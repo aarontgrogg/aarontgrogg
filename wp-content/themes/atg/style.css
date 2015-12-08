@@ -1146,9 +1146,10 @@ body.archive h1 {
         right: 0;
         padding: 0 .75em;
         height: 3em;
+        width: 212px;
     }
     nav #s {
-        width: 212px;
+        width: 100%;
         -webkit-transition: width 0.7s ease 0s;
         -moz-transition: width 0.7s ease 0s;
         -o-transition: width 0.7s ease 0s;
@@ -1179,8 +1180,12 @@ body.archive h1 {
         margin-right: 40px;
         text-align: right;
     }
-    #site-title a {
-        padding-left: 40px;
+    nav #search {
+        padding: 0 40px 0 0;
+        width: 33%;
+    }
+    nav #s {
+        width: 100%;
     }
     #content,
     div.widget-area {
@@ -1189,7 +1194,7 @@ body.archive h1 {
         margin: 0;
     }
     #content {
-        padding: 1em 40px;
+        padding: 0 40px;
         width: 66%;
     }
     article h2 a,
@@ -1220,7 +1225,7 @@ body.archive h1 {
     }
     div.widget-area {
         width: 33%;
-        padding: 1em 2em 1em 0;
+        padding: 0 40px 1em 0;
     }
     div.widget-area a {
         font-size: 1em;
@@ -1290,6 +1295,7 @@ body.archive h1 {
     nav #search {
         position: static;
         padding: 0 .75em;
+        width: 100%;
     }
     nav #s,
     nav #s:focus {
