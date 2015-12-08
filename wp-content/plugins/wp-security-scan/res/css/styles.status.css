@@ -1,0 +1,38 @@
+
+.wsdplugin_page_status {
+	display: block;
+	border-radius: 3px;
+	border: 1px solid #DFDFDF;
+	box-shadow: 0 0 1px #DFDFDF;
+	background-color: #FFFFFF;
+	padding: 10px 4px;
+	margin-bottom: 15px;
+	margin-top: 5px;
+}
+.wsdplugin_status_box {
+	display: inline-block;
+	margin-left: 5px;
+	line-height: 22px;
+}
+.wsdplugin_status_box span:first-child {
+	margin-right: 8px;
+	font-weight: bold;
+	display: inline;
+}
+.wsdplugin_status_box span.wsdplugin_status_ok {
+	color: #006400;
+}
+.wsdplugin_status_box span.wsdplugin_status_bad {
+	color: #cc0000;
+}
+.wsdplugin_status_box_spacer {
+	display: inline-block;
+	width: 2px;
+	border-left: 1px solid #BCB8B8;
+	border-right: 1px solid #fff;
+	margin-left: 10px;
+}
+.wsdplugin_page_status_horizontal .wsdplugin_status_box span:first-child {
+    display: inline-block;
+    width: 180px;
+}

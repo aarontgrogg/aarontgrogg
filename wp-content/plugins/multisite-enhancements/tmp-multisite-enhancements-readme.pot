@@ -1,0 +1,344 @@
+msgid ""
+msgstr "MIME-Version: 1.0\n"
+
+#. Name.
+msgid "Multisite Enhancements"
+msgstr ""
+
+#. Short description.
+msgid "Enhance Multisite for Network Admins with different topics"
+msgstr ""
+
+#. Screenshot description.
+msgid "Add Blog-ID on Sites"
+msgstr ""
+
+#. Screenshot description.
+msgid "Add User-ID on Users"
+msgstr ""
+
+#. Screenshot description.
+msgid "Add New link to install new plugin on each blog"
+msgstr ""
+
+#. Screenshot description.
+msgid "Manage Comments with Counter on Admin Bar"
+msgstr ""
+
+#. Screenshot description.
+msgid "On which blog is the plugin active"
+msgstr ""
+
+#. Screenshot description.
+msgid "On which blog is the theme active"
+msgstr ""
+
+#. Screenshot description.
+msgid "New Admin footer text"
+msgstr ""
+
+#. Screenshot description.
+msgid "Favicon on Admin bar"
+msgstr ""
+
+#. Screenshot description.
+msgid "Filter plugin list"
+msgstr ""
+
+#. Found in description list item.
+msgid "Add Blog and User ID in network; read <a href=\"http://wpengineer.com/2188/view-blog-id-in-wordpress-multisite/\">more</a>"
+msgstr ""
+
+#. Found in description list item.
+msgid "Enables an 'Add New' link under the Plugins menu for Network admins"
+msgstr ""
+
+#. Found in description list item.
+msgid "Adds several useful items to the multisite 'Network Admin' admin bar"
+msgstr ""
+
+#. Found in description list item.
+msgid "On the network plugins page, show which blog have this plugin active"
+msgstr ""
+
+#. Found in description list item.
+msgid "On the network theme page, show which blog have the theme active and is it a Child theme"
+msgstr ""
+
+#. Found in description list item.
+msgid "Change Admin footer text for Administrator's to view fast currently used RAM, SQL, RAM Version"
+msgstr ""
+
+#. Found in description list item.
+msgid "Add Favicon from theme folder to the admin area to easier identify the blog, use the <code>favicon.ico</code> file in the theme folder of the active theme in each blog"
+msgstr ""
+
+#. Found in description list item.
+msgid "Add Favicon to each blog on the Admin Bar Item 'My Sites'. If you a like a custom path for each favicon, please see the <a href=\"https://github.com/bueltge/WordPress-Multisite-Enhancements/wiki/Filter-Hook-for-Favicon-File-Path\">documentation</a> for this feature."
+msgstr ""
+
+#. Found in description list item.
+msgid "Remove also the 'W' logo and his sub-links in admin bar"
+msgstr ""
+
+#. Found in description list item.
+msgid "Add status to each site in the admin bar to identifier fast if the site <code>noindex</code> status and external url."
+msgstr ""
+
+#. Found in description list item.
+msgid "The function <code>get_blog_list()</code> is currently deprecated in the WP Core, but currently usable. The plugin check this and get a alternative in <a href=\"https://github.com/bueltge/WordPress-Multisite-Enhancements/blob/master/inc/autoload/core.php\"><code>inc/autoload/core.php</code></a>"
+msgstr ""
+
+#. Found in description list item.
+msgid "If you will develop with the alternative to this function from my source, then use the method <code>get_blog_list()</code> in class <code>Multisite_Core</code>. She use also caching with the Transient API. See more about the function on the function in <a href=\"https://github.com/bueltge/WordPress-Multisite-Enhancements/blob/master/inc/autoload/class-core.php\"><code>inc/autoload/class-core.php</code></a>."
+msgstr ""
+
+#. Found in description list item.
+msgid "If you use WordPress version 3.7 and higher, then check the function <code>wp_get_sites()</code>, the new alternative function inside the core to get all sides inside the network. The function accept a array with arguments, see the <a href=\"http://wpseek.com/wp_get_sites/\">description</a>."
+msgstr ""
+
+#. Found in description list item.
+msgid "Filter plugin list to find fast your goal. Works on single plugin page and also network plugin page."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "When you work quite a bit with WordPress Multisites, sometimes you need more information or menu items. This plugin enhance the network area for super admins with useful functions."
+msgstr ""
+
+#. Found in description paragraph, remaining content paragraph.
+msgid "<strong>Crafted by <a href=\"http://inpsyde.com\">Inpsyde</a> · Engineering the web since 2006.</strong>"
+msgstr ""
+
+#. Found in description paragraph, remaining content paragraph.
+msgid "Yes, we also run that <a href=\"http://marketpress.com\">marketplace for premium WordPress plugins and themes</a>."
+msgstr ""
+
+#. Found in installation header.
+msgid "Requirements"
+msgstr ""
+
+#. Found in installation header.
+msgid "Installation"
+msgstr ""
+
+#. Found in installation list item.
+msgid "WordPress Multisite 3.0+"
+msgstr ""
+
+#. Found in installation list item.
+msgid "PHP 5.3*, newer PHP versions will work faster."
+msgstr ""
+
+#. Found in installation list item.
+msgid "Use the installer via back-end of your install or ..."
+msgstr ""
+
+#. Found in installation list item.
+msgid "Unpack the download-package"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Upload the files to the <code>/wp-content/plugins/</code> directory"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Activate the plugin through the 'Network/Plugins' menu in WordPress and hit 'Network Activate'"
+msgstr ""
+
+#. Found in installation list item.
+msgid "No options, no settings, it works"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Enhance the external domain check for more exactly check, that's also work on root domain of multisite. Props Matt <a href=\"https://wordpress.org/support/topic/main-blog-being-tagged-as-external-domain\">Thread</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add new functionality to filter plugin list live."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Improve status label filter <code>multisite_enhancements_status_label</code>, now with the parameters <code>$blogname</code> and <code>$blog</code>."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Bugfix: Correction for the site icon topic. The functions \"has_site_icon\" and \"get_site_icon_url\" aren't compatible with multisites. Icon only displayed when on that blog, in network or other blog the WP logo showed."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Enhancement: Check for active usage of admin bar before add favicon to Admin Bar."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add support for Favicon feature <code>wp_site_icon</code> since WP 4.3, probs <a href=\"https://github.com/JoryHogeveen\">JoryHogeveen</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add status label to each site in the admin bar, probs JoryHogeveen"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Codex changes"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add hook <code>multisite_enhancements_autoload</code> to unset files, there not necessary on autoload, see also the <a href=\"https://github.com/bueltge/wordpress-multisite-enhancements/wiki\">Wiki</a> for more information"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Some modifications to plugin and theme admin columns for better performance and usage on Multisites with more as 100 blogs, plugins, themes <a href=\"https://github.com/bueltge/wordpress-multisite-enhancements/pull/16\">Issue #16</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Code inspections"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Enhance the value to get sites inside the network form WordPress default 100 to 9999"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add hook <code>multisite_enhancements_sites_limit</code> to change this value, see <a href=\"https://github.com/bueltge/wordpress-multisite-enhancements/wiki/Large-Network-Problem\">wiki page</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Code maintenance"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add parameters for custom favicon, see <a href=\"https://github.com/bueltge/WordPress-Multisite-Enhancements/wiki/Filter-Hook-for-Favicon-File-Path\">documentation</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add check for child theme, that you fast see, if is a child and what is the parent inside the network view of themes"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fix list of active plugin in plugin network view"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add hook for custom favicon path, see <a href=\"https://github.com/bueltge/WordPress-Multisite-Enhancements/wiki/Filter-Hook-for-Favicon-File-Path\">documentation</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add break, if no plugin is active, fixed <a href=\"http://wordpress.org/support/topic/error-in-active-in-column\">Error in \"Active In\" column</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Remove Super Admin check, that works the enhancements also on other roles."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add indicator for \"Network Only\" Plugins."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add Favicon Indicator also in Admin Bar on Front end side."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add Favicon in Admin Bar also in Front end"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Enhance style for favicon size"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Grammar fix in tags, readme"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Small changes for columns and 3.8 design"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add CSS rule for new WP 3.8 back end design (mp6 plugin)"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add more whitespace on the comment count in admin bar"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Enhance the filter to list active plugins <a href=\"https://github.com/bueltge/WordPress-Multisite-Enhancements/issues/1\">#1</a>"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "First release on wordpress.org after different installs with different users"
+msgstr ""
+
+#. Found in changelog paragraph.
+msgid "For more information about changes see the commits on the <a href=\"https://github.com/bueltge/WordPress-Multisite-Enhancements/commits/master\">working repository</a>."
+msgstr ""
+
+#. Found in remaining content header.
+msgid "Other Notes"
+msgstr ""
+
+#. Found in remaining content header.
+msgid "Hints, knowledge"
+msgstr ""
+
+#. Found in remaining content header.
+msgid "Bugs, technical hints or contribute"
+msgstr ""
+
+#. Found in remaining content header.
+msgid "License"
+msgstr ""
+
+#. Found in remaining content header.
+msgid "Contact &amp; Feedback"
+msgstr ""
+
+#. Found in remaining content header.
+msgid "Disclaimer"
+msgstr ""
+
+#. Found in remaining content list item.
+msgid "<a href=\"https://github.com/bueltge/WordPress-Multisite-Enhancements/wiki/Filter-Hook-for-Favicon-File-Path\">Filter Hook for Favicon File Path - Define your custom Favicon path</a>"
+msgstr ""
+
+#. Found in remaining content list item.
+msgid "<a href=\"https://github.com/bueltge/wordpress-multisite-enhancements/wiki/Large-Network-Problem\">Large Network Problem</a>"
+msgstr ""
+
+#. Found in remaining content paragraph.
+msgid ""
+"See also for helpful hints on the <a href=\"https://github.com/bueltge/wordpress-multisite-enhancements/wiki\">wiki page</a>.\n"
+"Especially the follow topics are interest:"
+msgstr ""
+
+#. Found in remaining content paragraph.
+msgid ""
+"Please give me feedback, contribute and file technical bugs on this\n"
+"<a href=\"https://github.com/bueltge/WordPress-Multisite-Enhancements/issues\">GitHub Repo</a>, use Issues."
+msgstr ""
+
+#. Found in remaining content paragraph.
+msgid ""
+"Good news, this plugin is free for everyone! Since it's released under the GPL,\n"
+"you can use it free of charge on your personal or commercial blog. But if you enjoy this plugin,\n"
+"you can thank me and leave a\n"
+"<a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=6069955\" title=\"Paypal Donate link\">small donation</a>\n"
+"for the time I've spent writing and supporting this plugin.\n"
+"And I really don't want to know how many hours of my life this plugin has already eaten ;)"
+msgstr ""
+
+#. Found in remaining content paragraph.
+msgid "The plugin is designed and developed by me <a href=\"http://bueltge.de\">Frank Bültge</a>, <a href=\"https://plus.google.com/+FrankBültge/about?rel=author\">G+ Page</a>"
+msgstr ""
+
+#. Found in remaining content paragraph.
+msgid ""
+"Please let me know if you like the plugin or you hate it or whatever ...\n"
+"Please fork it, add an issue for ideas and bugs on the <a href=\"https://github.com/bueltge/WordPress-Multisite-Enhancements\">Github Repository</a>."
+msgstr ""
+
+#. Found in remaining content paragraph.
+msgid ""
+"I'm German and my English might be gruesome here and there.\n"
+"So please be patient with me and let me know of typos or grammatical parts. Thanks"
+msgstr ""

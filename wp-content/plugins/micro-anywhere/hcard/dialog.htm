@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Copyright 2008  Alex Willemsma  (email : webmaster@undergroundwebdesigns.com)
+
+	This file is part of Micro Anywhere
+
+    Micro Anywhere is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Mico Anywhere is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Micro Anywhere.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>{#hcard_dlg.title}</title>
+	<script type="text/javascript" src="../../../../wp-includes/js/tinymce/tiny_mce_popup.js"></script>
+    <script type="text/javascript" src="js/Base.js"></script>
+    <script type="text/javascript" src="js/Iter.js"></script>
+    <script type="text/javascript" src="js/DOM.js"></script>
+	<script type="text/javascript" src="js/dialog.js"></script>
+    <link href="css/dlg_style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<ul id="tabs">
+	<li><a href="" onclick="return tabChange('basic');">Basic Information</a></li>
+    <li><a href="" onclick="return tabChange('address');">Address</a></li>
+    <li><a href="" onclick="return tabChange('contact');">Contact Information</a></li>
+</ul>
+<p>&nbsp;</p>
+<form onsubmit="ExampleDialog.insert();return false;" action="#">
+	<h3>Person or Company Details:</h3>
+    <fieldset title="Basic Information" id="basic-tab">
+    <legend>Basic Information</legend>
+    <p>
+	  <label for="middleName">Given Name: </label> 
+	  <input name="givenName" type="text" class="text" id="givenName" size="35" />
+  </p>
+  <p>
+	  <label for="middleName">Middle Name: </label> 
+	  <input name="middleName" type="text" class="text" id="middleName" size="35" />
+  </p>
+  <p>
+	  <label for="familyName">Family Name: </label> 
+	  <input name="familyName" type="text" class="text" id="familyName" size="35" />
+  </p>
+  <p>
+	  <label for="organization">Organization:</label> 
+	  <input name="organization" type="text" class="text" id="organization" size="35" />
+  </p>
+  <p>
+	  <label for="photoURL">Photo URL: </label> 
+	  <input name="photoURL" type="text" class="text" id="photoURL" size="35" />
+  </p>
+   <p>
+      <label for="note">Note:</label>
+    <br  />
+    	<textarea id="note" name="note" cols="50" rows="5"></textarea>
+  </p>
+   <p><label for="tags">tags (comma separated)</label>
+       <input name="tags" type="text" id="tags" size="30" />
+  </p>
+  </fieldset>
+  <fieldset title="Address" id="address-tab" class="hidden">
+  <legend>Address</legend>
+  <p>
+	  <label for="street">Street:</label> 
+	  <input name="street" type="text" class="text" id="street" size="35" />
+  </p>
+  <p>
+	  <label for="city">City</label> 
+	  <input name="city" type="text" class="text" id="city" size="35" />
+  </p>
+      
+  <p>
+<label for="state">State / Provinice: </label>
+      <input name="state" type="text" class="text" id="state" size="35" />
+  </p>
+      
+	  <p>
+      <label for="postalCode">Postal Code: </label>
+      <input name="postalCode" type="text" class="text" id="postalCode" size="35" />
+  </p>
+  <p>
+	  <label for="country">Country Name:</label> 
+	  <input name="country" type="text" class="text" id="country" size="35" />
+  </p>
+  </fieldset>
+  <fieldset title="Contact Information" id="contact-tab" class="hidden">
+  <legend>Contact Information</legend>
+  <p>
+	  <label for="homePhone">Home Phone:</label> 
+	  <input name="homePhone" type="text" class="text" id="homePhone" size="35" /><input type="radio" name="phonePref" value="home" />
+  </p>
+  <p>
+	  <label for="businessPhone">Business Phone:</label> 
+    <input name="businessPhone" type="text" class="text" id="businessPhone" size="35" /><input type="radio" name="phonePref" value="business" />
+  </p>
+  <p>
+	  <label for="mobilePhone">Mobile Phone:</label> 
+	  <input name="mobilePhone" type="text" class="text" id="mobilePhone" size="35" /><input type="radio" name="phonePref" value="mobile" />
+  </p>
+  <p class="note">Use the options to selecte a prefered phone number, or no preference:<input type="radio" name="phonePref" value="none" /></p>
+  <p>
+	  <label for="email">Email:</label> 
+	  <input name="email" type="text" class="text" id="email" size="35" />
+  </p>
+  <p>
+	  <label for="url">URL:</label> 
+	  <input name="url" type="text" class="text" id="url" size="35" />
+  </p>
+  <p>
+	  <label for="aim">AIM Screenname: </label> 
+	  <input name="aim" type="text" class="text" id="aim" size="35" />
+  </p>
+  <p>
+	  <label for="yim">YIM Screenname: </label> 
+	  <input name="yim" type="text" class="text" id="yim" size="35" />
+  </p>
+  <p>
+	  <label for="jabber">Jabber Screenname: </label> 
+	  <input name="jabber" type="text" class="text" id="jabber" size="35" />
+  </p>
+  <p>
+  <label for="skype">Skype Screenname: </label> 
+	  <input name="skype" type="text" class="text" id="skype" size="35" />
+  </p>
+  </fieldset>
+      
+<div class="mceActionPanel">
+		<div style="float: left">
+			<input type="button" id="insert" name="insert" value="{#insert}" onclick="ExampleDialog.insert();" />
+		</div>
+
+		<div style="float: right">
+			<input type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" />
+		</div>
+	</div>
+</form>
+
+</body>
+</html>

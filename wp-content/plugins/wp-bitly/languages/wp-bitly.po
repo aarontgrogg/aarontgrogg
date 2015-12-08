@@ -1,0 +1,698 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Bitly\n"
+"POT-Creation-Date: 2012-12-19 14:56-0500\n"
+"PO-Revision-Date: 2012-12-19 14:57-0500\n"
+"Last-Translator: Chip Bennett <chip@chipbennett.net>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;_x\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: C:\\Documents and Settings\\wbennett\\My Documents"
+"\\Dev\\GitHub\\wp-bitly\n"
+"X-Poedit-SearchPath-1: .\n"
+
+#: C:\Documents and Settings\wbennett\My
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly-options.php:29
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly-options.php:96
+msgid "Bit.ly Username"
+msgstr "Bit.ly Username"
+
+#: C:\Documents and Settings\wbennett\My
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly-options.php:30
+msgid "The username you use to log in to your Bit.ly account."
+msgstr "The username you use to log in to your Bit.ly account."
+
+#: C:\Documents and Settings\wbennett\My
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly-options.php:37
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly-options.php:119
+msgid "Bit.ly API Key"
+msgstr "Bit.ly API Key"
+
+#: C:\Documents and Settings\wbennett\My
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly-options.php:38
+#, php-format
+msgid "Your API key can be found on your %1$s"
+msgstr "Your API key can be found on your %1$s"
+
+#: C:\Documents and Settings\wbennett\My
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly-options.php:38
+msgid "Bit.ly account page"
+msgstr "Bit.ly account page"
+
+#: C:\Documents and Settings\wbennett\My
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly-options.php:45
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly-options.php:142
+msgid "Post Types"
+msgstr "Post Types"
+
+#: C:\Documents and Settings\wbennett\My
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly-options.php:46
+msgid "What kind of posts should short links be generated for?"
+msgstr "What kind of posts should short links be generated for?"
+
+#: C:\Documents and Settings\wbennett\My
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly-options.php:53
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly-options.php:168
+msgid "Admin Toolbar Link"
+msgstr "Admin Toolbar Link"
+
+#: C:\Documents and Settings\wbennett\My
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly-options.php:54
+msgid "Enable the \"Shortlink\" link in the Admin Toolbar"
+msgstr "Enable the \"Shortlink\" link in the Admin Toolbar"
+
+#: C:\Documents and Settings\wbennett\My
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly-options.php:191
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly-options.php:200
+msgid "Plugin Support"
+msgstr "Plugin Support"
+
+#: C:\Documents and Settings\wbennett\My
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly-options.php:198
+msgid ""
+"If you require support, or would like to contribute to the further "
+"development of this plugin, please choose one of the following;"
+msgstr ""
+"If you require support, or would like to contribute to the further "
+"development of this plugin, please choose one of the following;"
+
+#: C:\Documents and Settings\wbennett\My
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly-options.php:201
+msgid "Submit Bug Reports via GitHub"
+msgstr "Submit Bug Reports via GitHub"
+
+#: C:\Documents and Settings\wbennett\My
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly-options.php:202
+msgid "Contribute to the Plugin via GitHub"
+msgstr "Contribute to the Plugin via GitHub"
+
+#: C:\Documents and Settings\wbennett\My
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly-options.php:203
+msgid "Rate This Plugin"
+msgstr "Rate This Plugin"
+
+#: C:\Documents and Settings\wbennett\My
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly-options.php:204
+msgid "Developer Homepage"
+msgstr "Developer Homepage"
+
+#: C:\Documents and Settings\wbennett\My
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly-options.php:329
+msgid "WP Bit.Ly is almost ready!"
+msgstr "WP Bit.Ly is almost ready!"
+
+#: C:\Documents and Settings\wbennett\My
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly-options.php:330
+msgid "settings page"
+msgstr "settings page"
+
+#: C:\Documents and Settings\wbennett\My
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly-options.php:331
+#, php-format
+msgid "Please visit the %s to configure WP Bit.ly"
+msgstr "Please visit the %s to configure WP Bit.ly"
+
+#: C:\Documents and Settings\wbennett\My
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly-options.php:341
+msgid "Invalid API Key!"
+msgstr "Invalid API Key!"
+
+#: C:\Documents and Settings\wbennett\My
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly-options.php:342
+msgid ""
+"Your username and API key for bit.ly can't be validated. All features are "
+"temporarily disabled."
+msgstr ""
+"Your username and API key for bit.ly can't be validated. All features are "
+"temporarily disabled."
+
+#: C:\Documents and Settings\wbennett\My
+#: Documents\Dev\GitHub\wp-bitly/wp-bitly.php:129
+msgid "Settings"
+msgstr "Settings"
+
+#~ msgid "21st Century King James Version"
+#~ msgstr "21st Century King James Version"
+
+#~ msgid "American Standard Version"
+#~ msgstr "American Standard Version"
+
+#~ msgid "Amplified Bible"
+#~ msgstr "Amplified Bible"
+
+#~ msgid "Common English Bible"
+#~ msgstr "Common English Bible"
+
+#~ msgid "Contemporary English Version"
+#~ msgstr "Contemporary English Version"
+
+#~ msgid "Darby Translation"
+#~ msgstr "Darby Translation"
+
+#~ msgid "Douay-Rheims 1899 American Edition"
+#~ msgstr "Douay-Rheims 1899 American Edition"
+
+#~ msgid "English Standard Version"
+#~ msgstr "English Standard Version"
+
+#~ msgid "GOD'S WORD Bible"
+#~ msgstr "GOD'S WORD Bible"
+
+#~ msgid "Good News Translation"
+#~ msgstr "Good News Translation"
+
+#~ msgid "Holman Christian Standard Bible"
+#~ msgstr "Holman Christian Standard Bible"
+
+#~ msgid "King James Version"
+#~ msgstr "King James Version"
+
+#~ msgid "New American Standard Bible"
+#~ msgstr "New American Standard Bible"
+
+#~ msgid "New Century Version"
+#~ msgstr "New Century Version"
+
+#~ msgid "New International Readers' Version"
+#~ msgstr "New International Readers' Version"
+
+#~ msgid "New International Version"
+#~ msgstr "New International Version"
+
+#~ msgid "New International Version 1984"
+#~ msgstr "New International Version 1984"
+
+#~ msgid "New International Version 2010"
+#~ msgstr "New International Version 2010"
+
+#~ msgid "New International Version (British Edition)"
+#~ msgstr "New International Version (British Edition)"
+
+#~ msgid "New King James Version"
+#~ msgstr "New King James Version"
+
+#~ msgid "New Life Version"
+#~ msgstr "New Life Version"
+
+#~ msgid "New Living Translation"
+#~ msgstr "New Living Translation"
+
+#~ msgid "The Message"
+#~ msgstr "The Message"
+
+#~ msgid "Today's New International Version"
+#~ msgstr "Today's New International Version"
+
+#~ msgid "Worldwide English New Testament"
+#~ msgstr "Worldwide English New Testament"
+
+#~ msgid "Wycliffe New Testament"
+#~ msgstr "Wycliffe New Testament"
+
+#~ msgid "Young's Literal Translation"
+#~ msgstr "Young's Literal Translation"
+
+#~ msgid "New English Translation"
+#~ msgstr "New English Translation"
+
+#~ msgid "New Revised Standard Version"
+#~ msgstr "New Revised Standard Version"
+
+#~ msgid "Nestle-Aland Greek Text 26th edition"
+#~ msgstr "Nestle-Aland Greek Text 26th edition"
+
+#~ msgid "Septaugint"
+#~ msgstr "Septaugint"
+
+#~ msgid "[AMU] Amuzgo de Guerrero"
+#~ msgstr "[AMU] Amuzgo de Guerrero"
+
+#~ msgid "[AR] Arab Life Application Bible"
+#~ msgstr "[AR] Arab Life Application Bible"
+
+#~ msgid "[BG] Bulgarian Bible"
+#~ msgstr "[BG] Bulgarian Bible"
+
+#~ msgid "[BG] Bulgarian Bible 1940"
+#~ msgstr "[BG] Bulgarian Bible 1940"
+
+#~ msgid "[CCO] Chinanteco de Comaltepec"
+#~ msgstr "[CCO] Chinanteco de Comaltepec"
+
+#~ msgid "[CKW] Cakchiquel Occidental"
+#~ msgstr "[CKW] Cakchiquel Occidental"
+
+#~ msgid "[CPF] Haitian Creole Version"
+#~ msgstr "[CPF] Haitian Creole Version"
+
+#~ msgid "[CS] Slovo na cestu"
+#~ msgstr "[CS] Slovo na cestu"
+
+#~ msgid "[DA] New Intenational Reader's Version, Danish"
+#~ msgstr "[DA] New Intenational Reader's Version, Danish"
+
+#~ msgid "[DE] Hope For All, German"
+#~ msgstr "[DE] Hope For All, German"
+
+#~ msgid "[DE] Luther Bible 1545"
+#~ msgstr "[DE] Luther Bible 1545"
+
+#~ msgid "[ES] New International Version, Spanish"
+#~ msgstr "[ES] New International Version, Spanish"
+
+#~ msgid "[ES] Reina-Valera Antigua"
+#~ msgstr "[ES] Reina-Valera Antigua"
+
+#~ msgid "[ES] Reina-Valera 1960"
+#~ msgstr "[ES] Reina-Valera 1960"
+
+#~ msgid "[ES] Reina-Valera 1995"
+#~ msgstr "[ES] Reina-Valera 1995"
+
+#~ msgid "[ES] Castilian"
+#~ msgstr "[ES] Castilian"
+
+#~ msgid "[ES] Current Language Translation, Spanish"
+#~ msgstr "[ES] Current Language Translation, Spanish"
+
+#~ msgid "[ES] The New America Bible, Spanish"
+#~ msgstr "[ES] The New America Bible, Spanish"
+
+#~ msgid "[FR] Louis Segond"
+#~ msgstr "[FR] Louis Segond"
+
+#~ msgid "[FR] La Bible du Semeur"
+#~ msgstr "[FR] La Bible du Semeur"
+
+#~ msgid "[GRC] Westcott-Hort New Testament 1881"
+#~ msgstr "[GRC] Westcott-Hort New Testament 1881"
+
+#~ msgid "[GRC] Stephanus New Testament 1550"
+#~ msgstr "[GRC] Stephanus New Testament 1550"
+
+#~ msgid "[GRC] Scrivener New Testament 1894"
+#~ msgstr "[GRC] Scrivener New Testament 1894"
+
+#~ msgid "[HE]) The Westminster Leningrad Codex"
+#~ msgstr "[HE]) The Westminster Leningrad Codex"
+
+#~ msgid "[HIL] Hiligaynon Bible"
+#~ msgstr "[HIL] Hiligaynon Bible"
+
+#~ msgid "[HR] Croatian Bible"
+#~ msgstr "[HR] Croatian Bible"
+
+#~ msgid "[HU] Hungarian Bible"
+#~ msgstr "[HU] Hungarian Bible"
+
+#~ msgid "[IS] Icelandic Bible"
+#~ msgstr "[IS] Icelandic Bible"
+
+#~ msgid "[IT] La Nuova Diodati"
+#~ msgstr "[IT] La Nuova Diodati"
+
+#~ msgid "[IT] The Word Is Life, Italian"
+#~ msgstr "[IT] The Word Is Life, Italian"
+
+#~ msgid "[JAC] Jacalteco, Oriental"
+#~ msgstr "[JAC] Jacalteco, Oriental"
+
+#~ msgid "[KEK] Kekchi"
+#~ msgstr "[KEK] Kekchi"
+
+#~ msgid "[MI] Maori Bible"
+#~ msgstr "[MI] Maori Bible"
+
+#~ msgid "[MK] Macedonian New Testament"
+#~ msgstr "[MK] Macedonian New Testament"
+
+#~ msgid "[MVC] Mam, Central"
+#~ msgstr "[MVC] Mam, Central"
+
+#~ msgid "[MVJ] Mam of Todos Santos Chuchumatan, Guatemala"
+#~ msgstr "[MVJ] Mam of Todos Santos Chuchumatan, Guatemala"
+
+#~ msgid "[NDS] Reimer 2001"
+#~ msgstr "[NDS] Reimer 2001"
+
+#~ msgid "[NGU] Nahuatl de Guerrero, Mexico"
+#~ msgstr "[NGU] Nahuatl de Guerrero, Mexico"
+
+#~ msgid "[NL] Het Boek"
+#~ msgstr "[NL] Het Boek"
+
+#~ msgid "[NO] Det Norsk Bibelselskap 1930"
+#~ msgstr "[NO] Det Norsk Bibelselskap 1930"
+
+#~ msgid "[NO] Levande Bibeln"
+#~ msgstr "[NO] Levande Bibeln"
+
+#~ msgid "[PT] O Livro"
+#~ msgstr "[PT] O Livro"
+
+#~ msgid "[PT] King James Version, Portuguese"
+#~ msgstr "[PT] King James Version, Portuguese"
+
+#~ msgid "[QUT] Quiche, West Central Guatemala"
+#~ msgstr "[QUT] Quiche, West Central Guatemala"
+
+#~ msgid "[RO] Romanian"
+#~ msgstr "[RO] Romanian"
+
+#~ msgid "[RU] Russian Synodal Version"
+#~ msgstr "[RU] Russian Synodal Version"
+
+#~ msgid "[RU] Slovo Zhizny"
+#~ msgstr "[RU] Slovo Zhizny"
+
+#~ msgid "[SK] New American Standard Bible, Slovak"
+#~ msgstr "[SK] New American Standard Bible, Slovak"
+
+#~ msgid "[SQ] Albanian Bible"
+#~ msgstr "[SQ] Albanian Bible"
+
+#~ msgid "[SV] Levande Bibeln"
+#~ msgstr "[SV] Levande Bibeln"
+
+#~ msgid "[SV] Svenska 1917"
+#~ msgstr "[SV] Svenska 1917"
+
+#~ msgid "[SW] Swahili New Testament"
+#~ msgstr "[SW] Swahili New Testament"
+
+#~ msgid "[TL] Ang Salita ng Diyos"
+#~ msgstr "[TL] Ang Salita ng Diyos"
+
+#~ msgid "[UK] Ukrainian Bible"
+#~ msgstr "[UK] Ukrainian Bible"
+
+#~ msgid "[USP] Uspanteco"
+#~ msgstr "[USP] Uspanteco"
+
+#~ msgid "[VI] Vietnamese Bible 1934"
+#~ msgstr "[VI] Vietnamese Bible 1934"
+
+#~ msgid "[ZH] Chinese Union Version (Traditional)"
+#~ msgstr "[ZH] Chinese Union Version (Traditional)"
+
+#~ msgid "[ZH] Chinese Union Version (Simplified)"
+#~ msgstr "[ZH] Chinese Union Version (Simplified)"
+
+#~ msgid "Options"
+#~ msgstr "Options"
+
+#~ msgid "Scripturizer"
+#~ msgstr "Scripturizer"
+
+#~ msgid "Important Notes"
+#~ msgstr "Important Notes"
+
+#~ msgid ""
+#~ "Scripturizer now includes default options settings that will apply "
+#~ "automatically. Unlike with previous Plugin versions, you no longer must "
+#~ "press the UPDATE OPTIONS button at least once to install the default "
+#~ "settings."
+#~ msgstr ""
+#~ "Scripturizer now includes default options settings that will apply "
+#~ "automatically. Unlike with previous Plugin versions, you no longer must "
+#~ "press the UPDATE OPTIONS button at least once to install the default "
+#~ "settings."
+
+#~ msgid ""
+#~ "If you mess up one of the following inputs, then clear the field (make it "
+#~ "blank), hit \"update options,\" and then the default values will "
+#~ "reappear. Then, you <b>must hit \"update options\" again</b> in order to "
+#~ "save the new value."
+#~ msgstr ""
+#~ "If you mess up one of the following inputs, then clear the field (make it "
+#~ "blank), hit \"update options,\" and then the default values will "
+#~ "reappear. Then, you <b>must hit \"update options\" again</b> in order to "
+#~ "save the new value."
+
+#~ msgid "General Options"
+#~ msgstr "General Options"
+
+#~ msgid "Default Bible Translation"
+#~ msgstr "Default Bible Translation"
+
+#~ msgid ""
+#~ "The Scripturizer supports any version from the <a href=\"%s\" title=\"Go "
+#~ "to Bible Gateway\">Bible Gateway</a> plus ESV, NET, NRSV, and LXX. "
+#~ "However, this option must be ESV if you want to use the ESV show/hide "
+#~ "verse text option."
+#~ msgstr ""
+#~ "The Scripturizer supports any version from the <a href=\"%s\" title=\"Go "
+#~ "to Bible Gateway\">Bible Gateway</a> plus ESV, NET, NRSV, and LXX. "
+#~ "However, this option must be ESV if you want to use the ESV show/hide "
+#~ "verse text option."
+
+#~ msgid "Scripturizer Mode"
+#~ msgstr "Scripturizer Mode"
+
+#~ msgid ""
+#~ "You can use this plugin two ways; it can either scripturize your posts "
+#~ "every time someone views them (dynamic), or it can permanently "
+#~ "scripturize the posts whenever you create or edit them (static). If (1) "
+#~ "you have a medium to high traffic site and (2) you use lots of verse "
+#~ "references in your posts, then you probably want to use static mode. "
+#~ "Otherwise, most low traffic blog sites should be OK in dynamic mode."
+#~ msgstr ""
+#~ "You can use this plugin two ways; it can either scripturize your posts "
+#~ "every time someone views them (dynamic), or it can permanently "
+#~ "scripturize the posts whenever you create or edit them (static). If (1) "
+#~ "you have a medium to high traffic site and (2) you use lots of verse "
+#~ "references in your posts, then you probably want to use static mode. "
+#~ "Otherwise, most low traffic blog sites should be OK in dynamic mode."
+
+#~ msgid "Considerations for Static Mode"
+#~ msgstr "Considerations for Static Mode"
+
+#~ msgid ""
+#~ "If Bible Gateway or any of the other Bible sites change their interface, "
+#~ "then your old posts won't work right even if you update this plugin "
+#~ "(whereas if you use dynamic substitution updating the plugin fixes all "
+#~ "old and future posts transparently). This is not a theoretical "
+#~ "consideration--the Bible sites have changed their interfaces since this "
+#~ "plugin was first developed and they are likely to do so again."
+#~ msgstr ""
+#~ "If Bible Gateway or any of the other Bible sites change their interface, "
+#~ "then your old posts won't work right even if you update this plugin "
+#~ "(whereas if you use dynamic substitution updating the plugin fixes all "
+#~ "old and future posts transparently). This is not a theoretical "
+#~ "consideration--the Bible sites have changed their interfaces since this "
+#~ "plugin was first developed and they are likely to do so again."
+
+#~ msgid ""
+#~ "If you change your default Bible translation then old posts will not be "
+#~ "updated to reflect your new preference. Since it only changes posts when "
+#~ "you edit them, you need to go back through all your old posts with Bible "
+#~ "references and edit them to cause the plugin to take effect"
+#~ msgstr ""
+#~ "If you change your default Bible translation then old posts will not be "
+#~ "updated to reflect your new preference. Since it only changes posts when "
+#~ "you edit them, you need to go back through all your old posts with Bible "
+#~ "references and edit them to cause the plugin to take effect"
+
+#~ msgid "Link CSS Class"
+#~ msgstr "Link CSS Class"
+
+#~ msgid ""
+#~ "CSS class to apply to scripturized links, for use in optional link "
+#~ "styling. Valid class names must begin with a letter or number, and "
+#~ "contain only letters, numbers, underscores, and hyphens."
+#~ msgstr ""
+#~ "CSS class to apply to scripturized links, for use in optional link "
+#~ "styling. Valid class names must begin with a letter or number, and "
+#~ "contain only letters, numbers, underscores, and hyphens."
+
+#~ msgid "Open Link in New Tab/Window"
+#~ msgstr "Open Link in New Tab/Window"
+
+#~ msgid ""
+#~ "If set to true, adds target=\"_blank\" to scripturized links, causing the "
+#~ "links to open in a new window or tab."
+#~ msgstr ""
+#~ "If set to true, adds target=\"_blank\" to scripturized links, causing the "
+#~ "links to open in a new window or tab."
+
+#~ msgid "ESV Options"
+#~ msgstr "ESV Options"
+
+#~ msgid ""
+#~ "Note: these settings only apply if the Default Translation is set to ESV, "
+#~ "or if the inline ad hoc translation is set to ESV."
+#~ msgstr ""
+#~ "Note: these settings only apply if the Default Translation is set to ESV, "
+#~ "or if the inline ad hoc translation is set to ESV."
+
+#~ msgid "Show/Hide ESV Text"
+#~ msgstr "Show/Hide ESV Text"
+
+#~ msgid ""
+#~ "Show/hide the text (in addition to the reference) of the ESV in your page?"
+#~ msgstr ""
+#~ "Show/hide the text (in addition to the reference) of the ESV in your page?"
+
+#~ msgid "Note: use of this setting requires an ESV Web Service API Key."
+#~ msgstr "Note: use of this setting requires an ESV Web Service API Key."
+
+#~ msgid "ESV Web Service API Key"
+#~ msgstr "ESV Web Service API Key"
+
+#~ msgid ""
+#~ "The ESV Web Service now has a <a href=\"%1s\">keyless option</a>. "
+#~ "Therefore, you no longer need your key to use the show/hide ESV text "
+#~ "option. Instead, use <b><code>IP</code></b> as your key. However, if you "
+#~ "are using shared-IP hosting (i.e. more than one site is hosted on your IP "
+#~ "address) you will likely need your own key. To get your free key, follow "
+#~ "<a href=\"%2s\">these simple instructions</a>."
+#~ msgstr ""
+#~ "The ESV Web Service now has a <a href=\"%1s\">keyless option</a>. "
+#~ "Therefore, you no longer need your key to use the show/hide ESV text "
+#~ "option. Instead, use <b><code>IP</code></b> as your key. However, if you "
+#~ "are using shared-IP hosting (i.e. more than one site is hosted on your IP "
+#~ "address) you will likely need your own key. To get your free key, follow "
+#~ "<a href=\"%2s\">these simple instructions</a>."
+
+#~ msgid "ESV Inline Verse Display CSS"
+#~ msgstr "ESV Inline Verse Display CSS"
+
+#~ msgid ""
+#~ "This CSS modifies the SPAN tag in which the ESV verse text will be "
+#~ "displayed on your page. Do not use any line breaks (that means don't push "
+#~ "your ENTER key in this box) since the styles are added straight to the "
+#~ "span tag."
+#~ msgstr ""
+#~ "This CSS modifies the SPAN tag in which the ESV verse text will be "
+#~ "displayed on your page. Do not use any line breaks (that means don't push "
+#~ "your ENTER key in this box) since the styles are added straight to the "
+#~ "span tag."
+
+#~ msgid "ESV Web Service Query Options"
+#~ msgstr "ESV Web Service Query Options"
+
+#~ msgid ""
+#~ "ESV Query options to be appended to the URL query string. Refer to the <a "
+#~ "href=\"%s\">ESV Web Service API</a> for more information"
+#~ msgstr ""
+#~ "ESV Query options to be appended to the URL query string. Refer to the <a "
+#~ "href=\"%s\">ESV Web Service API</a> for more information"
+
+#~ msgid "Credits: \"Give honor to whom honor is due\""
+#~ msgstr "Credits: \"Give honor to whom honor is due\""
+
+#~ msgid "Original Scripturizer Perl MovableType Module:"
+#~ msgstr "Original Scripturizer Perl MovableType Module:"
+
+#~ msgid "<a href=\"%s\">Dean Peters</a>"
+#~ msgstr "<a href=\"%s\">Dean Peters</a>"
+
+#~ msgid "Additional Credits for Perl Movable Type Module:"
+#~ msgstr "Additional Credits for Perl Movable Type Module:"
+
+#~ msgid "<a href=\"%s\">Jonathan Fox</a>"
+#~ msgstr "<a href=\"%s\">Jonathan Fox</a>"
+
+#~ msgid "<a href=\"%s\">Jason Rust</a>"
+#~ msgstr "<a href=\"%s\">Jason Rust</a>"
+
+#~ msgid "<a href=\"%s\">Joseph Markey</a>"
+#~ msgstr "<a href=\"%s\">Joseph Markey</a>"
+
+#~ msgid "<a href=\"%s\">Brian A. Thomas</a>"
+#~ msgstr "<a href=\"%s\">Brian A. Thomas</a>"
+
+#~ msgid "<a href=\"%s\">Rob Hulson</a>"
+#~ msgstr "<a href=\"%s\">Rob Hulson</a>"
+
+#~ msgid "Port to PHP WordPress Plugin:"
+#~ msgstr "Port to PHP WordPress Plugin:"
+
+#~ msgid "<a href=\"%s\">Glen Davis</a>"
+#~ msgstr "<a href=\"%s\">Glen Davis</a>"
+
+#~ msgid "<a href=\"%s\">Laurence O'Donnell</a>"
+#~ msgstr "<a href=\"%s\">Laurence O'Donnell</a>"
+
+#~ msgid "WordPress Plugin Documentation and Development"
+#~ msgstr "WordPress Plugin Documentation and Development"
+
+#~ msgid "<a href=\"%s\">Chip Bennett</a>"
+#~ msgstr "<a href=\"%s\">Chip Bennett</a>"
+
+#~ msgid "JavaScript for ESV Show/Hide"
+#~ msgstr "JavaScript for ESV Show/Hide"
+
+#~ msgid "Modified from <a href=\"%s\">this script</a>"
+#~ msgstr "Modified from <a href=\"%s\">this script</a>"
+
+#~ msgid ""
+#~ "For more information, refer to the <a href=\"%s\">Scripturizer "
+#~ "Development Site</a>."
+#~ msgstr ""
+#~ "For more information, refer to the <a href=\"%s\">Scripturizer "
+#~ "Development Site</a>."
+
+#~ msgid "ESV Show/Hide Verse Text Options"
+#~ msgstr "ESV Show/Hide Verse Text Options"
+
+#~ msgid "Default Translation"
+#~ msgstr "Default Translation"
+
+#~ msgid "Substitution Mode"
+#~ msgstr "Substitution Mode"
+
+#~ msgid "ESV XML Output CSS"
+#~ msgstr "ESV XML Output CSS"
+
+#~ msgid "ESV Query Options"
+#~ msgstr "ESV Query Options"
+
+#~ msgid ""
+#~ "Refer to the contextual help screen for descriptions and help regarding "
+#~ "each Plugin option."
+#~ msgstr ""
+#~ "Refer to the contextual help screen for descriptions and help regarding "
+#~ "each Plugin option."
+
+#~ msgid ""
+#~ "The following settings are applicable only when using the ESV Translation."
+#~ msgstr ""
+#~ "The following settings are applicable only when using the ESV Translation."
+
+#~ msgid "Dynamic"
+#~ msgstr "Dynamic"
+
+#~ msgid "Static"
+#~ msgstr "Static"
+
+#~ msgid "Open Link in New Window/Tab"
+#~ msgstr "Open Link in New Window/Tab"
+
+#~ msgid "True (Open In New Tab/Window)"
+#~ msgstr "True (Open In New Tab/Window)"
+
+#~ msgid "False (Open In Same Tab/Window)"
+#~ msgstr "False (Open In Same Tab/Window)"
+
+#~ msgid "Show"
+#~ msgstr "Show"
+
+#~ msgid "Hide"
+#~ msgstr "Hide"
+
+#~ msgid "Scripturizer Plugin Settings"
+#~ msgstr "Scripturizer Plugin Settings"
+
+#~ msgid "Manage settings for the Scripturizer Plugin"
+#~ msgstr "Manage settings for the Scripturizer Plugin"
+
+#~ msgid "Save Settings"
+#~ msgstr "Save Settings"
+
+#~ msgid "Reset Defaults"
+#~ msgstr "Reset Defaults"

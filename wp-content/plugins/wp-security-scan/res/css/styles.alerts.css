@@ -1,0 +1,54 @@
+/**
+ * CSS used for alerts page
+ *
+**/
+
+/** Indicators **/
+.wsdplugin_content td.wsdplugin_alert_indicator
+{
+	text-align: center;
+	vertical-align: middle;
+	width: 14px;
+	height: 17px;
+}
+.wsdplugin_content td.wsdplugin_alert_indicator.wsdplugin_alert_indicator_info { background: transparent url('../images/indicator-green.png') no-repeat scroll center center; }
+.wsdplugin_content td.wsdplugin_alert_indicator.wsdplugin_alert_indicator_low { background: transparent url('../images/indicator-blue.png') no-repeat scroll center center; }
+.wsdplugin_content td.wsdplugin_alert_indicator.wsdplugin_alert_indicator_medium { background: transparent url('../images/indicator-yellow.png') no-repeat scroll center center; }
+.wsdplugin_content td.wsdplugin_alert_indicator.wsdplugin_alert_indicator_critical { background: transparent url('../images/indicator-red.png') no-repeat scroll center center; }
+
+/** Actions Bar **/
+.wsdplugin_content .wsdplugin_page_alerts_action_bar .wsdplugin_alerts_select_actions select,
+.wsdplugin_content .wsdplugin_page_alerts_action_bar .wsdplugin_alerts_bulk_actions select,
+.wsdplugin_content .wsdplugin_page_alerts_action_bar .wsdplugin_alerts_filter_severity select { width: 130px; }
+.wsdplugin_content .wsdplugin_page_alerts_action_bar .wsdplugin_alerts_sort .wsdplugin_alerts_sort_field { width: 120px; }
+.wsdplugin_content .wsdplugin_page_alerts_action_bar .wsdplugin_alerts_sort .wsdplugin_alerts_sort_dir { width: 110px; }
+.wsdplugin_content .wsdplugin_alerts_show_view select { width: 90px; }
+
+/** Alert Page **/
+.wsdplugin_content .wsdplugin_page_alerts { }
+.wsdplugin_content .wsdplugin_alert_section_title
+{
+	clear: both;
+	padding: 20px 50px 20px 15px;
+	font-size: 18px;
+	border-radius: 3px;
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
+.wsdplugin_content .wsdplugin_alert_section_title.wsdplugin_alert_section_title_category { background-color: #F9F9F9; border: 1px solid #DFDFDF; margin-bottom: 10px; box-shadow: 0px 0px 3px #DFDFDF; }
+
+.acx-section-box { padding-top: 0 !important; padding-bottom: 0 !important;}
+
+/** Checkbox **/
+.wsdplugin-overflow { overflow: hidden; }
+.wsdplugin-overflow .wsdplugin_checkbox { float: left; display: block; text-align: center; vertical-align: middle; width: 13px; margin-top: 1px;  }
+.wsdplugin-overflow  span { float: left; display: block; margin-left: 7px; margin-top: 0;}
+.wsdplugin-overflow .wsdplugin_checkbox a
+{
+    background: transparent url('../images/checkbox.png') no-repeat scroll 0 0;
+    display: block;
+    width: 13px;
+    height: 13px;
+}
+.wsdplugin-overflow .wsdplugin_checkbox-active a { background-position: -13px 0; }
+

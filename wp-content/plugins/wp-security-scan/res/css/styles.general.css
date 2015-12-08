@@ -1,0 +1,196 @@
+
+/** General Styling **/
+
+.wsdplugin_content
+{
+
+}
+
+.wsdplugin_content .wsdplugin_status_page_ico {
+	background: url('../images/logo.png') no-repeat scroll center center transparent;
+}
+.wsdplugin_content .wsdplugin_alerts-page-ico {
+	background: url('../images/alerts-page-ico.png') no-repeat scroll center center transparent;
+}
+
+
+/*
+ * Error box
+ */
+.wsdplugin_content .wsdplugin_error_box { }
+.wsdplugin_content .wsdplugin_error_box p { overflow: hidden; }
+.wsdplugin_content .wsdplugin_error_box p strong { display: block; float: left; }
+.wsdplugin_content .wsdplugin_error_box p a.dismiss { float: right; display: block; }
+
+
+.wsdplugin_content .wsdplugin_info_box {
+	background-color: #E0E9F9;
+	border-color: #98BCF9;
+}
+.wsdplugin_content .wsdplugin_info_box p { overflow: hidden; }
+.wsdplugin_content .wsdplugin_info_box p strong { display: block; float: left; }
+.wsdplugin_content .wsdplugin_info_box p a.dismiss { float: right; display: block; }
+
+
+
+/*
+ * INFO / ERROR boxes
+ */
+.wsdplugin_message
+{
+	margin: 5px 0 15px;
+	padding: 0 0.6em;
+	border-radius: 3px;
+	border: 1px solid;
+}
+.wsdplugin_message.wsdplugin_message_warning
+{
+	background-color: #FFFFE0;
+	border-color: #E6DB55;
+}
+.wsdplugin_message.wsdplugin_message_error
+{
+	background-color: #FCC2C2;
+	border-color: #CC0000;
+}
+.wsdplugin_message.wsdplugin_message_success
+{
+	background-color: #FFFFE0;
+	border-color: #E6DB55;
+	color: #006600;
+}
+.wsdplugin_message p
+{
+	margin: 0.5em 0;
+	padding: 2px;
+}
+
+
+
+/*
+* auth menu
+*/
+#wsdplugin_advert a, #wsdplugin_advert img { border: none 0; outline: none 0;}
+.wsdplugin_website_detail { overflow: hidden; float: none; clear: both;}
+.wsdplugin_page_title { overflow: hidden; display: block; clear: both; }
+
+.wsdplugin_page_title h2 {
+    background: url("../images/logo.png") no-repeat scroll 0 50% transparent;
+    padding-left: 45px;
+}
+.wsdplugin_page_title #uinfo {
+    float: right;
+    margin: 10px 10px;
+    cursor: pointer;
+    padding: 5px 0;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    /*width: 180px;*/
+    overflow: hidden;
+    text-align: right;
+}
+.wsdplugin_page_title #uinfo #wsdplugin-current-user-name { display: block; color: #CC0000; padding-right: 7px; padding-left: 7px; }
+.wsdplugin_page_title #uinfo #wsdplugin-current-user-menu{
+    width: 180px;
+    display: none;
+    margin: 5px 0 0 0 !important;
+    padding: 5px 0;
+    background-color: #F9F9F9;
+    border: 1px solid #DFDFDF;
+    border-top: none 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+.wsdplugin_page_title #uinfo:hover{
+    background-color: #F9F9F9;
+    border: 1px solid #DFDFDF;
+    border-radius: 3px;
+}
+
+.wsdplugin_page_title #uinfo:hover #wsdplugin-current-user-menu{
+    position: absolute; z-index: 9888998;
+    display: block; clear: both;
+    border-top: solid 1px #dadada;
+    right: 25px;
+}
+.wsdplugin_page_title #uinfo:hover #wsdplugin-current-user-menu ul,
+.wsdplugin_page_title #uinfo:hover #wsdplugin-current-user-menu ul li { margin: 0 0; padding: 0 0; width: 100%; list-style-type: none; list-style-position: outside;}
+.wsdplugin_page_title #uinfo:hover #wsdplugin-current-user-menu ul li { padding: 7px 5px; text-align: left !important; }
+.wsdplugin_page_title #uinfo:hover #wsdplugin-current-user-menu ul li a { display: block; margin: 3px 5px;}
+
+
+.wsdplugin_page_title .wsdplugin_error_box { clear: both; }
+.wsdplugin_page_alerts { float: none; clear: both;}
+
+
+/*
+ * Page: database
+ */
+.acx-section-box { padding: 0.5em; margin: 0.5em; }
+.acx-common-list {
+    list-style-type: none;
+    list-style-position: outside;
+    list-style-image: none;
+}
+.acx-common-list li {
+    background: url('../images/arrow-black-icon.png') no-repeat left center;
+    padding-left: 20px;
+}
+.acx-common-list li p span {}
+.acx-common-list li .acx-icon-alert-critical { padding-top: 2px; }
+.acx-common-list li .acx-icon-alert-info { padding-top: 2px; }
+
+.acx-info-box {
+    margin: 7px 7px; padding: 0.2em 0.2em 0.2em 2.2em;
+    font-family: Verdana, Geneva, sans-serif; font-size: 1em; color: #d00000;
+    background: #FFC url('../images/icon-info.png') no-repeat 5px 50%; border: solid 1px #FC0;
+}
+
+.acx-info-box-noicon { background-image: none; }
+
+.acx-notice-info { color: #252525; }
+.acx-notice-success { color: #060; font-weight: 900; }
+
+.acx-icon-alert-success { background: url('../images/green-check-icon.png') no-repeat right bottom; padding-right: 25px; line-height: 22px; }
+.acx-icon-alert-critical { background: url('../images/alert-info-critical.png') no-repeat right bottom; padding-right: 25px; line-height: 22px; }
+.acx-icon-alert-info { background: url('../images/alert-info-icon.png') no-repeat right bottom; padding-right: 25px; line-height: 22px; }
+
+.acx-table tbody td.td_success { width: 20px; background: url('../images/green-check-icon.png') no-repeat 5px center; }
+.acx-table tbody td.td_error { width: 20px; background: url('../images/alert-info-icon.png') no-repeat 5px center; }
+.acx-table tbody tr:hover { background: #e0e0e0; }
+
+
+
+.wsdplugin-tooltip {
+    cursor: pointer;
+    /*margin-left: 15px;*/
+    color: #21759B;
+    background: url('../images/icon-info.png') no-repeat 0 0 ! important;;
+}
+
+#tt {
+    position:absolute;
+    display:block;
+}
+#tttop {
+    display:block;
+    height:5px;
+    margin-left:5px;
+    background:url("../images/tooltips/tt_top.gif") top right no-repeat;
+    overflow:hidden;
+}
+#ttcont {
+    display:block;
+    padding:2px 12px 3px 12px;
+    margin-left:5px;
+    background:#666;
+    color:#fff;
+}
+#ttbot {
+    display:block;
+    height:5px;
+    margin-left:5px;
+    background:url("../images/tooltips/tt_bottom.gif") top right no-repeat;
+    overflow:hidden;
+}

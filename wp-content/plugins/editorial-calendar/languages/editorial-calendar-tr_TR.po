@@ -1,0 +1,189 @@
+# Translation of WordPress Editorial Calendar in Turkish
+# This file is distributed under the same license as the WordPress Editorial Calendar package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2015-03-24 12:47-0500\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: WordPress Editorial Calendar\n"
+"POT-Creation-Date: \n"
+"Last-Translator: Zack Grossbart <zack@grossbart.com>\n"
+"Language-Team: \n"
+
+msgid "%1$s Calendar"
+msgstr "%1$s Takvim"
+
+msgid "Calendar"
+msgstr "Takvim"
+
+msgid "en-US"
+msgstr "tr-TR"
+
+msgid "%1$s by %2$s"
+msgstr "%1$s tarafından %2$s"
+
+msgid "New Post"
+msgstr "Yeni Yazı"
+
+msgid " [DRAFT]"
+msgstr " [TASLAK]"
+
+msgid " [PENDING]"
+msgstr " [BEKLEMEDE]"
+
+msgid " [STICKY]"
+msgstr " [YAPIŞKAN]"
+
+msgid " [DRAFT, STICKY]"
+msgstr " [TASLAK, YAPIŞKAN]"
+
+msgid " [PENDING, STICKY]"
+msgstr " [BEKLEMEDE, YAPIŞKAN]"
+
+msgid "Edit"
+msgstr "Düzenle"
+
+msgid "Quick Edit"
+msgstr "Hızlı Düzenle"
+
+msgid "Delete"
+msgstr "Sil"
+
+msgid "View"
+msgstr "Görünüm"
+
+msgid "Status:"
+msgstr "Durum"
+
+msgid "Cancel"
+msgstr "İptal"
+
+msgid "Title"
+msgstr "Başlık"
+
+msgid "Content"
+msgstr "İçerik"
+
+msgid "Add a new post on %s"
+msgstr "Yen bir yazı ekle %s"
+
+msgid "New %s - "
+msgstr "Yeni %s - "
+
+msgid "Update"
+msgstr "Güncelle"
+
+msgid "Schedule"
+msgstr "Zamanla"
+
+msgid "Submit for Review"
+msgstr "İncelemek için giriş"
+
+msgid "Save"
+msgstr "Kaydet"
+
+msgid "Edit %1$s - %2$s"
+msgstr "Düzenle %1$s - %2$s"
+
+msgid "Scheduled"
+msgstr "Zamanlandı"
+
+msgid "You are about to delete the post \""
+msgstr "Yazıyı silmek üzeresiniz. \""
+
+msgid "\". Press Cancel to stop, OK to delete."
+msgstr "\". Press Cancel to stop, OK to delete.Durdurmak için İptal e Silmek için OK e basın"
+
+msgid "Looks like someone else already moved this post."
+msgstr "Bu yazı zaten taşınmış"
+
+msgid "You do not have permission to edit posts."
+msgstr "Yazıyı düzenleme yetkiniz yok"
+
+msgid "Invalid checksum for post. This is commonly a cross-site scripting error."
+msgstr "Yazı için geçersiz sınama Muhtemelen Cross Site Scripting hatası"
+
+msgid "There was an error contacting your blog."
+msgstr "Sitenize erişim hatası"
+
+msgid "Screen Options"
+msgstr "Ekran Seçenekleri"
+
+msgid "Colors"
+msgstr "Renkler"
+
+msgid "Drafts: "
+msgstr "Taslaklar"
+
+msgid "Apply"
+msgstr "Uygula"
+
+msgid "Show on screen"
+msgstr "Ekranda göster"
+
+msgid " weeks at a time"
+msgstr "haftada bir kez"
+
+msgid "Show in Calendar Cell"
+msgstr "Takvim Hücresinde Göster"
+
+msgid "Author"
+msgstr "Yazar"
+
+msgid "Status"
+msgstr "Durum"
+
+msgid "Time of day"
+msgstr "Günün zamanı"
+
+msgid "An error occurred while loading the calendar: "
+msgstr "Takvim yüklenirken bir hata oluştu"
+
+msgid "The calendar can only show between 1 and 5 weeks at a time."
+msgstr "Takvim 1-5 hafta arasını gösterebilir"
+
+msgid "Select the number of weeks for the calendar to show."
+msgstr "Takvimde gösterilecek haftanın numarasını giriniz."
+
+msgid "<h2>We're done</h2>We've finished collecting data.  Thank you for helping us make the calendar better."
+msgstr "Bilgiler toplandı"
+
+msgid "Jump back"
+msgstr "Geri git"
+
+msgid "Skip ahead"
+msgstr "Başa dön"
+
+msgid "Scroll the calendar and make the today visible"
+msgstr "Takvimi çevir ve bugünü aktifleştir."
+
+msgid "Show Today"
+msgstr "Bugünü göster"
+
+msgid "Edit Post"
+msgstr "Yazı düzenle"
+
+msgid "Time"
+msgstr "Zaman"
+
+msgid "Draft"
+msgstr "Taslak"
+
+msgid "Pending Review"
+msgstr "Bekleyen"
+
+msgid "Posts "
+msgstr "Yazılar"
+
+msgid "Post "
+msgstr "Yazı"
+
+msgid "Error in deleting..."
+msgstr "Silme hatası"
+
+msgid "ltr"
+msgstr "soldan sağa"
+

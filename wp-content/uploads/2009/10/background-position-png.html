@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<title>Background-Position PNGs. Yes, Even in IE6...</title>
+		<style type="text/css">
+			* {
+				margin:0;
+				padding:0;
+			}
+			html {
+				background:#947200 url('http://non-contextually-speaking.com/i/bg-gradient.gif') repeat-x;
+			}
+			body {
+				padding:10em;
+				width:1024px;
+				font:italic 18px/1 Trebuchet,'Lucida Sans',Arial,sans-serif;
+				color:#fff;
+				filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://non-contextually-speaking.com/i/Atg.png',sizingMethod='crop');
+			}
+			html > body {
+				filter:none;
+				background:transparent url('http://non-contextually-speaking.com/i/Atg.png') no-repeat -60px -130px;
+			}
+			h1, h2 {
+				padding-bottom:1em;
+			}
+			ul {
+				list-style:none;
+			}
+			#left {
+				float:left;
+				padding:0 10em;
+			}
+	.sticker {
+		position:relative;
+		top:0;
+		left:0;
+		width:88px;
+		height:88px;
+		overflow:hidden;
+	}
+	.sticker p {
+		position:absolute;
+		top:0;
+		left:0;
+		width:174px;
+		height:440px;
+		background:none;
+		filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='background-position-png.png',sizingMethod='crop');
+	}
+	.sticker > p {
+		filter:none;
+		background:url('background-position-png.png') no-repeat;
+	}
+	.sticker span, .sticker a {
+		position:absolute;
+		z-index:1;
+		top:50%;
+		margin-top:-1.2em;
+		width:80px;
+		display:block;
+		font-size:1em;
+		color:#fff;
+		text-transform:uppercase;
+		text-align:center;
+	}
+	.small p {
+		left:-95px;
+	}
+	.small span, .small a {
+		font-size:.8em;
+	}
+	.sticker .red {
+		top:0;
+	}
+	.sticker .green {
+		top:-90px;
+	}
+	.sticker .blue {
+		top:-180px;
+	}
+		</style>
+	</head>
+	<body>
+
+		<h1>Background-Position PNGs. Yes, Even in IE6...</h1>
+
+		<div id="left">
+			<h2>Text</h2>
+			<ul>
+<li class="sticker large">
+	<p class="green"></p>
+	<span>Large Green</span>
+</li>
+				<li class="sticker small">
+					<p class="blue"></p>
+					<span>Small Blue</span>
+				</li>
+				<li class="sticker large">
+					<p class="red"></p>
+					<span>Large Red</span>
+				</li>
+			</ul>
+		</div>
+
+		<div id="right">
+			<h2>Links</h2>
+			<ul>
+				<li class="sticker large">
+					<p class="green"></p>
+					<a href="#">Large Green</a>
+				</li>
+				<li class="sticker small">
+					<p class="blue"></p>
+					<a href="#">Small Blue</a>
+				</li>
+				<li class="sticker large">
+					<p class="red"></p>
+					<a href="#">Large Red</a>
+				</li>
+			</ul>
+		</div>
+
+	</body>
+</html>

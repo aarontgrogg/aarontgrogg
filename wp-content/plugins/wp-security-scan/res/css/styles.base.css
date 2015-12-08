@@ -1,0 +1,31 @@
+
+.status-indicator { display: block; width: 16px; height: 16px;}
+/* == 0 */
+.indicator-green { background: url('../images/indicator-green.png') no-repeat 0 0; }
+/* == 1 */
+.indicator-red { background: url('../images/indicator-red.png') no-repeat 0 0; }
+/* == 2 */
+.indicator-yellow { background: url('../images/indicator-yellow.png') no-repeat 0 0; }
+/* == 3 */
+.indicator-blue { background: url('../images/indicator-blue.png') no-repeat 0 0; }
+
+.wsd-content-section { float: left; display: block; }
+
+#wsd-banner-rotator {
+    display: block; clear: both;
+    margin-top: 50px;
+}
+
+.entry {}
+.entry-description { display: none; }
+
+
+
+
+
+
+
+
+
+
+

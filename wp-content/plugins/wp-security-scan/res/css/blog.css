@@ -1,0 +1,66 @@
+
+#pageblog { margin: 10px 0 10px 16px;}
+
+#pageblog #header {
+    background: transparent;
+    padding: 10px 10px;
+    overflow: hidden;
+    border-bottom: 1px solid #cccccc;
+    background: url("../images/blog/featured-slider-bg.jpg") no-repeat center top;
+}
+#pageblog #header #logo {
+    float: left;
+    width: 301px;
+    margin: 0 13px 0 0;
+}
+#pageblog #header #logo a {
+    width: 300px;
+    height: 70px;
+    float: left;
+    text-indent: -9999px;
+    background: url("../images/blog/logo.png") no-repeat left top;
+}
+#pageblog #header #main-nav {
+    float: right;
+    zoom: 1;
+    display: block;
+    margin: 27px 0 0 0;
+}
+#pageblog #header #main-nav:after {
+    content: '\\0020';
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    font-size: 0;
+}
+
+#pageblog #header #main-nav .facebook, #pageblog #header #main-nav .twitter {
+    float: left;
+    width: 16px;
+    height: 16px;
+    margin: 4px 0 0 10px;
+    text-indent: -9999px;
+}
+#pageblog #header #main-nav .facebook { background: url("../images/blog/ico-facebook.png") no-repeat left top; }
+#pageblog #header #main-nav .twitter { background: url("../images/blog/ico-twitter.png") no-repeat left top; }
+
+#pageblog #content {
+    background: none repeat scroll 0 0 #F5F5F5;
+    border-top: 1px solid #FFFFFF;
+    padding: 10px 0 5px;
+    width: 100%;
+}
+#pageblog #content #feed-list{ list-style-position: outside; list-style-type: none; margin: 10px 30px;}
+#pageblog #content #feed-list li {
+    padding: 2px 0;
+}
+#pageblog #content #feed-list li h4 {
+    background: url('../images/logo-small.png') no-repeat left center;
+    padding: 2px 0 2px 25px;
+}
+
+
+
+
+

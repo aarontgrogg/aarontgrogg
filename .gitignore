@@ -41,3 +41,17 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+
+# =========================
+# Repor files
+# =========================
+ela/
+lab/
+rte/
+stats/
+wp-content/aiowps_backups/
+wp-content/backup-db
+wp-content/cache
+wp-content/w3tc-config
+wp-config.php

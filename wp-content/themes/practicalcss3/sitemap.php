@@ -1,0 +1,240 @@
+<?php
+/*
+	@package WordPress
+	@subpackage Practical CSS3
+	Template Name: Sitemap
+*/
+header ('Content-Type:text/xml');
+echo '<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/background-gradient/</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/background-gradient/internet-explorer-filters/</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/background-gradient/css3-pie/</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/border-radius/</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/border-radius/css3-pie/</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/box-shadow/</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/box-shadow/internet-explorer-filters/</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/box-shadow/css3-pie/</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/opacity/</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/opacity/internet-explorer-filters/</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/opacity/ecsstender/</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/rgba/</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/rgba/internet-explorer-filters/</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/rgba/ecsstender/</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/rotate-text/</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/rotate-text/internet-explorer-filters/</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/text-shadow/</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/text-shadow/internet-explorer-filters/</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/animation/</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/fin/</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/fin/people-archive/</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/background-gradient/internet-explorer-filters</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/background-gradient/css3-pie</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/background-gradient/?replytocom=2</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/background-gradient/?replytocom=22</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/background-gradient/?replytocom=29</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/background-gradient/internet-explorer-filters/?replytocom=30</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/background-gradient/css3-pie/?replytocom=28</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/border-radius/css3-pie</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/border-radius/css3-pie/?replytocom=31</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/box-shadow/internet-explorer-filters</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/box-shadow/css3-pie</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/box-shadow/internet-explorer-filters/?replytocom=32</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/box-shadow/css3-pie/?replytocom=33</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/opacity/internet-explorer-filters</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/opacity/ecsstender</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/opacity/internet-explorer-filters/?replytocom=34</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/rgba/internet-explorer-filters</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/rgba/?replytocom=11</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/rgba/?replytocom=17</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/rotate-text/internet-explorer-filters</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/rotate-text/internet-explorer-filters/?replytocom=35</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/text-shadow/internet-explorer-filters</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/text-shadow/internet-explorer-filters/?replytocom=36</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/fin/people-archive</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/wp-content/themes/practicalcss3/classic.html</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/wp-content/themes/practicalcss3/css3.html</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/background-gradient/internet-explorer-filters?replytocom=30</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/background-gradient/css3-pie?replytocom=28</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/border-radius/css3-pie?replytocom=31</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/box-shadow/internet-explorer-filters?replytocom=32</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/box-shadow/css3-pie?replytocom=33</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/opacity/internet-explorer-filters?replytocom=34</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/rotate-text/internet-explorer-filters?replytocom=35</loc>
+  <changefreq>monthly</changefreq>
+</url>
+<url>
+  <loc>http://aarontgrogg.com/practicalcss3/text-shadow/internet-explorer-filters?replytocom=36</loc>
+  <changefreq>monthly</changefreq>
+</url>
+</urlset>';
+?>

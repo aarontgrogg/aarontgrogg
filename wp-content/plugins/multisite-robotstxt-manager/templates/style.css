@@ -1,0 +1,114 @@
+/**
+ * Multisite Robots.txt Manager
+ * @package Multisite Robots.txt Manager
+ * @author tribalNerd (tribalnerd@technerdia.com)
+ * @copyright Copyright (c) 2012-2013, techNerdia LLC.
+ * @link http://msrtm.technerdia.com/
+ * @license http://www.gnu.org/licenses/gpl.html
+ * @version 0.4.0
+*/
+
+/** ==================================================================================================================== Admin Area == */
+/** ==================================================================================================================== Admin Area == */
+/** ==================================================================================================================== Admin Area == */
+/** white box inside body */
+.inside-box {
+	background:#ffffff;
+	background-color:#ffffff;
+	border:1px solid #cccccc;
+	margin:25px auto;
+	width:95%;
+		-moz-border-radius:5px;
+		-webkit-border-radius:5px;
+		-khtml-border-radius:5px;
+		border-radius:5px;
+}
+
+.inside-pad {
+	padding:15px 30px;
+}
+
+.para {
+	color:#606060;
+	font-size:14px;
+	line-height:18px;
+}
+
+.para h2 {
+	border-bottom:1px dashed #cccccc;
+	font-weight:bold;
+}
+
+/** =============================== error notice == */
+.msrtm-warn {
+	background:#feefb3;
+	background-color:#feefb3;
+	border:1px solid #9f6000;
+	color:#9f6000;
+	line-height:22px;
+	margin:2px 0 15px 0;
+	padding:0;
+	width:100%;
+}
+
+.msrtm-warn p {
+	font-style:italic;
+	font-weight:bold;
+	 margin:5px 0 4px 10px;
+	 text-align:center;
+}
+
+/** =============================== automation notice == */
+.msrtm-auto {
+	border-bottom:1px dotted #cccccc;
+	border-top:1px dotted #cccccc;
+	color:#dd3333;
+	font-size:18px;
+	font-weight:bold;
+	letter-spacing:1px;
+	margin:25px 0;
+	padding:18px 0;
+	text-align:center;
+	width:100%;
+	word-spacing:10px;
+}
+
+.msrtm-setup {
+	display:block;
+	font-size:16px;
+	letter-spacing:normal;
+	word-spacing:normal;
+	margin:20px 0 0 0;
+}
+
+/** =============================== form sizes == */
+.msrtm-input,
+.msrtm-textarea {
+	width:60%;
+}
+
+/** =============================== 1440px == */
+@media handheld, only screen and ( max-width:1440px ) {
+	.msrtm-input,
+	.msrtm-textarea {
+		width:90%;
+	}
+}
+
+/** =============================== 1024px == */
+@media handheld, only screen and ( max-width:1024px ) {
+	.msrtm-input,
+	.msrtm-textarea {
+		width:100%;
+	}
+}
+
+/** =============================== 873px == */
+@media handheld, only screen and ( max-width:873px ) {
+	.inner-sidebar,
+	.postbox-container,
+	.columns-2 .inner-sidebar {
+		width:100%;
+	}
+}
+/** The End */

@@ -1,0 +1,130 @@
+<!doctype html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="imagetoolbar" content="no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="verify-v1" content="lbVeIvYlafhq4llvj199Sh3gUfq55tMu065LnAgjliw" />
+		<title>Demo: Pure CSS Highlight for Link :target | Aaron T. Grogg</title>
+		<link rel="profile" href="http://gmpg.org/xfn/11" />
+		<link rel="stylesheet" href="http://aarontgrogg.com/wp-content/themes/atg/style.css" />
+		<style>
+			/* CSS background highlight */
+			li {
+				background-color: transparent;
+			}
+			li:target {
+				-webkit-animation: hilite-background 5s;
+				-moz-animation: hilite-background 5s;
+				-ms-animation: hilite-background 5s;
+				-o-animation: hilite-background 5s;
+				animation: hilite-background 5s;
+			}
+			@-webkit-keyframes hilite-background {
+				0% {background-color: transparent;}
+				30% {background-color: #fbff0f;}
+				100% {background-color: transparent;}
+			}
+			@-moz-keyframes hilite-background {
+				0% {background-color: transparent;}
+				30% {background-color: #fbff0f;}
+				100% {background-color: transparent;}
+			}
+			@-ms-keyframes hilite-background {
+				0% {background-color: transparent;}
+				30% {background-color: #fbff0f;}
+				100% {background-color: transparent;}
+			}
+			@-o-keyframes hilite-background {
+				0% {background-color: transparent;}
+				30% {background-color: #fbff0f;}
+				100% {background-color: transparent;}
+			}
+			@keyframes hilite-background {
+				0% {background-color: transparent;}
+				30% {background-color: #fbff0f;}
+				100% {background-color: transparent;}
+			}
+			/* CSS border highlight */
+			li figure { /* not related to CSS highlight, merely to aid with the demonstration */ 
+				background: #333;
+				text-align: center;
+			}
+			li img {
+				border: 5px solid transparent; 
+			}
+			li:target img {
+				-webkit-animation: hilite-border 5s;
+				-moz-animation: hilite-border 5s;
+				-ms-animation: hilite-border 5s;
+				-o-animation: hilite-border 5s;
+				animation: hilite-border 5s;
+			}
+			@-webkit-keyframes hilite-border {
+				0% {border-color: transparent;}
+				30% {border-color: #fbff0f;}
+				100% {border-color: transparent;}
+			}
+			@-moz-keyframes hilite-border {
+				0% {border-color: transparent;}
+				30% {border-color: #fbff0f;}
+				100% {border-color: transparent;}
+			}
+			@-ms-keyframes hilite-border {
+				0% {border-color: transparent;}
+				30% {border-color: #fbff0f;}
+				100% {border-color: transparent;}
+			}
+			@-o-keyframes hilite-border {
+				0% {border-color: transparent;}
+				30% {border-color: #fbff0f;}
+				100% {border-color: transparent;}
+			}
+			@keyframes hilite-border {
+				0% {border-color: transparent;}
+				30% {border-color: #fbff0f;}
+				100% {border-color: transparent;}
+			}
+		</style>
+	</head>
+	<body>
+		<article>
+			<h1>Demo for Pure CSS Highlight for Link :target</h1>
+			<p>This is a demo for a pure CSS highlight for link targets.</p>
+			<p>You might want to read <a href="http://aarontgrogg.com/2012/05/18/" title="Post: Pure CSS Highlight for Link :target">the blog post</a>, but then again, you might not...</p>
+			<p>What should happen when you click the links below  (<a href="http://caniuse.com/#search=css3%20animation">check browser support for this CSS feature</a>) is that the page should jump down to the link's target, which is much lower on the page, then the targeted section should receive a highlight that will fade-in, then slowly fade-away.</p>
+			<p>This highlight affect also happens when you include the target reference in the URL initially, as a deep-link, like:<br>
+				<script>
+					var href = location.href.split('#')[0]+'#faq3';
+					document.write('<a href="'+href+'">'+href+'</a>');
+				</script>
+			</p>
+			
+			<h2>Questions</h2>
+			<ol>
+				<li><a href="#faq1">Is this a really frequently asked question?</a></li>
+				<li><a href="#faq2">Who decides?</a></li>
+				<li><a href="#faq3">No, seriously?</a></li>
+				<li><a href="#faq4">You can use other highlight effects as well, like border colors, maybe...</a></li>
+			</ol>
+	
+			<h2>Filler...</h2>
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+			
+			<h2>Answers</h2>
+			<ol>
+				<li id="faq1">Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</li>
+				<li id="faq2">Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</li>
+				<li id="faq3">Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi.</li>
+				<li id="faq4"><figure><img src="beach.jpg" title="Photo of the beach" /><figcaption>Image courtesy of <a href="http://www.flickr.com/photos/8438819@N03/">Anda</a></figcaption></figure></li>
+			</ol>
+
+			<h2>More Filler...</h2>
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+
+		</article>		
+	</body>
+</html>

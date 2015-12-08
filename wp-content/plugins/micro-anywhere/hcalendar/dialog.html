@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Copyright 2008  Alex Willemsma  (email : webmaster@undergroundwebdesigns.com)
+
+	This file is part of Micro Anywhere
+
+    Micro Anywhere is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Mico Anywhere is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Micro Anywhere.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>{#hcalendar_dlg.title}</title>
+	<script type="text/javascript" src="../../../../wp-includes/js/tinymce/tiny_mce_popup.js"></script>
+    <script type="text/javascript" src="js/Base.js"></script>
+    <script type="text/javascript" src="js/Iter.js"></script>
+    <script type="text/javascript" src="js/DOM.js"></script>
+	<script type="text/javascript" src="js/dialog.js"></script>
+    <link href="css/dlg_style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<form onsubmit="ExampleDialog.insert();return false;" action="#">
+	<h3>Details about your event:</h3>
+    <p>
+	  <label for="summary">Event summary / title: </label> 
+	  <input name="summary" type="text" class="text" id="summary" size="35" />
+  </p>
+      
+	  <p><label for="location">Location: </label>
+      <input name="location" type="text" class="text" id="location" size="35" />
+  </p>
+      
+	  <p><label for="url">Event URL:</label>
+      <input name="url" type="text" class="text" id="url" size="35" />
+  </p>
+      <p><label>Start: </label>
+      <select name="startMonth" id="startMonth" onchange="setDaysOfMonth(document.getElementById('startYear'), this, document.getElementById('startDay'));">
+        <option selected="selected">January</option>
+        <option>February</option>
+        <option>March</option>
+        <option>April</option>
+        <option>May</option>
+        <option>June</option>
+        <option>July</option>
+        <option>August</option>
+        <option>September</option>
+        <option>October</option>
+        <option>November</option>
+        <option>December</option>
+      </select>
+      <select name="startDay" id="startDay">
+        <option selected="selected">1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+        <option>11</option>
+        <option>12</option>
+        <option>13</option>
+        <option>14</option>
+        <option>15</option>
+        <option>16</option>
+        <option>17</option>
+        <option>18</option>
+        <option>19</option>
+        <option>20</option>
+        <option>21</option>
+        <option>22</option>
+        <option>23</option>
+        <option>24</option>
+        <option>25</option>
+        <option>26</option>
+        <option>27</option>
+        <option>28</option>
+        <option>29</option>
+        <option>30</option>
+        <option>31</option>
+            </select>
+      <select name="startYear" id="startYear" onchange="setDaysOfMonth(this, document.getElementById('startMonth'), document.getElementById('startDay'));">
+        <option selected="selected">2004</option>
+        <option>2005</option>
+        <option>2006</option>
+        <option>2007</option>
+        <option>2008</option>
+        <option>2009</option>
+        <option>2010</option>
+        <option>2011</option>
+        <option>2012</option>
+        <option>2013</option>
+        <option>2014</option>
+      </select>
+      <input name="startHour" type="text" id="startHour" size="2" />
+      <input name="startMinute" type="text" id="startMinute" size="2" />
+      </p>
+      
+      <p><label>End: </label>
+      <select name="endMonth" id="endMonth" onchange="setDaysOfMonth(document.getElementById('endYear'), this, document.getElementById('endDay'));">
+        <option selected="selected">January</option>
+        <option>February</option>
+        <option>March</option>
+        <option>April</option>
+        <option>May</option>
+        <option>June</option>
+        <option>July</option>
+        <option>August</option>
+        <option>September</option>
+        <option>October</option>
+        <option>November</option>
+        <option>December</option>
+      </select>
+      <select name="endDay" id="endDay">
+        <option selected="selected">1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+        <option>11</option>
+        <option>12</option>
+        <option>13</option>
+        <option>14</option>
+        <option>15</option>
+        <option>16</option>
+        <option>17</option>
+        <option>18</option>
+        <option>19</option>
+        <option>20</option>
+        <option>21</option>
+        <option>22</option>
+        <option>23</option>
+        <option>24</option>
+        <option>25</option>
+        <option>26</option>
+        <option>27</option>
+        <option>28</option>
+        <option>29</option>
+        <option>30</option>
+        <option>31</option>
+            </select>
+      <select name="endYear" id="endYear" onchange="setDaysOfMonth(this, document.getElementById('endMonth'), document.getElementById('endDay'));">
+        <option selected="selected">2004</option>
+        <option>2005</option>
+        <option>2006</option>
+        <option>2007</option>
+        <option>2008</option>
+        <option>2009</option>
+        <option>2010</option>
+        <option>2011</option>
+        <option>2012</option>
+        <option>2013</option>
+        <option>2014</option>
+      </select>
+      <input name="endHour" type="text" id="endHour" size="2" />
+      <input name="endMinute" type="text" id="endMinute" size="2" />
+      </p>
+      
+      <p>
+        <label for="timezone">Timezone:</label>
+        <select id="timezone" name="timezone">
+        <option value="">none</option>
+        <option value="-12:00">-12 (IDLW)</option>
+        <option value="-11:00">-11 (NT)</option>
+        <option value="-10:00">-10 (HST)</option>
+        <option value="-09:00">-9 (AKST)</option>
+        <option value="-08:00">-8 (PST/AKDT)</option>
+        <option value="-07:00">-7 (MST/PDT)</option>
+        <option value="-06:00">-6 (CST/MDT)</option>
+        <option value="-05:00">-5 (EST/CDT)</option>
+        <option value="-04:00">-4 (AST/EDT)</option>
+        <option value="-03:45">-3:45</option>
+        <option value="-03:30">-3:30</option>
+        <option value="-03:00">-3 (ADT)</option>
+        <option value="-02:00">-2 (AT)</option>
+        <option value="-01:00">-1 (WAT)</option>
+        <option value="Z">+0 (GMT/UTC)</option>
+        <option value="+01:00">+1 (CET/BST/IST/WEST)</option>
+        <option value="+02:00">+2 (EET/CEST)</option>
+        <option value="+03:00">+3 (MSK/EEST)</option>
+        <option value="+03:30">+3:30 (Iran)</option>
+        <option value="+04:00">+4 (ZP4/MSD)</option>
+        <option value="+04:30">+4:30 (Afghanistan)</option>
+        <option value="+05:00">+5 (ZP5)</option>
+        <option value="+05:30">+5:30 (India)</option>
+        <option value="+06:00">+6 (ZP6)</option>
+        <option value="+06:30">+6:30 (Burma)</option>
+        <option value="+07:00">+7 (WAST)</option>
+        <option value="+08:00">+8 (WST)</option>
+        <option value="+09:00">+9 (JST)</option>
+        <option value="+09:30">+9:30 (Central Australia)</option>
+        <option value="+10:00">+10 (AEST)</option>
+        <option value="+11:00">+11 (AEST(summer))</option>
+        <option value="+12:00">+12 (NZST/IDLE)</option>
+    </select>
+  <span class="note">hour(s) from GMT</span></p>
+    
+    <p><label for="description">description</label><br  />
+    	<textarea id="description" name="description" cols="50" rows="5"></textarea>
+  </p>
+        
+    <p><label for="tags">tags (comma separated)</label>
+       <input name="tags" type="text" id="tags" size="30" />
+  </p>
+      
+<div class="mceActionPanel">
+		<div style="float: left">
+			<input type="button" id="insert" name="insert" value="{#insert}" onclick="ExampleDialog.insert();" />
+		</div>
+
+		<div style="float: right">
+			<input type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" />
+		</div>
+	</div>
+</form>
+
+</body>
+</html>
