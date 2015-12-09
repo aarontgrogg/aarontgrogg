@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Crafting Twelve-Column Layouts with Flexbox | Flexbox Starter Course</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <!--<script src="js/vendor/modernizr-2.6.2.min.js"></script>-->
+        <style>
+
+            section {
+                margin: 0 auto;
+                max-width: 740px;
+                display: flex;
+                background-color: #fff;
+                background-image: linear-gradient(to right, 
+                    rgba(255,0,0,.5) 0%, rgba(255,0,0,.5) 16.67%, 
+                    rgba(255,0,0,.8) 16.7%, rgba(255,0,0,.8) 33.4%, 
+                    rgba(255,0,0,.5) 33.4%, rgba(255,0,0,.5) 50%, 
+                    rgba(255,0,0,.8) 50%, rgba(255,0,0,.8) 66.67%, 
+                    rgba(255,0,0,.5) 66.67%, rgba(255,0,0,.5) 83.4%, 
+                    rgba(255,0,0,.8) 83.4%, rgba(255,0,0,.8) 100%);
+            }
+        
+            .column {
+                flex-grow: 1;
+                flex-shrink: 1;
+                flex-basis: 0;
+                margin: 10px;
+                padding: .5em;
+                color: #eee;
+                text-align: center;
+                background: #aaa;
+                border: 1px solid #eee;
+            }
+
+            section:nth-of-type(5) .column:first-of-type,
+            section:nth-of-type(6) .column:nth-of-type(2) {
+                flex-grow: 2; /* should take up 2x the width of siblings with flex-grow: 1 */
+                flex-shrink: 2;
+                flex-basis: calc(20px + 2px + 2em); /* adding the margin, border and padding of the "missing" item from the row below*/
+            }
+
+        </style>
+    </head>
+    <body>
+        
+        <h1><a href="index.html">Flexbox Starter Course</a>: Crafting Twelve-Column Layouts with Flexbox</h1>
+        <a href="http://codepen.io/LandonSchropp/pen/BNQQva">CodePen</a>
+
+        <section>
+            <div class="column">
+                One Third
+            </div>
+            <div class="column">
+                One Third
+            </div>
+            <div class="column">
+                One Third
+            </div>
+        </section>
+
+        <section>
+            <div class="column">
+                One Half
+            </div>
+            <div class="column">
+                One Half
+            </div>
+        </section>
+
+        <section>
+            <div class="column">
+                One Fourth
+            </div>
+            <div class="column">
+                One Fourth
+            </div>
+            <div class="column">
+                One Fourth
+            </div>
+            <div class="column">
+                One Fourth
+            </div>
+        </section>
+
+        <section>
+            <div class="column">
+                One Sixth
+            </div>
+            <div class="column">
+                One Sixth
+            </div>
+            <div class="column">
+                One Sixth
+            </div>
+            <div class="column">
+                One Sixth
+            </div>
+            <div class="column">
+                One Sixth
+            </div>
+            <div class="column">
+                One Sixth
+            </div>
+        </section>
+
+        <section>
+            <div class="column">
+                One Half
+            </div>
+            <div class="column">
+                One Fourth
+            </div>
+            <div class="column">
+                One Fourth
+            </div>
+        </section>
+
+        <section>
+            <div class="column">
+                One Sixth
+            </div>
+            <div class="column">
+                Two Thirds
+            </div>
+            <div class="column">
+                One Sixth
+            </div>
+        </section>
+
+        <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>-->
+    </body>
+</html>

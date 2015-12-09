@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Responsive Image | Netbiscuits</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      /*
+       * Start: Basic CSS for NB layout
+       */
+      * {
+        margin: 0;
+        padding: 0;
+        -webkit-box-sizing:border-box;
+        -moz-box-sizing:border-box;
+        box-sizing:border-box;
+      }
+      body {
+        background: white;
+        text-align: center;
+      }
+      header {
+        background: url('header-bg.png') repeat-x center top;
+      }
+      footer {
+        background: url('footer-bg.png') repeat-x center center;
+      }
+      /*
+       * http://css-tricks.com/perfect-full-page-background-image/
+       */
+      .hero-image {
+        width: 100%;
+        height: 180px;
+        overflow: hidden;
+        position: relative;
+      }
+      .hero-image img {
+        min-height: 180px;
+        min-width: 1166px;
+        width: 100%;
+        height: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      @media screen and (max-width: 1166px) { /* Specific to this particular image */
+        .hero-image img {
+          left: 50%;
+          margin-left: -583px; /* 50% of image width */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <img src="header.png"/>
+    </header>
+
+    <div class="hero-image">
+      <img src="light-bulbs.png"/>
+    </div>
+
+    <div>
+      <img src="content.png"/>
+    </div>
+    <footer>
+      <img src="footer.png"/>
+    </footer>
+  </body>
+</html>

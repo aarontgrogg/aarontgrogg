@@ -1,0 +1,359 @@
+<!doctype html>
+<html dir="ltr" lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lab: abbr on touch devices | Aaron T. Grogg, Web Developer</title>
+        <link rel="stylesheet" href="/lab/style.css">
+        <link rel="profile" href="http://gmpg.org/xfn/11">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta name="google-site-verification" content="lbVeIvYlafhq4llvj199Sh3gUfq55tMu065LnAgjliw">
+        <meta name="googlebot" content="index,noarchive,follow,noodp">
+        <meta name="robots" content="all,index,follow">
+        <meta name="msnbot" content="all,index,follow">
+        <meta name="referrer" content="always">
+        <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"><![endif]-->
+        <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <!--[if lt IE 7]><meta http-equiv="imagetoolbar" content="no"><![endif]-->
+        <link rel="canonical" href="http://aarontgrogg.com/lab/abbr/">
+      <style>
+        main > h1 {
+          padding: 12px 0;
+          font-size: 1.5em;
+        }
+        main pre,
+        main style,
+        main script {
+          display: block;
+          background: #000;
+          color: lime;
+          font: .8em/1.2 consolas,monospace,sans-serif;
+          padding: 6px;
+          white-space: pre;
+          overflow-x: auto;
+        }
+        @keyframes fadeInOut {
+          10% {
+            opacity: 1;
+          }
+          95% {
+            opacity: 1;
+          }
+          100% {
+            opacity: 0;
+            outline: 0;
+          }
+        }
+      </style>
+   </head>
+   <body>
+
+        <header role="banner" class="vcard">
+            <h1 class="fn n"><span class="given-name">Aaron</span> <span class="middle-name"><abbr title="Thomas">T</abbr></span>. <span class="family-name">Grogg</span></h1>
+            <p><a class="url" href="http://aarontgrogg.com/">aarontgrogg.com</a> <a class="email" href="mailto:aarontgrogg@gmail.com">aarontgrogg@gmail.com</a></p>
+        </header>
+
+        <main role="main">
+
+        <h1>Lab: <code>abbr</code> on touch devices</h1>
+
+      <section id="normal">
+
+        <h1>Standard <code>abbr</code></h1>
+        <dl>
+          <dt>
+            <strong>Intro</strong>:
+          </dt>
+          <dd>
+            This is just an example of the native behavior of an <code>abbr</code> element with a <code>title</code> attribute with nothing new added.
+          </dd>
+          <dt>
+            <strong>HTML</strong>:
+          </dt>
+          <dd>
+            <pre>&lt;abbr title="National Aeronautics and Space Administration">NASA&lt;/abbr></pre>
+          </dd>
+          <dt>
+            <strong>CSS</strong>:
+          </dt>
+          <dd>
+<style>/* Nothing additional. */</style>
+          </dd>
+          <dt>
+            <strong>JS</strong>:
+          </dt>
+          <dd>
+<script>/* None. */</script>
+          </dd>
+          <dt>
+            <strong>Test</strong>:
+          </dt>
+          <dd>
+            Hover over the <code>abbr</code> below to see the native effect:<br/>
+            <abbr title="National Aeronautics and Space Administration">NASA</abbr>
+          </dd>
+          <dt>
+            <strong>Result</strong>:
+          </dt>
+          <dd>
+            This works fine on mouse devices, but does nothing on touch devices.
+          </dd>
+        </dl>
+
+      </section>
+
+
+      <section id="tabindex">
+
+        <h1>Standard <code>abbr</code> with <code>tabindex</code></h1>
+        <dl>
+          <dt>
+            <strong>Intro</strong>:
+          </dt>
+          <dd>
+            Starting with the above, standard <code>abbr</code> element, I add a <code>tabindex</code>, hoping this will allow the element to receive <code>:focus</code>.  Then I add a little extra CSS to display the <code>title</code> when the element receives <code>:focus</code> (and remains <code>:active</code>); the ID in the CSS is only to scope this CSS to this method.
+          </dd>
+          <dt>
+            <strong>HTML</strong>:
+          </dt>
+          <dd>
+            <pre>&lt;abbr tabindex="0" title="National Aeronautics and Space Administration">NASA&lt;/abbr></pre>
+          </dd>
+          <dt>
+            <strong>CSS</strong>:
+          </dt>
+          <dd>
+<style>#tabindex abbr[title]:focus,
+#tabindex abbr[title]:active {
+  /* Set the scope for the generated content. */
+  position: relative;
+  outline: 0;
+}
+#tabindex abbr[title]:focus::after,
+#tabindex abbr[title]:active::after {
+  /* Push the title attribute into generated content after the abbr... */
+  content: attr(title);
+  /* and position it below the element. */
+  position: absolute;
+  left: 0;
+  bottom: -100%;
+  white-space: nowrap;
+  /* Change to match your design specs. */
+  background-color: rgba(255, 255, 150, .85);
+  padding: 0 4px;
+  font-size: .8em;
+  /* Add a little fade in and out, cause we're cool like that... */
+  opacity: 0;
+  animation: fadeInOut 5s;
+}</style>
+          </dd>
+          <dt>
+            <strong>JS</strong>:
+          </dt>
+          <dd>
+<script>/* None. */</script>
+          </dd>
+          <dt>
+            <strong>Test</strong>:
+          </dt>
+          <dd>
+            Hover over the <code>abbr</code> below to see the native effect, touch or click to see the added effect:<br/>
+            <abbr tabindex="0" title="National Aeronautics and Space Administration">NASA</abbr>
+          </dd>
+          <dt>
+            <strong>Result</strong>:
+          </dt>
+          <dd>
+            Mouse devices still get the native effect on <code>:hover</code> (and they can click to see the added effect), and touch device users can now touch to see a tooltip.  However, this doesn't work on iOS devices...  Additionally, depending on where the <code>abbr</code> is on screen, and how wide the screen is, the generated content some times goes off-screen...
+          </dd>
+        </dl>
+
+      </section>
+
+
+      <section id="generated">
+
+        <h1>Standard <code>abbr</code> and generated content</h1>
+        <dl>
+          <dt>
+            <strong>Intro</strong>:
+          </dt>
+          <dd>
+            Removing the <code>tabindex</code> I added above, this goes back to nothing but the native HTML element with a <code>title</code> attribute, and uses a <code>@media</code> breakpoint to toggle displaying or hiding the <code>abbr</code> description via generated content.  The ID in the CSS is only to scope this CSS to this method.
+          </dd>
+          <dt>
+            <strong>HTML</strong>:
+          </dt>
+          <dd>
+            <pre>&lt;abbr title="National Aeronautics and Space Administration">NASA&lt;/abbr></pre>
+          </dd>
+          <dt>
+            <strong>CSS</strong>:
+          </dt>
+          <dd>
+<style>/* Remove the default appearance initially. */
+#generated abbr[title] {
+  border-bottom: 0;
+  cursor: default;
+}
+#generated abbr[title]::after {
+  /* Push the title attribute into generated content after the abbr. */
+  content: ' ('attr(title)')';
+  
+}
+@media only screen and (min-width:768px) {
+  /* On wider screens, remove the generated content... */
+  #generated abbr[title]::after {
+    content: '';
+  }
+  /* and reset the default appearance. */
+  #generated abbr[title] {
+    border-bottom: 1px dotted;
+    cursor: help;
+  }
+}</style>
+          </dd>
+          <dt>
+            <strong>JS</strong>:
+          </dt>
+          <dd>
+<script>/* None. */</script>
+          </dd>
+          <dt>
+            <strong>Test</strong>:
+          </dt>
+          <dd>
+            On all devices, on screens smaller than 768px wide, the <code>abbr</code> element will be followed by the definition in paranthesis, and on screens larger than 768px wide, the definition will revert to the native behavior:<br/>
+            <abbr title="National Aeronautics and Space Administration">NASA</abbr>
+          </dd>
+          <dt>
+            <strong>Result</strong>:
+          </dt>
+          <dd>
+            This works fine on all devices, but the definition is added after <em>all</em> <code>abbr</code> elements on small screens<sup>1</sup>.  Additionally, this method suffers from having to pick a "magic number" to indicate when the transition should happen.  I'm using 768px in this example, but what happens on touch devices that are wider than that?  This method also has to assume that devices smaller than the magic number are touch devices, and larger are not...<br/>
+            <footer>
+              <small><sup>1</sup> This might not be so bad, if you're using <code>abbr</code> correctly.  According to <a href="http://www.w3.org/TR/html5/text-level-semantics.html#the-abbr-element">the <code>abbr</code> spec</a>, you only need to provide the definition in the first instance, and for any other instances of that same <code>abbr</code> you could remove the <code>title</code> attribute.  This means users would only see the definition following that first instance, and the others would simply be the abbreviation.  This is also the most consistent behavior with standard <em>print</em> reading, where the first instance would define the abbreviation, and subsequent instances would not.  But, in this case, I would say get rid of the <code>@media</code> breakpoint and just do this for all devices, regardless or their size.</small>
+            </footer>
+          </dd>
+        </dl>
+
+      </section>
+
+
+      <section id="js">
+
+        <h1>Standard <code>abbr</code>, using JS test for touch capabilities</h1>
+        <dl>
+          <dt>
+            <strong>Intro</strong>:
+          </dt>
+          <dd>
+            This uses the same generated content method to display the definition, but rather than relying on some magic number and treating all devices the same based on that magic number, I only display the description on devices that have touch capabilities.  The ID in the CSS is only to scope this CSS to this method.
+          </dd>
+          <dt>
+            <strong>HTML</strong>:
+          </dt>
+          <dd>
+            <pre>&lt;abbr title="National Aeronautics and Space Administration">NASA&lt;/abbr></pre>
+          </dd>
+          <dt>
+            <strong>CSS</strong>:
+          </dt>
+          <dd>
+<style>/* On touch-capable devices, push the title attribute into generated content after the abbr... */
+html.touch #js abbr[title]::after {
+  content: ' ('attr(title)')';
+}
+/* and remove the default appearance. */
+html.touch #js abbr[title] {
+  border-bottom: 0;
+  cursor: default;
+}</style>
+          </dd>
+          <dt>
+            <strong>JS</strong>:
+          </dt>
+          <dd>
+<script>/* Test for touch and pointer events. */
+if ('ontouchstart' in window || window.navigator.msPointerEnabled) {
+  /* If either is true, add a class to the <html> element. */
+  document.documentElement.className += " touch";
+}</script>
+          </dd>
+          <dt>
+            <strong>Test</strong>:
+          </dt>
+          <dd>
+            On touch-capable devices, the <code>abbr</code> element will be followed by the definition in paranthesis, otherwise the definition will revert to the native behavior:<br/>
+            <abbr title="National Aeronautics and Space Administration">NASA</abbr>
+          </dd>
+          <dt>
+            <strong>Result</strong>:
+          </dt>
+          <dd>
+            This works well for distinguishing if the device has touch <em>capabilities</em>, but that does not necessarily mean it is a touch <em>device</em>.  A minor drawback is that this relies on JS, and maybe a little larger concern is that if the JS test happens after the content loads, it will cause a repaint.
+          </dd>
+        </dl>
+
+      </section>
+
+
+      <section id="w3c">
+
+        <h1>Standard <code>abbr</code>, adding the <code>title</code> attribute to only the first instance</h1>
+        <dl>
+          <dt>
+            <strong>Intro</strong>:
+          </dt>
+          <dd>
+            As I mentioned in the footnote of <a href="/lab/abbr/#generated">the first generated content method</a>, <a href="http://www.w3.org/TR/html5/text-level-semantics.html#the-abbr-element">the W3C's <code>abbr</code> spec</a> suggests you only need to provide the definition in the first instance of any <code>abbr</code>, and for any other instances of that same <code>abbr</code> you could skip the <code>title</code> attribute.
+          </dd>
+          <dt>
+            <strong>HTML</strong>:
+          </dt>
+          <dd>
+            <pre>&lt;abbr title="National Aeronautics and Space Administration">NASA&lt;/abbr>
+&lt;abbr>NASA&lt;/abbr></pre>
+          </dd>
+          <dt>
+            <strong>CSS</strong>:
+          </dt>
+          <dd>
+<style>/* Remove the default appearance for abbr elements. */
+#w3c abbr {
+  border-bottom: 0;
+  cursor: default;
+}
+/* If an abbr has a title attribute, push that title attribute into generated content. */
+#w3c abbr[title]::after {
+  content: ' ('attr(title)')';
+}</style>
+          </dd>
+          <dt>
+            <strong>JS</strong>:
+          </dt>
+          <dd>
+<script>/* None. */</script>
+          </dd>
+          <dt>
+            <strong>Test</strong>:
+          </dt>
+          <dd>
+            The first <code>abbr</code> element in the paragraph below will be followed by the definition in paranthesis; others will look like normal text:<br/>
+            Lorem ipsum dolor sit amet <abbr title="National Aeronautics and Space Administration">NASA</abbr>, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua <abbr>NASA</abbr>. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat <abbr>NASA</abbr>.
+          </dd>
+          <dt>
+            <strong>Result</strong>:
+          </dt>
+          <dd>
+            This is the most consistent behavior with standard <em>print</em> reading, where the first instance would define the abbreviation, and subsequent instances would not.  The one concern here is that the onus goes to the author to remember to add a <code>title</code> attribute to the first instance of each <code>abbr</code>, and not to any that follow.
+          </dd>
+        </dl>
+
+      </section>
+
+        </main>
+        <script src="//dcs.netbiscuits.net/ds/detect/js/account/netbiscuits42/profile/default/jsprofile/mytoken/token/9434c7746a008f2a"></script>
+        <script>var dcs=dcs||undefined;if(dcs!==undefined){dcs.dynamic.init({benchmark:true,profilediff:true});}</script>
+        <noscript><img src="//dcs.netbiscuits.net/ds/analytics/log/fallback/account/netbiscuits42/token/9434c7746a008f2a" alt="No-JS tracking pixel"/></noscript>
+   </body>
+</html>
