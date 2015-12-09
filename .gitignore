@@ -46,6 +46,8 @@ Temporary Items
 # =========================
 # Repor files
 # =========================
+_dev/
+_old/
 ela/
 lab/
 rte/
