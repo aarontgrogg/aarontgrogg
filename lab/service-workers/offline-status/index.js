@@ -1,26 +1,25 @@
-// register the service worker
+// Register the ServiceWorker
 navigator.serviceWorker.register('service-worker.js', {
-    // not sure what this means yet...
-    scope: '.'
-}).then(function(registration){
-    // notify the console, or not...
-    console.log('The service worker has been registered: ', registration);
-}).catch(function(err) {
-    // registration failed :(
-    console.log('ServiceWorker registration failed: ', err);
+  scope: '.'
+}).then(function(registration) {
+  console.log('[register] The service worker has been registered: ', registration);
+}).catch(function(error){
+  console.log('[register] The service worker has NOT been registered: ', error);
 });
 
-// listen for changes to the service worker
-navigator.serviceWorker.addEventListener('controllerchange', function(event){
-    console.log('A service worker controllerchange event has happened: ', event);
-    // the state of the service worker will change when the serice worker becomes activated, 
-    // meaning all files have been cached
-    navigator.serviceWorker.controller.addEventListener('statechange', function(){
-        console.log('A service worker statechange event has happened: ', this.state);
-        // if so...
-        if (this.state === 'activated') {
-            // show a message that it is okay to go offline
-            document.getElementById('offlineNotification').classList.remove('hidden');
-        }
-    });
+// Listen for claiming of our ServiceWorker
+navigator.serviceWorker.addEventListener('controllerchange', function(event) {
+  console.log('[controllerchange] A "controllerchange" event has happened within navigator.serviceWorker: ', event);
+
+  // Listen for changes in the state of our ServiceWorker
+  navigator.serviceWorker.controller.addEventListener('statechange', function() {
+      console.log('[controllerchange][statechange] A "statechange" has occured: ', this.state);
+
+      // If the ServiceWorker becomes "activated", let the user know they can go offline!
+      if (this.state === 'activated') {
+        // Show the "You may now use offline" notification
+        document.getElementById('offlineNotification').classList.remove('hidden');
+      }
+    }
+  );
 });

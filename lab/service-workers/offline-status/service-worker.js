@@ -1,62 +1,70 @@
-// name cache
+// [Working example](/serviceworker-cookbook/offline-status/).
+
 var CACHE_NAME = 'dependencies-cache';
 
-// manifest of files to cache
+// Files required to make this app work offline
 var REQUIRED_FILES = [
-    'random-1.png',
-    'random-2.png',
-    'random-3.png',
-    'random-4.png',
-    'random-5.png',
-    'random-6.png',
-    'style.css',
-    'index.html',
-//    '/',
-    'index.js',
-    'app.js'
+  'app.js',
+  'index.html',
+  'index.js',
+  'random-1.png',
+  'random-2.png',
+  'random-3.png',
+  'random-4.png',
+  'random-5.png',
+  'random-6.png',
+  'service-worker.js',
+  'style.css'
 ];
 
-// install listener
 self.addEventListener('install', function(event) {
-    console.log('[install] Service Worker install event: ', event);
-    // Perform install step:  loading each required file into cache
-    event.waitUntil(
-        console.log('[install] Service Worker install event.waitUntil.');
-        caches.open(CACHE_NAME)
-            .then(function(cache) {
-                // Add all offline dependencies to the cache
-                console.log('[install] Caches opened, adding all core components to cache');
-                return cache.addAll(REQUIRED_FILES);
-            })
-            .then(function() {
-                console.log('[install] All required resources have been cached, we\'re good!');
-                return self.skipWaiting();
-            })
-    );
+  // Perform install step:  loading each required file into cache
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(function(cache) {
+        // Add all offline dependencies to the cache
+        console.log('[install] Caches opened, adding all core components to cache: ', cache);
+        return cache.addAll(REQUIRED_FILES);
+      })
+      .then(function() {
+        console.log('[install] All required resources have been cached: ', self);
+        return self.skipWaiting();
+      })
+      .catch(function(error){
+        console.log('[install] The service worker has NOT been installed: ', error);
+      })
+  );
 });
 
-// listen to each fetch request the browser makes
-self.addEventListener('fetch', function(event){
-    console.log('[fetch] Service Worker fetch event: ', event);
-    // for each event...
-    event.respondWith(
-        console.log('[fetch] Service Worker fetch event.respondWith.');
-        // check if the item is in the cache
-        caches.match(event.request)
-            .then(function(response) {
-                console.log('[fetch] Service Worker caches.match: ', response);
-                // if so, return the cached asset
-                if (response) {
-                    return response;
-                }
-                // else process the fetch request
-                return fetch(event.request);
-            })
-    );
+self.addEventListener('fetch', function(event) {
+  console.log('[fetch] event: ', event);
+  event.respondWith(
+    /*** NOTE: Dave's tutorial only passes event.request to this Promise, which fails ***/
+    caches.match(event.request.url)
+      .then(function(response) {
+        console.log('[fetch] response: ', response);
+        // Cache hit - return the response from the cached version
+        if (response) {
+          console.log('[fetch] Returning from ServiceWorker cache: ', event.request.url);
+          return response;
+        }
+
+        // Not in cache - return the result from the live server
+        // `fetch` is essentially a "fallback"
+        console.log('[fetch] Returning from server: ', event.request.url);
+        return fetch(event.request);
+      }
+    )
+    .catch(function(error){
+      console.log('[fetch] No cache.match: ', error);
+    })
+  );
 });
 
-// activate the service worker right away to bypass a page refresh to start it
-self.addEventListener('activate', function(event){
-    console.log('[activate] Service Worker activated.');
-    event.waitUntil(self.clients.claim());
+self.addEventListener('activate', function(event) {
+  console.log('[activate] event: ', event);
+
+  // Calling claim() to force a "controllerchange" event on navigator.serviceWorker
+  console.log('[activate] self: ', self);
+  event.waitUntil(self.clients.claim());
 });
