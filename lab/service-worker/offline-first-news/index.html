@@ -1,0 +1,68 @@
+<!doctype html>
+<html dir="ltr" lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lab: Offline Status | Aaron T. Grogg, Web Developer</title>
+        <link rel="stylesheet" href="/lab/style.css">
+        <link rel="profile" href="http://gmpg.org/xfn/11">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta name="google-site-verification" content="lbVeIvYlafhq4llvj199Sh3gUfq55tMu065LnAgjliw">
+        <meta name="googlebot" content="index,noarchive,follow,noodp">
+        <meta name="robots" content="all,index,follow">
+        <meta name="msnbot" content="all,index,follow">
+        <meta name="referrer" content="always">
+        <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"><![endif]-->
+        <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <!--[if lt IE 7]><meta http-equiv="imagetoolbar" content="no"><![endif]-->
+        <link rel="canonical" href="http://aarontgrogg.com/lab/service-workers/offline-status">
+        <style>
+            section img {
+                float: none;
+            }
+            section button {
+                display: block;
+                margin: 1em;
+            }
+        </style>
+    </head>
+    <body>
+
+        <header role="banner" class="vcard">
+            <h1 class="fn n"><span class="given-name">Aaron</span> <span class="middle-name"><abbr title="Thomas">T</abbr></span>. <span class="family-name">Grogg</span></h1>
+            <p><a class="url" href="http://aarontgrogg.com/">aarontgrogg.com</a> <a class="email" href="mailto:aarontgrogg@gmail.com">aarontgrogg@gmail.com</a></p>
+        </header>
+
+        <main role="main">
+
+            <section id="introduction">
+                <h1>Lab: Offline Status</h1>
+                <p>From: <a href="https://hacks.mozilla.org/2015/11/offline-service-workers/">Offline Recipes for Service Workers</a></p>
+                <p>Instructions: After this page loads, disconnect from the Internet, then click the <strong>Show Another Random Logo</strong> button.  The image below the buttons should change to one of six random logos.  That is because, after the page loaded, a Service Worker downloaded and cached all the assets that this page needs.  These assets can now be used offline, and to help the page load faster even when online!</p>
+
+                <link rel="stylesheet" href="style.css">
+
+                <div class="hidden notification" id="offlineNotification">You are now safe to go offline!</div>
+                <button id="randomButton">Show Another Random Logo</button>
+                <button id="clearAndReRegister">View Complete Demo Again</button>
+                <img src="random-1.png" alt="" id="logoImage">
+
+                <script src="index.js"></script>
+                <script src="app.js"></script>
+
+                <p>Notes: I found two inconsistencies in the original tutorial that gave me bugs to find and correct.  Both appear in the <code>service-worker.js</code> file:</p>
+                <ol>
+                    <li>
+                        When creating the <code>REQUIRED_FILES</code> variable, you can just use relative URLs like <code>'app.js'</code>, but if you just use <code>'/'</code>, it will cache the <em>absolute</em> root document, not the <em>relative root</em>.  For example, for this demo, it cached <code>https://aarontgrogg.com/</code>, not <code>https://aarontgrogg.com/lab/service-workers/offline-status/</code>, which is what I wanted.  So I used the full relative URL for each of my assets, like <code>'/lab/service-workers/offline-status/'</code>.
+                    </li>
+                    <li>
+                        In the <code>fetch</code> listener, the <code>caches.match</code> receives the <code>event.request</code>, but what it really needs is the <code>event.request.url</code>.
+                    </li>
+                </ol>
+            </section>
+
+        </main>
+        <script src="//dcs.netbiscuits.net/ds/detect/js/account/netbiscuits42/profile/default/jsprofile/mytoken/token/9434c7746a008f2a"></script>
+        <script>var dcs=dcs||undefined;if(dcs!==undefined){dcs.dynamic.init({benchmark:true,profilediff:true});}</script>
+        <noscript><img src="//dcs.netbiscuits.net/ds/analytics/log/fallback/account/netbiscuits42/token/9434c7746a008f2a" alt="No-JS tracking pixel"/></noscript>
+    </body>
+</html>
