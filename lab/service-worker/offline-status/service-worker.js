@@ -11,18 +11,18 @@ var REQUIRED_FILES = [
       which is why I'm using the full path here.
   ***/
   '/lab/style.css',
-  '/lab/service-workers/offline-status/',
-  '/lab/service-workers/offline-status/app.js',
-  '/lab/service-workers/offline-status/index.html',
-  '/lab/service-workers/offline-status/index.js',
-  '/lab/service-workers/offline-status/random-1.png',
-  '/lab/service-workers/offline-status/random-2.png',
-  '/lab/service-workers/offline-status/random-3.png',
-  '/lab/service-workers/offline-status/random-4.png',
-  '/lab/service-workers/offline-status/random-5.png',
-  '/lab/service-workers/offline-status/random-6.png',
-  '/lab/service-workers/offline-status/service-worker.js',
-  '/lab/service-workers/offline-status/style.css'
+  '/lab/service-worker/offline-status/',
+  '/lab/service-worker/offline-status/app.js',
+  '/lab/service-worker/offline-status/index.html',
+  '/lab/service-worker/offline-status/index.js',
+  '/lab/service-worker/offline-status/random-1.png',
+  '/lab/service-worker/offline-status/random-2.png',
+  '/lab/service-worker/offline-status/random-3.png',
+  '/lab/service-worker/offline-status/random-4.png',
+  '/lab/service-worker/offline-status/random-5.png',
+  '/lab/service-worker/offline-status/random-6.png',
+  '/lab/service-worker/offline-status/service-worker.js',
+  '/lab/service-worker/offline-status/style.css'
 ];
 
 self.addEventListener('install', function(event) {

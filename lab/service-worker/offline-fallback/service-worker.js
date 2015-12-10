@@ -9,10 +9,10 @@ self.addEventListener('install', function(event) {
   event.waitUntil(
     fetch(offlineRequest).then(function(response){
       return caches.open('offline')
-                .then(function(cache) {
-                  console.log('[install] Cache opened, adding offline html to cache: ', cache);
-                  return cache.put(offlineRequest, response);
-                });
+        .then(function(cache) {
+          console.log('[install] Cache opened, adding offline html to cache: ', cache);
+          return cache.put(offlineRequest, response);
+        });
     })
   );
 });

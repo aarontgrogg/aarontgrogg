@@ -12,15 +12,10 @@ if (navigator.serviceWorker.controller) {
   });
 }
 
-// The refresh link needs a cache-busting URL parameter
-document.querySelector('#refresh').search = Date.now();
-
 // Allow for "replaying" this example
-document.getElementById('clearAndReRegister').addEventListener('click',
-  function() {
-    navigator.serviceWorker.getRegistration().then(function(registration) {
-      registration.unregister();
-      window.location.reload();
-    });
-  }
-);
+document.getElementById('clearAndReRegister').addEventListener('click', function() {
+  navigator.serviceWorker.getRegistration().then(function(registration) {
+    registration.unregister();
+    window.location.reload();
+  });
+});
