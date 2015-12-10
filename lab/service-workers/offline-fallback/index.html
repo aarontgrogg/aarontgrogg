@@ -2,7 +2,7 @@
 <html dir="ltr" lang="en-US">
     <head>
         <meta charset="UTF-8">
-        <title>Lab: Offline Status | Aaron T. Grogg, Web Developer</title>
+        <title>Lab: Offline Fallback | Aaron T. Grogg, Web Developer</title>
         <link rel="stylesheet" href="/lab/style.css">
         <link rel="profile" href="http://gmpg.org/xfn/11">
         <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -14,16 +14,7 @@
         <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"><![endif]-->
         <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
         <!--[if lt IE 7]><meta http-equiv="imagetoolbar" content="no"><![endif]-->
-        <link rel="canonical" href="http://aarontgrogg.com/lab/service-workers/offline-status">
-        <style>
-            section img {
-                float: none;
-            }
-            section button {
-                display: block;
-                margin: 1em;
-            }
-        </style>
+        <link rel="canonical" href="http://aarontgrogg.com/lab/service-workers/offline-fallback">
     </head>
     <body>
 
@@ -35,21 +26,22 @@
         <main role="main">
 
             <section id="introduction">
-                <h1>Lab: Offline Status</h1>
+                <h1>Lab: Offline Fallback</h1>
                 <p>From: <a href="https://hacks.mozilla.org/2015/11/offline-service-workers/">Offline Recipes for Service Workers</a></p>
-                <p>Instructions: After this page loads, disconnect from the Internet, then click the <strong>Show Another Random Logo</strong> button.  The image below the buttons should change to one of six random logos.  That is because, after the page loaded, a Service Worker downloaded and cached all the assets that this page needs.  These assets can now be used offline, and to help the page load faster even when online!</p>
+                <p>Instructions: After this page loads, disconnect from the Internet, then refresh the page.  Rather than your browser's default "Sorry, you're offline" page, you will get my custom, branded offline page.</p>
 
-                <link rel="stylesheet" href="style.css">
+                <p>Registered ServiceWorker:   <span id="register">Did not register</span></p>
+                <p>Active Controller:  <span id="controller">Did not activate</span></p>
 
-                <div class="hidden notification" id="offlineNotification">You are now safe to go offline!</div>
-                <button id="randomButton">Show Another Random Logo</button>
+                <p>ServiceWorker logs:</p>
+                <div id="log">Here be logs: <br></div>
+
+                <button id="refresh">Refresh</button>
                 <button id="clearAndReRegister">View Complete Demo Again</button>
-                <img src="random-1.png" alt="" id="logoImage">
 
                 <script src="index.js"></script>
-                <script src="app.js"></script>
 
-                <p>Notes: I found two inconsistencies in the original tutorial that gave me bugs to find and correct.  Both appear in the <code>service-worker.js</code> file:</p>
+               <!--  <p>Notes: I found two inconsistencies in the original tutorial that gave me bugs to find and correct.  Both appear in the <code>service-worker.js</code> file:</p>
                 <ol>
                     <li>
                         When creating the <code>REQUIRED_FILES</code> variable, you can just use relative URLs like <code>'app.js'</code>, but if you just use <code>'/'</code>, it will cache the <em>absolute</em> root document, not the <em>relative root</em>.  For example, for this demo, it cached <code>https://aarontgrogg.com/</code>, not <code>https://aarontgrogg.com/lab/service-workers/offline-status/</code>, which is what I wanted.  So I used the full relative URL for each of my assets, like <code>'/lab/service-workers/offline-status/'</code>.
@@ -57,7 +49,7 @@
                     <li>
                         In the <code>fetch</code> listener, the <code>caches.match</code> receives the <code>event.request</code>, but what it really needs is the <code>event.request.url</code>.
                     </li>
-                </ol>
+                </ol> -->
             </section>
 
         </main>

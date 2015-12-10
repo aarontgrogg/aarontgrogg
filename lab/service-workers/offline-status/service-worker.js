@@ -4,17 +4,25 @@ var CACHE_NAME = 'dependencies-cache';
 
 // Files required to make this app work offline
 var REQUIRED_FILES = [
-  'app.js',
-  'index.html',
-  'index.js',
-  'random-1.png',
-  'random-2.png',
-  'random-3.png',
-  'random-4.png',
-  'random-5.png',
-  'random-6.png',
-  'service-worker.js',
-  'style.css'
+  /***
+    NOTE: 
+      You can just use 'app.js' for example, and it will cache those relative URLs,
+      but if you just use '/', it will cache the *absolute* root document, not the *relative root*,
+      which is why I'm using the full path here.
+  ***/
+  '/lab/style.css',
+  '/lab/service-workers/offline-status/',
+  '/lab/service-workers/offline-status/app.js',
+  '/lab/service-workers/offline-status/index.html',
+  '/lab/service-workers/offline-status/index.js',
+  '/lab/service-workers/offline-status/random-1.png',
+  '/lab/service-workers/offline-status/random-2.png',
+  '/lab/service-workers/offline-status/random-3.png',
+  '/lab/service-workers/offline-status/random-4.png',
+  '/lab/service-workers/offline-status/random-5.png',
+  '/lab/service-workers/offline-status/random-6.png',
+  '/lab/service-workers/offline-status/service-worker.js',
+  '/lab/service-workers/offline-status/style.css'
 ];
 
 self.addEventListener('install', function(event) {
