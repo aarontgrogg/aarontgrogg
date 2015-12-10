@@ -2,8 +2,6 @@
 <IfModule mod_rewrite.c>
 	# enable Rewrite
 	RewriteEngine On
-	# make sure not local dev
-	RewriteCond %{HTTP_HOST} !=aarontgrogg.dev
 	# make sure not already HTTPS
 	RewriteCond %{HTTPS} !=on
 	# redirect from original location to same location using HTTPS
