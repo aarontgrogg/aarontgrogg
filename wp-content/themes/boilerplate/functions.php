@@ -505,7 +505,12 @@ if ( ! function_exists( 'boilerplate_posted_on' ) ) :
 				get_the_date( 'Y' )
 			),
 			// %5$s = author vcard
-			sprintf( '<span class="author vcard" itemscope="" itemtype="http://data-vocabulary.org/Person" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Person"><a class="url" itemprop="url" rel="home v:url" href="http://aarontgrogg.com/"><span class="fn n" itemprop="name" property="v:name">%1$s</span></a></span>',
+			sprintf( '<span class="author vcard" itemscope="" itemtype="http://data-vocabulary.org/Person" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Person">'
+						.'<a class="url" itemprop="url" rel="home v:url" href="%1$s">'
+							.'<span class="fn n" itemprop="name" property="v:name">%2$s</span>'
+						.'</a>'
+					.'</span>',
+				get_the_author_meta( 'user_url', get_the_author_meta( 'ID' ) ),
 				get_the_author()
 			)
 		);

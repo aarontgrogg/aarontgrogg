@@ -37,14 +37,14 @@
 		<meta property="og:type" content="<?php atg_page_type(); ?>">
 		<meta property="og:title" content="<?php atg_page_title(); ?>">
 		<meta property="og:url" content="<?php atg_page_link(); ?>">
-		<meta property="og:image" content="http://aarontgrogg.com/resume/Atg-clean.png">
+		<meta property="og:image" content="https://aarontgrogg.com/resume/Atg-clean.png">
 		<meta property="twitter:card" content="summary">
 		<meta property="twitter:creator" content="@aarontgrogg">
 		<meta property="twitter:site" content="@aarontgrogg">
 		<meta property="twitter:url" content="<?php atg_page_link(); ?>">
 		<meta property="twitter:title" content="<?php atg_page_title(); ?>">
 		<meta property="twitter:description" content="<?php atg_page_description(); ?>">
-		<meta property="twitter:image" content="http://aarontgrogg.com/resume/Atg-clean.png">
+		<meta property="twitter:image" content="https://aarontgrogg.com/resume/Atg-clean.png">
 <?php
 	/* We add some JavaScript to pages with the comment form
 	 * to support sites with threaded comments (when in use).
