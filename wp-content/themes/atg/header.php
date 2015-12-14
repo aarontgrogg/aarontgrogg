@@ -32,19 +32,12 @@
 		<meta http-equiv="imagetoolbar" content="false">
 		<meta name="bitly-verification" content="624ac79f6370">
 		<meta name="google-site-verification" content="lbVeIvYlafhq4llvj199Sh3gUfq55tMu065LnAgjliw">
-		<meta property="og:site_name" content="<?php bloginfo('name'); ?>">
-		<meta property="og:description" content="<?php atg_page_description(); ?>">
-		<meta property="og:type" content="<?php atg_page_type(); ?>">
-		<meta property="og:title" content="<?php atg_page_title(); ?>">
-		<meta property="og:url" content="<?php atg_page_link(); ?>">
-		<meta property="og:image" content="https://aarontgrogg.com/resume/Atg-clean.png">
 		<meta property="twitter:card" content="summary">
-		<meta property="twitter:creator" content="@aarontgrogg">
 		<meta property="twitter:site" content="@aarontgrogg">
-		<meta property="twitter:url" content="<?php atg_page_link(); ?>">
-		<meta property="twitter:title" content="<?php atg_page_title(); ?>">
-		<meta property="twitter:description" content="<?php atg_page_description(); ?>">
-		<meta property="twitter:image" content="https://aarontgrogg.com/resume/Atg-clean.png">
+		<meta property="og:url" content="<?php atg_page_link(); ?>">
+		<meta property="og:title" content="<?php atg_page_title(); ?>">
+		<meta property="og:description" content="<?php atg_page_description(); ?>">
+		<meta property="og:image" content="https://aarontgrogg.com/resume/Atg-clean.png">
 <?php
 	/* We add some JavaScript to pages with the comment form
 	 * to support sites with threaded comments (when in use).
