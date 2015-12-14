@@ -32,12 +32,6 @@
 		<meta http-equiv="imagetoolbar" content="false">
 		<meta name="bitly-verification" content="624ac79f6370">
 		<meta name="google-site-verification" content="lbVeIvYlafhq4llvj199Sh3gUfq55tMu065LnAgjliw">
-		<meta property="twitter:card" content="summary">
-		<meta property="twitter:site" content="@aarontgrogg">
-		<meta property="og:url" content="<?php atg_page_link(); ?>">
-		<meta property="og:title" content="<?php atg_page_title(); ?>">
-		<meta property="og:description" content="<?php atg_page_description(); ?>">
-		<meta property="og:image" content="https://aarontgrogg.com/resume/Atg-clean.png">
 <?php
 	/* We add some JavaScript to pages with the comment form
 	 * to support sites with threaded comments (when in use).
@@ -52,6 +46,12 @@
 		<meta name="msnbot" content="noindex,follow">
 <?php	endif; // end (is_single() || is_page() || is_home()) ?>
 		<meta name="referrer" content="always">
+		<meta property="twitter:card" content="summary">
+		<meta property="twitter:site" content="@aarontgrogg">
+		<meta property="og:url" content="<?php atg_page_link(); ?>">
+		<meta property="og:title" content="<?php atg_page_title(); ?>">
+		<meta property="og:description" content="<?php atg_page_description(); ?>">
+		<meta property="og:image" content="https://aarontgrogg.com/resume/Atg-clean.png">
 <?php
 	/* We add some JavaScript to pages with the comment form
 	 * to support sites with threaded comments (when in use).
