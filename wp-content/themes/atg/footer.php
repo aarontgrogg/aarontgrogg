@@ -30,6 +30,9 @@
 	 */
 
 	wp_footer();
-?>
+
+	/* Add JSON-LD to page */
+	include('json-ld.php');
+?><script type="application/ld+json"><?php echo json_encode($payload); ?></script>
 	</body>
 </html>
