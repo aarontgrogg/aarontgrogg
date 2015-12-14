@@ -22,6 +22,7 @@ $category = get_the_category();
 
 // stuff for specific pages
 if (is_single()) {
+
   // this gets the data for the user who wrote that particular item
   $author_data = get_userdata($post_data->post_author);
   $post_url = get_permalink();
@@ -38,11 +39,10 @@ if (is_single()) {
   $payload["image"] = ($post_thumb) ? $post_thumb : "https://aarontgrogg.com/resume/Atg-clean.png";
   $payload["ArticleSection"] = $category[0]->cat_name;
   $payload["Publisher"] = "Aaron T. Grogg";
-}
 
-// we do all this separately so we keep the right things for organization together
+} else if (is_front_page()) {
 
-if (is_front_page()) {
+  // we do all this separately so we keep the right things for organization together
   $payload["@type"] = "Organization";
   $payload["name"] = "Aaron T. Grogg";
   $payload["logo"] = "https://aarontgrogg.com/resume/Atg-clean.png";
@@ -61,9 +61,9 @@ if (is_front_page()) {
       "contactType" => "customer support"
     )
   );
-}
 
-if (is_author()) {
+} else {
+  
   // this gets the data for the user who wrote that particular item
   $author_data = get_userdata($post_data->post_author);
 
@@ -71,25 +71,37 @@ if (is_author()) {
   // fetch twitter from author meta and concatenate with full twitter URL
   $twitter_url =  " https://twitter.com/";
   $twitterHandle = get_the_author_meta('twitter');
-  $twitterHandleURL = $twitter_url . $twitterHandle;
+  //$twitterHandleURL = $twitter_url . $twitterHandle;
+  $twitterHandleURL = 'https://twitter.com/aarontgrogg';
 
   $websiteHandle = get_the_author_meta('url');
 
-  $facebookHandle = get_the_author_meta('facebook');
+  $rssHandle = 'http://aarontgrogg.com/feed/';
 
-  $gplusHandle = get_the_author_meta('googleplus');
+  //$facebookHandle = get_the_author_meta('facebook');
 
-  $linkedinHandle = get_the_author_meta('linkedin');
+  //$gplusHandle = get_the_author_meta('googleplus');
+  $gplusHandle = 'https://plus.google.com/+AaronGrogg/posts';
 
-  $slideshareHandle = get_the_author_meta('slideshare');
+  //$linkedinHandle = get_the_author_meta('linkedin');
+  $linkedinHandle = 'https://www.linkedin.com/in/aarontgrogg';
+
+  //$slideshareHandle = get_the_author_meta('slideshare');
+  $githubHandle = 'https://github.com/aarontgrogg';
 
   $payload["@type"] = "Person";
   $payload["name"] = $author_data->display_name;
   $payload["email"] = $author_data->user_email;
-  $payload["sameAs"] =  array(
-    $twitterHandleURL, $websiteHandle, $facebookHandle, $gplusHandle, $linkedinHandle, $slideshareHandle
-
-      );
+  $payload["sameAs"] =  array( 
+    $websiteHandle, 
+    $rssHandle,
+    $twitterHandleURL,
+    //$facebookHandle, 
+    $gplusHandle, 
+    $linkedinHandle, 
+    //$slideshareHandle, 
+    $githubHandle
+  );
   
 }
 ?>
