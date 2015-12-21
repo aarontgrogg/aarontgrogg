@@ -44,17 +44,23 @@ Temporary Items
 
 
 # =========================
-# Repor files
+# Repo files
 # =========================
 _dev/
 _old/
 ela/
 lab/angular/
 lab/people/
+node_modules
 rte/
 stats/
 wp-content/aiowps_backups/
-wp-content/backup-db
-wp-content/cache
-wp-content/w3tc-config
+wp-content/backup-db/
+wp-content/cache/
+wp-content/uploads/ithemes-security/
+wp-content/uploads/profiles/
+wp-content/w3tc-config/
+wp-content/advanced-cache.php
+wp-content/w3-total-cache-config-aarontgrogg.com.php
+wp-content/wp-cache-config.php
 wp-config.php

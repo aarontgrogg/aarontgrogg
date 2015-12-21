@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en" ng-app="store">
+	<head>
+		<meta charset="utf-8">
+		<title>Code School</title>
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+		<style>
+			body {
+				margin: 0 auto;
+				padding: 1em;
+				max-width: 600px;
+			}
+			.ng-invalid.ng-dirty {
+				border-color: #fa787e;
+			}
+			.ng-valid.ng-dirty {
+				border-color: #78fa89;
+			}
+		</style>
+	</head>
+	<body ng-controller="StoreController as store">
+
+		<div ng-repeat="product in store.products | orderBy: '-price'" ng-hide="product.soldOut">
+			<product-title></product-title>
+			<button class="btn btn-primary btn-small pull-right" ng-show="product.canPurchase">Add to Cart</button>
+			<img ng-src="{{ product.images[0].full }}" />
+			<section ng-controller="PanelController as panel">
+				<ul class="nav nav-pills">
+					<li ng-class="{ active: panel.isSelected(1) }">
+						<a href ng-click="panel.selectTab(1)">Description</a>
+					</li>
+					<li ng-class="{ active: panel.isSelected(2) }">
+						<a href ng-click="panel.selectTab(2)">Specification</a>
+					</li>
+					<li ng-class="{ active: panel.isSelected(3) }">
+						<a href ng-click="panel.selectTab(3)">Reviews</a>
+					</li>
+				</ul>
+				<div class="panel" ng-show="panel.isSelected(1)">
+					<h4>Description</h4>
+					<p>{{ product.description }}</p>
+				</div>
+				<div class="panel" ng-show="panel.isSelected(2)">
+					<h4>Specification</h4>
+					<p>{{ product.specification }}</p>
+				</div>
+				<div class="panel" ng-show="panel.isSelected(3)">
+					<h4>Reviews</h4>
+					<blockquote ng-repeat="review in product.reviews">
+						<p><b>Stars: {{ review.stars }}</b></p>
+						<p>{{ review.body }}</p>
+						<cite>by: {{ review.author }}</cite>
+					</blockquote>
+					<form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" class="form-horizontal" novalidate>
+						<blockquote>
+							<b>Stars: {{ reviewCtrl.review.stars }}</b>
+							{{ reviewCtrl.review.body }}
+							<cite>by: {{ reviewCtrl.review.author }}</cite>
+						</blockquote>
+						<div class="form-group">
+							<select ng-model="reviewCtrl.review.stars" class="form-control" required>
+								<option value="1">1 star</option>
+								<option value="2">2 stars</option>
+								<option value="3">3 stars</option>
+								<option value="4">4 stars</option>
+								<option value="5">5 stars</option>
+							</select>
+							<textarea name="body" ng-model="reviewCtrl.review.body" class="form-control" required></textarea>
+							<label>by: </label>
+							<input name="author" type="email" ng-model="reviewCtrl.review.author" rclass="form-control" equired/>
+						</div>
+						<input type="submit" value="Submit" class="btn btn-default"/>
+					</form>
+				</div>
+			</section>
+		</div>
+
+		<script src="bower_components/angular/angular.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/products.js"></script>
+	</body>
+</html>

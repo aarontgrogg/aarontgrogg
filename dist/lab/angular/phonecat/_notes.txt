@@ -1,0 +1,101 @@
+AngularJS
+https://docs.angularjs.org/tutorial
+
+MVC
+https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller
+- A model directly manages the data, logic and rules of the application; Stores data that is retrieved to the controller and displayed in the view. Whenever there is a change to the data it is updated by the controller.
+- A view can be any output representation of information; multiple views of the same information are possible, such as a bar chart for management and a tabular view for accountants; Requests information from the model that it uses to generate an output representation to the user.
+- A controller accepts input and converts it to commands for the model or view; Can send commands to the model to update the model's state (e.g., editing a document). It can also send commands to its associated view to change the view's presentation of the model (e.g., by scrolling through a document).
+
+
+Intro:
+
+git clone --depth=14 https://github.com/angular/angular-phonecat.git
+  --depth=14 tells Git to pull only the last 14 commits; makes download smaller and faster
+
+Bower - client-side code package manager
+Http-Server - simple local static web server
+Karma - unit test runner
+Protractor - end to end (E2E) test runner
+
+sudo npm install -g bower
+
+npm start : start a local development web-server
+npm test : start the Karma unit test runner
+npm run protractor : run the Protractor end to end (E2E) tests
+npm run update-webdriver : install the drivers needed by Protractor
+
+npm start
+http://localhost:8000/app/index.html
+
+
+Step 00:
+
+git checkout -f step-0
+  step-0 refreshes back to this step, killing any changes made locally
+
+ng-app attribute represents an Angular directive: ngApp
+  Angular uses spinal-case for attributes and camelCase for directives that implement them
+
+directive element = Angular root element; can be entire doc, or just part of it
+
+{{'yet' + '!'}}
+  - a binding, denoted by double-curlies {{ }}
+  - a simple expression 'yet' + '!' used in this binding
+
+
+3 important things that happen during the app bootstrap:
+  - dependency injector is created
+  - injector creates root scope based on directive
+  - Angular compiles the DOM, processing directives & bindings
+
+The "Angular seed project" is pre-configured to install the angular framework (via bower, into app/bower_components/ folder) and tools for developing a typical web app (via npm).
+
+
+Step 02:
+
+ng-app="phonecatApp" is the model name for this app
+
+ng-controller="PhoneListCtrl" directive attaches a PhoneListCtrl controller to the model
+
+ng-repeat="phone in phones" attribute is an Angular repeater directive (loop)
+
+{{phone.name}} and {{phone.snippet}} are bindings within the controller
+
+The data *model* (a simple array of phones in object literal notation) is now instantiated within the PhoneListCtrl controller. The controller is simply a constructor function that takes a $scope parameter:
+
+app/js/controllers.js:
+	var phonecatApp = angular.module('phonecatApp', []);
+
+	phonecatApp.controller('PhoneListCtrl', function ($scope) {
+	  $scope.phones = [
+	    {'name': 'Nexus S',
+	     'snippet': 'Fast just got faster with Nexus S.'},
+	    {'name': 'Motorola XOOM™ with Wi-Fi',
+	     'snippet': 'The Next, Next Generation tablet.'},
+	    {'name': 'MOTOROLA XOOM™',
+	     'snippet': 'The Next, Next Generation tablet.'}
+	  ];
+	});
+
+Providing context for our data model, the controller establishes data-binding between the model and view, connecting the dots between the presentation, data, and logic components as follows:
+- "ngController" directive, on <body>, references the name of our controller; "PhoneListCtrl" (in controllers.js)
+- PhoneListCtrl controller attaches the data to $scope.  This scope is a prototypical descendant of the root scope that was created when the application was defined.  This controller scope is available to all bindings located within the <body ng-controller="PhoneListCtrl"> tag
+
+Testing:
+- Behavior-driven Development (BDD)
+- Jasmine v1.3, http://jasmine.github.io/
+
+
+
+
+
+
+
+
+
+
+
+
+
+

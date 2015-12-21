@@ -1,0 +1,69 @@
+WHAT? / WHY?
+http://slides.com/contra/gulp
+https://github.com/gulpjs/gulp
+
+HOW?
+http://www.smashingmagazine.com/2014/06/building-with-gulp/#gulp-src
+	Matches the exact file
+		js/app.js
+	Matches all files ending in .js in the js directory only
+		js/*.js
+	Matches all files ending in .js in the js directory and all child directories
+		js/**/*.js
+	Excludes js/app.js from the match, which is useful if you want to match all files in a directory except for a particular file
+		!js/app.js
+	Matches all files in the root directory ending in .js or .css
+		*.+(js|css)
+	directory 'js',
+	some min, some not,
+	minify the files that aren’t already minified
+		gulp.src(['js/**/*.js', '!js/**/*.min.js'])
+	A task may also be a list of other tasks (run async)
+		gulp.task('build', ['css', 'js', 'imgs']);
+
+https://www.youtube.com/watch?v=dwSLFai8ovQ
+https://www.youtube.com/playlist?list=PLRk95HPmOM6PN-G1xyKj9q6ap_dc9Yckm
+
+
+BEYOND
+https://github.com/gulpjs/gulp/tree/master/docs
+http://gulpjs.com/plugins/
+	https://github.com/jackfranklin/gulp-load-plugins
+https://markgoodyear.com/2014/01/getting-started-with-gulp/
+https://github.com/google/web-starter-kit/blob/master/gulpfile.babel.js
+http://www.linuxuser.co.uk/tutorials/optimise-your-web-code-with-gulp-js
+http://tagtree.tv/gulp
+https://www.youtube.com/watch?v=QgEuZ52OZtU
+
+
+repo:
+.gitattributes
+.gitignore
+dist (symlinked from htdocs)
+  wp-admin
+  wp-content
+    themes
+      atg
+        css
+          style.css (minified)
+        js
+          scripts.js (minified)
+  ...
+  .htaccess
+  favicons
+  wp-config.php
+  ...
+src (unminified)
+  css
+    style.css (unminified)
+  icons
+    *.svg
+  js
+  ...
+
+local repo directory:
+	https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md
+
+¡OJOs!
+	http://rodaine.com/2013/10/develop-locally-with-wordpress/
+

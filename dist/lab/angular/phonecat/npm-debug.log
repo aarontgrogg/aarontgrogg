@@ -1,0 +1,75 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@2.1.11
+3 info using node@v0.10.33
+4 verbose install where, deps [ '/Applications/XAMPP/xamppfiles/htdocs/angular/phonecat',
+4 verbose install   [ 'karma',
+4 verbose install     'karma-chrome-launcher',
+4 verbose install     'karma-firefox-launcher',
+4 verbose install     'karma-jasmine',
+4 verbose install     'protractor',
+4 verbose install     'http-server',
+4 verbose install     'tmp',
+4 verbose install     'bower',
+4 verbose install     'shelljs' ] ]
+5 verbose install where, peers [ '/Applications/XAMPP/xamppfiles/htdocs/angular/phonecat', [] ]
+6 info preinstall angular-phonecat@0.0.0
+7 verbose already installed skipping tmp@0.0.23 /Applications/XAMPP/xamppfiles/htdocs/angular/phonecat
+8 verbose already installed skipping bower@^1.3.1 /Applications/XAMPP/xamppfiles/htdocs/angular/phonecat
+9 verbose already installed skipping shelljs@^0.2.6 /Applications/XAMPP/xamppfiles/htdocs/angular/phonecat
+10 verbose already installed skipping karma@^0.12.16 /Applications/XAMPP/xamppfiles/htdocs/angular/phonecat
+11 verbose already installed skipping karma-chrome-launcher@^0.1.4 /Applications/XAMPP/xamppfiles/htdocs/angular/phonecat
+12 verbose already installed skipping karma-firefox-launcher@^0.1.3 /Applications/XAMPP/xamppfiles/htdocs/angular/phonecat
+13 verbose already installed skipping karma-jasmine@~0.1.0 /Applications/XAMPP/xamppfiles/htdocs/angular/phonecat
+14 verbose already installed skipping protractor@^2.1.0 /Applications/XAMPP/xamppfiles/htdocs/angular/phonecat
+15 verbose already installed skipping http-server@^0.6.1 /Applications/XAMPP/xamppfiles/htdocs/angular/phonecat
+16 silly install resolved []
+17 info build /Applications/XAMPP/xamppfiles/htdocs/angular/phonecat
+18 verbose linkStuff [ false,
+18 verbose linkStuff   false,
+18 verbose linkStuff   false,
+18 verbose linkStuff   '/Applications/XAMPP/xamppfiles/htdocs/angular' ]
+19 info linkStuff angular-phonecat@0.0.0
+20 verbose linkBins angular-phonecat@0.0.0
+21 verbose linkMans angular-phonecat@0.0.0
+22 verbose rebuildBundles angular-phonecat@0.0.0
+23 verbose rebuildBundles [ '.bin',
+23 verbose rebuildBundles   'bower',
+23 verbose rebuildBundles   'http-server',
+23 verbose rebuildBundles   'karma',
+23 verbose rebuildBundles   'karma-chrome-launcher',
+23 verbose rebuildBundles   'karma-firefox-launcher',
+23 verbose rebuildBundles   'karma-jasmine',
+23 verbose rebuildBundles   'protractor',
+23 verbose rebuildBundles   'shelljs',
+23 verbose rebuildBundles   'tmp' ]
+24 info install angular-phonecat@0.0.0
+25 info postinstall angular-phonecat@0.0.0
+26 verbose unsafe-perm in lifecycle true
+27 info angular-phonecat@0.0.0 Failed to exec postinstall script
+28 verbose stack Error: angular-phonecat@0.0.0 postinstall: `bower install`
+28 verbose stack Exit status 1
+28 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:212:16)
+28 verbose stack     at EventEmitter.emit (events.js:98:17)
+28 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:14:12)
+28 verbose stack     at ChildProcess.emit (events.js:98:17)
+28 verbose stack     at maybeClose (child_process.js:756:16)
+28 verbose stack     at Process.ChildProcess._handle.onexit (child_process.js:823:5)
+29 verbose pkgid angular-phonecat@0.0.0
+30 verbose cwd /Applications/XAMPP/xamppfiles/htdocs/angular/phonecat
+31 error Darwin 12.6.0
+32 error argv "node" "/usr/local/bin/npm" "install"
+33 error node v0.10.33
+34 error npm  v2.1.11
+35 error code ELIFECYCLE
+36 error angular-phonecat@0.0.0 postinstall: `bower install`
+36 error Exit status 1
+37 error Failed at the angular-phonecat@0.0.0 postinstall script 'bower install'.
+37 error This is most likely a problem with the angular-phonecat package,
+37 error not with npm itself.
+37 error Tell the author that this fails on your system:
+37 error     bower install
+37 error You can get their info via:
+37 error     npm owner ls angular-phonecat
+37 error There is likely additional logging output above.
+38 verbose exit [ 1, true ]
