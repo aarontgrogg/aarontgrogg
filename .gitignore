@@ -48,10 +48,10 @@ Temporary Items
 # =========================
 _dev/
 _old/
-ela/
-lab/angular/
-lab/people/
 node_modules
+ela/
+lab/
+resume/
 rte/
 stats/
 wp-config.php
