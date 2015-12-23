@@ -1,4 +1,1 @@
-
-jQuery(document).ready(function($){
-	$( '#loginform' ).append( $( '#wpcc-sign-on' ) );
-});
+jQuery(document).ready(function(n){n("#loginform").append(n("#wpcc-sign-on"))});

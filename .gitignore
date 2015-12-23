@@ -48,6 +48,7 @@ Temporary Items
 # =========================
 _dev/
 _old/
+#_notes.txt
 ela/
 lab/angular/
 lab/people/

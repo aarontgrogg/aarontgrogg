@@ -1,8 +1,14 @@
 WHAT? / WHY?
 http://slides.com/contra/gulp
 https://github.com/gulpjs/gulp
+https://github.com/gulpjs/gulp/tree/master/docs
 
 HOW?
+https://github.com/johnholtripley/Autumn-Earth/tree/master/site
+	check-out package.json and gulpfile.js
+	also expands on JK's Service Worker (https://gist.github.com/adactio/4d588bb8a65fa11a3ea3):
+		https://github.com/johnholtripley/Autumn-Earth/blob/master/site/htdocs/serviceWorker.js
+
 http://www.smashingmagazine.com/2014/06/building-with-gulp/#gulp-src
 	Matches the exact file
 		js/app.js
@@ -21,19 +27,50 @@ http://www.smashingmagazine.com/2014/06/building-with-gulp/#gulp-src
 	A task may also be a list of other tasks (run async)
 		gulp.task('build', ['css', 'js', 'imgs']);
 
-https://www.youtube.com/watch?v=dwSLFai8ovQ
-https://www.youtube.com/playlist?list=PLRk95HPmOM6PN-G1xyKj9q6ap_dc9Yckm
-
-
-BEYOND
-https://github.com/gulpjs/gulp/tree/master/docs
-http://gulpjs.com/plugins/
-	https://github.com/jackfranklin/gulp-load-plugins
 https://markgoodyear.com/2014/01/getting-started-with-gulp/
-https://github.com/google/web-starter-kit/blob/master/gulpfile.babel.js
-http://www.linuxuser.co.uk/tutorials/optimise-your-web-code-with-gulp-js
+	good first look at Gulp,
+	some basic set-up and uses
+https://www.youtube.com/watch?v=dwSLFai8ovQ
+	great set-up strategy (install via command line, always use --save-dev)
+		* --save-dev adds the plugin to your package.json file, so anyone else setting up Node using that package.json will get the same dependencies
+	event-stream!
+	npm install event-stream --save-dev
 http://tagtree.tv/gulp
-https://www.youtube.com/watch?v=QgEuZ52OZtU
+	nice, easy-to-follow intro
+	also has blog/code samples below the video, for easy copy/paste
+https://www.youtube.com/playlist?list=PLRk95HPmOM6PN-G1xyKj9q6ap_dc9Yckm
+	initial is great intro, couple others look great as well
+http://www.linuxuser.co.uk/tutorials/optimise-your-web-code-with-gulp-js
+	can install multiple plugins at once:
+		npm install gulp-concat gulp-jshint gulp-bump gulp-load-plugins--save-dev
+	gulp-load-plugins (https://github.com/jackfranklin/gulp-load-plugins) seems quite good, allows for:
+		var gulpLoadPlugins = require('gulp-load-plugins');
+		var plugins = gulpLoadPlugins();
+		gulp.task('lint', function() {
+			return gulp.src('js/*.js')
+				.pipe(plugins.jshint())
+				.pipe(plugins.jshint.reporter(‘default’));
+		});
+		* note the "plugins.jshint()" and lack of need to create var jshints = require('js-hints') for each plugin
+https://www.liquidlight.co.uk/blog/article/creating-svg-sprites-using-gulp-and-sass/
+	advanced config, includes SVG sprites,
+	and uses these plugins:
+		gulp-svg-sprite
+	    gulp-svg2png
+	    gulp-svgo
+https://github.com/google/web-starter-kit/blob/master/gulpfile.babel.js
+	pretty advanced use,
+	based in ES6,
+	includes Babel, Browser Sync, and Service Worker stuff
+http://gulpjs.com/plugins/
+	neverending list of plugins...  like:
+	https://github.com/jackfranklin/gulp-load-plugins
+
+GET STARTED:
+	install Node.js:
+		http://nodejs.org/
+	from project folder, with package.json in place:
+		npm install
 
 
 repo:
@@ -64,6 +101,31 @@ src (unminified)
 local repo directory:
 	https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md
 
-¡OJOs!
+¡OJOs!:
 	http://rodaine.com/2013/10/develop-locally-with-wordpress/
 
+
+CRITICAL:
+	https://github.com/addyosmani/critical-path-css-demo
+	https://github.com/addyosmani/critical-path-css-demo#tutorial
+
+
+DEPLOY:
+	http://support.deploybot.com/article/791-setting-up-and-using-build-tools
+		'Compile, compress, or minimize your code'
+			pick 'Ubuntu 14.04 - PHP, NodeJS, Grunt, Gulp, Sass, Go, Java 7/8, RVM, Python (default)'
+			add gulp commands below
+			note "supported variables"
+		'Advanced options'
+			Cached build commands
+			cached until package.json, gulfile.js or Gruntfile.js changes
+		'Container' = custom code block that, once saved, can be re-used across environments
+	http://deploybot.com/guides/building-assets-with-grunt-or-gulp-during-deployment
+		Don’t store compiled assets in repository
+			hard to diff
+			so pollutes repo with complete new version, rather than just diffs
+			recreated with each build anyhow
+		Optimal workflow for a front-end code:
+			keep source files in repo
+			exclude dependencies and built assets from repo (especially node_modules!)
+			compile assets while deploying
