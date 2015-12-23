@@ -3,17 +3,26 @@ var gulp = require('gulp'),
     plugins = require('gulp-load-plugins')(),
     AUTOPREFIXER_MATRIX = 'last 2 version',
     THEME_DIST_DIR = 'dist/wp-content/themes/atg',
-    PLUGIN_DIST_DIR = 'dist/wp-content/plugins/',
-    UPLOADS_DIST_DIR = 'dist/wp-content/uploads/';
+    PLUGIN_DIST_DIR = 'dist/wp-content/plugins/';
 
 // run SVG-related tasks
-/* maybe use these?
-    gulp-svg-sprite
-    gulp-svg2png
-    gulp-svgo
+/* 
+    https://css-tricks.com/svg-use-with-external-reference-take-2/
+    - can have icons in an external sprite, ref via use, benefit from browser caching, but harder to style
+    - maybe doesn't matter for me, since icons are all solid color, make sure :hover can work
+
+    https://www.liquidlight.co.uk/blog/article/creating-svg-sprites-using-gulp-and-sass/
+
+    check diffs:
+    - gulp-svgmin (minifies SVGs using SVGO; https://github.com/ben-eb/gulp-svgmin)
+    - gulp-svgstore (creates sprite; https://www.npmjs.com/package/gulp-svgstore)
+    versus:
+    - gulp-svg-sprite (optimizes, creates sprite and CSS; https://www.npmjs.com/package/gulp-svg-sprite)
+    needed?
+    - gulp-svg2png (creates PNG fallbacks; https://www.npmjs.com/package/gulp-svg2png)
 */
 /*gulp.task('icons', function() {
-    return gulp.src('src/icons/*.svg')                  // grab all src css files
+    return gulp.src('src/icons/*.svg')                      // grab all src svg files
         .pipe(...); // save files into dist directory
 });*/
 
@@ -54,19 +63,5 @@ gulp.task( 'scripts-plugins', function() {
         .pipe( gulp.dest( PLUGIN_DIST_DIR ) );               // save files into dist directory
 });
 
-// run image-related tasks
-gulp.task( 'images', function() {
-    return gulp.src( UPLOADS_DIST_DIR + '**/**' )           // grab all dist image files
-        .pipe( plugins.cache( plugins.webp() ) )            // create WEBP versions of images
-        .pipe( plugins.cache( plugins.imagemin(             // optimize & cache images in the uploads directory
-            {
-                optimizationLevel: 3, 
-                progressive: true, 
-                interlaced: true
-            }
-        ) ) )
-        .pipe( gulp.dest( UPLOADS_DIST_DIR ) );               // save files into dist directory
-});
-
 // let's get this party started!
-gulp.task('default', [ /*'icons', */'styles-theme', 'scripts-theme', 'styles-plugins', 'scripts-plugins', 'images' ]);
+gulp.task('default', [ /*'icons', */'styles-theme', 'scripts-theme', 'styles-plugins', 'scripts-plugins' ]);

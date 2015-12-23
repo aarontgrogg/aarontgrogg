@@ -73,33 +73,9 @@ GET STARTED:
 		npm install
 
 
-repo:
-.gitattributes
-.gitignore
-dist (symlinked from htdocs)
-  wp-admin
-  wp-content
-    themes
-      atg
-        css
-          style.css (minified)
-        js
-          scripts.js (minified)
-  ...
-  .htaccess
-  favicons
-  wp-config.php
-  ...
-src (unminified)
-  css
-    style.css (unminified)
-  icons
-    *.svg
-  js
-  ...
-
 local repo directory:
 	https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md
+
 
 ¡OJOs!:
 	http://rodaine.com/2013/10/develop-locally-with-wordpress/
