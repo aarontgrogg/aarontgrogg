@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Personal blog & website",
   "author": "Aaron T. Grogg",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/aarontgrogg/aarontgrogg"
@@ -12,8 +13,10 @@
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-cache": "^0.4.1",
+    "gulp-changed-in-place": "^2.0.3",
     "gulp-concat": "^2.5.2",
     "gulp-imagemin": "^2.4.0",
+    "gulp-load-plugins": "^1.1.0",
     "gulp-minify-css": "^1.2.0",
     "gulp-rename": "^1.2.2",
     "gulp-svgmin": "^1.2.0",
