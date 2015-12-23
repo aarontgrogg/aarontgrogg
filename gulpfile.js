@@ -20,7 +20,6 @@ var gulp = require('gulp'),
 // run theme CSS-related tasks
 gulp.task( 'styles-theme', function() {
     return gulp.src( 'src/styles/*.css' )                   // grab all src css files
-        .pipe( plugins.changedInPlace() )                   // check if source has changed since last build
         .pipe( plugins.autoprefixer( AUTOPREFIXER_MATRIX ) ) // remove unneeded and add needed prefixes
         .pipe( plugins.concat( 'style-min.css' ) )          // concatenate all css files into a single files
         .pipe( plugins.minifyCss() )                        // minify concatenated css files
