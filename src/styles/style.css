@@ -162,9 +162,9 @@ h6 {
 abbr {
     white-space: nowrap;
 }
+
 /* http://aurelio.audero.it/blog/2013/12/23/enhancing-the-abbr-element-on-mobile/
 abbr[title]:after { content: " (" attr(title) ")"; } */
-
 abbr[title] {
     border-bottom: 1px dashed currentColor;
     cursor: help;
@@ -184,11 +184,11 @@ abbr[title]:focus::after {
 a,
 a * {
     text-decoration: none;
-    -webkit-transition: color .25s, background-color .5s, background-image .5s;
-    -moz-transition: color .25s, background-color .5s, background-image .5s;
-    -ms-transition: color .25s, background-color .5s, background-image .5s;
-    -o-transition: color .25s, background-color .5s, background-image .5s;
-    transition: color .25s, background-color .5s, background-image .5s;
+    -webkit-transition: color .35s, background-color .5s;
+    -moz-transition: color .35s, background-color .5s;
+    -ms-transition: color .35s, background-color .5s;
+    -o-transition: color .35s, background-color .5s;
+    transition: color .35s, background-color .5s;
 }
 pre,
 code {
@@ -199,8 +199,8 @@ code {
     max-width: 100%;
     overflow-x: auto;
 }
-/* stealing kbd style from Dudley Storey: http://demosthenes.info/blog/1019/Code-and-Keys-in-HTML-Using-the-code-var-samp-and-kbd-elements */
 
+/* stealing kbd style from Dudley Storey: http://demosthenes.info/blog/1019/Code-and-Keys-in-HTML-Using-the-code-var-samp-and-kbd-elements */
 kbd {
     display: inline-block;
     color: #666;
@@ -212,8 +212,8 @@ kbd {
     box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2), 0 0 0 2px #fff inset;
     background-color: #f7f7f7;
 }
-/* http://css-tricks.com/snippets/css/simple-and-nice-blockquote-styling/ */
 
+/* http://css-tricks.com/snippets/css/simple-and-nice-blockquote-styling/ */
 blockquote {
     margin: 1.5em 0;
     padding: .5em;
@@ -570,8 +570,6 @@ ul.social-links li {
 }
 ul.social-links a {
     display: block;
-    font-size: .9em;
-    padding: .5em .75em;
     color: #444;
     text-align: center;
     background: #eee;
@@ -579,16 +577,13 @@ ul.social-links a {
 ul.social-links a:hover {
     background-color: #ff4b33;
     color: #fff;
+    fill: #fff; /* will cascade to SVG icons */
 }
-ul.social-links span {
-    color: inherit;
-    vertical-align: middle;
-}
-ul.social-links span.icon-text {
+ul.social-links svg {
     display: block;
-    width: 0;
-    height: 0;
-    overflow: hidden;
+    margin: 0 auto;
+    width: 24px;
+    height: 24px;
 }
 ul.social-links.social-share {
     width: auto;
@@ -735,8 +730,8 @@ article figure a:hover {
 article figure br {
     display: none;
 }
-/* WP annoyingly adds <br> between <a> and <figcaption> */
 
+/* WP annoyingly adds <br> between <a> and <figcaption> */
 article figcaption {
     padding: .25em;
     font-size: 11px;
@@ -962,7 +957,7 @@ body.archive h1 {
     margin-bottom: .7em;
 }
 
-/* http://fontello.com/ Font Awesome */
+/* http://fontello.com/ Font Awesome
 @font-face {
     font-family: 'atg-font';
     src: url('font/atg-font.eot?75059931');
@@ -1010,7 +1005,7 @@ body.archive h1 {
 }
 .icon-twitter-squared:before {
     content: '\e804';
-}
+} */
 .top-link a {
     display: inline-block;
     position: relative;

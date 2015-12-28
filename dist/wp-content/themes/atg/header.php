@@ -68,6 +68,7 @@
 ?>
 	</head>
 	<body <?php body_class(); ?>>
+		<?php atg_add_svg_icons(); ?>
 		<header id="header" role="banner">
 			<h1 id="site-title" class="vcard" itemscope itemtype="http://data-vocabulary.org/Person" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Person">
 				<a href="<?php echo home_url('/'); ?>" title="<?php echo esc_attr( get_bloginfo('name', 'display') ); ?>" class="url" itemprop="url" rel="home v:url">
