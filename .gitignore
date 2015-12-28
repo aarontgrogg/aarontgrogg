@@ -54,5 +54,9 @@ lab/
 resume/
 rte/
 stats/
+<<<<<<< HEAD
+=======
+wp-config.php
+>>>>>>> FETCH_HEAD
 icons.svg
 dist/wp-content/themes/atg/style-min.css
