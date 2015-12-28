@@ -21,7 +21,7 @@ define( 'HOST', $_SERVER['HTTP_HOST'] );
 /*
  * SSL added 12/7/2015
  */
-define('FORCE_SSL_ADMIN', true);
+define( 'FORCE_SSL_ADMIN', true );
 
 
 /**
@@ -33,7 +33,6 @@ define('FORCE_SSL_ADMIN', true);
 */
 define( 'WP_DEBUG', false );
 define( 'WP_AUTO_UPDATE_CORE', false );
-
 define( 'WP_HOME', 'https://'.HOST );
 define( 'WP_SITEURL', 'https://'.HOST );
 define( 'WP_ALLOW_MULTISITE', true );
@@ -61,7 +60,7 @@ define(' SAVEQUERIES', true );
 
 
 // Added by WP-Cache Manager
-define( 'WP_CACHE', false );
+define( 'WP_CACHE', true );
 
 
 /**
@@ -88,7 +87,7 @@ if (HOST === 'aarontgrogg.com') {
 
 } else if (HOST === 'aarontgrogg.dreamhosters.com') {
 	$_DOMAIN_CURRENT_SITE = 'aarontgrogg.dreamhosters.com';
-	$_SITE_DIRECTORY = '/home/aarontgrogg/aarontgrogg.com';
+	$_SITE_DIRECTORY = '/home/aarontgrogg/aarontgrogg.dreamhosters.com';
 	// MySQL settings - temp dev on prod server
 	define('DB_HOST', 'mysql.aarontgrogg.dreamhosters.com');
 	define('DB_NAME', 'aarontgrogg_dreamhosters');
