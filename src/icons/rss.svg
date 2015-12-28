@@ -1,1 +1,27 @@
-<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414"><title>RSS icon</title><path d="M12.8 16C12.8 8.978 7.022 3.2 0 3.2V0c8.777 0 16 7.223 16 16h-3.2zM2.194 11.61c1.21 0 2.195.985 2.195 2.196 0 1.21-.985 2.194-2.196 2.194C.984 16 0 15.017 0 13.806c0-1.21.983-2.195 2.194-2.195zM10.606 16h-3.11c0-4.113-3.383-7.497-7.496-7.497v-3.11c5.818 0 10.606 4.79 10.606 10.607z"/></svg>
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<!-- The icon can be used freely in both personal and commercial projects with no attribution required, but always appreciated. 
+You may NOT sub-license, resell, rent, redistribute or otherwise transfer the icon without express written permission from iconmonstr.com -->
+
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+
+	 width="512px" height="512px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+
+	 <title>RSS icon</title>
+
+<path id="rss" d="M256,50C142.229,50,50,142.229,50,256s92.229,206,206,206s206-92.229,206-206S369.771,50,256,50z
+
+	 M189.203,356.592c-16.381,0-29.66-13.278-29.66-29.66c0-16.381,13.279-29.658,29.66-29.658s29.659,13.277,29.659,29.658
+
+	C218.862,343.313,205.584,356.592,189.203,356.592z M260.083,356.592c-0.567-55.189-45.352-99.971-100.54-100.539v-43.939
+
+	c79.544,0.568,143.91,64.934,144.479,144.479H260.083z M334.513,356.592c-0.133-46.756-18.396-90.693-51.474-123.771
+
+	c-33.011-33.012-76.843-51.267-123.496-51.47v-43.944c120.806,0.422,218.637,98.345,218.913,219.184H334.513z"/>
+
+</svg>
+

@@ -1,2 +1,2 @@
 Used graciously from:
-https://simpleicons.org/
+http://iconmonstr.com/
