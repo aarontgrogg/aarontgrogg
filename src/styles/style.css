@@ -570,6 +570,7 @@ ul.social-links li {
 }
 ul.social-links a {
     display: block;
+    padding: .5em .5em .3em;
     color: #444;
     text-align: center;
     background: #eee;
@@ -582,8 +583,8 @@ ul.social-links a:hover {
 ul.social-links svg {
     display: block;
     margin: 0 auto;
-    width: 24px;
-    height: 24px;
+    width: 34px;
+    height: 34px;
 }
 ul.social-links.social-share {
     width: auto;
@@ -1092,9 +1093,9 @@ body.archive h1 {
         display: table;
         width: 100%;
     }
-    ul.social-links.social-connect a {
+    /*ul.social-links.social-connect a {
         padding: .75em 1em;
-    }
+    }*/
     div.widget-area li.widget-container {
         display: table-cell;
         vertical-align: top;
@@ -1236,10 +1237,10 @@ body.archive h1 {
         display: block;
         padding: 0;
     }
-    ul.social-links.social-connect a {
+    /*ul.social-links.social-connect a {
         font-size: .9em;
         padding: .5em .75em .2em;
-    }
+    }*/
 }
 @media only screen and (min-width: 1300px) {
     body {

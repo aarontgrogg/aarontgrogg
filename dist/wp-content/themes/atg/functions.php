@@ -163,6 +163,7 @@
 	if (!function_exists( 'atg_add_svg_icons' )) {
 		function atg_add_svg_icons() {
 			echo '<div style="height:0;width:0;position:absolute;visibility:hidden">';
+			echo '<!-- Icons courtesy of http://iconmonstr.com/ -->';
 			@include( STYLESHEETPATH . '/icons/icons.svg');
 			echo '</div>' . PHP_EOL;
 		}
@@ -204,7 +205,7 @@
 //	add "Top ^" link to all home page posts
 	if (!function_exists( 'atg_add_top_of_page_link' )) {
 		function atg_add_top_of_page_link($content) {
-			return $content . '<p class="top-link"><a href="#top" title="' . _e( 'Jump to top of page', 'twentyten' ) .'">' . _e( 'Top', 'twentyten' ) .' <span>&#8682;</span></a></p>';
+			return $content . '<p class="top-link"><a href="#top" title="Jump to top of page">Top<span>&#8682;</span></a></p>';
 		}
 	}
 	add_filter( 'the_content', 'atg_add_top_of_page_link' );
