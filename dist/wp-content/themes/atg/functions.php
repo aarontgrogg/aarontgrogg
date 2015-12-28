@@ -164,7 +164,7 @@
 		function atg_add_svg_icons() {
 			echo '<div style="height:0;width:0;position:absolute;visibility:hidden">';
 			@include( STYLESHEETPATH . '/icons/icons.svg');
-			echo '</div>'.PHP_EOL;
+			echo '</div>' . PHP_EOL;
 		}
 	}	
 

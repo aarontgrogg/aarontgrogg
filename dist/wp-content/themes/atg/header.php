@@ -8,7 +8,6 @@
  * @subpackage Twenty_Ten
  * @since Twenty Ten 1.0
  */
-
 ?><!doctype html>
 <html dir="ltr" lang="en-US">
 	<head>
