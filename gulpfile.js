@@ -23,7 +23,7 @@ var gulp = require('gulp'),
             * need adjustments to current site CSS
     - had to remove <rect> from initial downloaded icons, so :hover would work properly
     - removed "-" from each file name & id so minify/concat would work properly (prob need an automated way to do this?)
-    - added <title> and <desc> to each SVG
+    - added <title> and <desc> to each SVG for a11y
 
     - use of @include and <use> seems like it will work for me and my tiny icon set; YMMV
 
