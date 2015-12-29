@@ -570,7 +570,7 @@ ul.social-links li {
 }
 ul.social-links a {
     display: block;
-    padding: .5em .5em .3em;
+    padding: 10px;
     color: #444;
     text-align: center;
     background: #eee;
@@ -583,8 +583,8 @@ ul.social-links a:hover {
 ul.social-links svg {
     display: block;
     margin: 0 auto;
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
     transition: fill 70ms;
 }
 ul.social-links.social-share {
