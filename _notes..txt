@@ -82,8 +82,19 @@ local repo directory:
 
 
 CRITICAL:
+	https://developers.google.com/speed/pagespeed/service/PrioritizeCriticalCSS
+	https://github.com/filamentgroup/criticalcss
+	https://github.com/addyosmani/critical
+	https://joe-watkins.io/javascript/inline-critical-css-with-wordpress/
+	https://adactio.com/journal/8504
+	http://gomakethings.com/inlining-critical-css-for-better-web-performance/
+	http://trevan.co/managing-critical-css-in-a-wp-theme/
+
 	https://github.com/addyosmani/critical-path-css-demo
 	https://github.com/addyosmani/critical-path-css-demo#tutorial
+	http://addyosmani.com/blog/detecting-critical-above-the-fold-css-with-paul-kinlan-video/
+	https://gist.github.com/PaulKinlan/6284142
+	https://gist.github.com/scottjehl/b6129da04733e4e0f9a4
 
 
 DEPLOY:

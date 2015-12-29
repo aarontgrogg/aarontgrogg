@@ -1,16 +1,18 @@
 // define requirements
 var gulp = require('gulp'),
     path = require('path'),
+    //critical = require('critical').stream,
+    criticalcss = require('criticalcss'),
     plugins = require('gulp-load-plugins')(),
     AUTOPREFIXER_MATRIX = 'last 2 version',
     THEME_DIST_DIR = 'dist/wp-content/themes/atg',
     PLUGIN_DIST_DIR = 'dist/wp-content/plugins/';
 
 // run SVG-related tasks
-gulp.task('icons', function() {
-    return gulp.src('src/icons/*.svg')                      // grab all src svg files
-        .pipe(plugins.svgmin(function (file) {              // minify all svg files
-            var prefix = path.basename(file.relative, path.extname(file.relative)); // create unique prefix for each symbol's ID
+gulp.task( 'icons', function() {
+    return gulp.src( 'src/icons/*.svg' )                    // grab all src svg files
+        .pipe( plugins.svgmin( function ( file ) {          // minify all svg files
+            var prefix = path.basename( file.relative, path.extname( file.relative ) ); // create unique prefix for each symbol's ID
             return {
                 plugins: [{
                     cleanupIDs: {
@@ -59,8 +61,82 @@ gulp.task( 'scripts-plugins', function() {
     return gulp.src( PLUGIN_DIST_DIR + '**/*.js' )          // grab all src js files
         .pipe( plugins.changedInPlace() )                   // check if source has changed since last build
         .pipe( plugins.uglify() )                           // minify concatenated js files
-        .pipe( gulp.dest( PLUGIN_DIST_DIR ) );               // save files into dist directory
+        .pipe( gulp.dest( PLUGIN_DIST_DIR ) );              // save files into dist directory
 });
 
+// Generate & Inline Critical-path CSS
+/*gulp.task( 'critical', function () {
+    return gulp.src( 'https://aarontgrogg.dreamhosters.com/' ) // grab home page
+        .pipe( critical({
+            minify: true                                    // minify results
+        }))
+        .pipe( gulp.dest( THEME_DIST_DIR + '/critical.css' ) ); // save files into dist directory
+
+});*/
+/*gulp.task('styles:critical', function() {
+    return gulp.src('wp-content/themes/your_theme/src/styles/critical.css')
+        // minify it
+        .pipe(minify())
+        // wrap with style tags
+        .pipe(concat.header('<style>'))
+        .pipe(concat.footer('</style>'))
+        // convert it to a php file
+        .pipe(rename({
+            basename: 'criticalCSS',
+            extname: '.php'
+        }))
+        // insert it Wordpress theme folder
+        .pipe(gulp.dest('wp-content/themes/your_theme/'));
+});*/
+gulp.task('styles-critical', function() {
+    var remoteURL = 'https://aarontgrogg.dreamhosters.com',
+        request = require('request'),
+        fs = require('fs'),
+        tmpDir = require('os').tmpdir(),
+        cssUrl = remoteURL + '/wp-content/themes/atg/style-min.css',
+        cssPath = path.join( tmpDir, 'style.css' ),
+        includePath = path.join( __dirname, 'src/styles/critical.css' );
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+    request( cssUrl )
+        .pipe( fs.createWriteStream( cssPath ) ).on( 'close', function() {
+            criticalcss.getRules( cssPath, function( err, output ) {
+                if ( err ) {
+                    throw new Error( err );
+                } else {
+                    criticalcss.findCritical( remoteURL, { 
+                        rules: JSON.parse( output ) 
+                    }, function( err, output ) {
+                        if ( err ) {
+                            throw new Error( err );
+                        } else {
+                            fs.writeFile( includePath, output, function( err ) {
+                                if ( err ) {
+                                    return console.log( err );
+                                }
+                                console.log( 'Critical written to include!' );
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+    return gulp.src( 'src/styles/critical.css' )
+        // minify it
+        .pipe( plugins.minifyCss() )
+        // wrap with style tags
+        .pipe( plugins.concatUtil.header('<style>') )
+        .pipe( plugins.concatUtil.footer('</style>') )
+        // convert it to a php file
+        .pipe( plugins.rename({
+            basename: 'criticalcss',
+            extname: '.php'
+        }) )
+        // insert it Wordpress theme folder
+        .pipe( gulp.dest( THEME_DIST_DIR ) );
+});
+
+
+
 // let's get this party started!
-gulp.task('default', [ 'icons', 'styles-theme', 'scripts-theme', 'styles-plugins', 'scripts-plugins' ]);
+gulp.task('default', [ 'icons', 'styles-theme', 'scripts-theme', 'styles-plugins', 'scripts-plugins', 'styles-critical' ]);
