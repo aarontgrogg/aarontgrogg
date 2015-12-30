@@ -73,21 +73,6 @@ gulp.task( 'scripts-plugins', function() {
         .pipe( gulp.dest( THEME_DIST_DIR + '/critical.css' ) ); // save files into dist directory
 
 });*/
-/*gulp.task('styles:critical', function() {
-    return gulp.src('wp-content/themes/your_theme/src/styles/critical.css')
-        // minify it
-        .pipe(minify())
-        // wrap with style tags
-        .pipe(concat.header('<style>'))
-        .pipe(concat.footer('</style>'))
-        // convert it to a php file
-        .pipe(rename({
-            basename: 'criticalCSS',
-            extname: '.php'
-        }))
-        // insert it Wordpress theme folder
-        .pipe(gulp.dest('wp-content/themes/your_theme/'));
-});*/
 gulp.task('styles-critical', function() {
     var remoteURL = 'https://aarontgrogg.dreamhosters.com',
         request = require('request'),
@@ -96,7 +81,7 @@ gulp.task('styles-critical', function() {
         cssUrl = remoteURL + '/wp-content/themes/atg/style-min.css',
         cssPath = path.join( tmpDir, 'style.css' ),
         includePath = path.join( __dirname, 'src/styles/critical.css' );
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
     request( cssUrl )
         .pipe( fs.createWriteStream( cssPath ) ).on( 'close', function() {
             criticalcss.getRules( cssPath, function( err, output ) {
