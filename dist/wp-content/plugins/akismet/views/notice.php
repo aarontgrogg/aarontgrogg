@@ -37,6 +37,13 @@
 	?>
 	</p>
 </div>
+<?php elseif ( $type == 'notice' ) :?>
+<div class="wrap alert critical">
+	<h3 class="key-status failed"><?php echo $notice_header; ?></h3>
+	<p class="description">
+		<?php echo $notice_text; ?>
+	</p>
+</div>
 <?php elseif ( $type == 'missing-functions' ) :?>
 <div class="wrap alert critical">
 	<h3 class="key-status failed"><?php esc_html_e('Network functions are disabled.', 'akismet'); ?></h3>

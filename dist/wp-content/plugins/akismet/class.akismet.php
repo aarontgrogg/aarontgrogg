@@ -45,12 +45,6 @@ class Akismet {
 
 		// Run this early in the pingback call, before doing a remote fetch of the source uri
 		add_action( 'xmlrpc_call', array( 'Akismet', 'pre_check_pingback' ) );
-
-		if ( '3.0.5' == $GLOBALS['wp_version'] ) {
-			remove_filter( 'comment_text', 'wp_kses_data' );
-			if ( is_admin() )
-				add_filter( 'comment_text', 'wp_kses_post' );
-		}
 	}
 
 	public static function get_api_key() {

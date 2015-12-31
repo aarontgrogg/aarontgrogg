@@ -1,1 +1,89 @@
-jQuery(document).ready(function(t){function e(t){return window.tadvTranslation.hasOwnProperty(t)?window.tadvTranslation[t]:t}var a=t("#tadv-import"),n=t("#tadv-import-error");t(".container").sortable({connectWith:".container",items:"> li",cursor:"move",stop:function(t,e){var a;e&&(a=e.item.parent().attr("id"))&&e.item.find("input.tadv-button").attr("name",a+"[]")},revert:300,opacity:.7,placeholder:"tadv-placeholder",forcePlaceholderSize:!0,containment:"document"}),t("#menubar").on("change",function(){t("#tadv-mce-menu").toggleClass("enabled",t(this).prop("checked"))}),t("#tadv-export-select").click(function(){t("#tadv-export").focus().select()}),a.change(function(){n.empty()}),t("#tadv-import-verify").click(function(){var t;t=(a.val()||"").replace(/^[^{]*/,"").replace(/[^}]*$/,""),a.val(t);try{JSON.parse(t),n.text("No errors.")}catch(e){n.text(e)}}),"object"==typeof window.tadvTranslation&&(t(".tadvitem").each(function(a,n){var r=t(n),o=r.find(".descr"),c=o.text();c&&(c=e(c),o.text(c),r.find(".mce-ico").attr("title",c))}),t("#tadv-mce-menu .tadv-translate").each(function(a,n){var r=t(n),o=r.text();o&&r.text(e(o))}))});
+// TinyMCE Advanced
+jQuery( document ).ready( function( $ ) {
+	var $importElement = $('#tadv-import'),
+		$importError = $('#tadv-import-error');
+
+	$('.container').sortable({
+		connectWith: '.container',
+		items: '> li',
+		cursor: 'move',
+		stop: function( event, ui ) {
+			var toolbar_id;
+
+			if ( ui && ( toolbar_id = ui.item.parent().attr('id') ) ) {
+				ui.item.find('input.tadv-button').attr('name', toolbar_id + '[]');
+			}
+		},
+		/*
+		activate: function( event, ui ) {
+			if ( this.id !== ui.sender.attr('id') ) {
+				$(this).parent().css({ 'border-color': '#888' }); // , 'background-color': '#fafff9'
+			}
+		},
+		deactivate: function( event, ui ) {
+			$(this).parent().css({ 'border-color': '' }); // , 'background-color': ''
+		},
+		*/
+		revert: 300,
+		opacity: 0.7,
+		placeholder: 'tadv-placeholder',
+		forcePlaceholderSize: true,
+		containment: 'document'
+	});
+
+	$( '#menubar' ).on( 'change', function() {
+		$( '#tadv-mce-menu' ).toggleClass( 'enabled', $(this).prop('checked') );
+	});
+
+	$('#tadv-export-select').click( function() {
+		$('#tadv-export').focus().select();
+	});
+
+	$importElement.change( function() {
+		$importError.empty();
+	});
+
+	$('#tadv-import-verify').click( function() {
+		var string;
+
+		string = ( $importElement.val() || '' ).replace( /^[^{]*/, '' ).replace( /[^}]*$/, '' );
+		$importElement.val( string );
+
+		try {
+			JSON.parse( string );
+			$importError.text( 'No errors.' );
+		} catch( error ) {
+			$importError.text( error );
+		}
+	});
+
+	function translate( str ) {
+		if ( window.tadvTranslation.hasOwnProperty( str ) ) {
+			return window.tadvTranslation[str];
+		}
+		return str;
+	}
+
+	if ( typeof window.tadvTranslation === 'object' ) {
+		$( '.tadvitem' ).each( function( i, element ) {
+			var $element = $( element ),
+				$descr = $element.find( '.descr' ),
+				text = $descr.text();
+
+			if ( text ) {
+				text = translate( text );
+				$descr.text( text );
+				$element.find( '.mce-ico' ).attr( 'title', text );
+			}
+		});
+
+		$( '#tadv-mce-menu .tadv-translate' ).each( function( i, element ) {
+			var $element = $( element ),
+				text = $element.text();
+
+			if ( text ) {
+				$element.text( translate( text ) );
+			}
+		});
+	}
+});

@@ -54,6 +54,8 @@ function _wp_get_image_size_from_meta( $size_name, $image_meta ) {
  *
  * @since 3.0.0
  *
+ * @see wp_calculate_image_srcset()
+ *
  * @param int          $attachment_id Image attachment ID.
  * @param array|string $size          Optional. Image size. Accepts any valid image size, or an array of
  *                                    width and height values in pixels (in that order). Default 'medium'.
@@ -135,9 +137,6 @@ function wp_calculate_image_srcset( $size_array, $image_src, $image_meta, $attac
 
 	$image_baseurl = trailingslashit( $image_baseurl );
 
-	// Calculate the image aspect ratio.
-	$image_ratio = $image_height / $image_width;
-
 	/*
 	 * Images that have been edited in WordPress after being uploaded will
 	 * contain a unique hash. Look for that hash and use it later to filter
@@ -174,15 +173,21 @@ function wp_calculate_image_srcset( $size_array, $image_src, $image_meta, $attac
 			continue;
 		}
 
-		// Calculate the new image ratio.
-		if ( $image['width'] ) {
-			$image_ratio_compare = $image['height'] / $image['width'];
+		/**
+		 * To check for varying crops, we calculate the expected size of the smaller
+		 * image if the larger were contstrained by the width of the smaller and then
+		 * see if it matches what we're expecting.
+		 */
+		if ( $image_width > $image['width'] ) {
+			$constrained_size = wp_constrain_dimensions( $image_width, $image_height, $image['width'] );
+			$expected_size = array( $image['width'], $image['height'] );
 		} else {
-			$image_ratio_compare = 0;
+			$constrained_size = wp_constrain_dimensions( $image['width'], $image['height'], $image_width );
+			$expected_size = array( $image_width, $image_height );
 		}
 
-		// If the new ratio differs by less than 0.01, use it.
-		if ( abs( $image_ratio - $image_ratio_compare ) < 0.01 ) {
+		// If the image dimensions are within 1px of the expected size, use it.
+		if ( abs( $constrained_size[0] - $expected_size[0] ) <= 1 && abs( $constrained_size[1] - $expected_size[1] ) <= 1 ) {
 			// Add the URL, descriptor, and value to the sources array to be returned.
 			$sources[ $image['width'] ] = array(
 				'url'        => $image_baseurl . $image['file'],
@@ -200,12 +205,12 @@ function wp_calculate_image_srcset( $size_array, $image_src, $image_meta, $attac
 	 * @param array  $sources {
 	 *     One or more arrays of source data to include in the 'srcset'.
 	 *
-	 *     @type type array $width {
-	 *          @type type string $url        The URL of an image source.
-	 *          @type type string $descriptor The descriptor type used in the image candidate string,
-	 *                                        either 'w' or 'x'.
-	 *          @type type int    $value      The source width, if paired with a 'w' descriptor or a
-	 *                                        pixel density value if paired with an 'x' descriptor.
+	 *     @type array $width {
+	 *         @type string $url        The URL of an image source.
+	 *         @type string $descriptor The descriptor type used in the image candidate string,
+	 *                                  either 'w' or 'x'.
+	 *         @type int    $value      The source width if paired with a 'w' descriptor, or a
+	 *                                  pixel density value if paired with an 'x' descriptor.
 	 *     }
 	 * }
 	 * @param array  $size_array    Array of width and height values in pixels (in that order).
@@ -233,6 +238,8 @@ function wp_calculate_image_srcset( $size_array, $image_src, $image_meta, $attac
  * Retrieves the value for an image attachment's 'sizes' attribute.
  *
  * @since 3.0.0
+ *
+ * @see wp_calculate_image_sizes()
  *
  * @param int          $attachment_id Image attachment ID.
  * @param array|string $size          Optional. Image size. Accepts any valid image size, or an array of width
@@ -325,11 +332,13 @@ function wp_calculate_image_sizes( $size, $image_src = null, $image_meta = null,
  * @return string Converted content with 'srcset' and 'sizes' attributes added to images.
  */
 function wp_make_content_images_responsive( $content ) {
-	$images = tevkori_get_media_embedded_in_content( $content, 'img' );
+	if ( ! preg_match_all( '/<img [^>]+>/', $content, $matches ) ) {
+		return $content;
+	}
 
 	$selected_images = $attachment_ids = array();
 
-	foreach( $images as $image ) {
+	foreach( $matches[0] as $image ) {
 		if ( false === strpos( $image, ' srcset=' ) && preg_match( '/wp-image-([0-9]+)/i', $image, $class_id ) &&
 			( $attachment_id = absint( $class_id[1] ) ) ) {
 
@@ -363,47 +372,6 @@ function wp_make_content_images_responsive( $content ) {
 add_filter( 'the_content', 'wp_make_content_images_responsive', 5, 1 );
 
 /**
- * Check the content blob for an audio, video, object, embed, or iframe tags.
- * This is a copy of `get_media_embedded_in_content()` in WP 4.4 in order to provide
- * back compatibility to older versions of WordPress.
- *
- * @since 3.0.0
- *
- * @param string $content A string which might contain media data.
- * @param array  $types   An array of media types: 'audio', 'video', 'object', 'embed', or 'iframe'.
- * @return array A list of found HTML media embeds.
- */
-function tevkori_get_media_embedded_in_content( $content, $types = null ) {
-	$html = array();
-
-	/**
-	 * Filter the embedded media types that are allowed to be returned from the content blob.
-	 *
-	 * @param array $allowed_media_types An array of allowed media types. Default media types are
-	 *                                   'audio', 'video', 'object', 'embed', 'iframe', and 'img'.
-	 */
-	$allowed_media_types = apply_filters( 'media_embedded_in_content_allowed_types', array( 'audio', 'video', 'object', 'embed', 'iframe', 'img' ) );
-
-	if ( ! empty( $types ) ) {
-		if ( ! is_array( $types ) ) {
-			$types = array( $types );
-		}
-
-		$allowed_media_types = array_intersect( $allowed_media_types, $types );
-	}
-
-	$tags = implode( '|', $allowed_media_types );
-
-	if ( preg_match_all( '#<(?P<tag>' . $tags . ')[^<]*?(?:>[\s\S]*?<\/(?P=tag)>|\s*\/>)#', $content, $matches ) ) {
-		foreach ( $matches[0] as $match ) {
-			$html[] = $match;
-		}
-	}
-
-	return $html;
-}
-
-/**
  * Adds 'srcset' and 'sizes' attributes to an existing 'img' element.
  *
  * @since 3.0.0
@@ -434,6 +402,29 @@ function wp_image_add_srcset_and_sizes( $image, $image_meta, $attachment_id ) {
 	if ( preg_match( '/-e[0-9]{13}/', $image_meta['file'], $img_edit_hash ) &&
 		strpos( wp_basename( $image_src ), $img_edit_hash[0] ) === false ) {
 
+		return $image;
+	}
+
+	/**
+	 * To make sure that our ID and image src match, we loop through all the sizes
+	 * in our attachment metadata and bail early if our src file isn't included.
+	 */
+	$file_name = wp_basename( $image_src );
+
+	$all_sizes = wp_list_pluck( $image_meta['sizes'], 'file' );
+	$all_sizes[] = $image_meta['file'];
+
+	$matched = false;
+
+	foreach( $all_sizes as $size ) {
+		if ( false !== strpos( $size, $file_name ) ) {
+			$matched = true;
+			break;
+		}
+	}
+
+	// Bail early if the image src doesn't match any of the known image sizes.
+	if ( ! $matched ) {
 		return $image;
 	}
 

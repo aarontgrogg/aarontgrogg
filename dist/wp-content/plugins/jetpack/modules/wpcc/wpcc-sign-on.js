@@ -1,1 +1,0 @@
-jQuery(document).ready(function(n){n("#loginform").append(n("#wpcc-sign-on"))});

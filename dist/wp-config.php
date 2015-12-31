@@ -15,54 +15,6 @@
 * @package WordPress
 */
 
-define( 'HOST', $_SERVER['HTTP_HOST'] );
-
-
-/*
- * SSL added 12/7/2015
- */
-define( 'FORCE_SSL_ADMIN', true );
-
-
-/**
-* For developers: WordPress debugging mode.
-*
-* Change this to true to enable the display of notices during development.
-* It is strongly recommended that plugin and theme developers use WP_DEBUG
-* in their development environments.
-*/
-define( 'WP_DEBUG', false );
-define( 'WP_AUTO_UPDATE_CORE', false );
-define( 'WP_HOME', 'https://'.HOST );
-define( 'WP_SITEURL', 'https://'.HOST );
-define( 'WP_ALLOW_MULTISITE', true );
-define( 'MULTISITE', true );
-define( 'SUBDOMAIN_INSTALL', false );
-define( 'PATH_CURRENT_SITE', '/' );
-define( 'SITE_ID_CURRENT_SITE', 1 );
-define( 'BLOG_ID_CURRENT_SITE', 1 );
-
-
-/**
-* Added based on:
-* https://digwp.com/2009/06/wordpress-configuration-tricks/
-*/
-define( 'ENABLE_CACHE', true );
-define( 'CACHE_EXPIRATION_TIME', 3600 );
-define( 'COOKIE_DOMAIN', '.'.HOST ); // don't omit the leading '.'
-define( 'COOKIEPATH', preg_replace('|https?://[^/]+|i', '', WP_HOME.'/') );
-define( 'SITECOOKIEPATH', preg_replace('|https?://[^/]+|i', '', WP_SITEURL.'/') );
-define( 'PLUGINS_COOKIE_PATH', preg_replace('|https?://[^/]+|i', '', WP_PLUGIN_URL) );
-define( 'ADMIN_COOKIE_PATH', SITECOOKIEPATH.'wp-admin' );
-define( 'WP_POST_REVISIONS', 3 );
-define( 'WP_MEMORY_LIMIT', '128M' );
-define(' SAVEQUERIES', true );
-
-
-// Added by WP-Cache Manager
-define( 'WP_CACHE', true );
-
-
 /**
 * WordPress Localized Language, defaults to English.
 *
@@ -74,42 +26,50 @@ define( 'WP_CACHE', true );
 define( 'WPLANG', '' );
 
 
+$_HOST = $_SERVER['HTTP_HOST'];
+
 // ** MySQL settings - You can get this info from your web host ** //
 
 /** Test if on local dev server **/
-if (HOST === 'aarontgrogg.com') {
+if ( $_HOST === 'aarontgrogg.com' ) {
 	$_DOMAIN_CURRENT_SITE = 'aarontgrogg.com';
 	$_SITE_DIRECTORY = '/home/aarontgrogg/aarontgrogg.com';
-	// MySQL settings - prod
-	define('DB_HOST', 'mysql.aarontgrogg.com'); 
-	define('DB_NAME', 'aar1125205222323');
-	define('DB_USER', 'aar1125205222323');
+	$_DB_HOST = 'mysql.aarontgrogg.com';
+	$_DB_NAME = 'aar1125205222323';
+	$_DB_USER = 'aar1125205222323';
+	$_FORCE_SSL_ADMIN = true;
+	$_WP_DEBUG = false;
 
-} else if (HOST === 'aarontgrogg.dreamhosters.com') {
+} else if ( $_HOST === 'aarontgrogg.dreamhosters.com' ) {
 	$_DOMAIN_CURRENT_SITE = 'aarontgrogg.dreamhosters.com';
 	$_SITE_DIRECTORY = '/home/aarontgrogg/aarontgrogg.dreamhosters.com';
-	// MySQL settings - temp dev on prod server
-	define('DB_HOST', 'mysql.aarontgrogg.dreamhosters.com');
-	define('DB_NAME', 'aarontgrogg_dreamhosters');
-	define('DB_USER', 'aarontgrogg');
+	$_DB_HOST = 'mysql.aarontgrogg.dreamhosters.com';
+	$_DB_NAME = 'aarontgrogg_dreamhosters';
+	$_DB_USER = 'aarontgrogg';
+	$_FORCE_SSL_ADMIN = true;
+	$_WP_DEBUG = false;
 
 } else {
-	$_DOMAIN_CURRENT_SITE = 'localhost';
+	$_DOMAIN_CURRENT_SITE = 'aarontgrogg.dev';
 	$_SITE_DIRECTORY = '';
-	// MySQL settings - localhost
-	define('DB_HOST', 'localhost');
+	$_DB_HOST = 'localhost';
+	$_DB_NAME = 'aar1125205222323';
+	$_DB_USER = 'aar1125205222323';
+	$_FORCE_SSL_ADMIN = true;
+	$_WP_DEBUG = false;
 }
+
+$_PROTOCOL = ( $_FORCE_SSL_ADMIN ) ? 'https' : 'http';
+
 // MySQL settings - all
-define('DB_PASSWORD', 'Try2Enter!');
-define('DB_CHARSET', 'utf8');
-define('DB_COLLATE', '');
+define( 'DB_HOST', $_DB_HOST );
+define( 'DB_NAME', $_DB_NAME );
+define( 'DB_USER', $_DB_USER );
+define( 'DB_PASSWORD', 'Try2Enter!' );
+define( 'DB_CHARSET', 'utf8' );
+define( 'DB_COLLATE', '' );
 
-define( 'DOMAIN_CURRENT_SITE', $_DOMAIN_CURRENT_SITE );
-define( 'WPCACHEHOME', $_SITE_DIRECTORY . '/wp-content/plugins/wp-super-cache/' ); //Added by WP-Cache Manager
-define( 'TEMPLATEPATH', $_SITE_DIRECTORY . '/wp-content/themes/boilerplate' );
-define( 'STYLESHEETPATH', $_SITE_DIRECTORY . '/wp-content/themes/atg' );
-
-
+//
 /**
 * WordPress Database Table prefix.
 *
@@ -128,16 +88,64 @@ $table_prefix  = 'wp_';
 *
 * @since 2.6.0
 */
-define('AUTH_KEY',        '}k~+)`a^dUe3_K:n+-}4q_85$>1mx)&L*/7)0n./F)rV?h[oO-Vy|{afsXpx{(Xi');
-define('SECURE_AUTH_KEY', 'e<H@BHQI=!>e{#C0(-^(Yn;E` |XT+#|`O#%&W2:Ds9IT;oS3ewnw{K)raGTBrM8');
-define('LOGGED_IN_KEY',   '(R|pu|36@Yu4+a}bC2B.Y`WcLcpx@*c)Z?]Sd!S@4yBp(t87#ciVxV>N)k@~&D^S');
-define('NONCE_KEY',       'kGust|R&.)vAPua(J]d/TBZqnH8[g_:8|ON/7wRhZs5& _FpbEwVtgUW1D.p +YN');
-define('AUTH_SALT',        'put your unique phrase here');
-define('SECURE_AUTH_SALT', 'put your unique phrase here');
-define('LOGGED_IN_SALT',   'put your unique phrase here');
-define('NONCE_SALT',       'put your unique phrase here');
+define('AUTH_KEY',         'qsNX{Z[3T+$)!xD,#`G0^.om>IN-J,EsztpZB+||?Tp;$>wTbW-0}^;&yVOlF-9a');
+define('SECURE_AUTH_KEY',  '+T-h?bp9 e(.77{9:I6lX>-]yx>w-mGDP3>]^k~^48B]N()yV4,K/75pf{7FfG)>');
+define('LOGGED_IN_KEY',    'CR{#d[N%qZv^-%E*ks(,)oQ0oKM/?(TE2APL~c-Q%4,9xkJ]+m-W$&2$gEmv!<CR');
+define('NONCE_KEY',        '~pXdgv0b>yP&?7=a$Cth^4jJE75K<,]rsqNidSe=|)?#fsil6n[4o|-U2_q)WHjM');
+define('AUTH_SALT',        '!s)!#vd{hr#8XHZs#H,8%z@Ti{V[{F`sXit?|[RP{Z^V]#@Cejqrjk*G2r>(/[>h');
+define('SECURE_AUTH_SALT', '[}]/v>#rC@3)|MB|/<&93gA4?!KKT ;%PN#9SKVDW|[+e>Z<x!QHbNr5 ,@#z{]y');
+define('LOGGED_IN_SALT',   'eJjUgN=gH{|$@61loMhUlTizS-7bF tEsZw3A~4!G9eX^fefh5)|P^-<(ONb#^a-');
+define('NONCE_SALT',       '|Y-%.EB51R]U$uf!nXlI546P`@26L(+.#c3w`Dv~7x>8-X(=;|#=ij][GX@zoUi6');
 
 /**#@-*/
+
+
+define( 'FORCE_SSL_ADMIN', $_FORCE_SSL_ADMIN );
+
+define( 'WP_DEBUG', $_WP_DEBUG );
+define( 'WP_HOME', $_PROTOCOL.'://'.$_HOST );
+define( 'WP_SITEURL', $_PROTOCOL.'://'.$_HOST );
+define( 'DOMAIN_CURRENT_SITE', $_DOMAIN_CURRENT_SITE );
+//define( 'WPCACHEHOME', $_SITE_DIRECTORY . '/wp-content/plugins/wp-super-cache/' ); //Added by WP-Cache Manager
+define( 'TEMPLATEPATH', $_SITE_DIRECTORY . '/wp-content/themes/boilerplate' );
+define( 'STYLESHEETPATH', $_SITE_DIRECTORY . '/wp-content/themes/atg' );
+define( 'WP_PLUGIN_URL', $_SITE_DIRECTORY . '/wp-content/plugins' );
+define( 'COOKIEPATH', preg_replace('|'.$_PROTOCOL.'?://[^/]+|i', '', WP_HOME.'/') );
+define( 'SITECOOKIEPATH', preg_replace('|'.$_PROTOCOL.'?://[^/]+|i', '', WP_SITEURL.'/') );
+define( 'PLUGINS_COOKIE_PATH', preg_replace('|'.$_PROTOCOL.'?://[^/]+|i', '', WP_PLUGIN_URL) );
+define( 'ADMIN_COOKIE_PATH', SITECOOKIEPATH.'wp-admin' );
+
+
+/**
+* For developers: WordPress debugging mode.
+*
+* Change this to true to enable the display of notices during development.
+* It is strongly recommended that plugin and theme developers use WP_DEBUG
+* in their development environments.
+*/
+define( 'WP_AUTO_UPDATE_CORE', false );
+define( 'WP_ALLOW_MULTISITE', true );
+define( 'MULTISITE', true );
+define( 'SUBDOMAIN_INSTALL', false );
+define( 'PATH_CURRENT_SITE', '/' );
+define( 'SITE_ID_CURRENT_SITE', 1 );
+define( 'BLOG_ID_CURRENT_SITE', 1 );
+
+
+/**
+* Added based on:
+* https://digwp.com/2009/06/wordpress-configuration-tricks/
+*/
+define( 'ENABLE_CACHE', false );
+define( 'CACHE_EXPIRATION_TIME', 3600 );
+define( 'COOKIE_DOMAIN', '.'.$_HOST ); // don't omit the leading '.'
+define( 'WP_POST_REVISIONS', 3 );
+define( 'WP_MEMORY_LIMIT', '128M' );
+define(' SAVEQUERIES', false );
+
+
+// Added by WP-Cache Manager
+//define( 'WP_CACHE', true );
 
 
 /* That's all, stop editing! Happy blogging. */

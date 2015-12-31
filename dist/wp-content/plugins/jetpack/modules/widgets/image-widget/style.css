@@ -1,1 +1,13 @@
-.jetpack-image-container:after{clear:both}.jetpack-image-container:after,.jetpack-image-container:before{display:table;content:""}
+/*
+ * Image Widget styles for Jetpack
+ */
+
+/* Clear floats */
+.jetpack-image-container:after {
+	clear: both;
+}
+.jetpack-image-container:before,
+.jetpack-image-container:after {
+	display: table;
+	content: "";
+}

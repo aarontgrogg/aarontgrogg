@@ -1,1 +1,103 @@
-!function(e){function t(t){switch(t.type){case"mousemove":return e.extend(t.data,{clientX:t.clientX,clientY:t.clientY,pageX:t.pageX,pageY:t.pageY});case"DOMMouseScroll":e.extend(t,t.data),t.delta=-t.detail/3;break;case"mousewheel":t.delta=t.wheelDelta/120}var n=e(this).scrollable();return t.preventDefault(),n.move(t.delta<0?1:-1,50),!1}e.fn.wheel=function(e){return this[e?"bind":"trigger"]("wheel",e)},e.event.special.wheel={setup:function(){this.addEventListener("DOMMouseScroll",t,!1),this.addEventListener("mousewheel",t,!1)},teardown:function(){this.removeEventListener("DOMMouseScroll",t,!1),this.removeEventListener("mousewheel",t,!1)}};var n=e.tools.scrollable;n.plugins=n.plugins||{},n.plugins.mousewheel={version:"1.0.1",conf:{api:!1,speed:50}},e.fn.mousewheel=function(t){var l,s=e.extend({},n.plugins.mousewheel.conf);return"number"==typeof t&&(t={speed:t}),t=e.extend(s,t),this.each(function(){var n=e(this).scrollable();n&&(l=n),n.getRoot().wheel(function(e,l){return n.move(0>l?1:-1,t.speed||50),!1})}),t.api?l:this}}(jQuery);
+/**
+ * jQuery TOOLS plugin :: scrollable.mousewheel 1.0.1
+ * 
+ * Copyright (c) 2009 Tero Piirainen
+ * http://flowplayer.org/tools/scrollable.html#mousewheel
+ *
+ * Dual licensed under MIT and GPL 2+ licenses
+ * http://www.opensource.org/licenses
+ *
+ * Launch  : September 2009
+ * Date: jQuery{date}
+ * Revision: jQuery{revision} 
+ *
+ * 
+ * jquery.event.wheel.js - rev 1 
+ * Copyright (c) 2008, Three Dub Media (http://threedubmedia.com)
+ * Liscensed under the MIT License (MIT-LICENSE.txt)
+ * http://www.opensource.org/licenses/mit-license.php
+ * Created: 2008-07-01 | Updated: 2008-07-14
+ */
+(function(jQuery) {
+		
+	jQuery.fn.wheel = function( fn ){
+		return this[ fn ? "bind" : "trigger" ]( "wheel", fn );
+	};
+
+	// special event config
+	jQuery.event.special.wheel = {
+		setup: function(){
+            this.addEventListener('DOMMouseScroll', wheelHandler, false);
+            this.addEventListener('mousewheel', wheelHandler, false);
+		},
+		teardown: function(){
+			this.removeEventListener('DOMMouseScroll', wheelHandler, false);
+            this.removeEventListener('mousewheel', wheelHandler, false);
+		}
+	};
+
+    // shared event handler
+	function wheelHandler( event ) {
+		
+		switch ( event.type ){
+			
+			// FF2 has incorrect event positions
+			case "mousemove": 
+				return jQuery.extend( event.data, { // store the correct properties
+					clientX: event.clientX, clientY: event.clientY,
+					pageX: event.pageX, pageY: event.pageY
+				});
+				
+			// firefox	
+            case "DOMMouseScroll": 
+                jQuery.extend( event, event.data ); // fix event properties in FF2
+				event.delta = -event.detail / 3; // normalize delta
+				break;
+				
+			// IE, opera, safari	
+			case "mousewheel":				
+				event.delta = event.wheelDelta / 120;
+				break;
+		}
+
+        var api = jQuery(this).scrollable();
+        event.preventDefault();
+        api.move(event.delta < 0 ? 1 : -1, 50);
+        return false;
+	}
+	
+	
+	// version number
+	var t = jQuery.tools.scrollable; 
+	t.plugins = t.plugins || {};
+	t.plugins.mousewheel = {	
+		version: '1.0.1',
+		conf: { 
+			api: false,
+			speed: 50
+		} 
+	}; 
+	
+	// scrollable mousewheel implementation
+	jQuery.fn.mousewheel = function(conf) {
+
+		var globals = jQuery.extend({}, t.plugins.mousewheel.conf), ret;
+		if (typeof conf == 'number') { conf = {speed: conf}; }
+		conf = jQuery.extend(globals, conf);
+		
+		this.each(function() {		
+
+			var api = jQuery(this).scrollable();
+			if (api) { ret = api; }
+			
+			api.getRoot().wheel(function(e, delta)  { 
+                api.move(delta < 0 ? 1 : -1, conf.speed || 50);
+				return false;
+			});
+		});
+		
+		return conf.api ? ret : this;
+	};
+	
+})(jQuery); 
+

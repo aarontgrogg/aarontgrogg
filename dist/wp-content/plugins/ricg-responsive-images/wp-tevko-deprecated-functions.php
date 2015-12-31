@@ -412,3 +412,46 @@ function _wp_get_attachment_image_sizes_filter_shim( $sizes, $size, $image_src, 
 	}
 }
 add_filter( 'wp_calculate_image_sizes', '_wp_get_attachment_image_sizes_filter_shim', 10, 5 );
+
+/**
+ * Check the content blob for an audio, video, object, embed, iframe, or img tags.
+ * This is a modified version of `get_media_embedded_in_content()` that was modified
+ * during the WP 4.4 cycle to return images in content, before being reverted.
+ *
+ * @since 3.0.0
+ * @deprecated 3.1.1 Use 'get_media_embedded_in_content()'
+ *
+ * @param string $content A string which might contain media data.
+ * @param array  $types   An array of media types: 'audio', 'video', 'object', 'embed', 'iframe', or 'img'.
+ * @return array A list of found HTML media embeds.
+ */
+function tevkori_get_media_embedded_in_content( $content, $types = null ) {
+	_deprecated_function( __FUNCTION__, '3.1.1', 'get_media_embedded_in_content()' );
+	$html = array();
+
+	/**
+	 * Filter the embedded media types that are allowed to be returned from the content blob.
+	 *
+	 * @param array $allowed_media_types An array of allowed media types. Default media types are
+	 *                                   'audio', 'video', 'object', 'embed', 'iframe', and 'img'.
+	 */
+	$allowed_media_types = apply_filters( 'media_embedded_in_content_allowed_types', array( 'audio', 'video', 'object', 'embed', 'iframe', 'img' ) );
+
+	if ( ! empty( $types ) ) {
+		if ( ! is_array( $types ) ) {
+			$types = array( $types );
+		}
+
+		$allowed_media_types = array_intersect( $allowed_media_types, $types );
+	}
+
+	$tags = implode( '|', $allowed_media_types );
+
+	if ( preg_match_all( '#<(?P<tag>' . $tags . ')[^<]*?(?:>[\s\S]*?<\/(?P=tag)>|\s*\/>)#', $content, $matches ) ) {
+		foreach ( $matches[0] as $match ) {
+			$html[] = $match;
+		}
+	}
+
+	return $html;
+}

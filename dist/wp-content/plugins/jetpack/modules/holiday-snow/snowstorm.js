@@ -1,1 +1,539 @@
-var snowStorm=function(e,t){function i(e,t){return isNaN(t)&&(t=0),Math.random()*e+t}function s(e){return 1===parseInt(i(2),10)?-1*e:e}function n(){e.setTimeout(function(){o.start(!0)},20),o.events.remove(r?t:e,"mousemove",n)}function l(){o.excludeMobile&&h||(o.freezeOnBlur?o.events.add(r?t:e,"mousemove",n):n()),o.events.remove(e,"load",l)}this.autoStart=!0,this.flakesMax=60,this.flakesMaxActive=60,this.animationInterval=40,this.excludeMobile=!0,this.flakeBottom=null,this.followMouse=!0,this.snowColor="#fff",this.snowCharacter="&bull;",this.snowStick=!1,this.targetElement=null,this.useMeltEffect=!0,this.useTwinkleEffect=!1,this.usePositionFixed=!1,this.freezeOnBlur=!0,this.flakeLeftOffset=0,this.flakeRightOffset=0,this.flakeWidth=5,this.flakeHeight=5,this.vMaxX=2.5,this.vMaxY=2.5,this.zIndex=1e5;var o=this,a=this,r=navigator.userAgent.match(/msie/i),f=navigator.userAgent.match(/msie 6/i),m=navigator.appVersion.match(/windows 98/i),h=navigator.userAgent.match(/mobile|opera m(ob|in)/i),c=r&&"BackCompat"===t.compatMode,u=h||c||f,d=null,v=null,k=null,y=null,g=null,p=null,x=1,w=2,E=6,F=!1,b=function(){try{t.createElement("div").style.opacity="0.5"}catch(e){return!1}return!0}(),z=!1,H=t.createDocumentFragment();return this.timers=[],this.flakes=[],this.disabled=!1,this.active=!1,this.meltFrameCount=20,this.meltFrames=[],this.events=function(){function t(e){var t=o.call(e),i=t.length;return l?(t[1]="on"+t[1],i>3&&t.pop()):3===i&&t.push(!1),t}function i(e,t){var i=e.shift(),s=[a[t]];l?i[s](e[0],e[1]):i[s].apply(i,e)}function s(){i(t(arguments),"add")}function n(){i(t(arguments),"remove")}var l=!e.addEventListener&&e.attachEvent,o=Array.prototype.slice,a={add:l?"attachEvent":"addEventListener",remove:l?"detachEvent":"removeEventListener"};return{add:s,remove:n}}(),this.randomizeWind=function(){var e;if(g=s(i(o.vMaxX,.2)),p=i(o.vMaxY,.2),this.flakes)for(e=0;e<this.flakes.length;e++)this.flakes[e].active&&this.flakes[e].setVelocities()},this.scrollHandler=function(){var i;if(y=o.flakeBottom?0:parseInt(e.scrollY||t.documentElement.scrollTop||t.body.scrollTop,10),isNaN(y)&&(y=0),!F&&!o.flakeBottom&&o.flakes)for(i=o.flakes.length;i--;)0===o.flakes[i].active&&o.flakes[i].stick()},this.resizeHandler=function(){e.innerWidth||e.innerHeight?(d=e.innerWidth-16-o.flakeRightOffset,k=o.flakeBottom?o.flakeBottom:e.innerHeight):(d=(t.documentElement.clientWidth||t.body.clientWidth||t.body.scrollWidth)-(r?0:8)-o.flakeRightOffset,k=o.flakeBottom?o.flakeBottom:t.documentElement.clientHeight||t.body.clientHeight||t.body.scrollHeight),v=parseInt(d/2,10)},this.resizeHandlerAlt=function(){d=o.targetElement.offsetLeft+o.targetElement.offsetWidth-o.flakeRightOffset,k=o.flakeBottom?o.flakeBottom:o.targetElement.offsetTop+o.targetElement.offsetHeight,v=parseInt(d/2,10)},this.freeze=function(){var e;if(o.disabled)return!1;for(o.disabled=1,e=o.timers.length;e--;)clearInterval(o.timers[e])},this.resume=function(){return o.disabled?(o.disabled=0,void o.timerInit()):!1},this.toggleSnow=function(){o.flakes.length?(o.active=!o.active,o.active?(o.show(),o.resume()):(o.stop(),o.freeze())):o.start()},this.stop=function(){var i;for(this.freeze(),i=this.flakes.length;i--;)this.flakes[i].o.style.display="none";o.events.remove(e,"scroll",o.scrollHandler),o.events.remove(e,"resize",o.resizeHandler),o.freezeOnBlur&&(r?(o.events.remove(t,"focusout",o.freeze),o.events.remove(t,"focusin",o.resume)):(o.events.remove(e,"blur",o.freeze),o.events.remove(e,"focus",o.resume)))},this.show=function(){var e;for(e=this.flakes.length;e--;)this.flakes[e].o.style.display="block"},this.SnowFlake=function(e,s,n,l){var o=this,a=e;this.type=s,this.x=n||parseInt(i(d-20),10),this.y=isNaN(l)?-i(k)-12:l,this.vX=null,this.vY=null,this.vAmpTypes=[1,1.2,1.4,1.6,1.8],this.vAmp=this.vAmpTypes[this.type],this.melting=!1,this.meltFrameCount=a.meltFrameCount,this.meltFrames=a.meltFrames,this.meltFrame=0,this.twinkleFrame=0,this.active=1,this.fontSize=10+this.type/5*10,this.o=t.createElement("div"),this.o.innerHTML=a.snowCharacter,this.o.style.color=a.snowColor,this.o.style.position=F?"fixed":"absolute",this.o.style.width=a.flakeWidth+"px",this.o.style.height=a.flakeHeight+"px",this.o.style.fontFamily="arial,verdana",this.o.style.cursor="default",this.o.style.overflow="hidden",this.o.style.fontWeight="normal",this.o.style.zIndex=a.zIndex,H.appendChild(this.o),this.refresh=function(){return isNaN(o.x)||isNaN(o.y)?!1:(o.o.style.left=o.x+"px",void(o.o.style.top=o.y+"px"))},this.stick=function(){u||a.targetElement!==t.documentElement&&a.targetElement!==t.body?o.o.style.top=k+y-a.flakeHeight+"px":a.flakeBottom?o.o.style.top=a.flakeBottom+"px":(o.o.style.display="none",o.o.style.top="auto",o.o.style.bottom="0px",o.o.style.position="fixed",o.o.style.display="block")},this.vCheck=function(){o.vX>=0&&o.vX<.2?o.vX=.2:o.vX<0&&o.vX>-.2&&(o.vX=-.2),o.vY>=0&&o.vY<.2&&(o.vY=.2)},this.move=function(){var e,t=o.vX*x;o.x+=t,o.y+=o.vY*o.vAmp,o.x>=d||d-o.x<a.flakeWidth?o.x=0:0>t&&o.x-a.flakeLeftOffset<-a.flakeWidth&&(o.x=d-a.flakeWidth-1),o.refresh(),e=k+y-o.y,e<a.flakeHeight?(o.active=0,a.snowStick?o.stick():o.recycle()):(a.useMeltEffect&&o.active&&o.type<3&&!o.melting&&Math.random()>.998&&(o.melting=!0,o.melt()),a.useTwinkleEffect&&(o.twinkleFrame?(o.twinkleFrame--,o.o.style.visibility=o.twinkleFrame&&o.twinkleFrame%2===0?"hidden":"visible"):Math.random()>.9&&(o.twinkleFrame=parseInt(20*Math.random(),10))))},this.animate=function(){o.move()},this.setVelocities=function(){o.vX=g+i(.12*a.vMaxX,.1),o.vY=p+i(.12*a.vMaxY,.1)},this.setOpacity=function(e,t){return b?void(e.style.opacity=t):!1},this.melt=function(){a.useMeltEffect&&o.melting&&o.meltFrame<o.meltFrameCount?(o.setOpacity(o.o,o.meltFrames[o.meltFrame]),o.o.style.fontSize=o.fontSize-o.fontSize*(o.meltFrame/o.meltFrameCount)+"px",o.o.style.lineHeight=a.flakeHeight+2+.75*a.flakeHeight*(o.meltFrame/o.meltFrameCount)+"px",o.meltFrame++):o.recycle()},this.recycle=function(){o.o.style.display="none",o.o.style.position=F?"fixed":"absolute",o.o.style.bottom="auto",o.setVelocities(),o.vCheck(),o.meltFrame=0,o.melting=!1,o.setOpacity(o.o,1),o.o.style.padding="0px",o.o.style.margin="0px",o.o.style.fontSize=o.fontSize+"px",o.o.style.lineHeight=a.flakeHeight+2+"px",o.o.style.textAlign="center",o.o.style.verticalAlign="baseline",o.x=parseInt(i(d-a.flakeWidth-20),10),o.y=parseInt(-1*i(k),10)-a.flakeHeight,o.refresh(),o.o.style.display="block",o.active=1},this.recycle(),this.refresh()},this.snow=function(){var e,t=0,s=0,n=0,l=null;for(e=o.flakes.length;e--;)1===o.flakes[e].active?(o.flakes[e].move(),t++):0===o.flakes[e].active?s++:n++,o.flakes[e].melting&&o.flakes[e].melt();t<o.flakesMaxActive&&(l=o.flakes[parseInt(i(o.flakes.length),10)],0===l.active&&(l.melting=!0))},this.mouseMove=function(e){if(!o.followMouse)return!0;var t=parseInt(e.clientX,10);v>t?x=-w+t/v*w:(t-=v,x=t/v*w)},this.createSnow=function(e,t){var s;for(s=0;e>s;s++)o.flakes[o.flakes.length]=new o.SnowFlake(o,parseInt(i(E),10)),(t||s>o.flakesMaxActive)&&(o.flakes[o.flakes.length-1].active=-1);a.targetElement.appendChild(H)},this.timerInit=function(){o.timers=m?[setInterval(o.snow,3*o.animationInterval),setInterval(o.snow,o.animationInterval)]:[setInterval(o.snow,o.animationInterval)]},this.init=function(){var i;for(i=0;i<o.meltFrameCount;i++)o.meltFrames.push(1-i/o.meltFrameCount);o.randomizeWind(),o.createSnow(o.flakesMax),o.events.add(e,"resize",o.resizeHandler),o.events.add(e,"scroll",o.scrollHandler),o.freezeOnBlur&&(r?(o.events.add(t,"focusout",o.freeze),o.events.add(t,"focusin",o.resume)):(o.events.add(e,"blur",o.freeze),o.events.add(e,"focus",o.resume))),o.resizeHandler(),o.scrollHandler(),o.followMouse&&o.events.add(r?t:e,"mousemove",o.mouseMove),o.animationInterval=Math.max(20,o.animationInterval),o.timerInit()},this.start=function(e){if(z){if(e)return!0}else z=!0;if("string"==typeof o.targetElement){var i=o.targetElement;if(o.targetElement=t.getElementById(i),!o.targetElement)throw new Error('Snowstorm: Unable to get targetElement "'+i+'"')}o.targetElement||(o.targetElement=r?t.body:t.documentElement?t.documentElement:t.body),o.targetElement!==t.documentElement&&o.targetElement!==t.body&&(o.resizeHandler=o.resizeHandlerAlt),o.resizeHandler(),o.usePositionFixed=o.usePositionFixed&&!u,F=o.usePositionFixed,d&&k&&!o.disabled&&(o.init(),o.active=!0)},o.autoStart&&o.events.add(e,"load",l,!1),this}(window,document);
+/** @license
+ * DHTML Snowstorm! JavaScript-based Snow for web pages
+ * --------------------------------------------------------
+ * Version 1.43.20111201 (Previous rev: 1.42.20111120)
+ * Copyright (c) 2007, Scott Schiller. All rights reserved.
+ * Code provided under the BSD License:
+ * http://schillmania.com/projects/snowstorm/license.txt
+ */
+
+/*global window, document, navigator, clearInterval, setInterval */
+/*jslint white: false, onevar: true, plusplus: false, undef: true, nomen: true, eqeqeq: true, bitwise: true, regexp: true, newcap: true, immed: true */
+
+var snowStorm = (function(window, document) {
+
+  // --- common properties ---
+
+  this.autoStart = true;          // Whether the snow should start automatically or not.
+  this.flakesMax = 60;           // Limit total amount of snow made (falling + sticking)
+  this.flakesMaxActive = 60;      // Limit amount of snow falling at once (less = lower CPU use)
+  this.animationInterval = 40;    // Theoretical "miliseconds per frame" measurement. 20 = fast + smooth, but high CPU use. 50 = more conservative, but slower
+  this.excludeMobile = true;      // Snow is likely to be bad news for mobile phones' CPUs (and batteries.) By default, be nice.
+  this.flakeBottom = null;        // Integer for Y axis snow limit, 0 or null for "full-screen" snow effect
+  this.followMouse = true;        // Snow movement can respond to the user's mouse
+  this.snowColor = '#fff';        // Don't eat (or use?) yellow snow.
+  this.snowCharacter = '&bull;';  // &bull; = bullet, &middot; is square on some systems etc.
+  this.snowStick = false;          // Whether or not snow should "stick" at the bottom. When off, will never collect.
+  this.targetElement = null;      // element which snow will be appended to (null = document.body) - can be an element ID eg. 'myDiv', or a DOM node reference
+  this.useMeltEffect = true;      // When recycling fallen snow (or rarely, when falling), have it "melt" and fade out if browser supports it
+  this.useTwinkleEffect = false;  // Allow snow to randomly "flicker" in and out of view while falling
+  this.usePositionFixed = false;  // true = snow does not shift vertically when scrolling. May increase CPU load, disabled by default - if enabled, used only where supported
+
+  // --- less-used bits ---
+
+  this.freezeOnBlur = true;       // Only snow when the window is in focus (foreground.) Saves CPU.
+  this.flakeLeftOffset = 0;       // Left margin/gutter space on edge of container (eg. browser window.) Bump up these values if seeing horizontal scrollbars.
+  this.flakeRightOffset = 0;      // Right margin/gutter space on edge of container
+  this.flakeWidth = 5;            // Max pixel width reserved for snow element
+  this.flakeHeight = 5;           // Max pixel height reserved for snow element
+  this.vMaxX = 2.5;                 // Maximum X velocity range for snow
+  this.vMaxY = 2.5;                 // Maximum Y velocity range for snow
+  this.zIndex = 100000;                // CSS stacking order applied to each snowflake
+
+  // --- End of user section ---
+
+  var s = this, storm = this, i,
+  // UA sniffing and backCompat rendering mode checks for fixed position, etc.
+  isIE = navigator.userAgent.match(/msie/i),
+  isIE6 = navigator.userAgent.match(/msie 6/i),
+  isWin98 = navigator.appVersion.match(/windows 98/i),
+  isMobile = navigator.userAgent.match(/mobile|opera m(ob|in)/i),
+  isBackCompatIE = (isIE && document.compatMode === 'BackCompat'),
+  noFixed = (isMobile || isBackCompatIE || isIE6),
+  screenX = null, screenX2 = null, screenY = null, scrollY = null, vRndX = null, vRndY = null,
+  windOffset = 1,
+  windMultiplier = 2,
+  flakeTypes = 6,
+  fixedForEverything = false,
+  opacitySupported = (function(){
+    try {
+      document.createElement('div').style.opacity = '0.5';
+    } catch(e) {
+      return false;
+    }
+    return true;
+  }()),
+  didInit = false,
+  docFrag = document.createDocumentFragment();
+
+  this.timers = [];
+  this.flakes = [];
+  this.disabled = false;
+  this.active = false;
+  this.meltFrameCount = 20;
+  this.meltFrames = [];
+
+  this.events = (function() {
+
+    var old = (!window.addEventListener && window.attachEvent), slice = Array.prototype.slice,
+    evt = {
+      add: (old?'attachEvent':'addEventListener'),
+      remove: (old?'detachEvent':'removeEventListener')
+    };
+
+    function getArgs(oArgs) {
+      var args = slice.call(oArgs), len = args.length;
+      if (old) {
+        args[1] = 'on' + args[1]; // prefix
+        if (len > 3) {
+          args.pop(); // no capture
+        }
+      } else if (len === 3) {
+        args.push(false);
+      }
+      return args;
+    }
+
+    function apply(args, sType) {
+      var element = args.shift(),
+          method = [evt[sType]];
+      if (old) {
+        element[method](args[0], args[1]);
+      } else {
+        element[method].apply(element, args);
+      }
+    }
+
+    function addEvent() {
+      apply(getArgs(arguments), 'add');
+    }
+
+    function removeEvent() {
+      apply(getArgs(arguments), 'remove');
+    }
+
+    return {
+      add: addEvent,
+      remove: removeEvent
+    };
+
+  }());
+
+  function rnd(n,min) {
+    if (isNaN(min)) {
+      min = 0;
+    }
+    return (Math.random()*n)+min;
+  }
+
+  function plusMinus(n) {
+    return (parseInt(rnd(2),10)===1?n*-1:n);
+  }
+
+  this.randomizeWind = function() {
+    var i;
+    vRndX = plusMinus(rnd(s.vMaxX,0.2));
+    vRndY = rnd(s.vMaxY,0.2);
+    if (this.flakes) {
+      for (i=0; i<this.flakes.length; i++) {
+        if (this.flakes[i].active) {
+          this.flakes[i].setVelocities();
+        }
+      }
+    }
+  };
+
+  this.scrollHandler = function() {
+    var i;
+    // "attach" snowflakes to bottom of window if no absolute bottom value was given
+    scrollY = (s.flakeBottom?0:parseInt(window.scrollY||document.documentElement.scrollTop||document.body.scrollTop,10));
+    if (isNaN(scrollY)) {
+      scrollY = 0; // Netscape 6 scroll fix
+    }
+    if (!fixedForEverything && !s.flakeBottom && s.flakes) {
+      for (i=s.flakes.length; i--;) {
+        if (s.flakes[i].active === 0) {
+          s.flakes[i].stick();
+        }
+      }
+    }
+  };
+
+  this.resizeHandler = function() {
+    if (window.innerWidth || window.innerHeight) {
+      screenX = window.innerWidth-16-s.flakeRightOffset;
+      screenY = (s.flakeBottom?s.flakeBottom:window.innerHeight);
+    } else {
+      screenX = (document.documentElement.clientWidth||document.body.clientWidth||document.body.scrollWidth)-(!isIE?8:0)-s.flakeRightOffset;
+      screenY = s.flakeBottom?s.flakeBottom:(document.documentElement.clientHeight||document.body.clientHeight||document.body.scrollHeight);
+    }
+    screenX2 = parseInt(screenX/2,10);
+  };
+
+  this.resizeHandlerAlt = function() {
+    screenX = s.targetElement.offsetLeft+s.targetElement.offsetWidth-s.flakeRightOffset;
+    screenY = s.flakeBottom?s.flakeBottom:s.targetElement.offsetTop+s.targetElement.offsetHeight;
+    screenX2 = parseInt(screenX/2,10);
+  };
+
+  this.freeze = function() {
+    // pause animation
+    var i;
+    if (!s.disabled) {
+      s.disabled = 1;
+    } else {
+      return false;
+    }
+    for (i=s.timers.length; i--;) {
+      clearInterval(s.timers[i]);
+    }
+  };
+
+  this.resume = function() {
+    if (s.disabled) {
+       s.disabled = 0;
+    } else {
+      return false;
+    }
+    s.timerInit();
+  };
+
+  this.toggleSnow = function() {
+    if (!s.flakes.length) {
+      // first run
+      s.start();
+    } else {
+      s.active = !s.active;
+      if (s.active) {
+        s.show();
+        s.resume();
+      } else {
+        s.stop();
+        s.freeze();
+      }
+    }
+  };
+
+  this.stop = function() {
+    var i;
+    this.freeze();
+    for (i=this.flakes.length; i--;) {
+      this.flakes[i].o.style.display = 'none';
+    }
+    s.events.remove(window,'scroll',s.scrollHandler);
+    s.events.remove(window,'resize',s.resizeHandler);
+    if (s.freezeOnBlur) {
+      if (isIE) {
+        s.events.remove(document,'focusout',s.freeze);
+        s.events.remove(document,'focusin',s.resume);
+      } else {
+        s.events.remove(window,'blur',s.freeze);
+        s.events.remove(window,'focus',s.resume);
+      }
+    }
+  };
+
+  this.show = function() {
+    var i;
+    for (i=this.flakes.length; i--;) {
+      this.flakes[i].o.style.display = 'block';
+    }
+  };
+
+  this.SnowFlake = function(parent,type,x,y) {
+    var s = this, storm = parent;
+    this.type = type;
+    this.x = x||parseInt(rnd(screenX-20),10);
+    this.y = (!isNaN(y)?y:-rnd(screenY)-12);
+    this.vX = null;
+    this.vY = null;
+    this.vAmpTypes = [1,1.2,1.4,1.6,1.8]; // "amplification" for vX/vY (based on flake size/type)
+    this.vAmp = this.vAmpTypes[this.type];
+    this.melting = false;
+    this.meltFrameCount = storm.meltFrameCount;
+    this.meltFrames = storm.meltFrames;
+    this.meltFrame = 0;
+    this.twinkleFrame = 0;
+    this.active = 1;
+    this.fontSize = (10+(this.type/5)*10);
+    this.o = document.createElement('div');
+    this.o.innerHTML = storm.snowCharacter;
+    this.o.style.color = storm.snowColor;
+    this.o.style.position = (fixedForEverything?'fixed':'absolute');
+    this.o.style.width = storm.flakeWidth+'px';
+    this.o.style.height = storm.flakeHeight+'px';
+    this.o.style.fontFamily = 'arial,verdana';
+    this.o.style.cursor = 'default';
+    this.o.style.overflow = 'hidden';
+    this.o.style.fontWeight = 'normal';
+    this.o.style.zIndex = storm.zIndex;
+    docFrag.appendChild(this.o);
+
+    this.refresh = function() {
+      if (isNaN(s.x) || isNaN(s.y)) {
+        // safety check
+        return false;
+      }
+      s.o.style.left = s.x+'px';
+      s.o.style.top = s.y+'px';
+    };
+
+    this.stick = function() {
+      if (noFixed || (storm.targetElement !== document.documentElement && storm.targetElement !== document.body)) {
+        s.o.style.top = (screenY+scrollY-storm.flakeHeight)+'px';
+      } else if (storm.flakeBottom) {
+        s.o.style.top = storm.flakeBottom+'px';
+      } else {
+        s.o.style.display = 'none';
+        s.o.style.top = 'auto';
+        s.o.style.bottom = '0px';
+        s.o.style.position = 'fixed';
+        s.o.style.display = 'block';
+      }
+    };
+
+    this.vCheck = function() {
+      if (s.vX>=0 && s.vX<0.2) {
+        s.vX = 0.2;
+      } else if (s.vX<0 && s.vX>-0.2) {
+        s.vX = -0.2;
+      }
+      if (s.vY>=0 && s.vY<0.2) {
+        s.vY = 0.2;
+      }
+    };
+
+    this.move = function() {
+      var vX = s.vX*windOffset, yDiff;
+      s.x += vX;
+      s.y += (s.vY*s.vAmp);
+      if (s.x >= screenX || screenX-s.x < storm.flakeWidth) { // X-axis scroll check
+        s.x = 0;
+      } else if (vX < 0 && s.x-storm.flakeLeftOffset < -storm.flakeWidth) {
+        s.x = screenX-storm.flakeWidth-1; // flakeWidth;
+      }
+      s.refresh();
+      yDiff = screenY+scrollY-s.y;
+      if (yDiff<storm.flakeHeight) {
+        s.active = 0;
+        if (storm.snowStick) {
+          s.stick();
+        } else {
+          s.recycle();
+        }
+      } else {
+        if (storm.useMeltEffect && s.active && s.type < 3 && !s.melting && Math.random()>0.998) {
+          // ~1/1000 chance of melting mid-air, with each frame
+          s.melting = true;
+          s.melt();
+          // only incrementally melt one frame
+          // s.melting = false;
+        }
+        if (storm.useTwinkleEffect) {
+          if (!s.twinkleFrame) {
+            if (Math.random()>0.9) {
+              s.twinkleFrame = parseInt(Math.random()*20,10);
+            }
+          } else {
+            s.twinkleFrame--;
+            s.o.style.visibility = (s.twinkleFrame && s.twinkleFrame%2===0?'hidden':'visible');
+          }
+        }
+      }
+    };
+
+    this.animate = function() {
+      // main animation loop
+      // move, check status, die etc.
+      s.move();
+    };
+
+    this.setVelocities = function() {
+      s.vX = vRndX+rnd(storm.vMaxX*0.12,0.1);
+      s.vY = vRndY+rnd(storm.vMaxY*0.12,0.1);
+    };
+
+    this.setOpacity = function(o,opacity) {
+      if (!opacitySupported) {
+        return false;
+      }
+      o.style.opacity = opacity;
+    };
+
+    this.melt = function() {
+      if (!storm.useMeltEffect || !s.melting) {
+        s.recycle();
+      } else {
+        if (s.meltFrame < s.meltFrameCount) {
+          s.setOpacity(s.o,s.meltFrames[s.meltFrame]);
+          s.o.style.fontSize = s.fontSize-(s.fontSize*(s.meltFrame/s.meltFrameCount))+'px';
+          s.o.style.lineHeight = storm.flakeHeight+2+(storm.flakeHeight*0.75*(s.meltFrame/s.meltFrameCount))+'px';
+          s.meltFrame++;
+        } else {
+          s.recycle();
+        }
+      }
+    };
+
+    this.recycle = function() {
+      s.o.style.display = 'none';
+      s.o.style.position = (fixedForEverything?'fixed':'absolute');
+      s.o.style.bottom = 'auto';
+      s.setVelocities();
+      s.vCheck();
+      s.meltFrame = 0;
+      s.melting = false;
+      s.setOpacity(s.o,1);
+      s.o.style.padding = '0px';
+      s.o.style.margin = '0px';
+      s.o.style.fontSize = s.fontSize+'px';
+      s.o.style.lineHeight = (storm.flakeHeight+2)+'px';
+      s.o.style.textAlign = 'center';
+      s.o.style.verticalAlign = 'baseline';
+      s.x = parseInt(rnd(screenX-storm.flakeWidth-20),10);
+      s.y = parseInt(rnd(screenY)*-1,10)-storm.flakeHeight;
+      s.refresh();
+      s.o.style.display = 'block';
+      s.active = 1;
+    };
+
+    this.recycle(); // set up x/y coords etc.
+    this.refresh();
+
+  };
+
+  this.snow = function() {
+    var active = 0, used = 0, waiting = 0, flake = null, i;
+    for (i=s.flakes.length; i--;) {
+      if (s.flakes[i].active === 1) {
+        s.flakes[i].move();
+        active++;
+      } else if (s.flakes[i].active === 0) {
+        used++;
+      } else {
+        waiting++;
+      }
+      if (s.flakes[i].melting) {
+        s.flakes[i].melt();
+      }
+    }
+    if (active<s.flakesMaxActive) {
+      flake = s.flakes[parseInt(rnd(s.flakes.length),10)];
+      if (flake.active === 0) {
+        flake.melting = true;
+      }
+    }
+  };
+
+  this.mouseMove = function(e) {
+    if (!s.followMouse) {
+      return true;
+    }
+    var x = parseInt(e.clientX,10);
+    if (x<screenX2) {
+      windOffset = -windMultiplier+(x/screenX2*windMultiplier);
+    } else {
+      x -= screenX2;
+      windOffset = (x/screenX2)*windMultiplier;
+    }
+  };
+
+  this.createSnow = function(limit,allowInactive) {
+    var i;
+    for (i=0; i<limit; i++) {
+      s.flakes[s.flakes.length] = new s.SnowFlake(s,parseInt(rnd(flakeTypes),10));
+      if (allowInactive || i>s.flakesMaxActive) {
+        s.flakes[s.flakes.length-1].active = -1;
+      }
+    }
+    storm.targetElement.appendChild(docFrag);
+  };
+
+  this.timerInit = function() {
+    s.timers = (!isWin98?[setInterval(s.snow,s.animationInterval)]:[setInterval(s.snow,s.animationInterval*3),setInterval(s.snow,s.animationInterval)]);
+  };
+
+  this.init = function() {
+    var i;
+    for (i=0; i<s.meltFrameCount; i++) {
+      s.meltFrames.push(1-(i/s.meltFrameCount));
+    }
+    s.randomizeWind();
+    s.createSnow(s.flakesMax); // create initial batch
+    s.events.add(window,'resize',s.resizeHandler);
+    s.events.add(window,'scroll',s.scrollHandler);
+    if (s.freezeOnBlur) {
+      if (isIE) {
+        s.events.add(document,'focusout',s.freeze);
+        s.events.add(document,'focusin',s.resume);
+      } else {
+        s.events.add(window,'blur',s.freeze);
+        s.events.add(window,'focus',s.resume);
+      }
+    }
+    s.resizeHandler();
+    s.scrollHandler();
+    if (s.followMouse) {
+      s.events.add(isIE?document:window,'mousemove',s.mouseMove);
+    }
+    s.animationInterval = Math.max(20,s.animationInterval);
+    s.timerInit();
+  };
+
+  this.start = function(bFromOnLoad) {
+    if (!didInit) {
+      didInit = true;
+    } else if (bFromOnLoad) {
+      // already loaded and running
+      return true;
+    }
+    if (typeof s.targetElement === 'string') {
+      var targetID = s.targetElement;
+      s.targetElement = document.getElementById(targetID);
+      if (!s.targetElement) {
+        throw new Error('Snowstorm: Unable to get targetElement "'+targetID+'"');
+      }
+    }
+    if (!s.targetElement) {
+      s.targetElement = (!isIE?(document.documentElement?document.documentElement:document.body):document.body);
+    }
+    if (s.targetElement !== document.documentElement && s.targetElement !== document.body) {
+      s.resizeHandler = s.resizeHandlerAlt; // re-map handler to get element instead of screen dimensions
+    }
+    s.resizeHandler(); // get bounding box elements
+    s.usePositionFixed = (s.usePositionFixed && !noFixed); // whether or not position:fixed is supported
+    fixedForEverything = s.usePositionFixed;
+    if (screenX && screenY && !s.disabled) {
+      s.init();
+      s.active = true;
+    }
+  };
+
+  function doDelayedStart() {
+    window.setTimeout(function() {
+      s.start(true);
+    }, 20);
+    // event cleanup
+    s.events.remove(isIE?document:window,'mousemove',doDelayedStart);
+  }
+
+  function doStart() {
+    if (!s.excludeMobile || !isMobile) {
+      if (s.freezeOnBlur) {
+        s.events.add(isIE?document:window,'mousemove',doDelayedStart);
+      } else {
+        doDelayedStart();
+      }
+    }
+    // event cleanup
+    s.events.remove(window, 'load', doStart);
+  }
+
+  // hooks for starting the snow
+  if (s.autoStart) {
+    s.events.add(window, 'load', doStart, false);
+  }
+
+  return this;
+
+}(window, document));

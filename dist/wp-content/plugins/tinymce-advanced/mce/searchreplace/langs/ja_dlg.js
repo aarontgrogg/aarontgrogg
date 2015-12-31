@@ -1,1 +1,0 @@
-tinyMCE.addI18n("ja.searchreplace_dlg",{findwhat:"検索する文字列",replacewith:"置換後の文字列",direction:"方向",up:"上へ",down:"下へ",mcase:"大文字・小文字の区別",findnext:"次を検索",allreplaced:"すべて置換しました。",searchnext_desc:"再検索",notfound:"検索を完了しました。検索文字列は見つかりませんでした。",search_title:"検索",replace_title:"検索と置換",replaceall:"すべて置換",replace:"置換"});

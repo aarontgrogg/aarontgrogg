@@ -1,1 +1,2888 @@
-!function(e,t){"use strict";function n(e,t){for(var n,o=[],r=0;r<e.length;++r){if(n=a[e[r]]||l(e[r]),!n)throw"module definition dependecy not found: "+e[r];o.push(n)}t.apply(null,o)}function o(e,o,l){if("string"!=typeof e)throw"invalid module definition, module id must be defined and be a string";if(o===t)throw"invalid module definition, dependencies must be specified";if(l===t)throw"invalid module definition, definition function must be specified";n(o,function(){a[e]=l.apply(null,arguments)})}function l(t){for(var n=e,o=t.split(/[.\/]/),l=0;l<o.length;++l){if(!n[o[l]])return;n=n[o[l]]}return n}var a={};o("tinymce/tableplugin/Utils",["tinymce/Env"],function(e){function t(e,t){return parseInt(e.getAttribute(t)||1,10)}function n(t){(!e.ie||e.ie>10)&&(t.innerHTML='<br data-mce-bogus="1" />')}return{getSpanVal:t,paddCell:n}}),o("tinymce/tableplugin/TableGrid",["tinymce/util/Tools","tinymce/Env","tinymce/tableplugin/Utils"],function(e,n,o){var l=e.each,a=o.getSpanVal;return function(r,i){function s(){var e=0;M=[],D=0,l(["thead","tbody","tfoot"],function(t){var n=W.select("> "+t+" tr",i);l(n,function(n,o){o+=e,l(W.select("> td, > th",n),function(e,n){var l,r,i,s;if(M[o])for(;M[o][n];)n++;for(i=a(e,"rowspan"),s=a(e,"colspan"),r=o;o+i>r;r++)for(M[r]||(M[r]=[]),l=n;n+s>l;l++)M[r][l]={part:t,real:r==o&&l==n,elm:e,rowspan:i,colspan:s};D=Math.max(D,n+1)})}),e+=n.length})}function c(e,t){return e=e.cloneNode(t),e.removeAttribute("id"),e}function d(e,t){var n;return n=M[t],n?n[e]:void 0}function u(e,t,n){e&&(n=parseInt(n,10),1===n?e.removeAttribute(t,1):e.setAttribute(t,n,1))}function m(e){return e&&(W.hasClass(e.elm,"mce-item-selected")||e==L)}function f(){var e=[];return l(i.rows,function(t){l(t.cells,function(n){return W.hasClass(n,"mce-item-selected")||L&&n==L.elm?(e.push(t),!1):void 0})}),e}function g(){var e=W.createRng();e.setStartAfter(i),e.setEndAfter(i),H.setRng(e),W.remove(i)}function p(t){var a,i={};return r.settings.table_clone_elements!==!1&&(i=e.makeMap((r.settings.table_clone_elements||"strong em b i span font h1 h2 h3 h4 h5 h6 p div").toUpperCase(),/[ ,]/)),e.walk(t,function(e){var o;return 3==e.nodeType?(l(W.getParents(e.parentNode,null,t).reverse(),function(e){i[e.nodeName]&&(e=c(e,!1),a?o&&o.appendChild(e):a=o=e,o=e)}),o&&(o.innerHTML=n.ie?"&nbsp;":'<br data-mce-bogus="1" />'),!1):void 0},"childNodes"),t=c(t,!1),u(t,"rowSpan",1),u(t,"colSpan",1),a?t.appendChild(a):o.paddCell(t),t}function b(){var e,t=W.createRng();return l(W.select("tr",i),function(e){0===e.cells.length&&W.remove(e)}),0===W.select("tr",i).length?(t.setStartBefore(i),t.setEndBefore(i),H.setRng(t),void W.remove(i)):(l(W.select("thead,tbody,tfoot",i),function(e){0===e.rows.length&&W.remove(e)}),s(),void(I&&(e=M[Math.min(M.length-1,I.y)],e&&(H.select(e[Math.min(e.length-1,I.x)].elm,!0),H.collapse(!0)))))}function h(e,t,n,o){var l,a,r,i,s;for(l=M[t][e].elm.parentNode,r=1;n>=r;r++)if(l=W.getNext(l,"tr")){for(a=e;a>=0;a--)if(s=M[t+r][a].elm,s.parentNode==l){for(i=1;o>=i;i++)W.insertAfter(p(s),s);break}if(-1==a)for(i=1;o>=i;i++)l.insertBefore(p(l.cells[0]),l.cells[0])}}function v(){l(M,function(e,t){l(e,function(e,n){var o,l,r;if(m(e)&&(e=e.elm,o=a(e,"colspan"),l=a(e,"rowspan"),o>1||l>1)){for(u(e,"rowSpan",1),u(e,"colSpan",1),r=0;o-1>r;r++)W.insertAfter(p(e),e);h(n,t,l-1,o)}})})}function y(t,n,o){var a,r,i,c,f,g,p,h,y,x,w;if(t?(a=P(t),r=a.x,i=a.y,c=r+(n-1),f=i+(o-1)):(I=E=null,l(M,function(e,t){l(e,function(e,n){m(e)&&(I||(I={x:n,y:t}),E={x:n,y:t})})}),I&&(r=I.x,i=I.y,c=E.x,f=E.y)),h=d(r,i),y=d(c,f),h&&y&&h.part==y.part){for(v(),s(),h=d(r,i).elm,u(h,"colSpan",c-r+1),u(h,"rowSpan",f-i+1),p=i;f>=p;p++)for(g=r;c>=g;g++)M[p]&&M[p][g]&&(t=M[p][g].elm,t!=h&&(x=e.grep(t.childNodes),l(x,function(e){h.appendChild(e)}),x.length&&(x=e.grep(h.childNodes),w=0,l(x,function(e){"BR"==e.nodeName&&W.getAttrib(e,"data-mce-bogus")&&w++<x.length-1&&h.removeChild(e)})),W.remove(t)));b()}}function x(e){var n,o,r,i,s,d,f,g,b;if(l(M,function(t,o){return l(t,function(t){return m(t)&&(t=t.elm,s=t.parentNode,d=c(s,!1),n=o,e)?!1:void 0}),e?!n:void 0}),n!==t){for(i=0;i<M[0].length;i++)if(M[n][i]&&(o=M[n][i].elm,o!=r)){if(e){if(n>0&&M[n-1][i]&&(g=M[n-1][i].elm,b=a(g,"rowSpan"),b>1)){u(g,"rowSpan",b+1);continue}}else if(b=a(o,"rowspan"),b>1){u(o,"rowSpan",b+1);continue}f=p(o),u(f,"colSpan",o.colSpan),d.appendChild(f),r=o}d.hasChildNodes()&&(e?s.parentNode.insertBefore(d,s):W.insertAfter(d,s))}}function w(e){var t,n;l(M,function(n){return l(n,function(n,o){return m(n)&&(t=o,e)?!1:void 0}),e?!t:void 0}),l(M,function(o,l){var r,i,s;o[t]&&(r=o[t].elm,r!=n&&(s=a(r,"colspan"),i=a(r,"rowspan"),1==s?e?(r.parentNode.insertBefore(p(r),r),h(t,l,i-1,s)):(W.insertAfter(p(r),r),h(t,l,i-1,s)):u(r,"colSpan",r.colSpan+1),n=r))})}function C(){var t=[];l(M,function(n){l(n,function(n,o){m(n)&&-1===e.inArray(t,o)&&(l(M,function(e){var t,n=e[o].elm;t=a(n,"colSpan"),t>1?u(n,"colSpan",t-1):W.remove(n)}),t.push(o))})}),b()}function S(){function e(e){var t,n;l(e.cells,function(e){var n=a(e,"rowSpan");n>1&&(u(e,"rowSpan",n-1),t=P(e),h(t.x,t.y,1,1))}),t=P(e.cells[0]),l(M[t.y],function(e){var t;e=e.elm,e!=n&&(t=a(e,"rowSpan"),1>=t?W.remove(e):u(e,"rowSpan",t-1),n=e)})}var t;t=f(),l(t.reverse(),function(t){e(t)}),b()}function T(){var e=f();return W.remove(e),b(),e}function R(){var e=f();return l(e,function(t,n){e[n]=c(t,!0)}),e}function N(e,t){var n=f(),o=n[t?0:n.length-1],a=o.cells.length;e&&(l(M,function(e){var t;return a=0,l(e,function(e){e.real&&(a+=e.colspan),e.elm.parentNode==o&&(t=1)}),t?!1:void 0}),t||e.reverse(),l(e,function(e){var n,l,r=e.cells.length;for(n=0;r>n;n++)l=e.cells[n],u(l,"colSpan",1),u(l,"rowSpan",1);for(n=r;a>n;n++)e.appendChild(p(e.cells[r-1]));for(n=a;r>n;n++)W.remove(e.cells[n]);t?o.parentNode.insertBefore(e,o):W.insertAfter(e,o)}),W.removeClass(W.select("td.mce-item-selected,th.mce-item-selected"),"mce-item-selected"))}function P(e){var t;return l(M,function(n,o){return l(n,function(n,l){return n.elm==e?(t={x:l,y:o},!1):void 0}),!t}),t}function A(e){I=P(e)}function k(){var e,t;return e=t=0,l(M,function(n,o){l(n,function(n,l){var a,r;m(n)&&(n=M[o][l],l>e&&(e=l),o>t&&(t=o),n.real&&(a=n.colspan-1,r=n.rowspan-1,a&&l+a>e&&(e=l+a),r&&o+r>t&&(t=o+r)))})}),{x:e,y:t}}function _(e){var t,n,o,l,a,r,i,s,c,d;if(E=P(e),I&&E){for(t=Math.min(I.x,E.x),n=Math.min(I.y,E.y),o=Math.max(I.x,E.x),l=Math.max(I.y,E.y),a=o,r=l,d=n;r>=d;d++)e=M[d][t],e.real||t-(e.colspan-1)<t&&(t-=e.colspan-1);for(c=t;a>=c;c++)e=M[n][c],e.real||n-(e.rowspan-1)<n&&(n-=e.rowspan-1);for(d=n;l>=d;d++)for(c=t;o>=c;c++)e=M[d][c],e.real&&(i=e.colspan-1,s=e.rowspan-1,i&&c+i>a&&(a=c+i),s&&d+s>r&&(r=d+s));for(W.removeClass(W.select("td.mce-item-selected,th.mce-item-selected"),"mce-item-selected"),d=n;r>=d;d++)for(c=t;a>=c;c++)M[d][c]&&W.addClass(M[d][c].elm,"mce-item-selected")}}function B(e,t){var n,o,l;n=P(e),o=n.y*D+n.x;do{if(o+=t,l=d(o%D,Math.floor(o/D)),!l)break;if(l.elm!=e)return H.select(l.elm,!0),W.isEmpty(l.elm)&&H.collapse(!0),!0}while(l.elm==e);return!1}var M,D,I,E,L,H=r.selection,W=H.dom;i=i||W.getParent(H.getStart(),"table"),s(),L=W.getParent(H.getStart(),"th,td"),L&&(I=P(L),E=k(),L=d(I.x,I.y)),e.extend(this,{deleteTable:g,split:v,merge:y,insertRow:x,insertCol:w,deleteCols:C,deleteRows:S,cutRows:T,copyRows:R,pasteRows:N,getPos:P,setStartCell:A,setEndCell:_,moveRelIdx:B,refresh:s})}}),o("tinymce/tableplugin/Quirks",["tinymce/util/VK","tinymce/Env","tinymce/util/Tools","tinymce/tableplugin/Utils"],function(e,t,n,o){var l=n.each,a=o.getSpanVal;return function(r){function i(){function t(t){function n(e,n){var l=e?"previousSibling":"nextSibling",a=r.dom.getParent(n,"tr"),i=a[l];if(i)return b(r,n,i,e),t.preventDefault(),!0;var d=r.dom.getParent(a,"table"),u=a.parentNode,m=u.nodeName.toLowerCase();if("tbody"===m||m===(e?"tfoot":"thead")){var f=o(e,d,u,"tbody");if(null!==f)return s(e,f,n)}return c(e,a,l,d)}function o(e,t,n,o){var l=r.dom.select(">"+o,t),a=l.indexOf(n);if(e&&0===a||!e&&a===l.length-1)return i(e,t);if(-1===a){var s="thead"===n.tagName.toLowerCase()?0:l.length-1;return l[s]}return l[a+(e?-1:1)]}function i(e,t){var n=e?"thead":"tfoot",o=r.dom.select(">"+n,t);return 0!==o.length?o[0]:null}function s(e,n,o){var l=d(n,e);return l&&b(r,o,l,e),t.preventDefault(),!0}function c(e,o,l,a){var i=a[l];if(i)return u(i),!0;var s=r.dom.getParent(a,"td,th");if(s)return n(e,s,t);var c=d(o,!e);return u(c),t.preventDefault(),!1}function d(e,t){var n=e&&e[t?"lastChild":"firstChild"];return n&&"BR"===n.nodeName?r.dom.getParent(n,"td,th"):n}function u(e){r.selection.setCursorLocation(e,0)}function m(){return y==e.UP||y==e.DOWN}function f(e){var t=e.selection.getNode(),n=e.dom.getParent(t,"tr");return null!==n}function g(e){for(var t=0,n=e;n.previousSibling;)n=n.previousSibling,t+=a(n,"colspan");return t}function p(e,t){var n=0,o=0;return l(e.children,function(e,l){return n+=a(e,"colspan"),o=l,n>t?!1:void 0}),o}function b(e,t,n,o){var l=g(r.dom.getParent(t,"td,th")),a=p(n,l),i=n.childNodes[a],s=d(i,o);u(s||i)}function h(e){var t=r.selection.getNode(),n=r.dom.getParent(t,"td,th"),o=r.dom.getParent(e,"td,th");return n&&n!==o&&v(n,o)}function v(e,t){return r.dom.getParent(e,"TABLE")===r.dom.getParent(t,"TABLE")}var y=t.keyCode;if(m()&&f(r)){var x=r.selection.getNode();setTimeout(function(){h(x)&&n(!t.shiftKey&&y===e.UP,x,t)},0)}}r.on("KeyDown",function(e){t(e)})}function s(){function e(e,t){var n,o=t.ownerDocument,l=o.createRange();return l.setStartBefore(t),l.setEnd(e.endContainer,e.endOffset),n=o.createElement("body"),n.appendChild(l.cloneContents()),0===n.innerHTML.replace(/<(br|img|object|embed|input|textarea)[^>]*>/gi,"-").replace(/<[^>]+>/g,"").length}r.on("KeyDown",function(t){var n,o,l=r.dom;(37==t.keyCode||38==t.keyCode)&&(n=r.selection.getRng(),o=l.getParent(n.startContainer,"table"),o&&r.getBody().firstChild==o&&e(n,o)&&(n=l.createRng(),n.setStartBefore(o),n.setEndBefore(o),r.selection.setRng(n),t.preventDefault()))})}function c(){r.on("KeyDown SetContent VisualAid",function(){var e;for(e=r.getBody().lastChild;e;e=e.previousSibling)if(3==e.nodeType){if(e.nodeValue.length>0)break}else if(1==e.nodeType&&("BR"==e.tagName||!e.getAttribute("data-mce-bogus")))break;e&&"TABLE"==e.nodeName&&(r.settings.forced_root_block?r.dom.add(r.getBody(),r.settings.forced_root_block,r.settings.forced_root_block_attrs,t.ie&&t.ie<11?"&nbsp;":'<br data-mce-bogus="1" />'):r.dom.add(r.getBody(),"br",{"data-mce-bogus":"1"}))}),r.on("PreProcess",function(e){var t=e.node.lastChild;t&&("BR"==t.nodeName||1==t.childNodes.length&&("BR"==t.firstChild.nodeName||" "==t.firstChild.nodeValue))&&t.previousSibling&&"TABLE"==t.previousSibling.nodeName&&r.dom.remove(t)})}function d(){function e(e,t,n,o){var l,a,r,i=3,s=e.dom.getParent(t.startContainer,"TABLE");return s&&(l=s.parentNode),a=t.startContainer.nodeType==i&&0===t.startOffset&&0===t.endOffset&&o&&("TR"==n.nodeName||n==l),r=("TD"==n.nodeName||"TH"==n.nodeName)&&!o,a||r}function t(){var t=r.selection.getRng(),n=r.selection.getNode(),o=r.dom.getParent(t.startContainer,"TD,TH");if(e(r,t,n,o)){o||(o=n);for(var l=o.lastChild;l.lastChild;)l=l.lastChild;3==l.nodeType&&(t.setEnd(l,l.data.length),r.selection.setRng(t))}}r.on("KeyDown",function(){t()}),r.on("MouseDown",function(e){2!=e.button&&t()})}function u(){function t(e){r.selection.select(e,!0),r.selection.collapse(!0)}function l(e){r.$(e).empty(),o.paddCell(e)}r.on("keydown",function(o){if((o.keyCode==e.DELETE||o.keyCode==e.BACKSPACE)&&!o.isDefaultPrevented()){var a,i,s,c;if(a=r.dom.getParent(r.selection.getStart(),"table")){if(i=r.dom.select("td,th",a),s=n.grep(i,function(e){return r.dom.hasClass(e,"mce-item-selected")}),0===s.length)return c=r.dom.getParent(r.selection.getStart(),"td,th"),void(r.selection.isCollapsed()&&c&&r.dom.isEmpty(c)&&(o.preventDefault(),l(c),t(c)));o.preventDefault(),i.length==s.length?r.execCommand("mceTableDelete"):(n.each(s,l),t(s[0]))}}})}u(),t.webkit&&(i(),d()),t.gecko&&(s(),c()),t.ie>10&&(s(),c())}}),o("tinymce/tableplugin/CellSelection",["tinymce/tableplugin/TableGrid","tinymce/dom/TreeWalker","tinymce/util/Tools"],function(e,t,n){return function(o){function l(e){o.getBody().style.webkitUserSelect="",(e||u)&&(o.dom.removeClass(o.dom.select("td.mce-item-selected,th.mce-item-selected"),"mce-item-selected"),u=!1)}function a(t){var n,l,a=t.target;if(!c&&i&&(r||a!=i)&&("TD"==a.nodeName||"TH"==a.nodeName)){l=d.getParent(a,"table"),l==s&&(r||(r=new e(o,l),r.setStartCell(i),o.getBody().style.webkitUserSelect="none"),r.setEndCell(a),u=!0),n=o.selection.getSel();try{n.removeAllRanges?n.removeAllRanges():n.empty()}catch(m){}t.preventDefault()}}var r,i,s,c,d=o.dom,u=!0;return o.on("MouseDown",function(e){2==e.button||c||(l(),i=d.getParent(e.target,"td,th"),s=d.getParent(i,"table"))}),o.on("mouseover",a),o.on("remove",function(){d.unbind(o.getDoc(),"mouseover",a)}),o.on("MouseUp",function(){function e(e,o){var a=new t(e,e);do{if(3==e.nodeType&&0!==n.trim(e.nodeValue).length)return void(o?l.setStart(e,0):l.setEnd(e,e.nodeValue.length));if("BR"==e.nodeName)return void(o?l.setStartBefore(e):l.setEndBefore(e))}while(e=o?a.next():a.prev())}var l,a,c,u,m,f=o.selection;if(i){if(r&&(o.getBody().style.webkitUserSelect=""),a=d.select("td.mce-item-selected,th.mce-item-selected"),a.length>0){l=d.createRng(),u=a[0],l.setStartBefore(u),l.setEndAfter(u),e(u,1),c=new t(u,d.getParent(a[0],"table"));do if("TD"==u.nodeName||"TH"==u.nodeName){if(!d.hasClass(u,"mce-item-selected"))break;m=u}while(u=c.next());e(m),f.setRng(l)}o.nodeChanged(),i=r=s=null}}),o.on("KeyUp Drop SetContent",function(e){l("setcontent"==e.type),i=r=s=null,c=!1}),o.on("ObjectResizeStart ObjectResized",function(e){c="objectresized"!=e.type}),{clear:l}}}),o("tinymce/tableplugin/Dialogs",["tinymce/util/Tools","tinymce/Env"],function(e,t){var n=e.each;return function(o){function l(){var e=o.settings.color_picker_callback;return e?function(){var t=this;e.call(o,function(e){t.value(e).fire("change")},t.value())}:void 0}function a(e){return{title:"Advanced",type:"form",defaults:{onchange:function(){u(e,this.parents().reverse()[0],"style"==this.name())}},items:[{label:"Style",name:"style",type:"textbox"},{type:"form",padding:0,formItemDefaults:{layout:"grid",alignH:["start","right"]},defaults:{size:7},items:[{label:"Border color",type:"colorbox",name:"borderColor",onaction:l()},{label:"Background color",type:"colorbox",name:"backgroundColor",onaction:l()}]}]}}function r(e){return e?e.replace(/px$/,""):""}function i(e){return/^[0-9]+$/.test(e)&&(e+="px"),e}function s(e){n("left center right".split(" "),function(t){o.formatter.remove("align"+t,{},e)})}function c(e){n("top middle bottom".split(" "),function(t){o.formatter.remove("valign"+t,{},e)})}function d(t,n,o){function l(t,o){return o=o||[],e.each(t,function(e){var t={text:e.text||e.title};e.menu?t.menu=l(e.menu):(t.value=e.value,n&&n(t)),o.push(t)}),o}return l(t,o||[])}function u(e,t,n){var o=t.toJSON(),l=e.parseStyle(o.style);n?(t.find("#borderColor").value(l["border-color"]||"")[0].fire("change"),t.find("#backgroundColor").value(l["background-color"]||"")[0].fire("change")):(l["border-color"]=o.borderColor,l["background-color"]=o.backgroundColor),t.find("#style").value(e.serializeStyle(e.parseStyle(e.serializeStyle(l))))}function m(e,t,n){var o=e.parseStyle(e.getAttrib(n,"style"));o["border-color"]&&(t.borderColor=o["border-color"]),o["background-color"]&&(t.backgroundColor=o["background-color"]),t.style=e.serializeStyle(o)}function f(e,t,o){var l=e.parseStyle(e.getAttrib(t,"style"));n(o,function(e){l[e.name]=e.value}),e.setAttrib(t,"style",e.serializeStyle(e.parseStyle(e.serializeStyle(l))))}var g=this;g.tableProps=function(){g.table(!0)},g.table=function(l){function c(){function n(e,t,o){if("TD"===e.tagName||"TH"===e.tagName)w.setStyle(e,t,o);else if(e.children)for(var l=0;l<e.children.length;l++)n(e.children[l],t,o)}var l;u(w,this),C=e.extend(C,this.toJSON()),C["class"]===!1&&delete C["class"],o.undoManager.transact(function(){if(p||(p=o.plugins.table.insertTable(C.cols||1,C.rows||1)),o.dom.setAttribs(p,{style:C.style,"class":C["class"]}),o.settings.table_style_by_css){if(x=[],x.push({name:"border",value:C.border}),x.push({name:"border-spacing",value:i(C.cellspacing)}),f(w,p,x),w.setAttribs(p,{"data-mce-border-color":C.borderColor,"data-mce-cell-padding":C.cellpadding,"data-mce-border":C.border}),p.children)for(var e=0;e<p.children.length;e++)n(p.children[e],"border",C.border),n(p.children[e],"padding",i(C.cellpadding))}else o.dom.setAttribs(p,{border:C.border,cellpadding:C.cellpadding,cellspacing:C.cellspacing});w.getAttrib(p,"width")&&!o.settings.table_style_by_css?w.setAttrib(p,"width",r(C.width)):w.setStyle(p,"width",i(C.width)),w.setStyle(p,"height",i(C.height)),l=w.select("caption",p)[0],l&&!C.caption&&w.remove(l),!l&&C.caption&&(l=w.create("caption"),l.innerHTML=t.ie?" ":'<br data-mce-bogus="1"/>',p.insertBefore(l,p.firstChild)),s(p),C.align&&o.formatter.apply("align"+C.align,{},p),o.focus(),o.addVisual()})}function g(e,t){function n(e,n){for(var o=0;o<n.length;o++){var l=w.getStyle(n[o],t);if("undefined"==typeof e&&(e=l),e!=l)return""}return e}var l,a=o.dom.select("td,th",e);return l=n(l,a)}var p,b,h,v,y,x,w=o.dom,C={};l===!0?(p=w.getParent(o.selection.getStart(),"table"),p&&(C={width:r(w.getStyle(p,"width")||w.getAttrib(p,"width")),height:r(w.getStyle(p,"height")||w.getAttrib(p,"height")),cellspacing:r(w.getStyle(p,"border-spacing")||w.getAttrib(p,"cellspacing")),cellpadding:w.getAttrib(p,"data-mce-cell-padding")||w.getAttrib(p,"cellpadding")||g(p,"padding"),border:w.getAttrib(p,"data-mce-border")||w.getAttrib(p,"border")||g(p,"border"),borderColor:w.getAttrib(p,"data-mce-border-color"),caption:!!w.select("caption",p)[0],"class":w.getAttrib(p,"class")},n("left center right".split(" "),function(e){o.formatter.matchNode(p,"align"+e)&&(C.align=e)}))):(b={label:"Cols",name:"cols"},h={label:"Rows",name:"rows"}),o.settings.table_class_list&&(C["class"]&&(C["class"]=C["class"].replace(/\s*mce\-item\-table\s*/g,"")),v={name:"class",type:"listbox",label:"Class",values:d(o.settings.table_class_list,function(e){e.value&&(e.textStyle=function(){return o.formatter.getCssText({block:"table",classes:[e.value]})})})}),y={type:"form",layout:"flex",direction:"column",labelGapCalc:"children",padding:0,items:[{type:"form",labelGapCalc:!1,padding:0,layout:"grid",columns:2,defaults:{type:"textbox",maxWidth:50},items:o.settings.table_appearance_options!==!1?[b,h,{label:"Width",name:"width"},{label:"Height",name:"height"},{label:"Cell spacing",name:"cellspacing"},{label:"Cell padding",name:"cellpadding"},{label:"Border",name:"border"},{label:"Caption",name:"caption",type:"checkbox"}]:[b,h,{label:"Width",name:"width"},{label:"Height",name:"height"}]},{label:"Alignment",name:"align",type:"listbox",text:"None",values:[{text:"None",value:""},{text:"Left",value:"left"},{text:"Center",value:"center"},{text:"Right",value:"right"}]},v]},o.settings.table_advtab!==!1?(m(w,C,p),o.windowManager.open({title:"Table properties",data:C,bodyType:"tabpanel",body:[{title:"General",type:"form",items:y},a(w)],onsubmit:c})):o.windowManager.open({title:"Table properties",data:C,body:y,onsubmit:c})},g.merge=function(e,t){o.windowManager.open({title:"Merge cells",body:[{label:"Cols",name:"cols",type:"textbox",value:"1",size:10},{label:"Rows",name:"rows",type:"textbox",value:"1",size:10}],onsubmit:function(){var n=this.toJSON();o.undoManager.transact(function(){e.merge(t,n.cols,n.rows)})}})},g.cell=function(){function t(){u(p,this),f=e.extend(f,this.toJSON()),o.undoManager.transact(function(){n(b,function(e){o.dom.setAttribs(e,{scope:f.scope,style:f.style,"class":f["class"]}),o.dom.setStyles(e,{width:i(f.width),height:i(f.height)}),f.type&&e.nodeName.toLowerCase()!=f.type&&(e=p.rename(e,f.type)),s(e),f.align&&o.formatter.apply("align"+f.align,{},e),c(e),f.valign&&o.formatter.apply("valign"+f.valign,{},e)}),o.focus()})}var l,f,g,p=o.dom,b=[];if(b=o.dom.select("td.mce-item-selected,th.mce-item-selected"),l=o.dom.getParent(o.selection.getStart(),"td,th"),!b.length&&l&&b.push(l),l=l||b[0]){f={width:r(p.getStyle(l,"width")||p.getAttrib(l,"width")),height:r(p.getStyle(l,"height")||p.getAttrib(l,"height")),scope:p.getAttrib(l,"scope"),"class":p.getAttrib(l,"class")},f.type=l.nodeName.toLowerCase(),n("left center right".split(" "),function(e){o.formatter.matchNode(l,"align"+e)&&(f.align=e)}),n("top middle bottom".split(" "),function(e){o.formatter.matchNode(l,"valign"+e)&&(f.valign=e)}),o.settings.table_cell_class_list&&(g={name:"class",type:"listbox",label:"Class",values:d(o.settings.table_cell_class_list,function(e){e.value&&(e.textStyle=function(){return o.formatter.getCssText({block:"td",classes:[e.value]})})})});var h={type:"form",layout:"flex",direction:"column",labelGapCalc:"children",padding:0,items:[{type:"form",layout:"grid",columns:2,labelGapCalc:!1,padding:0,defaults:{type:"textbox",maxWidth:50},items:[{label:"Width",name:"width"},{label:"Height",name:"height"},{label:"Cell type",name:"type",type:"listbox",text:"None",minWidth:90,maxWidth:null,values:[{text:"Cell",value:"td"},{text:"Header cell",value:"th"}]},{label:"Scope",name:"scope",type:"listbox",text:"None",minWidth:90,maxWidth:null,values:[{text:"None",value:""},{text:"Row",value:"row"},{text:"Column",value:"col"},{text:"Row group",value:"rowgroup"},{text:"Column group",value:"colgroup"}]},{label:"H Align",name:"align",type:"listbox",text:"None",minWidth:90,maxWidth:null,values:[{text:"None",value:""},{text:"Left",value:"left"},{text:"Center",value:"center"},{text:"Right",value:"right"}]},{label:"V Align",name:"valign",type:"listbox",text:"None",minWidth:90,maxWidth:null,values:[{text:"None",value:""},{text:"Top",value:"top"},{text:"Middle",value:"middle"},{text:"Bottom",value:"bottom"}]}]},g]};o.settings.table_cell_advtab!==!1?(m(p,f,l),o.windowManager.open({title:"Cell properties",bodyType:"tabpanel",data:f,body:[{title:"General",type:"form",items:h},a(p)],onsubmit:t})):o.windowManager.open({title:"Cell properties",data:f,body:h,onsubmit:t})}},g.row=function(){function t(){var t,l,a;u(h,this),p=e.extend(p,this.toJSON()),o.undoManager.transact(function(){var e=p.type;n(v,function(n){o.dom.setAttribs(n,{scope:p.scope,style:p.style,"class":p["class"]}),o.dom.setStyles(n,{height:i(p.height)}),e!=n.parentNode.nodeName.toLowerCase()&&(t=h.getParent(n,"table"),l=n.parentNode,a=h.select(e,t)[0],a||(a=h.create(e),t.firstChild?t.insertBefore(a,t.firstChild):t.appendChild(a)),a.appendChild(n),l.hasChildNodes()||h.remove(l)),s(n),p.align&&o.formatter.apply("align"+p.align,{},n)}),o.focus()})}var l,c,f,g,p,b,h=o.dom,v=[];l=o.dom.getParent(o.selection.getStart(),"table"),c=o.dom.getParent(o.selection.getStart(),"td,th"),n(l.rows,function(e){n(e.cells,function(t){return h.hasClass(t,"mce-item-selected")||t==c?(v.push(e),!1):void 0})}),f=v[0],f&&(p={height:r(h.getStyle(f,"height")||h.getAttrib(f,"height")),scope:h.getAttrib(f,"scope"),"class":h.getAttrib(f,"class")},p.type=f.parentNode.nodeName.toLowerCase(),n("left center right".split(" "),function(e){o.formatter.matchNode(f,"align"+e)&&(p.align=e)}),o.settings.table_row_class_list&&(g={name:"class",type:"listbox",label:"Class",values:d(o.settings.table_row_class_list,function(e){e.value&&(e.textStyle=function(){return o.formatter.getCssText({block:"tr",classes:[e.value]})})})}),b={type:"form",columns:2,padding:0,defaults:{type:"textbox"},items:[{type:"listbox",name:"type",label:"Row type",text:"None",maxWidth:null,values:[{text:"Header",value:"thead"},{text:"Body",value:"tbody"},{text:"Footer",value:"tfoot"}]},{type:"listbox",name:"align",label:"Alignment",text:"None",maxWidth:null,values:[{text:"None",value:""},{text:"Left",value:"left"},{text:"Center",value:"center"},{text:"Right",value:"right"}]},{label:"Height",name:"height"},g]},o.settings.table_row_advtab!==!1?(m(h,p,f),o.windowManager.open({title:"Row properties",data:p,bodyType:"tabpanel",body:[{title:"General",type:"form",items:b},a(h)],onsubmit:t})):o.windowManager.open({title:"Row properties",data:p,body:b,onsubmit:t}))}}}),o("tinymce/tableplugin/Plugin",["tinymce/tableplugin/TableGrid","tinymce/tableplugin/Quirks","tinymce/tableplugin/CellSelection","tinymce/tableplugin/Dialogs","tinymce/util/Tools","tinymce/dom/TreeWalker","tinymce/Env","tinymce/PluginManager"],function(e,t,n,o,l,a,r,i){function s(l){function a(e){return function(){l.execCommand(e)}}function i(e,t){var n,o,a,i;for(a='<table id="__mce"><tbody>',n=0;t>n;n++){for(a+="<tr>",o=0;e>o;o++)a+="<td>"+(r.ie?" ":"<br>")+"</td>";a+="</tr>"}return a+="</tbody></table>",l.undoManager.transact(function(){l.insertContent(a),i=l.dom.get("__mce"),l.dom.setAttrib(i,"id",null),l.dom.setAttribs(i,l.settings.table_default_attributes||{}),l.dom.setStyles(i,l.settings.table_default_styles||{})}),i}function s(e,t){function n(){e.disabled(!l.dom.getParent(l.selection.getStart(),t)),l.selection.selectorChanged(t,function(t){e.disabled(!t)})}l.initialized?n():l.on("init",n)}function d(){s(this,"table")}function u(){s(this,"td,th")}function m(){var e="";e='<table role="grid" class="mce-grid mce-grid-border" aria-readonly="true">';for(var t=0;10>t;t++){e+="<tr>";for(var n=0;10>n;n++)e+='<td role="gridcell" tabindex="-1"><a id="mcegrid'+(10*t+n)+'" href="#" data-mce-x="'+n+'" data-mce-y="'+t+'"></a></td>';e+="</tr>"}return e+="</table>",e+='<div class="mce-text-center" role="presentation">1 x 1</div>'}function f(e,t,n){var o,a,r,i,s,c=n.getEl().getElementsByTagName("table")[0],d=n.isRtl()||"tl-tr"==n.parent().rel;for(c.nextSibling.innerHTML=e+1+" x "+(t+1),d&&(e=9-e),a=0;10>a;a++)for(o=0;10>o;o++)i=c.rows[a].childNodes[o].firstChild,s=(d?o>=e:e>=o)&&t>=a,l.dom.toggleClass(i,"mce-active",s),s&&(r=i);return r.parentNode}var g,p=this,b=new o(l);l.settings.table_grid===!1?l.addMenuItem("inserttable",{text:"Insert table",icon:"table",context:"table",onclick:b.table}):l.addMenuItem("inserttable",{text:"Insert table",icon:"table",context:"table",ariaHideMenu:!0,onclick:function(e){e.aria&&(this.parent().hideAll(),e.stopImmediatePropagation(),b.table())},onshow:function(){f(0,0,this.menu.items()[0])},onhide:function(){var e=this.menu.items()[0].getEl().getElementsByTagName("a");l.dom.removeClass(e,"mce-active"),l.dom.addClass(e[0],"mce-active")},menu:[{type:"container",html:m(),onPostRender:function(){this.lastX=this.lastY=0},onmousemove:function(e){var t,n,o=e.target;"A"==o.tagName.toUpperCase()&&(t=parseInt(o.getAttribute("data-mce-x"),10),n=parseInt(o.getAttribute("data-mce-y"),10),(this.isRtl()||"tl-tr"==this.parent().rel)&&(t=9-t),(t!==this.lastX||n!==this.lastY)&&(f(t,n,e.control),this.lastX=t,this.lastY=n))},onclick:function(e){var t=this;"A"==e.target.tagName.toUpperCase()&&(e.preventDefault(),e.stopPropagation(),t.parent().cancel(),l.undoManager.transact(function(){i(t.lastX+1,t.lastY+1)}),l.addVisual())}}]}),l.addMenuItem("tableprops",{text:"Table properties",context:"table",onPostRender:d,onclick:b.tableProps}),l.addMenuItem("deletetable",{text:"Delete table",context:"table",onPostRender:d,cmd:"mceTableDelete"}),l.addMenuItem("cell",{separator:"before",text:"Cell",context:"table",menu:[{text:"Cell properties",onclick:a("mceTableCellProps"),onPostRender:u},{text:"Merge cells",onclick:a("mceTableMergeCells"),onPostRender:u},{text:"Split cell",onclick:a("mceTableSplitCells"),onPostRender:u}]}),l.addMenuItem("row",{text:"Row",context:"table",menu:[{text:"Insert row before",onclick:a("mceTableInsertRowBefore"),onPostRender:u},{text:"Insert row after",onclick:a("mceTableInsertRowAfter"),onPostRender:u},{text:"Delete row",onclick:a("mceTableDeleteRow"),onPostRender:u},{text:"Row properties",onclick:a("mceTableRowProps"),onPostRender:u},{text:"-"},{text:"Cut row",onclick:a("mceTableCutRow"),onPostRender:u},{text:"Copy row",onclick:a("mceTableCopyRow"),onPostRender:u},{text:"Paste row before",onclick:a("mceTablePasteRowBefore"),onPostRender:u},{text:"Paste row after",onclick:a("mceTablePasteRowAfter"),onPostRender:u}]}),l.addMenuItem("column",{text:"Column",context:"table",menu:[{text:"Insert column before",onclick:a("mceTableInsertColBefore"),onPostRender:u},{text:"Insert column after",onclick:a("mceTableInsertColAfter"),onPostRender:u},{text:"Delete column",onclick:a("mceTableDeleteCol"),onPostRender:u}]});var h=[];c("inserttable tableprops deletetable | cell row column".split(" "),function(e){"|"==e?h.push({text:"-"}):h.push(l.menuItems[e])}),l.addButton("table",{type:"menubutton",title:"Table",menu:h}),r.isIE||l.on("click",function(e){e=e.target,"TABLE"===e.nodeName&&(l.selection.select(e),l.nodeChanged())}),p.quirks=new t(l),l.on("Init",function(){p.cellSelection=new n(l)}),l.on("PreInit",function(){l.serializer.addAttributeFilter("data-mce-cell-padding,data-mce-border,data-mce-border-color",function(e,t){for(var n=e.length;n--;)e[n].attr(t,null)})}),c({mceTableSplitCells:function(e){e.split()},mceTableMergeCells:function(e){var t;t=l.dom.getParent(l.selection.getStart(),"th,td"),l.dom.select("td.mce-item-selected,th.mce-item-selected").length?e.merge():b.merge(e,t)},mceTableInsertRowBefore:function(e){e.insertRow(!0)},mceTableInsertRowAfter:function(e){e.insertRow()},mceTableInsertColBefore:function(e){e.insertCol(!0)},mceTableInsertColAfter:function(e){e.insertCol()},mceTableDeleteCol:function(e){e.deleteCols()},mceTableDeleteRow:function(e){e.deleteRows()},mceTableCutRow:function(e){g=e.cutRows()},mceTableCopyRow:function(e){g=e.copyRows()},mceTablePasteRowBefore:function(e){e.pasteRows(g,!0)},mceTablePasteRowAfter:function(e){e.pasteRows(g)},mceTableDelete:function(e){e.deleteTable()}},function(t,n){l.addCommand(n,function(){var n=new e(l);n&&(t(n),l.execCommand("mceRepaint"),p.cellSelection.clear())})}),c({mceInsertTable:b.table,mceTableProps:function(){b.table(!0)},mceTableRowProps:b.row,mceTableCellProps:b.cell},function(e,t){l.addCommand(t,function(t,n){e(n)})}),l.settings.table_tab_navigation!==!1&&l.on("keydown",function(t){var n,o,a;9==t.keyCode&&(n=l.dom.getParent(l.selection.getStart(),"th,td"),n&&(t.preventDefault(),o=new e(l),a=t.shiftKey?-1:1,l.undoManager.transact(function(){!o.moveRelIdx(n,a)&&a>0&&(o.insertRow(),o.refresh(),o.moveRelIdx(n,a))})))}),p.insertTable=i}var c=l.each;i.add("table",s)})}(this);
+/**
+ * Compiled inline version. (Library mode)
+ */
+
+/*jshint smarttabs:true, undef:true, latedef:true, curly:true, bitwise:true, camelcase:true */
+/*globals $code */
+
+(function(exports, undefined) {
+	"use strict";
+
+	var modules = {};
+
+	function require(ids, callback) {
+		var module, defs = [];
+
+		for (var i = 0; i < ids.length; ++i) {
+			module = modules[ids[i]] || resolve(ids[i]);
+			if (!module) {
+				throw 'module definition dependecy not found: ' + ids[i];
+			}
+
+			defs.push(module);
+		}
+
+		callback.apply(null, defs);
+	}
+
+	function define(id, dependencies, definition) {
+		if (typeof id !== 'string') {
+			throw 'invalid module definition, module id must be defined and be a string';
+		}
+
+		if (dependencies === undefined) {
+			throw 'invalid module definition, dependencies must be specified';
+		}
+
+		if (definition === undefined) {
+			throw 'invalid module definition, definition function must be specified';
+		}
+
+		require(dependencies, function() {
+			modules[id] = definition.apply(null, arguments);
+		});
+	}
+
+	function defined(id) {
+		return !!modules[id];
+	}
+
+	function resolve(id) {
+		var target = exports;
+		var fragments = id.split(/[.\/]/);
+
+		for (var fi = 0; fi < fragments.length; ++fi) {
+			if (!target[fragments[fi]]) {
+				return;
+			}
+
+			target = target[fragments[fi]];
+		}
+
+		return target;
+	}
+
+	function expose(ids) {
+		var i, target, id, fragments, privateModules;
+
+		for (i = 0; i < ids.length; i++) {
+			target = exports;
+			id = ids[i];
+			fragments = id.split(/[.\/]/);
+
+			for (var fi = 0; fi < fragments.length - 1; ++fi) {
+				if (target[fragments[fi]] === undefined) {
+					target[fragments[fi]] = {};
+				}
+
+				target = target[fragments[fi]];
+			}
+
+			target[fragments[fragments.length - 1]] = modules[id];
+		}
+		
+		// Expose private modules for unit tests
+		if (exports.AMDLC_TESTS) {
+			privateModules = exports.privateModules || {};
+
+			for (id in modules) {
+				privateModules[id] = modules[id];
+			}
+
+			for (i = 0; i < ids.length; i++) {
+				delete privateModules[ids[i]];
+			}
+
+			exports.privateModules = privateModules;
+		}
+	}
+
+// Included from: js/tinymce/plugins/table/classes/Utils.js
+
+/**
+ * Utils.js
+ *
+ * Released under LGPL License.
+ * Copyright (c) 1999-2015 Ephox Corp. All rights reserved
+ *
+ * License: http://www.tinymce.com/license
+ * Contributing: http://www.tinymce.com/contributing
+ */
+
+/**
+ * Various utility functions.
+ *
+ * @class tinymce.tableplugin.Utils
+ * @private
+ */
+define("tinymce/tableplugin/Utils", [
+	"tinymce/Env"
+], function(Env) {
+	function getSpanVal(td, name) {
+		return parseInt(td.getAttribute(name) || 1, 10);
+	}
+
+	function paddCell(cell) {
+		if (!Env.ie || Env.ie > 10) {
+			cell.innerHTML = '<br data-mce-bogus="1" />';
+		}
+	}
+
+	return {
+		getSpanVal: getSpanVal,
+		paddCell: paddCell
+	};
+});
+
+// Included from: js/tinymce/plugins/table/classes/TableGrid.js
+
+/**
+ * TableGrid.js
+ *
+ * Released under LGPL License.
+ * Copyright (c) 1999-2015 Ephox Corp. All rights reserved
+ *
+ * License: http://www.tinymce.com/license
+ * Contributing: http://www.tinymce.com/contributing
+ */
+
+/**
+ * This class creates a grid out of a table element. This
+ * makes it a whole lot easier to handle complex tables with
+ * col/row spans.
+ *
+ * @class tinymce.tableplugin.TableGrid
+ * @private
+ */
+define("tinymce/tableplugin/TableGrid", [
+	"tinymce/util/Tools",
+	"tinymce/Env",
+	"tinymce/tableplugin/Utils"
+], function(Tools, Env, Utils) {
+	var each = Tools.each, getSpanVal = Utils.getSpanVal;
+
+	return function(editor, table) {
+		var grid, gridWidth, startPos, endPos, selectedCell, selection = editor.selection, dom = selection.dom;
+
+		function isEditorBody(node) {
+			return node === editor.getBody();
+		}
+
+		function buildGrid() {
+			var startY = 0;
+
+			grid = [];
+			gridWidth = 0;
+
+			each(['thead', 'tbody', 'tfoot'], function(part) {
+				var rows = dom.select('> ' + part + ' tr', table);
+
+				each(rows, function(tr, y) {
+					y += startY;
+
+					each(dom.select('> td, > th', tr), function(td, x) {
+						var x2, y2, rowspan, colspan;
+
+						// Skip over existing cells produced by rowspan
+						if (grid[y]) {
+							while (grid[y][x]) {
+								x++;
+							}
+						}
+
+						// Get col/rowspan from cell
+						rowspan = getSpanVal(td, 'rowspan');
+						colspan = getSpanVal(td, 'colspan');
+
+						// Fill out rowspan/colspan right and down
+						for (y2 = y; y2 < y + rowspan; y2++) {
+							if (!grid[y2]) {
+								grid[y2] = [];
+							}
+
+							for (x2 = x; x2 < x + colspan; x2++) {
+								grid[y2][x2] = {
+									part: part,
+									real: y2 == y && x2 == x,
+									elm: td,
+									rowspan: rowspan,
+									colspan: colspan
+								};
+							}
+						}
+
+						gridWidth = Math.max(gridWidth, x + 1);
+					});
+				});
+
+				startY += rows.length;
+			});
+		}
+
+		function cloneNode(node, children) {
+			node = node.cloneNode(children);
+			node.removeAttribute('id');
+
+			return node;
+		}
+
+		function getCell(x, y) {
+			var row;
+
+			row = grid[y];
+			if (row) {
+				return row[x];
+			}
+		}
+
+		function setSpanVal(td, name, val) {
+			if (td) {
+				val = parseInt(val, 10);
+
+				if (val === 1) {
+					td.removeAttribute(name, 1);
+				} else {
+					td.setAttribute(name, val, 1);
+				}
+			}
+		}
+
+		function isCellSelected(cell) {
+			return cell && (dom.hasClass(cell.elm, 'mce-item-selected') || cell == selectedCell);
+		}
+
+		function getSelectedRows() {
+			var rows = [];
+
+			each(table.rows, function(row) {
+				each(row.cells, function(cell) {
+					if (dom.hasClass(cell, 'mce-item-selected') || (selectedCell && cell == selectedCell.elm)) {
+						rows.push(row);
+						return false;
+					}
+				});
+			});
+
+			return rows;
+		}
+
+		function deleteTable() {
+			var rng = dom.createRng();
+
+			if (isEditorBody(table)) {
+				return;
+			}
+
+			rng.setStartAfter(table);
+			rng.setEndAfter(table);
+
+			selection.setRng(rng);
+
+			dom.remove(table);
+		}
+
+		function cloneCell(cell) {
+			var formatNode, cloneFormats = {};
+
+			if (editor.settings.table_clone_elements !== false) {
+				cloneFormats = Tools.makeMap(
+					(editor.settings.table_clone_elements || 'strong em b i span font h1 h2 h3 h4 h5 h6 p div').toUpperCase(),
+					/[ ,]/
+				);
+			}
+
+			// Clone formats
+			Tools.walk(cell, function(node) {
+				var curNode;
+
+				if (node.nodeType == 3) {
+					each(dom.getParents(node.parentNode, null, cell).reverse(), function(node) {
+						if (!cloneFormats[node.nodeName]) {
+							return;
+						}
+
+						node = cloneNode(node, false);
+
+						if (!formatNode) {
+							formatNode = curNode = node;
+						} else if (curNode) {
+							curNode.appendChild(node);
+						}
+
+						curNode = node;
+					});
+
+					// Add something to the inner node
+					if (curNode) {
+						curNode.innerHTML = Env.ie ? '&nbsp;' : '<br data-mce-bogus="1" />';
+					}
+
+					return false;
+				}
+			}, 'childNodes');
+
+			cell = cloneNode(cell, false);
+			setSpanVal(cell, 'rowSpan', 1);
+			setSpanVal(cell, 'colSpan', 1);
+
+			if (formatNode) {
+				cell.appendChild(formatNode);
+			} else {
+				Utils.paddCell(cell);
+			}
+
+			return cell;
+		}
+
+		function cleanup() {
+			var rng = dom.createRng(), row;
+
+			// Empty rows
+			each(dom.select('tr', table), function(tr) {
+				if (tr.cells.length === 0) {
+					dom.remove(tr);
+				}
+			});
+
+			// Empty table
+			if (dom.select('tr', table).length === 0) {
+				rng.setStartBefore(table);
+				rng.setEndBefore(table);
+				selection.setRng(rng);
+				dom.remove(table);
+				return;
+			}
+
+			// Empty header/body/footer
+			each(dom.select('thead,tbody,tfoot', table), function(part) {
+				if (part.rows.length === 0) {
+					dom.remove(part);
+				}
+			});
+
+			// Restore selection to start position if it still exists
+			buildGrid();
+
+			// If we have a valid startPos object
+			if (startPos) {
+				// Restore the selection to the closest table position
+				row = grid[Math.min(grid.length - 1, startPos.y)];
+				if (row) {
+					selection.select(row[Math.min(row.length - 1, startPos.x)].elm, true);
+					selection.collapse(true);
+				}
+			}
+		}
+
+		function fillLeftDown(x, y, rows, cols) {
+			var tr, x2, r, c, cell;
+
+			tr = grid[y][x].elm.parentNode;
+			for (r = 1; r <= rows; r++) {
+				tr = dom.getNext(tr, 'tr');
+
+				if (tr) {
+					// Loop left to find real cell
+					for (x2 = x; x2 >= 0; x2--) {
+						cell = grid[y + r][x2].elm;
+
+						if (cell.parentNode == tr) {
+							// Append clones after
+							for (c = 1; c <= cols; c++) {
+								dom.insertAfter(cloneCell(cell), cell);
+							}
+
+							break;
+						}
+					}
+
+					if (x2 == -1) {
+						// Insert nodes before first cell
+						for (c = 1; c <= cols; c++) {
+							tr.insertBefore(cloneCell(tr.cells[0]), tr.cells[0]);
+						}
+					}
+				}
+			}
+		}
+
+		function split() {
+			each(grid, function(row, y) {
+				each(row, function(cell, x) {
+					var colSpan, rowSpan, i;
+
+					if (isCellSelected(cell)) {
+						cell = cell.elm;
+						colSpan = getSpanVal(cell, 'colspan');
+						rowSpan = getSpanVal(cell, 'rowspan');
+
+						if (colSpan > 1 || rowSpan > 1) {
+							setSpanVal(cell, 'rowSpan', 1);
+							setSpanVal(cell, 'colSpan', 1);
+
+							// Insert cells right
+							for (i = 0; i < colSpan - 1; i++) {
+								dom.insertAfter(cloneCell(cell), cell);
+							}
+
+							fillLeftDown(x, y, rowSpan - 1, colSpan);
+						}
+					}
+				});
+			});
+		}
+
+		function merge(cell, cols, rows) {
+			var pos, startX, startY, endX, endY, x, y, startCell, endCell, children, count;
+
+			// Use specified cell and cols/rows
+			if (cell) {
+				pos = getPos(cell);
+				startX = pos.x;
+				startY = pos.y;
+				endX = startX + (cols - 1);
+				endY = startY + (rows - 1);
+			} else {
+				startPos = endPos = null;
+
+				// Calculate start/end pos by checking for selected cells in grid works better with context menu
+				each(grid, function(row, y) {
+					each(row, function(cell, x) {
+						if (isCellSelected(cell)) {
+							if (!startPos) {
+								startPos = {x: x, y: y};
+							}
+
+							endPos = {x: x, y: y};
+						}
+					});
+				});
+
+				// Use selection, but make sure startPos is valid before accessing
+				if (startPos) {
+					startX = startPos.x;
+					startY = startPos.y;
+					endX = endPos.x;
+					endY = endPos.y;
+				}
+			}
+
+			// Find start/end cells
+			startCell = getCell(startX, startY);
+			endCell = getCell(endX, endY);
+
+			// Check if the cells exists and if they are of the same part for example tbody = tbody
+			if (startCell && endCell && startCell.part == endCell.part) {
+				// Split and rebuild grid
+				split();
+				buildGrid();
+
+				// Set row/col span to start cell
+				startCell = getCell(startX, startY).elm;
+				setSpanVal(startCell, 'colSpan', (endX - startX) + 1);
+				setSpanVal(startCell, 'rowSpan', (endY - startY) + 1);
+
+				// Remove other cells and add it's contents to the start cell
+				for (y = startY; y <= endY; y++) {
+					for (x = startX; x <= endX; x++) {
+						if (!grid[y] || !grid[y][x]) {
+							continue;
+						}
+
+						cell = grid[y][x].elm;
+
+						/*jshint loopfunc:true */
+						/*eslint no-loop-func:0 */
+						if (cell != startCell) {
+							// Move children to startCell
+							children = Tools.grep(cell.childNodes);
+							each(children, function(node) {
+								startCell.appendChild(node);
+							});
+
+							// Remove bogus nodes if there is children in the target cell
+							if (children.length) {
+								children = Tools.grep(startCell.childNodes);
+								count = 0;
+								each(children, function(node) {
+									if (node.nodeName == 'BR' && dom.getAttrib(node, 'data-mce-bogus') && count++ < children.length - 1) {
+										startCell.removeChild(node);
+									}
+								});
+							}
+
+							dom.remove(cell);
+						}
+					}
+				}
+
+				// Remove empty rows etc and restore caret location
+				cleanup();
+			}
+		}
+
+		function insertRow(before) {
+			var posY, cell, lastCell, x, rowElm, newRow, newCell, otherCell, rowSpan;
+
+			// Find first/last row
+			each(grid, function(row, y) {
+				each(row, function(cell) {
+					if (isCellSelected(cell)) {
+						cell = cell.elm;
+						rowElm = cell.parentNode;
+						newRow = cloneNode(rowElm, false);
+						posY = y;
+
+						if (before) {
+							return false;
+						}
+					}
+				});
+
+				if (before) {
+					return !posY;
+				}
+			});
+
+			// If posY is undefined there is nothing for us to do here...just return to avoid crashing below
+			if (posY === undefined) {
+				return;
+			}
+
+			for (x = 0; x < grid[0].length; x++) {
+				// Cell not found could be because of an invalid table structure
+				if (!grid[posY][x]) {
+					continue;
+				}
+
+				cell = grid[posY][x].elm;
+
+				if (cell != lastCell) {
+					if (!before) {
+						rowSpan = getSpanVal(cell, 'rowspan');
+						if (rowSpan > 1) {
+							setSpanVal(cell, 'rowSpan', rowSpan + 1);
+							continue;
+						}
+					} else {
+						// Check if cell above can be expanded
+						if (posY > 0 && grid[posY - 1][x]) {
+							otherCell = grid[posY - 1][x].elm;
+							rowSpan = getSpanVal(otherCell, 'rowSpan');
+							if (rowSpan > 1) {
+								setSpanVal(otherCell, 'rowSpan', rowSpan + 1);
+								continue;
+							}
+						}
+					}
+
+					// Insert new cell into new row
+					newCell = cloneCell(cell);
+					setSpanVal(newCell, 'colSpan', cell.colSpan);
+
+					newRow.appendChild(newCell);
+
+					lastCell = cell;
+				}
+			}
+
+			if (newRow.hasChildNodes()) {
+				if (!before) {
+					dom.insertAfter(newRow, rowElm);
+				} else {
+					rowElm.parentNode.insertBefore(newRow, rowElm);
+				}
+			}
+		}
+
+		function insertCol(before) {
+			var posX, lastCell;
+
+			// Find first/last column
+			each(grid, function(row) {
+				each(row, function(cell, x) {
+					if (isCellSelected(cell)) {
+						posX = x;
+
+						if (before) {
+							return false;
+						}
+					}
+				});
+
+				if (before) {
+					return !posX;
+				}
+			});
+
+			each(grid, function(row, y) {
+				var cell, rowSpan, colSpan;
+
+				if (!row[posX]) {
+					return;
+				}
+
+				cell = row[posX].elm;
+				if (cell != lastCell) {
+					colSpan = getSpanVal(cell, 'colspan');
+					rowSpan = getSpanVal(cell, 'rowspan');
+
+					if (colSpan == 1) {
+						if (!before) {
+							dom.insertAfter(cloneCell(cell), cell);
+							fillLeftDown(posX, y, rowSpan - 1, colSpan);
+						} else {
+							cell.parentNode.insertBefore(cloneCell(cell), cell);
+							fillLeftDown(posX, y, rowSpan - 1, colSpan);
+						}
+					} else {
+						setSpanVal(cell, 'colSpan', cell.colSpan + 1);
+					}
+
+					lastCell = cell;
+				}
+			});
+		}
+
+		function getSelectedCells(grid) {
+			return Tools.grep(getAllCells(grid), isCellSelected);
+		}
+
+		function getAllCells(grid) {
+			var cells = [];
+
+			each(grid, function(row) {
+				each(row, function(cell) {
+					cells.push(cell);
+				});
+			});
+
+			return cells;
+		}
+
+		function deleteCols() {
+			var cols = [];
+
+			if (isEditorBody(table)) {
+				if (grid[0].length == 1) {
+					return;
+				}
+
+				if (getSelectedCells(grid).length == getAllCells(grid).length) {
+					return;
+				}
+			}
+
+			// Get selected column indexes
+			each(grid, function(row) {
+				each(row, function(cell, x) {
+					if (isCellSelected(cell) && Tools.inArray(cols, x) === -1) {
+						each(grid, function(row) {
+							var cell = row[x].elm, colSpan;
+
+							colSpan = getSpanVal(cell, 'colSpan');
+
+							if (colSpan > 1) {
+								setSpanVal(cell, 'colSpan', colSpan - 1);
+							} else {
+								dom.remove(cell);
+							}
+						});
+
+						cols.push(x);
+					}
+				});
+			});
+
+			cleanup();
+		}
+
+		function deleteRows() {
+			var rows;
+
+			function deleteRow(tr) {
+				var pos, lastCell;
+
+				// Move down row spanned cells
+				each(tr.cells, function(cell) {
+					var rowSpan = getSpanVal(cell, 'rowSpan');
+
+					if (rowSpan > 1) {
+						setSpanVal(cell, 'rowSpan', rowSpan - 1);
+						pos = getPos(cell);
+						fillLeftDown(pos.x, pos.y, 1, 1);
+					}
+				});
+
+				// Delete cells
+				pos = getPos(tr.cells[0]);
+				each(grid[pos.y], function(cell) {
+					var rowSpan;
+
+					cell = cell.elm;
+
+					if (cell != lastCell) {
+						rowSpan = getSpanVal(cell, 'rowSpan');
+
+						if (rowSpan <= 1) {
+							dom.remove(cell);
+						} else {
+							setSpanVal(cell, 'rowSpan', rowSpan - 1);
+						}
+
+						lastCell = cell;
+					}
+				});
+			}
+
+			// Get selected rows and move selection out of scope
+			rows = getSelectedRows();
+
+			if (isEditorBody(table) && rows.length == table.rows.length) {
+				return;
+			}
+
+			// Delete all selected rows
+			each(rows.reverse(), function(tr) {
+				deleteRow(tr);
+			});
+
+			cleanup();
+		}
+
+		function cutRows() {
+			var rows = getSelectedRows();
+
+			if (isEditorBody(table) && rows.length == table.rows.length) {
+				return;
+			}
+
+			dom.remove(rows);
+			cleanup();
+
+			return rows;
+		}
+
+		function copyRows() {
+			var rows = getSelectedRows();
+
+			each(rows, function(row, i) {
+				rows[i] = cloneNode(row, true);
+			});
+
+			return rows;
+		}
+
+		function pasteRows(rows, before) {
+			var selectedRows = getSelectedRows(),
+				targetRow = selectedRows[before ? 0 : selectedRows.length - 1],
+				targetCellCount = targetRow.cells.length;
+
+			// Nothing to paste
+			if (!rows) {
+				return;
+			}
+
+			// Calc target cell count
+			each(grid, function(row) {
+				var match;
+
+				targetCellCount = 0;
+				each(row, function(cell) {
+					if (cell.real) {
+						targetCellCount += cell.colspan;
+					}
+
+					if (cell.elm.parentNode == targetRow) {
+						match = 1;
+					}
+				});
+
+				if (match) {
+					return false;
+				}
+			});
+
+			if (!before) {
+				rows.reverse();
+			}
+
+			each(rows, function(row) {
+				var i, cellCount = row.cells.length, cell;
+
+				// Remove col/rowspans
+				for (i = 0; i < cellCount; i++) {
+					cell = row.cells[i];
+					setSpanVal(cell, 'colSpan', 1);
+					setSpanVal(cell, 'rowSpan', 1);
+				}
+
+				// Needs more cells
+				for (i = cellCount; i < targetCellCount; i++) {
+					row.appendChild(cloneCell(row.cells[cellCount - 1]));
+				}
+
+				// Needs less cells
+				for (i = targetCellCount; i < cellCount; i++) {
+					dom.remove(row.cells[i]);
+				}
+
+				// Add before/after
+				if (before) {
+					targetRow.parentNode.insertBefore(row, targetRow);
+				} else {
+					dom.insertAfter(row, targetRow);
+				}
+			});
+
+			// Remove current selection
+			dom.removeClass(dom.select('td.mce-item-selected,th.mce-item-selected'), 'mce-item-selected');
+		}
+
+		function getPos(target) {
+			var pos;
+
+			each(grid, function(row, y) {
+				each(row, function(cell, x) {
+					if (cell.elm == target) {
+						pos = {x: x, y: y};
+						return false;
+					}
+				});
+
+				return !pos;
+			});
+
+			return pos;
+		}
+
+		function setStartCell(cell) {
+			startPos = getPos(cell);
+		}
+
+		function findEndPos() {
+			var maxX, maxY;
+
+			maxX = maxY = 0;
+
+			each(grid, function(row, y) {
+				each(row, function(cell, x) {
+					var colSpan, rowSpan;
+
+					if (isCellSelected(cell)) {
+						cell = grid[y][x];
+
+						if (x > maxX) {
+							maxX = x;
+						}
+
+						if (y > maxY) {
+							maxY = y;
+						}
+
+						if (cell.real) {
+							colSpan = cell.colspan - 1;
+							rowSpan = cell.rowspan - 1;
+
+							if (colSpan) {
+								if (x + colSpan > maxX) {
+									maxX = x + colSpan;
+								}
+							}
+
+							if (rowSpan) {
+								if (y + rowSpan > maxY) {
+									maxY = y + rowSpan;
+								}
+							}
+						}
+					}
+				});
+			});
+
+			return {x: maxX, y: maxY};
+		}
+
+		function setEndCell(cell) {
+			var startX, startY, endX, endY, maxX, maxY, colSpan, rowSpan, x, y;
+
+			endPos = getPos(cell);
+
+			if (startPos && endPos) {
+				// Get start/end positions
+				startX = Math.min(startPos.x, endPos.x);
+				startY = Math.min(startPos.y, endPos.y);
+				endX = Math.max(startPos.x, endPos.x);
+				endY = Math.max(startPos.y, endPos.y);
+
+				// Expand end positon to include spans
+				maxX = endX;
+				maxY = endY;
+
+				// Expand startX
+				for (y = startY; y <= maxY; y++) {
+					cell = grid[y][startX];
+
+					if (!cell.real) {
+						if (startX - (cell.colspan - 1) < startX) {
+							startX -= cell.colspan - 1;
+						}
+					}
+				}
+
+				// Expand startY
+				for (x = startX; x <= maxX; x++) {
+					cell = grid[startY][x];
+
+					if (!cell.real) {
+						if (startY - (cell.rowspan - 1) < startY) {
+							startY -= cell.rowspan - 1;
+						}
+					}
+				}
+
+				// Find max X, Y
+				for (y = startY; y <= endY; y++) {
+					for (x = startX; x <= endX; x++) {
+						cell = grid[y][x];
+
+						if (cell.real) {
+							colSpan = cell.colspan - 1;
+							rowSpan = cell.rowspan - 1;
+
+							if (colSpan) {
+								if (x + colSpan > maxX) {
+									maxX = x + colSpan;
+								}
+							}
+
+							if (rowSpan) {
+								if (y + rowSpan > maxY) {
+									maxY = y + rowSpan;
+								}
+							}
+						}
+					}
+				}
+
+				// Remove current selection
+				dom.removeClass(dom.select('td.mce-item-selected,th.mce-item-selected'), 'mce-item-selected');
+
+				// Add new selection
+				for (y = startY; y <= maxY; y++) {
+					for (x = startX; x <= maxX; x++) {
+						if (grid[y][x]) {
+							dom.addClass(grid[y][x].elm, 'mce-item-selected');
+						}
+					}
+				}
+			}
+		}
+
+		function moveRelIdx(cellElm, delta) {
+			var pos, index, cell;
+
+			pos = getPos(cellElm);
+			index = pos.y * gridWidth + pos.x;
+
+			do {
+				index += delta;
+				cell = getCell(index % gridWidth, Math.floor(index / gridWidth));
+
+				if (!cell) {
+					break;
+				}
+
+				if (cell.elm != cellElm) {
+					selection.select(cell.elm, true);
+
+					if (dom.isEmpty(cell.elm)) {
+						selection.collapse(true);
+					}
+
+					return true;
+				}
+			} while (cell.elm == cellElm);
+
+			return false;
+		}
+
+		table = table || dom.getParent(selection.getStart(true), 'table');
+
+		buildGrid();
+
+		selectedCell = dom.getParent(selection.getStart(true), 'th,td');
+
+		if (selectedCell) {
+			startPos = getPos(selectedCell);
+			endPos = findEndPos();
+			selectedCell = getCell(startPos.x, startPos.y);
+		}
+
+		Tools.extend(this, {
+			deleteTable: deleteTable,
+			split: split,
+			merge: merge,
+			insertRow: insertRow,
+			insertCol: insertCol,
+			deleteCols: deleteCols,
+			deleteRows: deleteRows,
+			cutRows: cutRows,
+			copyRows: copyRows,
+			pasteRows: pasteRows,
+			getPos: getPos,
+			setStartCell: setStartCell,
+			setEndCell: setEndCell,
+			moveRelIdx: moveRelIdx,
+			refresh: buildGrid
+		});
+	};
+});
+
+// Included from: js/tinymce/plugins/table/classes/Quirks.js
+
+/**
+ * Quirks.js
+ *
+ * Released under LGPL License.
+ * Copyright (c) 1999-2015 Ephox Corp. All rights reserved
+ *
+ * License: http://www.tinymce.com/license
+ * Contributing: http://www.tinymce.com/contributing
+ */
+
+/**
+ * This class includes fixes for various browser quirks.
+ *
+ * @class tinymce.tableplugin.Quirks
+ * @private
+ */
+define("tinymce/tableplugin/Quirks", [
+	"tinymce/util/VK",
+	"tinymce/Env",
+	"tinymce/util/Tools",
+	"tinymce/tableplugin/Utils"
+], function(VK, Env, Tools, Utils) {
+	var each = Tools.each, getSpanVal = Utils.getSpanVal;
+
+	return function(editor) {
+		/**
+		 * Fixed caret movement around tables on WebKit.
+		 */
+		function moveWebKitSelection() {
+			function eventHandler(e) {
+				var key = e.keyCode;
+
+				function handle(upBool, sourceNode) {
+					var siblingDirection = upBool ? 'previousSibling' : 'nextSibling';
+					var currentRow = editor.dom.getParent(sourceNode, 'tr');
+					var siblingRow = currentRow[siblingDirection];
+
+					if (siblingRow) {
+						moveCursorToRow(editor, sourceNode, siblingRow, upBool);
+						e.preventDefault();
+						return true;
+					}
+
+					var tableNode = editor.dom.getParent(currentRow, 'table');
+					var middleNode = currentRow.parentNode;
+					var parentNodeName = middleNode.nodeName.toLowerCase();
+					if (parentNodeName === 'tbody' || parentNodeName === (upBool ? 'tfoot' : 'thead')) {
+						var targetParent = getTargetParent(upBool, tableNode, middleNode, 'tbody');
+						if (targetParent !== null) {
+							return moveToRowInTarget(upBool, targetParent, sourceNode);
+						}
+					}
+
+					return escapeTable(upBool, currentRow, siblingDirection, tableNode);
+				}
+
+				function getTargetParent(upBool, topNode, secondNode, nodeName) {
+					var tbodies = editor.dom.select('>' + nodeName, topNode);
+					var position = tbodies.indexOf(secondNode);
+					if (upBool && position === 0 || !upBool && position === tbodies.length - 1) {
+						return getFirstHeadOrFoot(upBool, topNode);
+					} else if (position === -1) {
+						var topOrBottom = secondNode.tagName.toLowerCase() === 'thead' ? 0 : tbodies.length - 1;
+						return tbodies[topOrBottom];
+					}
+
+					return tbodies[position + (upBool ? -1 : 1)];
+				}
+
+				function getFirstHeadOrFoot(upBool, parent) {
+					var tagName = upBool ? 'thead' : 'tfoot';
+					var headOrFoot = editor.dom.select('>' + tagName, parent);
+					return headOrFoot.length !== 0 ? headOrFoot[0] : null;
+				}
+
+				function moveToRowInTarget(upBool, targetParent, sourceNode) {
+					var targetRow = getChildForDirection(targetParent, upBool);
+
+					if (targetRow) {
+						moveCursorToRow(editor, sourceNode, targetRow, upBool);
+					}
+
+					e.preventDefault();
+					return true;
+				}
+
+				function escapeTable(upBool, currentRow, siblingDirection, table) {
+					var tableSibling = table[siblingDirection];
+
+					if (tableSibling) {
+						moveCursorToStartOfElement(tableSibling);
+						return true;
+					}
+
+					var parentCell = editor.dom.getParent(table, 'td,th');
+					if (parentCell) {
+						return handle(upBool, parentCell, e);
+					}
+
+					var backUpSibling = getChildForDirection(currentRow, !upBool);
+					moveCursorToStartOfElement(backUpSibling);
+					e.preventDefault();
+					return false;
+				}
+
+				function getChildForDirection(parent, up) {
+					var child = parent && parent[up ? 'lastChild' : 'firstChild'];
+					// BR is not a valid table child to return in this case we return the table cell
+					return child && child.nodeName === 'BR' ? editor.dom.getParent(child, 'td,th') : child;
+				}
+
+				function moveCursorToStartOfElement(n) {
+					editor.selection.setCursorLocation(n, 0);
+				}
+
+				function isVerticalMovement() {
+					return key == VK.UP || key == VK.DOWN;
+				}
+
+				function isInTable(editor) {
+					var node = editor.selection.getNode();
+					var currentRow = editor.dom.getParent(node, 'tr');
+					return currentRow !== null;
+				}
+
+				function columnIndex(column) {
+					var colIndex = 0;
+					var c = column;
+					while (c.previousSibling) {
+						c = c.previousSibling;
+						colIndex = colIndex + getSpanVal(c, "colspan");
+					}
+					return colIndex;
+				}
+
+				function findColumn(rowElement, columnIndex) {
+					var c = 0, r = 0;
+
+					each(rowElement.children, function(cell, i) {
+						c = c + getSpanVal(cell, "colspan");
+						r = i;
+						if (c > columnIndex) {
+							return false;
+						}
+					});
+					return r;
+				}
+
+				function moveCursorToRow(ed, node, row, upBool) {
+					var srcColumnIndex = columnIndex(editor.dom.getParent(node, 'td,th'));
+					var tgtColumnIndex = findColumn(row, srcColumnIndex);
+					var tgtNode = row.childNodes[tgtColumnIndex];
+					var rowCellTarget = getChildForDirection(tgtNode, upBool);
+					moveCursorToStartOfElement(rowCellTarget || tgtNode);
+				}
+
+				function shouldFixCaret(preBrowserNode) {
+					var newNode = editor.selection.getNode();
+					var newParent = editor.dom.getParent(newNode, 'td,th');
+					var oldParent = editor.dom.getParent(preBrowserNode, 'td,th');
+
+					return newParent && newParent !== oldParent && checkSameParentTable(newParent, oldParent);
+				}
+
+				function checkSameParentTable(nodeOne, NodeTwo) {
+					return editor.dom.getParent(nodeOne, 'TABLE') === editor.dom.getParent(NodeTwo, 'TABLE');
+				}
+
+				if (isVerticalMovement() && isInTable(editor)) {
+					var preBrowserNode = editor.selection.getNode();
+					setTimeout(function() {
+						if (shouldFixCaret(preBrowserNode)) {
+							handle(!e.shiftKey && key === VK.UP, preBrowserNode, e);
+						}
+					}, 0);
+				}
+			}
+
+			editor.on('KeyDown', function(e) {
+				eventHandler(e);
+			});
+		}
+
+		function fixBeforeTableCaretBug() {
+			// Checks if the selection/caret is at the start of the specified block element
+			function isAtStart(rng, par) {
+				var doc = par.ownerDocument, rng2 = doc.createRange(), elm;
+
+				rng2.setStartBefore(par);
+				rng2.setEnd(rng.endContainer, rng.endOffset);
+
+				elm = doc.createElement('body');
+				elm.appendChild(rng2.cloneContents());
+
+				// Check for text characters of other elements that should be treated as content
+				return elm.innerHTML.replace(/<(br|img|object|embed|input|textarea)[^>]*>/gi, '-').replace(/<[^>]+>/g, '').length === 0;
+			}
+
+			// Fixes an bug where it's impossible to place the caret before a table in Gecko
+			// this fix solves it by detecting when the caret is at the beginning of such a table
+			// and then manually moves the caret infront of the table
+			editor.on('KeyDown', function(e) {
+				var rng, table, dom = editor.dom;
+
+				// On gecko it's not possible to place the caret before a table
+				if (e.keyCode == 37 || e.keyCode == 38) {
+					rng = editor.selection.getRng();
+					table = dom.getParent(rng.startContainer, 'table');
+
+					if (table && editor.getBody().firstChild == table) {
+						if (isAtStart(rng, table)) {
+							rng = dom.createRng();
+
+							rng.setStartBefore(table);
+							rng.setEndBefore(table);
+
+							editor.selection.setRng(rng);
+
+							e.preventDefault();
+						}
+					}
+				}
+			});
+		}
+
+		// Fixes an issue on Gecko where it's impossible to place the caret behind a table
+		// This fix will force a paragraph element after the table but only when the forced_root_block setting is enabled
+		function fixTableCaretPos() {
+			editor.on('KeyDown SetContent VisualAid', function() {
+				var last;
+
+				// Skip empty text nodes from the end
+				for (last = editor.getBody().lastChild; last; last = last.previousSibling) {
+					if (last.nodeType == 3) {
+						if (last.nodeValue.length > 0) {
+							break;
+						}
+					} else if (last.nodeType == 1 && (last.tagName == 'BR' || !last.getAttribute('data-mce-bogus'))) {
+						break;
+					}
+				}
+
+				if (last && last.nodeName == 'TABLE') {
+					if (editor.settings.forced_root_block) {
+						editor.dom.add(
+							editor.getBody(),
+							editor.settings.forced_root_block,
+							editor.settings.forced_root_block_attrs,
+							Env.ie && Env.ie < 11 ? '&nbsp;' : '<br data-mce-bogus="1" />'
+						);
+					} else {
+						editor.dom.add(editor.getBody(), 'br', {'data-mce-bogus': '1'});
+					}
+				}
+			});
+
+			editor.on('PreProcess', function(o) {
+				var last = o.node.lastChild;
+
+				if (last && (last.nodeName == "BR" || (last.childNodes.length == 1 &&
+					(last.firstChild.nodeName == 'BR' || last.firstChild.nodeValue == '\u00a0'))) &&
+					last.previousSibling && last.previousSibling.nodeName == "TABLE") {
+					editor.dom.remove(last);
+				}
+			});
+		}
+
+		// this nasty hack is here to work around some WebKit selection bugs.
+		function fixTableCellSelection() {
+			function tableCellSelected(ed, rng, n, currentCell) {
+				// The decision of when a table cell is selected is somewhat involved.  The fact that this code is
+				// required is actually a pointer to the root cause of this bug. A cell is selected when the start
+				// and end offsets are 0, the start container is a text, and the selection node is either a TR (most cases)
+				// or the parent of the table (in the case of the selection containing the last cell of a table).
+				var TEXT_NODE = 3, table = ed.dom.getParent(rng.startContainer, 'TABLE');
+				var tableParent, allOfCellSelected, tableCellSelection;
+
+				if (table) {
+					tableParent = table.parentNode;
+				}
+
+				allOfCellSelected = rng.startContainer.nodeType == TEXT_NODE &&
+					rng.startOffset === 0 &&
+					rng.endOffset === 0 &&
+					currentCell &&
+					(n.nodeName == "TR" || n == tableParent);
+
+				tableCellSelection = (n.nodeName == "TD" || n.nodeName == "TH") && !currentCell;
+
+				return allOfCellSelected || tableCellSelection;
+			}
+
+			function fixSelection() {
+				var rng = editor.selection.getRng();
+				var n = editor.selection.getNode();
+				var currentCell = editor.dom.getParent(rng.startContainer, 'TD,TH');
+
+				if (!tableCellSelected(editor, rng, n, currentCell)) {
+					return;
+				}
+
+				if (!currentCell) {
+					currentCell = n;
+				}
+
+				// Get the very last node inside the table cell
+				var end = currentCell.lastChild;
+				while (end.lastChild) {
+					end = end.lastChild;
+				}
+
+				// Select the entire table cell. Nothing outside of the table cell should be selected.
+				if (end.nodeType == 3) {
+					rng.setEnd(end, end.data.length);
+					editor.selection.setRng(rng);
+				}
+			}
+
+			editor.on('KeyDown', function() {
+				fixSelection();
+			});
+
+			editor.on('MouseDown', function(e) {
+				if (e.button != 2) {
+					fixSelection();
+				}
+			});
+		}
+
+		/**
+		 * Delete table if all cells are selected.
+		 */
+		function deleteTable() {
+			function placeCaretInCell(cell) {
+				editor.selection.select(cell, true);
+				editor.selection.collapse(true);
+			}
+
+			function clearCell(cell) {
+				editor.$(cell).empty();
+				Utils.paddCell(cell);
+			}
+
+			editor.on('keydown', function(e) {
+				if ((e.keyCode == VK.DELETE || e.keyCode == VK.BACKSPACE) && !e.isDefaultPrevented()) {
+					var table, tableCells, selectedTableCells, cell;
+
+					table = editor.dom.getParent(editor.selection.getStart(), 'table');
+					if (table) {
+						tableCells = editor.dom.select('td,th', table);
+						selectedTableCells = Tools.grep(tableCells, function(cell) {
+							return editor.dom.hasClass(cell, 'mce-item-selected');
+						});
+
+						if (selectedTableCells.length === 0) {
+							// If caret is within an empty table cell then empty it for real
+							cell = editor.dom.getParent(editor.selection.getStart(), 'td,th');
+							if (editor.selection.isCollapsed() && cell && editor.dom.isEmpty(cell)) {
+								e.preventDefault();
+								clearCell(cell);
+								placeCaretInCell(cell);
+							}
+
+							return;
+						}
+
+						e.preventDefault();
+
+						editor.undoManager.transact(function() {
+							if (tableCells.length == selectedTableCells.length) {
+								editor.execCommand('mceTableDelete');
+							} else {
+								Tools.each(selectedTableCells, clearCell);
+								placeCaretInCell(selectedTableCells[0]);
+							}
+						});
+					}
+				}
+			});
+		}
+
+		deleteTable();
+
+		if (Env.webkit) {
+			moveWebKitSelection();
+			fixTableCellSelection();
+		}
+
+		if (Env.gecko) {
+			fixBeforeTableCaretBug();
+			fixTableCaretPos();
+		}
+
+		if (Env.ie > 10) {
+			fixBeforeTableCaretBug();
+			fixTableCaretPos();
+		}
+	};
+});
+
+// Included from: js/tinymce/plugins/table/classes/CellSelection.js
+
+/**
+ * CellSelection.js
+ *
+ * Released under LGPL License.
+ * Copyright (c) 1999-2015 Ephox Corp. All rights reserved
+ *
+ * License: http://www.tinymce.com/license
+ * Contributing: http://www.tinymce.com/contributing
+ */
+
+/**
+ * This class handles table cell selection by faking it using a css class that gets applied
+ * to cells when dragging the mouse from one cell to another.
+ *
+ * @class tinymce.tableplugin.CellSelection
+ * @private
+ */
+define("tinymce/tableplugin/CellSelection", [
+	"tinymce/tableplugin/TableGrid",
+	"tinymce/dom/TreeWalker",
+	"tinymce/util/Tools"
+], function(TableGrid, TreeWalker, Tools) {
+	return function(editor) {
+		var dom = editor.dom, tableGrid, startCell, startTable, hasCellSelection = true, resizing;
+
+		function clear(force) {
+			// Restore selection possibilities
+			editor.getBody().style.webkitUserSelect = '';
+
+			if (force || hasCellSelection) {
+				editor.dom.removeClass(
+					editor.dom.select('td.mce-item-selected,th.mce-item-selected'),
+					'mce-item-selected'
+				);
+
+				hasCellSelection = false;
+			}
+		}
+
+		function cellSelectionHandler(e) {
+			var sel, table, target = e.target;
+
+			if (resizing) {
+				return;
+			}
+
+			if (startCell && (tableGrid || target != startCell) && (target.nodeName == 'TD' || target.nodeName == 'TH')) {
+				table = dom.getParent(target, 'table');
+				if (table == startTable) {
+					if (!tableGrid) {
+						tableGrid = new TableGrid(editor, table);
+						tableGrid.setStartCell(startCell);
+
+						editor.getBody().style.webkitUserSelect = 'none';
+					}
+
+					tableGrid.setEndCell(target);
+					hasCellSelection = true;
+				}
+
+				// Remove current selection
+				sel = editor.selection.getSel();
+
+				try {
+					if (sel.removeAllRanges) {
+						sel.removeAllRanges();
+					} else {
+						sel.empty();
+					}
+				} catch (ex) {
+					// IE9 might throw errors here
+				}
+
+				e.preventDefault();
+			}
+		}
+
+		// Add cell selection logic
+		editor.on('MouseDown', function(e) {
+			if (e.button != 2 && !resizing) {
+				clear();
+
+				startCell = dom.getParent(e.target, 'td,th');
+				startTable = dom.getParent(startCell, 'table');
+			}
+		});
+
+		editor.on('mouseover', cellSelectionHandler);
+
+		editor.on('remove', function() {
+			dom.unbind(editor.getDoc(), 'mouseover', cellSelectionHandler);
+		});
+
+		editor.on('MouseUp', function() {
+			var rng, sel = editor.selection, selectedCells, walker, node, lastNode;
+
+			function setPoint(node, start) {
+				var walker = new TreeWalker(node, node);
+
+				do {
+					// Text node
+					if (node.nodeType == 3 && Tools.trim(node.nodeValue).length !== 0) {
+						if (start) {
+							rng.setStart(node, 0);
+						} else {
+							rng.setEnd(node, node.nodeValue.length);
+						}
+
+						return;
+					}
+
+					// BR element
+					if (node.nodeName == 'BR') {
+						if (start) {
+							rng.setStartBefore(node);
+						} else {
+							rng.setEndBefore(node);
+						}
+
+						return;
+					}
+				} while ((node = (start ? walker.next() : walker.prev())));
+			}
+
+			// Move selection to startCell
+			if (startCell) {
+				if (tableGrid) {
+					editor.getBody().style.webkitUserSelect = '';
+				}
+
+				// Try to expand text selection as much as we can only Gecko supports cell selection
+				selectedCells = dom.select('td.mce-item-selected,th.mce-item-selected');
+				if (selectedCells.length > 0) {
+					rng = dom.createRng();
+					node = selectedCells[0];
+					rng.setStartBefore(node);
+					rng.setEndAfter(node);
+
+					setPoint(node, 1);
+					walker = new TreeWalker(node, dom.getParent(selectedCells[0], 'table'));
+
+					do {
+						if (node.nodeName == 'TD' || node.nodeName == 'TH') {
+							if (!dom.hasClass(node, 'mce-item-selected')) {
+								break;
+							}
+
+							lastNode = node;
+						}
+					} while ((node = walker.next()));
+
+					setPoint(lastNode);
+
+					sel.setRng(rng);
+				}
+
+				editor.nodeChanged();
+				startCell = tableGrid = startTable = null;
+			}
+		});
+
+		editor.on('KeyUp Drop SetContent', function(e) {
+			clear(e.type == 'setcontent');
+			startCell = tableGrid = startTable = null;
+			resizing = false;
+		});
+
+		editor.on('ObjectResizeStart ObjectResized', function(e) {
+			resizing = e.type != 'objectresized';
+		});
+
+		return {
+			clear: clear
+		};
+	};
+});
+
+// Included from: js/tinymce/plugins/table/classes/Dialogs.js
+
+/**
+ * Dialogs.js
+ *
+ * Released under LGPL License.
+ * Copyright (c) 1999-2015 Ephox Corp. All rights reserved
+ *
+ * License: http://www.tinymce.com/license
+ * Contributing: http://www.tinymce.com/contributing
+ */
+
+/*eslint dot-notation:0*/
+
+/**
+ * ...
+ *
+ * @class tinymce.tableplugin.Dialogs
+ * @private
+ */
+define("tinymce/tableplugin/Dialogs", [
+	"tinymce/util/Tools",
+	"tinymce/Env"
+], function(Tools, Env) {
+	var each = Tools.each;
+
+	return function(editor) {
+		var self = this;
+
+		function createColorPickAction() {
+			var colorPickerCallback = editor.settings.color_picker_callback;
+
+			if (colorPickerCallback) {
+				return function() {
+					var self = this;
+
+					colorPickerCallback.call(
+						editor,
+						function(value) {
+							self.value(value).fire('change');
+						},
+						self.value()
+					);
+				};
+			}
+		}
+
+		function createStyleForm(dom) {
+			return {
+				title: 'Advanced',
+				type: 'form',
+				defaults: {
+					onchange: function() {
+						updateStyle(dom, this.parents().reverse()[0], this.name() == "style");
+					}
+				},
+				items: [
+					{
+						label: 'Style',
+						name: 'style',
+						type: 'textbox'
+					},
+
+					{
+						type: 'form',
+						padding: 0,
+						formItemDefaults: {
+							layout: 'grid',
+							alignH: ['start', 'right']
+						},
+						defaults: {
+							size: 7
+						},
+						items: [
+							{
+								label: 'Border color',
+								type: 'colorbox',
+								name: 'borderColor',
+								onaction: createColorPickAction()
+							},
+
+							{
+								label: 'Background color',
+								type: 'colorbox',
+								name: 'backgroundColor',
+								onaction: createColorPickAction()
+							}
+						]
+					}
+				]
+			};
+		}
+
+		function removePxSuffix(size) {
+			return size ? size.replace(/px$/, '') : "";
+		}
+
+		function addSizeSuffix(size) {
+			if (/^[0-9]+$/.test(size)) {
+				size += "px";
+			}
+
+			return size;
+		}
+
+		function unApplyAlign(elm) {
+			each('left center right'.split(' '), function(name) {
+				editor.formatter.remove('align' + name, {}, elm);
+			});
+		}
+
+		function unApplyVAlign(elm) {
+			each('top middle bottom'.split(' '), function(name) {
+				editor.formatter.remove('valign' + name, {}, elm);
+			});
+		}
+
+		function buildListItems(inputList, itemCallback, startItems) {
+			function appendItems(values, output) {
+				output = output || [];
+
+				Tools.each(values, function(item) {
+					var menuItem = {text: item.text || item.title};
+
+					if (item.menu) {
+						menuItem.menu = appendItems(item.menu);
+					} else {
+						menuItem.value = item.value;
+
+						if (itemCallback) {
+							itemCallback(menuItem);
+						}
+					}
+
+					output.push(menuItem);
+				});
+
+				return output;
+			}
+
+			return appendItems(inputList, startItems || []);
+		}
+
+		function updateStyle(dom, win, isStyleCtrl) {
+			var data = win.toJSON();
+			var css = dom.parseStyle(data.style);
+
+			if (isStyleCtrl) {
+				win.find('#borderColor').value(css["border-color"] || '')[0].fire('change');
+				win.find('#backgroundColor').value(css["background-color"] || '')[0].fire('change');
+			} else {
+				css["border-color"] = data.borderColor;
+				css["background-color"] = data.backgroundColor;
+			}
+
+			win.find('#style').value(dom.serializeStyle(dom.parseStyle(dom.serializeStyle(css))));
+		}
+
+		function appendStylesToData(dom, data, elm) {
+			var css = dom.parseStyle(dom.getAttrib(elm, 'style'));
+
+			if (css["border-color"]) {
+				data.borderColor = css["border-color"];
+			}
+
+			if (css["background-color"]) {
+				data.backgroundColor = css["background-color"];
+			}
+
+			data.style = dom.serializeStyle(css);
+		}
+
+		function mergeStyles(dom, elm, styles) {
+			var css = dom.parseStyle(dom.getAttrib(elm, 'style'));
+
+			each(styles, function(style) {
+				css[style.name] = style.value;
+			});
+
+			dom.setAttrib(elm, 'style', dom.serializeStyle(dom.parseStyle(dom.serializeStyle(css))));
+		}
+
+		self.tableProps = function() {
+			self.table(true);
+		};
+
+		self.table = function(isProps) {
+			var dom = editor.dom, tableElm, colsCtrl, rowsCtrl, classListCtrl, data = {}, generalTableForm, stylesToMerge;
+
+			function onSubmitTableForm() {
+
+				//Explore the layers of the table till we find the first layer of tds or ths
+				function styleTDTH(elm, name, value) {
+					if (elm.tagName === "TD" || elm.tagName === "TH") {
+						dom.setStyle(elm, name, value);
+					} else {
+						if (elm.children) {
+							for (var i = 0; i < elm.children.length; i++) {
+								styleTDTH(elm.children[i], name, value);
+							}
+						}
+					}
+				}
+
+				var captionElm;
+
+				updateStyle(dom, this);
+				data = Tools.extend(data, this.toJSON());
+
+				if (data["class"] === false) {
+					delete data["class"];
+				}
+
+				editor.undoManager.transact(function() {
+					if (!tableElm) {
+						tableElm = editor.plugins.table.insertTable(data.cols || 1, data.rows || 1);
+					}
+
+					editor.dom.setAttribs(tableElm, {
+						style: data.style,
+						'class': data['class']
+					});
+
+					if (editor.settings.table_style_by_css) {
+						stylesToMerge = [];
+						stylesToMerge.push({name: 'border', value: data.border});
+						stylesToMerge.push({name: 'border-spacing', value: addSizeSuffix(data.cellspacing)});
+						mergeStyles(dom, tableElm, stylesToMerge);
+						dom.setAttribs(tableElm, {
+							'data-mce-border-color': data.borderColor,
+							'data-mce-cell-padding': data.cellpadding,
+							'data-mce-border': data.border
+						});
+						if (tableElm.children) {
+							for (var i = 0; i < tableElm.children.length; i++) {
+								styleTDTH(tableElm.children[i], 'border', data.border);
+								styleTDTH(tableElm.children[i], 'padding', addSizeSuffix(data.cellpadding));
+							}
+						}
+					} else {
+						editor.dom.setAttribs(tableElm, {
+							border: data.border,
+							cellpadding: data.cellpadding,
+							cellspacing: data.cellspacing
+						});
+					}
+
+					if (dom.getAttrib(tableElm, 'width') && !editor.settings.table_style_by_css) {
+						dom.setAttrib(tableElm, 'width', removePxSuffix(data.width));
+					} else {
+						dom.setStyle(tableElm, 'width', addSizeSuffix(data.width));
+					}
+
+					dom.setStyle(tableElm, 'height', addSizeSuffix(data.height));
+
+					// Toggle caption on/off
+					captionElm = dom.select('caption', tableElm)[0];
+
+					if (captionElm && !data.caption) {
+						dom.remove(captionElm);
+					}
+
+					if (!captionElm && data.caption) {
+						captionElm = dom.create('caption');
+						captionElm.innerHTML = !Env.ie ? '<br data-mce-bogus="1"/>' : '\u00a0';
+						tableElm.insertBefore(captionElm, tableElm.firstChild);
+					}
+					unApplyAlign(tableElm);
+					if (data.align) {
+						editor.formatter.apply('align' + data.align, {}, tableElm);
+					}
+
+					editor.focus();
+					editor.addVisual();
+				});
+			}
+
+			function getTDTHOverallStyle(elm, name) {
+				var cells = editor.dom.select("td,th", elm), firstChildStyle;
+
+				function checkChildren(firstChildStyle, elms) {
+
+					for (var i = 0; i < elms.length; i++) {
+						var currentStyle = dom.getStyle(elms[i], name);
+						if (typeof firstChildStyle === "undefined") {
+							firstChildStyle = currentStyle;
+						}
+						if (firstChildStyle != currentStyle) {
+							return "";
+						}
+					}
+
+					return firstChildStyle;
+
+				}
+
+				firstChildStyle = checkChildren(firstChildStyle, cells);
+
+				return firstChildStyle;
+			}
+
+			if (isProps === true) {
+				tableElm = dom.getParent(editor.selection.getStart(), 'table');
+
+				if (tableElm) {
+					data = {
+						width: removePxSuffix(dom.getStyle(tableElm, 'width') || dom.getAttrib(tableElm, 'width')),
+						height: removePxSuffix(dom.getStyle(tableElm, 'height') || dom.getAttrib(tableElm, 'height')),
+						cellspacing: removePxSuffix(dom.getStyle(tableElm, 'border-spacing') ||
+							dom.getAttrib(tableElm, 'cellspacing')),
+						cellpadding: dom.getAttrib(tableElm, 'data-mce-cell-padding') || dom.getAttrib(tableElm, 'cellpadding') ||
+							getTDTHOverallStyle(tableElm, 'padding'),
+						border: dom.getAttrib(tableElm, 'data-mce-border') || dom.getAttrib(tableElm, 'border') ||
+							getTDTHOverallStyle(tableElm, 'border'),
+						borderColor: dom.getAttrib(tableElm, 'data-mce-border-color'),
+						caption: !!dom.select('caption', tableElm)[0],
+						'class': dom.getAttrib(tableElm, 'class')
+					};
+
+					each('left center right'.split(' '), function(name) {
+						if (editor.formatter.matchNode(tableElm, 'align' + name)) {
+							data.align = name;
+						}
+					});
+				}
+			} else {
+				colsCtrl = {label: 'Cols', name: 'cols'};
+				rowsCtrl = {label: 'Rows', name: 'rows'};
+			}
+
+			if (editor.settings.table_class_list) {
+				if (data["class"]) {
+					data["class"] = data["class"].replace(/\s*mce\-item\-table\s*/g, '');
+				}
+
+				classListCtrl = {
+					name: 'class',
+					type: 'listbox',
+					label: 'Class',
+					values: buildListItems(
+						editor.settings.table_class_list,
+						function(item) {
+							if (item.value) {
+								item.textStyle = function() {
+									return editor.formatter.getCssText({block: 'table', classes: [item.value]});
+								};
+							}
+						}
+					)
+				};
+			}
+
+			generalTableForm = {
+				type: 'form',
+				layout: 'flex',
+				direction: 'column',
+				labelGapCalc: 'children',
+				padding: 0,
+				items: [
+					{
+						type: 'form',
+						labelGapCalc: false,
+						padding: 0,
+						layout: 'grid',
+						columns: 2,
+						defaults: {
+							type: 'textbox',
+							maxWidth: 50
+						},
+						items: (editor.settings.table_appearance_options !== false) ? [
+							colsCtrl,
+							rowsCtrl,
+							{label: 'Width', name: 'width'},
+							{label: 'Height', name: 'height'},
+							{label: 'Cell spacing', name: 'cellspacing'},
+							{label: 'Cell padding', name: 'cellpadding'},
+							{label: 'Border', name: 'border'},
+							{label: 'Caption', name: 'caption', type: 'checkbox'}
+						] : [
+							colsCtrl,
+							rowsCtrl,
+							{label: 'Width', name: 'width'},
+							{label: 'Height', name: 'height'}
+						]
+					},
+
+					{
+						label: 'Alignment',
+						name: 'align',
+						type: 'listbox',
+						text: 'None',
+						values: [
+							{text: 'None', value: ''},
+							{text: 'Left', value: 'left'},
+							{text: 'Center', value: 'center'},
+							{text: 'Right', value: 'right'}
+						]
+					},
+
+					classListCtrl
+				]
+			};
+
+			if (editor.settings.table_advtab !== false) {
+				appendStylesToData(dom, data, tableElm);
+
+				editor.windowManager.open({
+					title: "Table properties",
+					data: data,
+					bodyType: 'tabpanel',
+					body: [
+						{
+							title: 'General',
+							type: 'form',
+							items: generalTableForm
+						},
+						createStyleForm(dom)
+					],
+
+					onsubmit: onSubmitTableForm
+				});
+			} else {
+				editor.windowManager.open({
+					title: "Table properties",
+					data: data,
+					body: generalTableForm,
+					onsubmit: onSubmitTableForm
+				});
+			}
+		};
+
+		self.merge = function(grid, cell) {
+			editor.windowManager.open({
+				title: "Merge cells",
+				body: [
+					{label: 'Cols', name: 'cols', type: 'textbox', value: '1', size: 10},
+					{label: 'Rows', name: 'rows', type: 'textbox', value: '1', size: 10}
+				],
+				onsubmit: function() {
+					var data = this.toJSON();
+
+					editor.undoManager.transact(function() {
+						grid.merge(cell, data.cols, data.rows);
+					});
+				}
+			});
+		};
+
+		self.cell = function() {
+			var dom = editor.dom, cellElm, data, classListCtrl, cells = [];
+
+			function onSubmitCellForm() {
+				updateStyle(dom, this);
+				data = Tools.extend(data, this.toJSON());
+
+				editor.undoManager.transact(function() {
+					each(cells, function(cellElm) {
+						editor.dom.setAttribs(cellElm, {
+							scope: data.scope,
+							style: data.style,
+							'class': data['class']
+						});
+
+						editor.dom.setStyles(cellElm, {
+							width: addSizeSuffix(data.width),
+							height: addSizeSuffix(data.height)
+						});
+
+						// Switch cell type
+						if (data.type && cellElm.nodeName.toLowerCase() != data.type) {
+							cellElm = dom.rename(cellElm, data.type);
+						}
+
+						// Apply/remove alignment
+						unApplyAlign(cellElm);
+						if (data.align) {
+							editor.formatter.apply('align' + data.align, {}, cellElm);
+						}
+
+						// Apply/remove vertical alignment
+						unApplyVAlign(cellElm);
+						if (data.valign) {
+							editor.formatter.apply('valign' + data.valign, {}, cellElm);
+						}
+					});
+
+					editor.focus();
+				});
+			}
+
+			// Get selected cells or the current cell
+			cells = editor.dom.select('td.mce-item-selected,th.mce-item-selected');
+			cellElm = editor.dom.getParent(editor.selection.getStart(), 'td,th');
+			if (!cells.length && cellElm) {
+				cells.push(cellElm);
+			}
+
+			cellElm = cellElm || cells[0];
+
+			if (!cellElm) {
+				// If this element is null, return now to avoid crashing.
+				return;
+			}
+
+			data = {
+				width: removePxSuffix(dom.getStyle(cellElm, 'width') || dom.getAttrib(cellElm, 'width')),
+				height: removePxSuffix(dom.getStyle(cellElm, 'height') || dom.getAttrib(cellElm, 'height')),
+				scope: dom.getAttrib(cellElm, 'scope'),
+				'class': dom.getAttrib(cellElm, 'class')
+			};
+
+			data.type = cellElm.nodeName.toLowerCase();
+
+			each('left center right'.split(' '), function(name) {
+				if (editor.formatter.matchNode(cellElm, 'align' + name)) {
+					data.align = name;
+				}
+			});
+
+			each('top middle bottom'.split(' '), function(name) {
+				if (editor.formatter.matchNode(cellElm, 'valign' + name)) {
+					data.valign = name;
+				}
+			});
+
+			if (editor.settings.table_cell_class_list) {
+				classListCtrl = {
+					name: 'class',
+					type: 'listbox',
+					label: 'Class',
+					values: buildListItems(
+						editor.settings.table_cell_class_list,
+						function(item) {
+							if (item.value) {
+								item.textStyle = function() {
+									return editor.formatter.getCssText({block: 'td', classes: [item.value]});
+								};
+							}
+						}
+					)
+				};
+			}
+
+			var generalCellForm = {
+				type: 'form',
+				layout: 'flex',
+				direction: 'column',
+				labelGapCalc: 'children',
+				padding: 0,
+				items: [
+					{
+						type: 'form',
+						layout: 'grid',
+						columns: 2,
+						labelGapCalc: false,
+						padding: 0,
+						defaults: {
+							type: 'textbox',
+							maxWidth: 50
+						},
+						items: [
+							{label: 'Width', name: 'width'},
+							{label: 'Height', name: 'height'},
+							{
+								label: 'Cell type',
+								name: 'type',
+								type: 'listbox',
+								text: 'None',
+								minWidth: 90,
+								maxWidth: null,
+								values: [
+									{text: 'Cell', value: 'td'},
+									{text: 'Header cell', value: 'th'}
+								]
+							},
+							{
+								label: 'Scope',
+								name: 'scope',
+								type: 'listbox',
+								text: 'None',
+								minWidth: 90,
+								maxWidth: null,
+								values: [
+									{text: 'None', value: ''},
+									{text: 'Row', value: 'row'},
+									{text: 'Column', value: 'col'},
+									{text: 'Row group', value: 'rowgroup'},
+									{text: 'Column group', value: 'colgroup'}
+								]
+							},
+							{
+								label: 'H Align',
+								name: 'align',
+								type: 'listbox',
+								text: 'None',
+								minWidth: 90,
+								maxWidth: null,
+								values: [
+									{text: 'None', value: ''},
+									{text: 'Left', value: 'left'},
+									{text: 'Center', value: 'center'},
+									{text: 'Right', value: 'right'}
+								]
+							},
+							{
+								label: 'V Align',
+								name: 'valign',
+								type: 'listbox',
+								text: 'None',
+								minWidth: 90,
+								maxWidth: null,
+								values: [
+									{text: 'None', value: ''},
+									{text: 'Top', value: 'top'},
+									{text: 'Middle', value: 'middle'},
+									{text: 'Bottom', value: 'bottom'}
+								]
+							}
+						]
+					},
+
+					classListCtrl
+				]
+			};
+
+			if (editor.settings.table_cell_advtab !== false) {
+				appendStylesToData(dom, data, cellElm);
+
+				editor.windowManager.open({
+					title: "Cell properties",
+					bodyType: 'tabpanel',
+					data: data,
+					body: [
+						{
+							title: 'General',
+							type: 'form',
+							items: generalCellForm
+						},
+
+						createStyleForm(dom)
+					],
+
+					onsubmit: onSubmitCellForm
+				});
+			} else {
+				editor.windowManager.open({
+					title: "Cell properties",
+					data: data,
+					body: generalCellForm,
+					onsubmit: onSubmitCellForm
+				});
+			}
+		};
+
+		self.row = function() {
+			var dom = editor.dom, tableElm, cellElm, rowElm, classListCtrl, data, rows = [], generalRowForm;
+
+			function onSubmitRowForm() {
+				var tableElm, oldParentElm, parentElm;
+
+				updateStyle(dom, this);
+				data = Tools.extend(data, this.toJSON());
+
+				editor.undoManager.transact(function() {
+					var toType = data.type;
+
+					each(rows, function(rowElm) {
+						editor.dom.setAttribs(rowElm, {
+							scope: data.scope,
+							style: data.style,
+							'class': data['class']
+						});
+
+						editor.dom.setStyles(rowElm, {
+							height: addSizeSuffix(data.height)
+						});
+
+						if (toType != rowElm.parentNode.nodeName.toLowerCase()) {
+							tableElm = dom.getParent(rowElm, 'table');
+
+							oldParentElm = rowElm.parentNode;
+							parentElm = dom.select(toType, tableElm)[0];
+							if (!parentElm) {
+								parentElm = dom.create(toType);
+								if (tableElm.firstChild) {
+									tableElm.insertBefore(parentElm, tableElm.firstChild);
+								} else {
+									tableElm.appendChild(parentElm);
+								}
+							}
+
+							parentElm.appendChild(rowElm);
+
+							if (!oldParentElm.hasChildNodes()) {
+								dom.remove(oldParentElm);
+							}
+						}
+
+						// Apply/remove alignment
+						unApplyAlign(rowElm);
+						if (data.align) {
+							editor.formatter.apply('align' + data.align, {}, rowElm);
+						}
+					});
+
+					editor.focus();
+				});
+			}
+
+			tableElm = editor.dom.getParent(editor.selection.getStart(), 'table');
+			cellElm = editor.dom.getParent(editor.selection.getStart(), 'td,th');
+
+			each(tableElm.rows, function(row) {
+				each(row.cells, function(cell) {
+					if (dom.hasClass(cell, 'mce-item-selected') || cell == cellElm) {
+						rows.push(row);
+						return false;
+					}
+				});
+			});
+
+			rowElm = rows[0];
+			if (!rowElm) {
+				// If this element is null, return now to avoid crashing.
+				return;
+			}
+
+			data = {
+				height: removePxSuffix(dom.getStyle(rowElm, 'height') || dom.getAttrib(rowElm, 'height')),
+				scope: dom.getAttrib(rowElm, 'scope'),
+				'class': dom.getAttrib(rowElm, 'class')
+			};
+
+			data.type = rowElm.parentNode.nodeName.toLowerCase();
+
+			each('left center right'.split(' '), function(name) {
+				if (editor.formatter.matchNode(rowElm, 'align' + name)) {
+					data.align = name;
+				}
+			});
+
+			if (editor.settings.table_row_class_list) {
+				classListCtrl = {
+					name: 'class',
+					type: 'listbox',
+					label: 'Class',
+					values: buildListItems(
+						editor.settings.table_row_class_list,
+						function(item) {
+							if (item.value) {
+								item.textStyle = function() {
+									return editor.formatter.getCssText({block: 'tr', classes: [item.value]});
+								};
+							}
+						}
+					)
+				};
+			}
+
+			generalRowForm = {
+				type: 'form',
+				columns: 2,
+				padding: 0,
+				defaults: {
+					type: 'textbox'
+				},
+				items: [
+					{
+						type: 'listbox',
+						name: 'type',
+						label: 'Row type',
+						text: 'None',
+						maxWidth: null,
+						values: [
+							{text: 'Header', value: 'thead'},
+							{text: 'Body', value: 'tbody'},
+							{text: 'Footer', value: 'tfoot'}
+						]
+					},
+					{
+						type: 'listbox',
+						name: 'align',
+						label: 'Alignment',
+						text: 'None',
+						maxWidth: null,
+						values: [
+							{text: 'None', value: ''},
+							{text: 'Left', value: 'left'},
+							{text: 'Center', value: 'center'},
+							{text: 'Right', value: 'right'}
+						]
+					},
+					{label: 'Height', name: 'height'},
+					classListCtrl
+				]
+			};
+
+			if (editor.settings.table_row_advtab !== false) {
+				appendStylesToData(dom, data, rowElm);
+
+				editor.windowManager.open({
+					title: "Row properties",
+					data: data,
+					bodyType: 'tabpanel',
+					body: [
+						{
+							title: 'General',
+							type: 'form',
+							items: generalRowForm
+						},
+						createStyleForm(dom)
+					],
+
+					onsubmit: onSubmitRowForm
+				});
+			} else {
+				editor.windowManager.open({
+					title: "Row properties",
+					data: data,
+					body: generalRowForm,
+					onsubmit: onSubmitRowForm
+				});
+			}
+		};
+	};
+});
+
+// Included from: js/tinymce/plugins/table/classes/Plugin.js
+
+/**
+ * Plugin.js
+ *
+ * Released under LGPL License.
+ * Copyright (c) 1999-2015 Ephox Corp. All rights reserved
+ *
+ * License: http://www.tinymce.com/license
+ * Contributing: http://www.tinymce.com/contributing
+ */
+
+/**
+ * This class contains all core logic for the table plugin.
+ *
+ * @class tinymce.tableplugin.Plugin
+ * @private
+ */
+define("tinymce/tableplugin/Plugin", [
+	"tinymce/tableplugin/TableGrid",
+	"tinymce/tableplugin/Quirks",
+	"tinymce/tableplugin/CellSelection",
+	"tinymce/tableplugin/Dialogs",
+	"tinymce/util/Tools",
+	"tinymce/dom/TreeWalker",
+	"tinymce/Env",
+	"tinymce/PluginManager"
+], function(TableGrid, Quirks, CellSelection, Dialogs, Tools, TreeWalker, Env, PluginManager) {
+	var each = Tools.each;
+
+	function Plugin(editor) {
+		var clipboardRows, self = this, dialogs = new Dialogs(editor);
+
+		function cmd(command) {
+			return function() {
+				editor.execCommand(command);
+			};
+		}
+
+		function insertTable(cols, rows) {
+			var y, x, html, tableElm;
+
+			html = '<table id="__mce"><tbody>';
+
+			for (y = 0; y < rows; y++) {
+				html += '<tr>';
+
+				for (x = 0; x < cols; x++) {
+					html += '<td>' + (Env.ie ? " " : '<br>') + '</td>';
+				}
+
+				html += '</tr>';
+			}
+
+			html += '</tbody></table>';
+
+			editor.undoManager.transact(function() {
+				editor.insertContent(html);
+
+				tableElm = editor.dom.get('__mce');
+				editor.dom.setAttrib(tableElm, 'id', null);
+
+				editor.dom.setAttribs(tableElm, editor.settings.table_default_attributes || {});
+				editor.dom.setStyles(tableElm, editor.settings.table_default_styles || {});
+			});
+
+			return tableElm;
+		}
+
+		function handleDisabledState(ctrl, selector) {
+			function bindStateListener() {
+				ctrl.disabled(!editor.dom.getParent(editor.selection.getStart(), selector));
+
+				editor.selection.selectorChanged(selector, function(state) {
+					ctrl.disabled(!state);
+				});
+			}
+
+			if (editor.initialized) {
+				bindStateListener();
+			} else {
+				editor.on('init', bindStateListener);
+			}
+		}
+
+		function postRender() {
+			/*jshint validthis:true*/
+			handleDisabledState(this, 'table');
+		}
+
+		function postRenderCell() {
+			/*jshint validthis:true*/
+			handleDisabledState(this, 'td,th');
+		}
+
+		function generateTableGrid() {
+			var html = '';
+
+			html = '<table role="grid" class="mce-grid mce-grid-border" aria-readonly="true">';
+
+			for (var y = 0; y < 10; y++) {
+				html += '<tr>';
+
+				for (var x = 0; x < 10; x++) {
+					html += '<td role="gridcell" tabindex="-1"><a id="mcegrid' + (y * 10 + x) + '" href="#" ' +
+						'data-mce-x="' + x + '" data-mce-y="' + y + '"></a></td>';
+				}
+
+				html += '</tr>';
+			}
+
+			html += '</table>';
+
+			html += '<div class="mce-text-center" role="presentation">1 x 1</div>';
+
+			return html;
+		}
+
+		function selectGrid(tx, ty, control) {
+			var table = control.getEl().getElementsByTagName('table')[0];
+			var x, y, focusCell, cell, active;
+			var rtl = control.isRtl() || control.parent().rel == 'tl-tr';
+
+			table.nextSibling.innerHTML = (tx + 1) + ' x ' + (ty + 1);
+
+			if (rtl) {
+				tx = 9 - tx;
+			}
+
+			for (y = 0; y < 10; y++) {
+				for (x = 0; x < 10; x++) {
+					cell = table.rows[y].childNodes[x].firstChild;
+					active = (rtl ? x >= tx : x <= tx) && y <= ty;
+
+					editor.dom.toggleClass(cell, 'mce-active', active);
+
+					if (active) {
+						focusCell = cell;
+					}
+				}
+			}
+
+			return focusCell.parentNode;
+		}
+
+		if (editor.settings.table_grid === false) {
+			editor.addMenuItem('inserttable', {
+				text: 'Insert table',
+				icon: 'table',
+				context: 'table',
+				onclick: dialogs.table
+			});
+		} else {
+			editor.addMenuItem('inserttable', {
+				text: 'Insert table',
+				icon: 'table',
+				context: 'table',
+				ariaHideMenu: true,
+				onclick: function(e) {
+					if (e.aria) {
+						this.parent().hideAll();
+						e.stopImmediatePropagation();
+						dialogs.table();
+					}
+				},
+				onshow: function() {
+					selectGrid(0, 0, this.menu.items()[0]);
+				},
+				onhide: function() {
+					var elements = this.menu.items()[0].getEl().getElementsByTagName('a');
+					editor.dom.removeClass(elements, 'mce-active');
+					editor.dom.addClass(elements[0], 'mce-active');
+				},
+				menu: [
+					{
+						type: 'container',
+						html: generateTableGrid(),
+
+						onPostRender: function() {
+							this.lastX = this.lastY = 0;
+						},
+
+						onmousemove: function(e) {
+							var target = e.target, x, y;
+
+							if (target.tagName.toUpperCase() == 'A') {
+								x = parseInt(target.getAttribute('data-mce-x'), 10);
+								y = parseInt(target.getAttribute('data-mce-y'), 10);
+
+								if (this.isRtl() || this.parent().rel == 'tl-tr') {
+									x = 9 - x;
+								}
+
+								if (x !== this.lastX || y !== this.lastY) {
+									selectGrid(x, y, e.control);
+
+									this.lastX = x;
+									this.lastY = y;
+								}
+							}
+						},
+
+						onclick: function(e) {
+							var self = this;
+
+							if (e.target.tagName.toUpperCase() == 'A') {
+								e.preventDefault();
+								e.stopPropagation();
+								self.parent().cancel();
+
+								editor.undoManager.transact(function() {
+									insertTable(self.lastX + 1, self.lastY + 1);
+								});
+
+								editor.addVisual();
+							}
+						}
+					}
+				]
+			});
+		}
+
+		editor.addMenuItem('tableprops', {
+			text: 'Table properties',
+			context: 'table',
+			onPostRender: postRender,
+			onclick: dialogs.tableProps
+		});
+
+		editor.addMenuItem('deletetable', {
+			text: 'Delete table',
+			context: 'table',
+			onPostRender: postRender,
+			cmd: 'mceTableDelete'
+		});
+
+		editor.addMenuItem('cell', {
+			separator: 'before',
+			text: 'Cell',
+			context: 'table',
+			menu: [
+				{text: 'Cell properties', onclick: cmd('mceTableCellProps'), onPostRender: postRenderCell},
+				{text: 'Merge cells', onclick: cmd('mceTableMergeCells'), onPostRender: postRenderCell},
+				{text: 'Split cell', onclick: cmd('mceTableSplitCells'), onPostRender: postRenderCell}
+			]
+		});
+
+		editor.addMenuItem('row', {
+			text: 'Row',
+			context: 'table',
+			menu: [
+				{text: 'Insert row before', onclick: cmd('mceTableInsertRowBefore'), onPostRender: postRenderCell},
+				{text: 'Insert row after', onclick: cmd('mceTableInsertRowAfter'), onPostRender: postRenderCell},
+				{text: 'Delete row', onclick: cmd('mceTableDeleteRow'), onPostRender: postRenderCell},
+				{text: 'Row properties', onclick: cmd('mceTableRowProps'), onPostRender: postRenderCell},
+				{text: '-'},
+				{text: 'Cut row', onclick: cmd('mceTableCutRow'), onPostRender: postRenderCell},
+				{text: 'Copy row', onclick: cmd('mceTableCopyRow'), onPostRender: postRenderCell},
+				{text: 'Paste row before', onclick: cmd('mceTablePasteRowBefore'), onPostRender: postRenderCell},
+				{text: 'Paste row after', onclick: cmd('mceTablePasteRowAfter'), onPostRender: postRenderCell}
+			]
+		});
+
+		editor.addMenuItem('column', {
+			text: 'Column',
+			context: 'table',
+			menu: [
+				{text: 'Insert column before', onclick: cmd('mceTableInsertColBefore'), onPostRender: postRenderCell},
+				{text: 'Insert column after', onclick: cmd('mceTableInsertColAfter'), onPostRender: postRenderCell},
+				{text: 'Delete column', onclick: cmd('mceTableDeleteCol'), onPostRender: postRenderCell}
+			]
+		});
+
+		var menuItems = [];
+		each("inserttable tableprops deletetable | cell row column".split(' '), function(name) {
+			if (name == '|') {
+				menuItems.push({text: '-'});
+			} else {
+				menuItems.push(editor.menuItems[name]);
+			}
+		});
+
+		editor.addButton("table", {
+			type: "menubutton",
+			title: "Table",
+			menu: menuItems
+		});
+
+		// Select whole table is a table border is clicked
+		if (!Env.isIE) {
+			editor.on('click', function(e) {
+				e = e.target;
+
+				if (e.nodeName === 'TABLE') {
+					editor.selection.select(e);
+					editor.nodeChanged();
+				}
+			});
+		}
+
+		self.quirks = new Quirks(editor);
+
+		editor.on('Init', function() {
+			self.cellSelection = new CellSelection(editor);
+		});
+
+		editor.on('PreInit', function() {
+			// Remove internal data attributes
+			editor.serializer.addAttributeFilter(
+				'data-mce-cell-padding,data-mce-border,data-mce-border-color',
+				function(nodes, name) {
+
+					var i = nodes.length;
+
+					while (i--) {
+						nodes[i].attr(name, null);
+					}
+				});
+		});
+
+		// Register action commands
+		each({
+			mceTableSplitCells: function(grid) {
+				grid.split();
+			},
+
+			mceTableMergeCells: function(grid) {
+				var cell;
+
+				cell = editor.dom.getParent(editor.selection.getStart(), 'th,td');
+
+				if (!editor.dom.select('td.mce-item-selected,th.mce-item-selected').length) {
+					dialogs.merge(grid, cell);
+				} else {
+					grid.merge();
+				}
+			},
+
+			mceTableInsertRowBefore: function(grid) {
+				grid.insertRow(true);
+			},
+
+			mceTableInsertRowAfter: function(grid) {
+				grid.insertRow();
+			},
+
+			mceTableInsertColBefore: function(grid) {
+				grid.insertCol(true);
+			},
+
+			mceTableInsertColAfter: function(grid) {
+				grid.insertCol();
+			},
+
+			mceTableDeleteCol: function(grid) {
+				grid.deleteCols();
+			},
+
+			mceTableDeleteRow: function(grid) {
+				grid.deleteRows();
+			},
+
+			mceTableCutRow: function(grid) {
+				clipboardRows = grid.cutRows();
+			},
+
+			mceTableCopyRow: function(grid) {
+				clipboardRows = grid.copyRows();
+			},
+
+			mceTablePasteRowBefore: function(grid) {
+				grid.pasteRows(clipboardRows, true);
+			},
+
+			mceTablePasteRowAfter: function(grid) {
+				grid.pasteRows(clipboardRows);
+			},
+
+			mceTableDelete: function(grid) {
+				grid.deleteTable();
+			}
+		}, function(func, name) {
+			editor.addCommand(name, function() {
+				var grid = new TableGrid(editor);
+
+				if (grid) {
+					func(grid);
+					editor.execCommand('mceRepaint');
+					self.cellSelection.clear();
+				}
+			});
+		});
+
+		// Register dialog commands
+		each({
+			mceInsertTable: dialogs.table,
+			mceTableProps: function() {
+				dialogs.table(true);
+			},
+			mceTableRowProps: dialogs.row,
+			mceTableCellProps: dialogs.cell
+		}, function(func, name) {
+			editor.addCommand(name, function(ui, val) {
+				func(val);
+			});
+		});
+
+		// Enable tab key cell navigation
+		if (editor.settings.table_tab_navigation !== false) {
+			editor.on('keydown', function(e) {
+				var cellElm, grid, delta;
+
+				if (e.keyCode == 9) {
+					cellElm = editor.dom.getParent(editor.selection.getStart(), 'th,td');
+
+					if (cellElm) {
+						e.preventDefault();
+
+						grid = new TableGrid(editor);
+						delta = e.shiftKey ? -1 : 1;
+
+						editor.undoManager.transact(function() {
+							if (!grid.moveRelIdx(cellElm, delta) && delta > 0) {
+								grid.insertRow();
+								grid.refresh();
+								grid.moveRelIdx(cellElm, delta);
+							}
+						});
+					}
+				}
+			});
+		}
+
+		self.insertTable = insertTable;
+	}
+
+	PluginManager.add('table', Plugin);
+});
+})(this);

@@ -124,4 +124,8 @@ gulp.task('styles-critical', function() {
 
 
 // let's get this party started!
-gulp.task('default', [ 'icons', 'styles-theme', 'scripts-theme', 'styles-plugins', 'scripts-plugins', 'styles-critical' ]);
+gulp.task('default', [ 'icons', 'styles-theme', 'scripts-theme', 'styles-plugins', 'scripts-plugins'/*, 'styles-critical'*/ ]);
+
+
+
+

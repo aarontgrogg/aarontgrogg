@@ -1,1 +1,22 @@
-jQuery(document).ready(function(t){"use strict";t.expr[":"].contains=function(t,n,e){return(t.textContent||t.innerText||"").toUpperCase().indexOf(e[3].toUpperCase())>=0},t("#plugin-search-input").keyup(function(){var n=t(this).val(),e="#the-list";n.length<2?t(e).find("> tr").show():(t(e).find("> tr").hide(),t(e).find(".plugin-title strong:contains("+n+")").parent().parent().show())}).focus()});
+// via https://github.com/charliepark/faq-patrol
+// extend :contains to be case-insensitive; via http://stackoverflow.com/questions/187537/
+jQuery( document ).ready( function( $ ) {
+	'use strict';
+
+	$.expr[ ':' ].contains = function( a, i, m ) {
+		return (
+				a.textContent || a.innerText || ''
+			).toUpperCase().indexOf( m[ 3 ].toUpperCase() ) >= 0;
+	};
+
+	$( '#plugin-search-input' ).keyup( function() {
+		var val = $( this ).val();
+		var selector = '#the-list';
+		if ( val.length < 2 ) {
+			$( selector ).find( '> tr' ).show();
+		} else {
+			$( selector ).find( '> tr' ).hide();
+			$( selector ).find( '.plugin-title strong:contains(' + val + ')' ).parent().parent().show();
+		}
+	} ).focus();
+} );

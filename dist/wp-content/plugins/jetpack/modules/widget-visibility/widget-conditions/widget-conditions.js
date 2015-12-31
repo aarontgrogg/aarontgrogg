@@ -1,1 +1,170 @@
-jQuery(function(i){function t(t){if(i("body").hasClass("wp-customizer"))return void t.find(".widget-inside").css("top",0);if(t.hasClass("expanded")){t.attr("style")&&t.data("original-style",t.attr("style"));var e=t.width();if(400>e){var n=400-e;isRtl?t.css("position","relative").css("right","-"+n+"px").css("width","400px"):t.css("position","relative").css("left","-"+n+"px").css("width","400px")}}else t.data("original-style")?t.attr("style",t.data("original-style")).data("original-style",null):t.removeAttr("style")}var e=i("div#widgets-right");e.length&&i(e).find(".widget-control-actions").length||(e=i("form#customize-controls")),i("a.display-options").each(function(){var t=i(this),e=t.closest("div.widget");t.insertBefore(e.find("input.widget-control-save")),t.parent().removeClass("widget-control-noform").find(".spinner").remove().css("float","left").prependTo(t.parent())}),e.on("click.widgetconditions","a.add-condition",function(t){t.preventDefault();var e=i(this).closest("div.condition"),n=e.clone().insertAfter(e);n.find("select.conditions-rule-major").val(""),n.find("select.conditions-rule-minor").html("").attr("disabled"),n.find("span.conditions-rule-has-children").hide().html("")}),e.on("click.widgetconditions","a.display-options",function(e){e.preventDefault();var n=i(this),s=n.closest("div.widget");s.find("div.widget-conditional").toggleClass("widget-conditional-hide"),i(this).toggleClass("active"),s.toggleClass("expanded"),t(s),i(this).hasClass("active")?s.find("input[name=widget-conditions-visible]").val("1"):s.find("input[name=widget-conditions-visible]").val("0")}),e.on("click.widgetconditions","a.delete-condition",function(t){t.preventDefault();var e=i(this).closest("div.condition");e.is(":first-child")&&e.is(":last-child")?(i(this).closest("div.widget").find("a.display-options").click(),e.find("select.conditions-rule-major").val("").change()):e.detach()}),e.on("click.widgetconditions","div.widget-top",function(){var e=i(this).closest("div.widget"),n=e.find("a.display-options");n.hasClass("active")&&n.attr("opened","true"),n.attr("opened")&&(n.removeAttr("opened"),e.toggleClass("expanded"),t(e))}),i(document).on("change.widgetconditions","select.conditions-rule-major",function(){var t=i(this),e=t.siblings("select.conditions-rule-minor:first"),n=t.siblings("span.conditions-rule-has-children");if(t.val()){"page"!==t.val()&&n.hide().html(""),e.html("").append(i("<option/>").text(e.data("loading-text")));var s={action:"widget_conditions_options",major:t.val()};jQuery.post(ajaxurl,s,function(i){e.html(i).removeAttr("disabled")})}else t.siblings("select.conditions-rule-minor").attr("disabled","disabled").html(""),n.hide().html("")}),i(document).on("change.widgetconditions","select.conditions-rule-minor",function(){var t=i(this),e=t.siblings("select.conditions-rule-major"),n=t.siblings("span.conditions-rule-has-children");if("page"===e.val()){var s={action:"widget_conditions_has_children",major:e.val(),minor:t.val()};jQuery.post(ajaxurl,s,function(i){n.html(i).show()})}else n.hide().html("")})});
+/* jshint onevar: false, smarttabs: true */
+/* global ajaxurl */
+/* global isRtl */
+
+jQuery( function( $ ) {
+	var widgets_shell = $( 'div#widgets-right' );
+
+	if ( ! widgets_shell.length || ! $( widgets_shell ).find( '.widget-control-actions' ).length ) {
+		widgets_shell = $( 'form#customize-controls' );
+	}
+
+	function setWidgetMargin( $widget ) {
+
+		if ( $( 'body' ).hasClass( 'wp-customizer' ) ) {
+			// set the inside widget 2 top this way we can see the widget settings
+			$widget.find('.widget-inside').css( 'top', 0 );
+
+			return;
+		}
+
+		if ( $widget.hasClass( 'expanded' ) ) {
+			// The expanded widget must be at least 400px wide in order to
+			// contain the visibility settings. IE wasn't handling the
+			// margin-left value properly.
+
+			if ( $widget.attr( 'style' ) ) {
+				$widget.data( 'original-style', $widget.attr( 'style' ) );
+			}
+
+			var currentWidth = $widget.width();
+
+			if ( currentWidth < 400 ) {
+				var extra = 400 - currentWidth;
+				if( isRtl ) {
+					$widget.css( 'position', 'relative' ).css( 'right', '-' + extra + 'px' ).css( 'width', '400px' );
+				} else {
+					$widget.css( 'position', 'relative' ).css( 'left', '-' + extra + 'px' ).css( 'width', '400px' );
+				}
+
+			}
+		}
+		else if ( $widget.data( 'original-style' ) ) {
+			// Restore any original inline styles when visibility is toggled off.
+			$widget.attr( 'style', $widget.data( 'original-style' ) ).data( 'original-style', null );
+		}
+		else {
+			$widget.removeAttr( 'style' );
+		}
+	}
+
+	$( 'a.display-options' ).each( function() {
+		var $displayOptionsButton = $( this ),
+			$widget = $displayOptionsButton.closest( 'div.widget' );
+		$displayOptionsButton.insertBefore( $widget.find( 'input.widget-control-save' ) );
+
+		// Widgets with no configurable options don't show the Save button's container.
+		$displayOptionsButton
+			.parent()
+				.removeClass( 'widget-control-noform' )
+				.find( '.spinner' )
+					.remove()
+					.css( 'float', 'left' )
+					.prependTo( $displayOptionsButton.parent() );
+
+	} );
+
+	widgets_shell.on( 'click.widgetconditions', 'a.add-condition', function( e ) {
+		e.preventDefault();
+
+		var $condition = $( this ).closest( 'div.condition' ),
+			$conditionClone = $condition.clone().insertAfter( $condition );
+
+		$conditionClone.find( 'select.conditions-rule-major' ).val( '' );
+		$conditionClone.find( 'select.conditions-rule-minor' ).html( '' ).attr( 'disabled' );
+		$conditionClone.find( 'span.conditions-rule-has-children' ).hide().html( '' );
+	} );
+
+	widgets_shell.on( 'click.widgetconditions', 'a.display-options', function ( e ) {
+		e.preventDefault();
+
+		var $displayOptionsButton = $( this ),
+			$widget = $displayOptionsButton.closest( 'div.widget' );
+
+		$widget.find( 'div.widget-conditional' ).toggleClass( 'widget-conditional-hide' );
+		$( this ).toggleClass( 'active' );
+		$widget.toggleClass( 'expanded' );
+		setWidgetMargin( $widget );
+
+		if ( $( this ).hasClass( 'active' ) ) {
+			$widget.find( 'input[name=widget-conditions-visible]' ).val( '1' );
+		} else {
+			$widget.find( 'input[name=widget-conditions-visible]' ).val( '0' );
+		}
+
+	} );
+
+	widgets_shell.on( 'click.widgetconditions', 'a.delete-condition', function( e ) {
+		e.preventDefault();
+
+		var $condition = $( this ).closest( 'div.condition' );
+
+		if ( $condition.is( ':first-child' ) && $condition.is( ':last-child' ) ) {
+			$( this ).closest( 'div.widget' ).find( 'a.display-options' ).click();
+			$condition.find( 'select.conditions-rule-major' ).val( '' ).change();
+		} else {
+			$condition.detach();
+		}
+	} );
+
+	widgets_shell.on( 'click.widgetconditions', 'div.widget-top', function() {
+		var $widget = $( this ).closest( 'div.widget' ),
+			$displayOptionsButton = $widget.find( 'a.display-options' );
+
+		if ( $displayOptionsButton.hasClass( 'active' ) ) {
+			$displayOptionsButton.attr( 'opened', 'true' );
+		}
+
+		if ( $displayOptionsButton.attr( 'opened' ) ) {
+			$displayOptionsButton.removeAttr( 'opened' );
+			$widget.toggleClass( 'expanded' );
+			setWidgetMargin( $widget );
+		}
+	} );
+
+	$( document ).on( 'change.widgetconditions', 'select.conditions-rule-major', function() {
+		var $conditionsRuleMajor = $ ( this ),
+			$conditionsRuleMinor = $conditionsRuleMajor.siblings( 'select.conditions-rule-minor:first' ),
+			$conditionsRuleHasChildren = $conditionsRuleMajor.siblings( 'span.conditions-rule-has-children' );
+
+		if ( $conditionsRuleMajor.val() ) {
+			if ( $conditionsRuleMajor.val() !== 'page' ){
+				$conditionsRuleHasChildren.hide().html( '' );
+			}
+
+			$conditionsRuleMinor.html( '' ).append( $( '<option/>' ).text( $conditionsRuleMinor.data( 'loading-text' ) ) );
+
+			var data = {
+				action: 'widget_conditions_options',
+				major: $conditionsRuleMajor.val()
+			};
+
+			jQuery.post( ajaxurl, data, function( html ) {
+				$conditionsRuleMinor.html( html ).removeAttr( 'disabled' );
+			} );
+		} else {
+			$conditionsRuleMajor.siblings( 'select.conditions-rule-minor' ).attr( 'disabled', 'disabled' ).html( '' );
+			$conditionsRuleHasChildren.hide().html( '' );
+		}
+	} );
+
+	$( document ).on( 'change.widgetconditions', 'select.conditions-rule-minor', function() {
+		var $conditionsRuleMinor = $ ( this ),
+			$conditionsRuleMajor = $conditionsRuleMinor.siblings( 'select.conditions-rule-major' ),
+			$conditionsRuleHasChildren = $conditionsRuleMinor.siblings( 'span.conditions-rule-has-children' );
+
+		if ( $conditionsRuleMajor.val() === 'page' ) {
+			var data = {
+				action: 'widget_conditions_has_children',
+				major: $conditionsRuleMajor.val(),
+				minor: $conditionsRuleMinor.val()
+			};
+
+			jQuery.post( ajaxurl, data, function( html ) {
+				$conditionsRuleHasChildren.html( html ).show();
+			} );
+		} else {
+			$conditionsRuleHasChildren.hide().html( '' );
+		}
+	} );
+} );

@@ -1,1 +1,0 @@
-tinyMCE.addI18n("ja.advhr_dlg",{size:"高さ",noshade:"影なし",width:"幅",normal:"通常",widthunits:"単位"});

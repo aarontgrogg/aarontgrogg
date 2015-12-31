@@ -1,1 +1,3 @@
-jQuery(function(t){t('.contact-form input[type="date"]').datepicker({dateFormat:"yy-mm-dd"})});
+jQuery( function ( $ ) {
+	$( '.contact-form input[type="date"]' ).datepicker( { dateFormat : 'yy-mm-dd' } );
+} );

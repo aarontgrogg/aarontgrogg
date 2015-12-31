@@ -1,1 +1,49 @@
-!function(n){function e(){i=n("#the-list"),t(),o(),r()}function t(){i.sortable({cancel:".no-items",stop:function(n,e){return e.item.is(":first-child")?i.sortable("cancel"):void a()}})}function a(){i.find(".menu-label-row").each(function(){var e=n(this).data("term_id");n(this).nextUntil(".menu-label-row").each(function(t){var a=n(this);a.find(".menu-order-value").val(t),a.find(".nova-menu-term").val(e)})})}function r(){n(".tablenav").prepend('<input type="submit" class="button-primary button-reorder alignright" value="'+_novaDragDrop.reorder+'" name="'+_novaDragDrop.reorderName+'" />')}function o(){n("#posts-filter").append('<input type="hidden" name="'+_novaDragDrop.nonceName+'" value="'+_novaDragDrop.nonce+'" />')}var i;n(document).ready(e)}(jQuery);
+/* jshint onevar: false, smarttabs: true */
+/* global _novaDragDrop */
+
+(function($){
+	var list;
+
+	function init() {
+		list = $('#the-list');
+		dragMenus();
+		addNonce();
+		addSubmitButton();
+	}
+
+	function dragMenus() {
+		list.sortable({
+			cancel: '.no-items',
+			stop: function( event, ui ) {
+				if ( ui.item.is(':first-child') ) {
+					return list.sortable('cancel');
+				}
+				//
+				reOrder();
+			}
+		});
+	}
+
+	function reOrder() {
+		list.find('.menu-label-row').each(function() {
+			var term_id = $(this).data('term_id');
+			$(this).nextUntil('.menu-label-row').each(function(i) {
+				var row = $(this);
+				row.find('.menu-order-value').val(i);
+				row.find('.nova-menu-term').val(term_id);
+			});
+		});
+	}
+
+	function addSubmitButton() {
+		$('.tablenav').prepend('<input type="submit" class="button-primary button-reorder alignright" value="' + _novaDragDrop.reorder + '" name="' + _novaDragDrop.reorderName + '" />');
+	}
+
+	function addNonce() {
+		$('#posts-filter').append('<input type="hidden" name="' + _novaDragDrop.nonceName + '" value="' + _novaDragDrop.nonce + '" />');
+	}
+
+	// do it
+	$(document).ready(init);
+})(jQuery);
+

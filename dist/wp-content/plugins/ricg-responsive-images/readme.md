@@ -1,3 +1,11 @@
+##WordPress 4.4 and Native Responsive Images
+
+As of WordPress 4.4, images are responsive by default. If you are on WordPress 4.4 or plan to update, you will not need to install this plugin.
+
+If you have had this plugin installed since before version 2.5 but are running version 4.4 of WordPress, it is important that you leave the plugin installed. This is because all versions of the plugin before version 2.5 relied on a `data-sizes` attribute being present on an image in order to provide the responsive markup needed. If the plugin in this case is removed, then images in posts will be left with invalid markup. We are working to address this issue, and you can [keep track of our progress here](https://github.com/ResponsiveImagesCG/wp-tevko-responsive-images/issues/178).
+
+You can still use the plugin for advanced image compression support or as a simple way to include the picturefill script. The plugin will fall back to WordPress default functions if responsive image support is detected in your installation.
+
 RICG-responsive-images
 ---
 
@@ -9,7 +17,7 @@ This plugin works by including all available image sizes for each image upload. 
 
 ## Contribution Guidelines
 
-Please submit pull requests to our dev branch. If your contribution requires such, please aim to include appropriate tests with your pr as well.
+Please submit pull requests to our dev branch. If your contribution requires such, please aim to include appropriate tests with your PR as well.
 
 ## Documentation
 
@@ -19,7 +27,7 @@ No configuration is needed! Just install the plugin and enjoy automatic responsi
 
 ### For Theme Developers
 
-This plugin includes several functions that can be used by theme and plugin developers in templates.
+This plugin includes several functions that can be used by theme and plugin developers in templates, as well as hooks to filter their output.
 
 ### Advanced Image Compression
 
@@ -153,6 +161,26 @@ Array of width and height values in pixels (in that order).
 
 `wp_calculate_image_srcset()`
 
+##### Usage Example
+
+```
+<?php
+// Increase the limit to 2048px if the image is wider than 800px.
+
+function custom_max_srcset_image_width( $max_width, $size_array ) {
+	$width = $size_array[0];
+
+	if ( $width > 800 ) {
+		$max_width = 2048;
+	}
+
+	return $max_width;
+}
+add_filter( 'max_srcset_image_width', 'custom_max_srcset_image_width', 10, 2 );
+
+?>
+```
+
 ---
 
 #### Hook wp_calculate_image_srcset
@@ -179,6 +207,9 @@ $width (array) {
 **$size_array** (array)
 Array of width and height values in pixels (in that order).
 
+**$image_src** (string)
+The `src` of the image.
+
 **$image_meta** (array)
 The image meta data as returned by `wp_get_attachment_metadata()`.
 
@@ -188,6 +219,33 @@ Image attachment ID or 0.
 ##### Used by
 
 `wp_calculate_image_srcset()`
+
+##### Usage Example
+
+```
+<?php
+// Remove sources wider than 800px from the 'srcset' for featured images.
+
+function custom_wp_calculate_image_srcset( $sources, $size_array, $image_src, $image_meta, $attachment_id ) {
+	if ( array_key_exists( 'post-thumbnail', $image_meta['sizes'] ) ) {
+		$post_thumbnail_file = $image_meta['sizes']['post-thumbnail']['file'];
+		$image_src_file = wp_basename( $image_src );
+
+		if ( $image_src_file === $post_thumbnail_file ) {
+			foreach ( $sources as $key => $source ) {
+				if ( $source['value'] > 800 ) {
+					unset( $sources[ $key ] );
+				}
+			}
+		}
+	}
+
+	return $sources;
+}
+add_filter( 'wp_calculate_image_srcset', 'custom_wp_calculate_image_srcset', 10, 5 );
+
+?>
+```
 
 ---
 
@@ -313,6 +371,36 @@ Image attachment ID of the original image or 0.
 
 `wp_calculate_image_sizes()`
 
+##### Usage Example
+
+```
+<?php
+// Constrain the width of full size images to the content width.
+
+function custom_wp_calculate_image_sizes( $sizes, $size, $image_src, $image_meta, $attachment_id ) {
+	if ( is_array( $size ) ) {
+		global $content_width;
+		$width = $size[0]
+
+		if ( $width > $content_width ) {
+			$upload_dir = wp_upload_dir();
+			$upload_baseurl = $upload_dir['baseurl'];
+			$fullsize_file = $image_meta['file'];
+			$fullsize_url = trailingslashit( $upload_baseurl ) . $fullsize_file;
+
+			if ( $image_src === $fullsize_url ) {
+				$sizes = '(max-width: ' . $content_width . 'px) 100vw, ' . $content_width . 'px';
+			}
+		}
+	}
+
+	return $sizes;
+}
+add_filter( 'wp_calculate_image_sizes', 'custom_wp_calculate_image_sizes', 10, 5 );
+
+?>
+```
+
 ---
 
 ### Backward Compatibility
@@ -360,9 +448,19 @@ We use a hook because if you attempt to dequeue a script before it's enqueued, w
 
 ## Version
 
-3.1.0
+3.1.1
 
 ## Changelog
+
+**3.1.1**
+
+- Fixes a bug where the srcset of images in imported content was missing or broken (issue #263).
+- Improved calculation of ratio difference for images to be included in the srcset. (issue #260).
+- Fixes a bug where `img` tags without ending slash don't get responsive images (issue #259).
+- Deprecates the helper function `tevkori_get_media_embedded_in_content()` which is no longer used.
+- Makes sure that the setup of default themes doesn't break the tests (issue #261).
+- Adds more examples to the Hook Reference in readme.md.
+- Corrections and improvements to inline documentation.
 
 **3.1.0**
 
