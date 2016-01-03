@@ -107,8 +107,8 @@ define( 'WP_HOME', $_PROTOCOL.'://'.$_HOST );
 define( 'WP_SITEURL', $_PROTOCOL.'://'.$_HOST );
 define( 'DOMAIN_CURRENT_SITE', $_DOMAIN_CURRENT_SITE );
 //define( 'WPCACHEHOME', $_SITE_DIRECTORY . '/wp-content/plugins/wp-super-cache/' ); //Added by WP-Cache Manager
-define( 'TEMPLATEPATH', $_SITE_DIRECTORY . '/wp-content/themes/boilerplate' );
-define( 'STYLESHEETPATH', $_SITE_DIRECTORY . '/wp-content/themes/atg' );
+//define( 'TEMPLATEPATH', $_SITE_DIRECTORY . '/wp-content/themes/boilerplate' );
+//define( 'STYLESHEETPATH', $_SITE_DIRECTORY . '/wp-content/themes/atg' );
 define( 'WP_PLUGIN_URL', $_SITE_DIRECTORY . '/wp-content/plugins' );
 define( 'COOKIEPATH', preg_replace('|'.$_PROTOCOL.'?://[^/]+|i', '', WP_HOME.'/') );
 define( 'SITECOOKIEPATH', preg_replace('|'.$_PROTOCOL.'?://[^/]+|i', '', WP_SITEURL.'/') );
