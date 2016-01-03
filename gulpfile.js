@@ -74,14 +74,17 @@ gulp.task( 'scripts-plugins', function() {
 
 });*/
 gulp.task('styles-critical', function() {
-    var remoteURL = 'https://aarontgrogg.dreamhosters.com',
+    // ignore self-signed ssl cert warning
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+    // get set-up
+    var remoteURL = 'https://aarontgrogg.dev',
         request = require('request'),
         fs = require('fs'),
         tmpDir = require('os').tmpdir(),
         cssUrl = remoteURL + '/wp-content/themes/atg/style-min.css',
-        cssPath = path.join( tmpDir, 'style.css' ),
+        cssPath = path.join( __dirname, 'src/styles/style.css' ),
         includePath = path.join( __dirname, 'src/styles/critical.css' );
-
+    // get started
     request( cssUrl )
         .pipe( fs.createWriteStream( cssPath ) ).on( 'close', function() {
             criticalcss.getRules( cssPath, function( err, output ) {
@@ -105,7 +108,8 @@ gulp.task('styles-critical', function() {
                 }
             });
         });
-
+});
+gulp.task('styles-critical-php', function() {
     return gulp.src( 'src/styles/critical.css' )
         // minify it
         .pipe( plugins.minifyCss() )
@@ -121,10 +125,8 @@ gulp.task('styles-critical', function() {
         .pipe( gulp.dest( THEME_DIST_DIR ) );
 });
 
-
-
 // let's get this party started!
-gulp.task('default', [ 'icons', 'styles-theme', 'scripts-theme', 'styles-plugins', 'scripts-plugins'/*, 'styles-critical'*/ ]);
+gulp.task('default', [ 'icons', 'styles-theme', 'scripts-theme', 'styles-plugins', 'scripts-plugins', 'styles-critical' ]);
 
 
 
