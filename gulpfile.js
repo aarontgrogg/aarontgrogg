@@ -65,24 +65,22 @@ gulp.task( 'scripts-plugins', function() {
 });
 
 // Generate & Inline Critical-path CSS
-/*gulp.task( 'critical', function () {
+gulp.task( 'critical', function () {
     return gulp.src( 'https://aarontgrogg.dreamhosters.com/' ) // grab home page
         .pipe( critical({
             minify: true                                    // minify results
         }))
         .pipe( gulp.dest( THEME_DIST_DIR + '/critical.css' ) ); // save files into dist directory
 
-});*/
+});
 gulp.task('styles-critical', function() {
-    // ignore self-signed ssl cert warning
-    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
     // get set-up
-    var remoteURL = 'https://aarontgrogg.dev',
+    var remoteURL = 'https://aarontgrogg.com/',
         request = require('request'),
         fs = require('fs'),
         tmpDir = require('os').tmpdir(),
-        cssUrl = remoteURL + '/wp-content/themes/atg/style-min.css',
-        cssPath = path.join( __dirname, 'src/styles/style.css' ),
+        cssUrl = remoteURL + 'wp-content/themes/atg/style-min.css',
+        cssPath = path.join( tmpDir, 'critical.css' ),
         includePath = path.join( __dirname, 'src/styles/critical.css' );
     // get started
     request( cssUrl )
@@ -91,6 +89,8 @@ gulp.task('styles-critical', function() {
                 if ( err ) {
                     throw new Error( err );
                 } else {
+                    // ignore self-signed ssl cert warning
+                    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
                     criticalcss.findCritical( remoteURL, { 
                         rules: JSON.parse( output ) 
                     }, function( err, output ) {
@@ -101,15 +101,29 @@ gulp.task('styles-critical', function() {
                                 if ( err ) {
                                     return console.log( err );
                                 }
-                                console.log( 'Critical written to include!' );
+                                console.log( 'Critical CSS written: ', includePath );
                             });
                         }
+                        gulp.src( 'src/styles/critical.css' )
+                            // minify it
+                            .pipe( plugins.minifyCss() )
+                            // wrap with style tags
+                            .pipe( plugins.concatUtil.header('<style>') )
+                            .pipe( plugins.concatUtil.footer('</style>') )
+                            // convert it to a php file
+                            .pipe( plugins.rename({
+                                basename: 'criticalcss',
+                                extname: '.php'
+                            }) )
+                            // insert it Wordpress theme folder
+                            .pipe( gulp.dest( THEME_DIST_DIR ) );
+                            console.log( 'Critical PHP written: ', THEME_DIST_DIR, 'criticalcss.php' );
                     });
                 }
             });
         });
 });
-gulp.task('styles-critical-php', function() {
+/*gulp.task('styles-critical-php', function() {
     return gulp.src( 'src/styles/critical.css' )
         // minify it
         .pipe( plugins.minifyCss() )
@@ -123,7 +137,7 @@ gulp.task('styles-critical-php', function() {
         }) )
         // insert it Wordpress theme folder
         .pipe( gulp.dest( THEME_DIST_DIR ) );
-});
+});*/
 
 // let's get this party started!
 gulp.task('default', [ 'icons', 'styles-theme', 'scripts-theme', 'styles-plugins', 'scripts-plugins', 'styles-critical' ]);
