@@ -123,24 +123,9 @@ gulp.task('styles-critical', function() {
             });
         });
 });
-/*gulp.task('styles-critical-php', function() {
-    return gulp.src( 'src/styles/critical.css' )
-        // minify it
-        .pipe( plugins.minifyCss() )
-        // wrap with style tags
-        .pipe( plugins.concatUtil.header('<style>') )
-        .pipe( plugins.concatUtil.footer('</style>') )
-        // convert it to a php file
-        .pipe( plugins.rename({
-            basename: 'criticalcss',
-            extname: '.php'
-        }) )
-        // insert it Wordpress theme folder
-        .pipe( gulp.dest( THEME_DIST_DIR ) );
-});*/
 
 // let's get this party started!
-gulp.task('default', [ 'icons', 'styles-theme', 'scripts-theme', 'styles-plugins', 'scripts-plugins', 'styles-critical' ]);
+gulp.task('default', [ 'icons', 'styles-theme', 'scripts-theme', 'styles-plugins', 'scripts-plugins'/*, 'styles-critical'*/ ]);
 
 
 
