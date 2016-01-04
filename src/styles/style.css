@@ -572,6 +572,7 @@ ul.social-links a {
     display: block;
     padding: 10px;
     color: #444;
+    fill: #444; /* will cascade to SVG icons */
     text-align: center;
     background: #eee;
 }
