@@ -516,6 +516,9 @@ article header h2 a:hover {
     -webkit-background-size: 100% 1px;
     background-size: 100% 1px;
 }
+.entry-content .note a {
+    text-shadow: 3px 0 0 #eee,-3px 0 0 #eee;
+}
 .entry-content a:hover {
     background-image: -webkit-linear-gradient( left, #ff4b33 0%, #ff4b33 100%);
     background-image: linear-gradient( to right, #ff4b33 0%, #ff4b33 100%);
