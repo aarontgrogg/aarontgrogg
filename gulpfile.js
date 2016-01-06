@@ -65,14 +65,6 @@ gulp.task( 'scripts-plugins', function() {
 });
 
 // Generate & Inline Critical-path CSS
-gulp.task( 'critical', function () {
-    return gulp.src( 'https://aarontgrogg.dreamhosters.com/' ) // grab home page
-        .pipe( critical({
-            minify: true                                    // minify results
-        }))
-        .pipe( gulp.dest( THEME_DIST_DIR + '/critical.css' ) ); // save files into dist directory
-
-});
 gulp.task('styles-critical', function() {
     // get set-up
     var remoteURL = 'https://aarontgrogg.com/',
