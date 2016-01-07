@@ -72,11 +72,10 @@ gulp.task('styles-critical', function() {
         fs = require('fs'),
         tmpDir = require('os').tmpdir(),
         cssUrl = remoteURL + 'wp-content/themes/atg/style-min.css',
-        cssPath = path.join( tmpDir, 'critical.css' ),
-        includePath = path.join( __dirname, 'src/styles/critical.css' );
+        cssPath = path.join( __dirname, 'src/styles/critical.css' );
     // get started
     request( cssUrl )
-        .pipe( fs.createWriteStream( cssPath ) ).on( 'close', function() {
+        .pipe( fs.createWriteStream( cssPath ) ).on( 'finish', function() {
             criticalcss.getRules( cssPath, function( err, output ) {
                 if ( err ) {
                     throw new Error( err );
@@ -89,11 +88,11 @@ gulp.task('styles-critical', function() {
                         if ( err ) {
                             throw new Error( err );
                         } else {
-                            fs.writeFile( includePath, output, function( err ) {
+                            fs.writeFile( cssPath, output, function( err ) {
                                 if ( err ) {
                                     return console.log( err );
                                 }
-                                console.log( 'Critical CSS written: ', includePath );
+                                console.log( 'Critical CSS written: ', cssPath );
                             });
                         }
                         gulp.src( 'src/styles/critical.css' )
@@ -117,7 +116,7 @@ gulp.task('styles-critical', function() {
 });
 
 // let's get this party started!
-gulp.task('default', [ 'icons', 'styles-theme', 'scripts-theme', 'styles-plugins', 'scripts-plugins'/*, 'styles-critical'*/ ]);
+gulp.task('default', [ 'icons', 'styles-theme', 'scripts-theme', 'styles-plugins', 'scripts-plugins', 'styles-critical' ]);
 
 
 
