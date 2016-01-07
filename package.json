@@ -9,7 +9,6 @@
     "url": "https://github.com/aarontgrogg/aarontgrogg"
   },
   "devDependencies": {
-    "critical": "^0.7.0",
     "criticalcss": "^0.6.1",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",
