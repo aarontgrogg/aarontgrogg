@@ -55,6 +55,7 @@ resume/
 rte/
 stats/
 src/styles/critical.css
+dist/wp-config.php
 dist/wp-content/themes/atg/criticalcss.php
 dist/wp-content/themes/atg/style-min.css
 dist/wp-content/themes/atg/icons/icons.svg
