@@ -235,9 +235,11 @@ blockquote p {
 }
 .inline-top {
     margin-top: 0;
+    border-top: 1px solid #fff;
 }
 .inline-bottom {
     margin-bottom: 0;
+    border-bottom: 1px solid #fff;
 }
 .inline-bottom + p {
     margin-top: 0;
