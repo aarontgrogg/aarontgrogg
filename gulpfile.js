@@ -92,7 +92,7 @@ gulp.task('styles-critical', function() {
                                 if ( err ) {
                                     return console.log( err );
                                 }
-                                console.log( 'Critical CSS written: ', cssPath );
+                                console.log( 'Critical CSS written: ' + cssPath );
                             });
                         }
                         gulp.src( 'src/styles/critical.css' )
@@ -108,7 +108,7 @@ gulp.task('styles-critical', function() {
                             }) )
                             // insert it Wordpress theme folder
                             .pipe( gulp.dest( THEME_DIST_DIR ) );
-                            console.log( 'Critical PHP written: ', THEME_DIST_DIR, 'criticalcss.php' );
+                            console.log( 'Critical PHP written: /' + THEME_DIST_DIR + '/criticalcss.php' );
                     });
                 }
             });
