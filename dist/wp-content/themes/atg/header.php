@@ -35,11 +35,11 @@
 	/* We add some JavaScript to pages with the comment form
 	 * to support sites with threaded comments (when in use).
 	 */
-	if (is_single() || is_page() || is_home()) : ?>
+if (is_single() || is_page() || is_home()) : ?>
 		<meta name="googlebot" content="index,noarchive,follow,noodp">
 		<meta name="robots" content="all,index,follow">
 		<meta name="msnbot" content="all,index,follow">
-	<?php else: ?>
+<?php else: ?>
 		<meta name="googlebot" content="noindex,noarchive,follow,noodp">
 		<meta name="robots" content="noindex,follow">
 		<meta name="msnbot" content="noindex,follow">
