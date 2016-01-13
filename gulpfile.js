@@ -78,7 +78,7 @@ gulp.task('styles-critical', function() {
         // css destination file
         dest: 'dist/wp-content/themes/atg/critical-min.css',
         // page to use for picking critical
-        src: 'https://aarontgrogg.dev/',
+        src: 'https://aarontgrogg.dreamhosters.com/',
         // make sure the output is minified
         minify: true,
         // pick multiple dimensions for top nav
@@ -156,7 +156,7 @@ gulp.task('styles-critical', function() {
 });
 
 // let's get this party started!
-gulp.task('default', [ 'icons', 'styles-theme', 'scripts-theme', 'styles-plugins', 'scripts-plugins'/*, 'styles-critical'*/ ]);
+gulp.task('default', [ 'icons', 'styles-theme', 'scripts-theme', 'styles-plugins', 'scripts-plugins', 'styles-critical' ]);
 
 
 

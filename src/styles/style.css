@@ -610,7 +610,8 @@ ul.social-links.social-connect li {
     max-width: 20%;
 }
 ul.social-links.social-connect a {
-    padding: .5em 0 .3em;
+    padding-left: 0;
+    padding-right: 0;
 }
 article a:hover *,
 article a:focus *,
