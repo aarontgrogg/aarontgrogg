@@ -9,6 +9,13 @@
 	Tags: black, blue, white, two-columns, fixed-width, custom-header, custom-background, threaded-comments, sticky-post, translation-ready, microformats, rtl-language-support, editor-style
 */
 
+//	store these for later
+	define( 'TEMPLATE_DIRECTORY', get_template_directory() );
+	define( 'STYLESHEET_DIRECTORY', get_stylesheet_directory() );
+
+//	define site revision for cache-busting
+	define( 'WP_SITE_REVISION', '20160113' );
+
 //	remove 'http://s0.wp.com/wp-content/js/devicepx-jetpack.js' script
 	add_action('wp_enqueue_scripts', create_function(null, "wp_dequeue_script('devicepx');"), 20);
 
@@ -86,12 +93,30 @@
 		}
 	}
 
-//	utility function to get style.css link and convert it to -min file
-	if (!function_exists( 'atg_css_min' )) {
-		function atg_css_min() {
-			echo str_replace("style.css", "style-min.css", get_bloginfo('stylesheet_url'));
-		}
-	}
+
+//	add the critical CSS in the <head>
+	if ( ! function_exists( 'atg_add_css' ) ) :
+		function atg_add_css() {
+			
+			// get the full css file
+			$fullstyle = THEME_DIRECTORY . '/' .$style. '-min.' . WP_SITE_REVISION . '.css';
+
+			// check if they need the critical CSS
+			if ($_COOKIE['atg-csscached-'.$style] === WP_SITE_REVISION) {
+				// if they have the cookie, then they have the CSS file cached, so simply enqueue it
+				wp_enqueue_style( $style, $fullstyle );
+			} else {
+				// write the critical CSS into the page
+				echo '<style>';
+					include( STYLESHEET_DIRECTORY . '/critical-min.css' );
+				echo '</style>'.PHP_EOL;
+				echo "<script>!function(e,t){'use strict';function s(s){function n(){var t,s;for(s=0;s<a.length;s+=1)a[s].href&&a[s].href.indexOf(r.href)>-1&&(t=!0);t?r.media='all':e.setTimeout(n)}var r=t.createElement('link'),i=t.getElementsByTagName('script')[0],a=t.styleSheets;return r.rel='stylesheet',r.href=s,r.media='only x',i.parentNode.insertBefore(r,i),n(),r}s('".$fullstyle."'),t.cookie='atg-csscached-".$style."=".WP_SITE_REVISION.";expires=\"Tue, 19 Jan 2038 03:14:07 GMT\";path=/'}(this,this.document);</script>".PHP_EOL;
+				echo '<noscript><link rel="stylesheet" href="'.$fullstyle.'"></noscript>'.PHP_EOL;
+			}
+
+		} // atg_add_css
+	endif; // function_exists
+
 
 //	utility function to get page title
 	if (!function_exists( 'atg_page_title' )) {

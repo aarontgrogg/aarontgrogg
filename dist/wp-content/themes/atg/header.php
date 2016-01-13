@@ -24,7 +24,7 @@
 				echo ' | ' . sprintf(__('Page %s', 'twentyten'), max($paged, $page));
 			}
 		?></title>
-		<link rel="stylesheet" href="<?php atg_css_min(); ?>">
+<?php atg_add_css(); ?>
 		<link rel="profile" href="http://gmpg.org/xfn/11">
 		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
 		<meta name="description" content="<?php atg_page_description(); ?>">
@@ -43,7 +43,7 @@ if (is_single() || is_page() || is_home()) : ?>
 		<meta name="googlebot" content="noindex,noarchive,follow,noodp">
 		<meta name="robots" content="noindex,follow">
 		<meta name="msnbot" content="noindex,follow">
-<?php	endif; // end (is_single() || is_page() || is_home()) ?>
+<?php endif; ?>
 		<meta name="referrer" content="always">
 		<meta property="twitter:card" content="summary">
 		<meta property="twitter:site" content="@aarontgrogg">

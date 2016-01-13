@@ -1,8 +1,7 @@
-// define requirements
+// define requirements & local variables
 var gulp = require('gulp'),
     path = require('path'),
     critical = require('critical'),
-    criticalcss = require('criticalcss'),
     plugins = require('gulp-load-plugins')(),
     AUTOPREFIXER_MATRIX = 'last 2 version',
     THEME_DIST_DIR = 'dist/wp-content/themes/atg',
@@ -64,100 +63,40 @@ gulp.task( 'scripts-plugins', function() {
         .pipe( gulp.dest( PLUGIN_DIST_DIR ) );              // save files into dist directory
 });
 
-// Generate & Inline Critical-path CSS
-gulp.task('styles-critical', function() {
-    // prevent Node from balking at self-signed ssl cert
-    process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
-    // get started
+// generate critical CSS
+gulp.task( 'styles-critical', function() {
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;           // prevent Node from balking at self-signed ssl cert
     critical.generate({
         /* note: cannot use 'base:' or will break remote 'src:' */
-        // we want css, not html
-        inline: false,
-        // css source file
-        css: 'dist/wp-content/themes/atg/style-min.css',
-        // css destination file
-        dest: 'dist/wp-content/themes/atg/critical-min.css',
-        // page to use for picking critical
-        src: 'https://aarontgrogg.dreamhosters.com/',
-        // make sure the output is minified
-        minify: true,
-        // pick multiple dimensions for top nav
-        dimensions: [{
+        inline: false,                                      // we want css, not html
+        css: 'src/styles/style.css',                        // css source file
+        dest: THEME_DIST_DIR + '/critical-min.css',         // css destination file
+        src: 'https://aarontgrogg.dreamhosters.com/',       // page to use for picking critical
+        minify: true,                                       // make sure the output is minified
+        dimensions: [{                                      // pick multiple dimensions for top nav
             height: 500,
             width: 300
-        }, {
+        },{
             height: 600,
             width: 480
-        }, {
+        },{
             height: 800,
             width: 600
-        }, {
+        },{
             height: 940,
             width: 1280
-        }, {
+        },{
             height: 1000,
             width: 1300
-        }, {
+        },{
             height: 1200,
             width: 1800
-        }, {
+        },{
             height: 1200,
             width: 2300
         }]
     });
-
-    // get set-up
-    /*var remoteURL = 'https://aarontgrogg.com/',
-        request = require('request'),
-        fs = require('fs'),
-        tmpDir = require('os').tmpdir(),
-        cssUrl = remoteURL + 'wp-content/themes/atg/style-min.css',
-        cssPath = path.join( __dirname, 'src/styles/critical.css' );*/
-    // get started
-    /*request( cssUrl )
-        .pipe( fs.createWriteStream( cssPath ) ).on( 'finish', function() {
-            criticalcss.getRules( cssPath, function( err, output ) {
-                if ( err ) {
-                    throw new Error( err );
-                } else {
-                    // ignore self-signed ssl cert warning
-                    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-                    criticalcss.findCritical( remoteURL, { 
-                        rules: JSON.parse( output ) 
-                    }, function( err, output ) {
-                        if ( err ) {
-                            throw new Error( err );
-                        } else {
-                            fs.writeFile( cssPath, output, function( err ) {
-                                if ( err ) {
-                                    return console.log( err );
-                                }
-                                console.log( 'Critical CSS written: ' + cssPath );
-                            });
-                        }
-                        gulp.src( 'src/styles/critical.css' )
-                            // minify it
-                            .pipe( plugins.minifyCss() )
-                            // wrap with style tags
-                            .pipe( plugins.concatUtil.header('<style>') )
-                            .pipe( plugins.concatUtil.footer('</style>') )
-                            // convert it to a php file
-                            .pipe( plugins.rename({
-                                basename: 'criticalcss',
-                                extname: '.php'
-                            }) )
-                            // insert it Wordpress theme folder
-                            .pipe( gulp.dest( THEME_DIST_DIR ) );
-                        console.log( 'Critical PHP written: /' + THEME_DIST_DIR + '/criticalcss.php' );
-                    });
-                }
-            });
-        });*/
 });
 
 // let's get this party started!
 gulp.task('default', [ 'icons', 'styles-theme', 'scripts-theme', 'styles-plugins', 'scripts-plugins', 'styles-critical' ]);
-
-
-
-
