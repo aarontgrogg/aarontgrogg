@@ -546,6 +546,7 @@ if ( ! function_exists( 'boilerplate_posted_in' ) ) :
 endif;
 /*	End original TwentyTen functions (from Starkers Theme, renamed into this namespace) */
 
+
 /*	Begin Boilerplate */
 	// Add Admin
 	if ( is_admin() ) {
@@ -559,6 +560,19 @@ endif;
 		}
 	endif;
 	add_filter( 'the_generator', 'boilerplate_complete_version_removal' );
+
+	// remove ?ver=X.X.X from CSS and JS URLs (https://wordpress.org/support/topic/get-rid-of-ver-on-the-end-of-cssjs-files)
+	if ( ! function_exists( 'boilerplate_remove_cssjs_ver' ) ) :
+		function boilerplate_remove_cssjs_ver( $src ) {
+			if( strpos( $src, '?ver=' ) ) {
+				$src = remove_query_arg( 'ver', $src );
+			}
+			return $src;
+		}
+	endif;
+	add_filter( 'style_loader_src', 'boilerplate_remove_cssjs_ver', 10, 2 );
+	add_filter( 'script_loader_src', 'boilerplate_remove_cssjs_ver', 10, 2 );
+
 
 	// add thumbnail support
 	if ( function_exists( 'add_theme_support' ) ) :
