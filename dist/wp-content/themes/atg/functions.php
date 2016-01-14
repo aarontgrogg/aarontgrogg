@@ -9,12 +9,20 @@
 	Tags: black, blue, white, two-columns, fixed-width, custom-header, custom-background, threaded-comments, sticky-post, translation-ready, microformats, rtl-language-support, editor-style
 */
 
-//	store these for later
-	define( 'TEMPLATE_DIRECTORY', get_template_directory() );
-	define( 'STYLESHEET_DIRECTORY', get_stylesheet_directory() );
-
-//	define site revision for cache-busting
-	define( 'WP_SITE_REVISION', '20160113' );
+//	utility functions to create and add cache-buster, based on file's last modified date
+//	adapted from: http://www.particletree.com/notebook/automatically-version-your-css-and-javascript-files/
+	if (!function_exists( 'atg_create_cache_buster' )) {
+		function atg_create_cache_buster( $url ){
+		    return filemtime( $_SERVER['DOCUMENT_ROOT'] . $url );
+		}
+	}
+	if (!function_exists( 'atg_add_cache_buster' )) {
+		function atg_add_cache_buster( $url ){
+			$path = pathinfo( $url );
+			$ver = '.' . filemtime( $_SERVER['DOCUMENT_ROOT'] . $url ) . '.';
+			return $path['dirname'] . '/' . str_replace( '.', $ver, $path['basename'] );
+		}
+	}
 
 //	remove 'http://s0.wp.com/wp-content/js/devicepx-jetpack.js' script
 	add_action('wp_enqueue_scripts', create_function(null, "wp_dequeue_script('devicepx');"), 20);
@@ -98,19 +106,25 @@
 	if ( ! function_exists( 'atg_add_css' ) ) :
 		function atg_add_css() {
 			
+			// name of style sheet
+			$style = '/wp-content/themes/atg/style-min.css';
+
+			// get cache-buster
+			$cachebuster = (string) atg_create_cache_buster( $style );
+
 			// get the full css file
-			$fullstyle = THEME_DIRECTORY . '/' .$style. '-min.' . WP_SITE_REVISION . '.css';
+			$fullstyle = atg_add_cache_buster( $style );
 
 			// check if they need the critical CSS
-			if ($_COOKIE['atg-csscached-'.$style] === WP_SITE_REVISION) {
+			if ( $_COOKIE['atg-csscached'] == $cachebuster ) {
 				// if they have the cookie, then they have the CSS file cached, so simply enqueue it
-				wp_enqueue_style( $style, $fullstyle );
+				wp_enqueue_style( 'atg-style', $fullstyle );
 			} else {
 				// write the critical CSS into the page
 				echo '<style>';
-					include( STYLESHEET_DIRECTORY . '/critical-min.css' );
+					include( get_stylesheet_directory() . '/critical-min.css' );
 				echo '</style>'.PHP_EOL;
-				echo "<script>!function(e,t){'use strict';function s(s){function n(){var t,s;for(s=0;s<a.length;s+=1)a[s].href&&a[s].href.indexOf(r.href)>-1&&(t=!0);t?r.media='all':e.setTimeout(n)}var r=t.createElement('link'),i=t.getElementsByTagName('script')[0],a=t.styleSheets;return r.rel='stylesheet',r.href=s,r.media='only x',i.parentNode.insertBefore(r,i),n(),r}s('".$fullstyle."'),t.cookie='atg-csscached-".$style."=".WP_SITE_REVISION.";expires=\"Tue, 19 Jan 2038 03:14:07 GMT\";path=/'}(this,this.document);</script>".PHP_EOL;
+				echo "<script>!function(e,t){'use strict';function s(s){function n(){var t,s;for(s=0;s<a.length;s+=1)a[s].href&&a[s].href.indexOf(r.href)>-1&&(t=!0);t?r.media='all':e.setTimeout(n)}var r=t.createElement('link'),i=t.getElementsByTagName('script')[0],a=t.styleSheets;return r.rel='stylesheet',r.href=s,r.media='only x',i.parentNode.insertBefore(r,i),n(),r}s('".$fullstyle."'),t.cookie='atg-csscached=".$cachebuster.";expires=\"Tue, 19 Jan 2038 03:14:07 GMT\";path=/'}(this,this.document);</script>".PHP_EOL;
 				echo '<noscript><link rel="stylesheet" href="'.$fullstyle.'"></noscript>'.PHP_EOL;
 			}
 
