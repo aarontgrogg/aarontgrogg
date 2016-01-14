@@ -108,7 +108,7 @@
 
 			// name of css file
 			$cssfile = '/style-min.css';
-			
+
 			// file path for the css file
 			$csspath = get_stylesheet_directory() . $cssfile;
 
@@ -127,7 +127,9 @@
 				echo '<style>';
 					include( get_stylesheet_directory() . '/critical-min.css' );
 				echo '</style>'.PHP_EOL;
-				echo "<script>!function(e,t){'use strict';function s(s){function n(){var t,s;for(s=0;s<a.length;s+=1)a[s].href&&a[s].href.indexOf(r.href)>-1&&(t=!0);t?r.media='all':e.setTimeout(n)}var r=t.createElement('link'),i=t.getElementsByTagName('script')[0],a=t.styleSheets;return r.rel='stylesheet',r.href=s,r.media='only x',i.parentNode.insertBefore(r,i),n(),r}s('".$cssurl."'),t.cookie='atg-csscached=".$cachebuster.";expires=\"Tue, 19 Jan 2038 03:14:07 GMT\";path=/'}(this,this.document);</script>".PHP_EOL;
+				// add loadCSS to the page; note the PHP variables mixed in for the cookie setting
+				echo "<script>!function(e,t){'use strict';function s(s){function n(){var t,s;for(s=0;s<a.length;s+=1)a[s].href&&a[s].href.indexOf(r.href)>-1&&(t=!0);t?r.media='all':e.setTimeout(n)}var r=t.createElement('link'),i=t.getElementsByTagName('script')[0],a=t.styleSheets;return r.rel='stylesheet',r.href=s,r.media='only x',i.parentNode.insertBefore(r,i),n(),r}s('".$cssurl."'),t.cookie='atg-csscached=".$cachebuster.";expires=\"".date("D, j M Y h:i:s e", strtotime("+1 week"))."\";path=/'}(this,this.document);</script>".PHP_EOL;
+				// add the full CSS file inside of a noscript, just in case
 				echo '<noscript><link rel="stylesheet" href="'.$cssurl.'"></noscript>'.PHP_EOL;
 			}
 
