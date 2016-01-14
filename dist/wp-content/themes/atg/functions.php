@@ -13,13 +13,13 @@
 //	adapted from: http://www.particletree.com/notebook/automatically-version-your-css-and-javascript-files/
 	if (!function_exists( 'atg_create_cache_buster' )) {
 		function atg_create_cache_buster( $url ){
-		    return filemtime( $_SERVER['DOCUMENT_ROOT'] . $url );
+		    return filemtime( $url );
 		}
 	}
 	if (!function_exists( 'atg_add_cache_buster' )) {
-		function atg_add_cache_buster( $url ){
+		function atg_add_cache_buster( $url, $buster ){
 			$path = pathinfo( $url );
-			$ver = '.' . filemtime( $_SERVER['DOCUMENT_ROOT'] . $url ) . '.';
+			$ver = '.' . $buster . '.';
 			return $path['dirname'] . '/' . str_replace( '.', $ver, $path['basename'] );
 		}
 	}
@@ -105,27 +105,30 @@
 //	add the critical CSS in the <head>
 	if ( ! function_exists( 'atg_add_css' ) ) :
 		function atg_add_css() {
+
+			// name of css file
+			$cssfile = '/style-min.css';
 			
-			// name of style sheet
-			$style = '/wp-content/themes/atg/style-min.css';
+			// file path for the css file
+			$csspath = get_stylesheet_directory() . $cssfile;
 
 			// get cache-buster
-			$cachebuster = (string) atg_create_cache_buster( $style );
+			$cachebuster = (string) atg_create_cache_buster( $csspath );
 
-			// get the full css file
-			$fullstyle = atg_add_cache_buster( $style );
+			// url for the css file
+			$cssurl = atg_add_cache_buster( get_stylesheet_directory_uri() . $cssfile, $cachebuster );
 
 			// check if they need the critical CSS
 			if ( $_COOKIE['atg-csscached'] == $cachebuster ) {
 				// if they have the cookie, then they have the CSS file cached, so simply enqueue it
-				wp_enqueue_style( 'atg-style', $fullstyle );
+				wp_enqueue_style( 'atg-style', $cssurl );
 			} else {
 				// write the critical CSS into the page
 				echo '<style>';
 					include( get_stylesheet_directory() . '/critical-min.css' );
 				echo '</style>'.PHP_EOL;
-				echo "<script>!function(e,t){'use strict';function s(s){function n(){var t,s;for(s=0;s<a.length;s+=1)a[s].href&&a[s].href.indexOf(r.href)>-1&&(t=!0);t?r.media='all':e.setTimeout(n)}var r=t.createElement('link'),i=t.getElementsByTagName('script')[0],a=t.styleSheets;return r.rel='stylesheet',r.href=s,r.media='only x',i.parentNode.insertBefore(r,i),n(),r}s('".$fullstyle."'),t.cookie='atg-csscached=".$cachebuster.";expires=\"Tue, 19 Jan 2038 03:14:07 GMT\";path=/'}(this,this.document);</script>".PHP_EOL;
-				echo '<noscript><link rel="stylesheet" href="'.$fullstyle.'"></noscript>'.PHP_EOL;
+				echo "<script>!function(e,t){'use strict';function s(s){function n(){var t,s;for(s=0;s<a.length;s+=1)a[s].href&&a[s].href.indexOf(r.href)>-1&&(t=!0);t?r.media='all':e.setTimeout(n)}var r=t.createElement('link'),i=t.getElementsByTagName('script')[0],a=t.styleSheets;return r.rel='stylesheet',r.href=s,r.media='only x',i.parentNode.insertBefore(r,i),n(),r}s('".$cssurl."'),t.cookie='atg-csscached=".$cachebuster.";expires=\"Tue, 19 Jan 2038 03:14:07 GMT\";path=/'}(this,this.document);</script>".PHP_EOL;
+				echo '<noscript><link rel="stylesheet" href="'.$cssurl.'"></noscript>'.PHP_EOL;
 			}
 
 		} // atg_add_css
