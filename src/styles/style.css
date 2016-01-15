@@ -151,6 +151,13 @@ body {
     -ms-hyphens: auto;
     hyphens: auto;
 }
+.entry-content {
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+.entry-content > * {
+    margin-bottom: 1.5em;
+}
 h1,
 h2,
 h3,
@@ -315,42 +322,6 @@ blockquote p {
 em {
     font-style: italic;
 }
-aside {
-    margin-bottom: 1em;
-    padding: .5em 1em;
-    font-style: italic;
-    font-size: .8em;
-    line-height: 1.4;
-    color: #888;
-    border-left: 1px solid #c3c3c3;
-    border-bottom: 1px solid #c3c3c3;
-}
-aside.danger {
-    margin-top: 1em;
-    font-style: normal;
-    color: #f00;
-    border-left: 1px solid #f00;
-    border-bottom: 1px solid #f00;
-}
-aside.note {
-    background: #eee;
-    border: 1px solid #aaa;
-    margin-top: 1em;
-    padding: 1em;
-    line-height: 1.5;
-    color: #333;
-}
-aside:not([class]) {
-    margin-top: -1.5em;
-}
-article aside p,
-article aside li {
-    font-size: inherit;
-}
-article aside p:first-child,
-article aside ul:first-child {
-    margin-top: 0;
-}
 nav {
     margin: 1em 0;
     background: #000;
@@ -460,11 +431,6 @@ nav #searchsubmit {
 article {
     margin-bottom: 2.5em;
 }
-.home .entry-content,
-main {
-    padding-top: 2em;
-    padding-bottom: 2em;
-}
 article header h1,
 article header h2 {
     font-size: 1.5em;
@@ -491,21 +457,47 @@ article header h2 a:hover {
     border-color: #fff;
     outline: 5px solid #ff4b33;
 }
+aside {
+    padding: .5em 1em;
+    font-style: italic;
+    font-size: .8em;
+    line-height: 1.4;
+    color: #888;
+    border-left: 1px solid #c3c3c3;
+    border-bottom: 1px solid #c3c3c3;
+}
+aside.danger {
+    margin-top: 1em;
+    font-style: normal;
+    color: #f00;
+    border-left: 1px solid #f00;
+    border-bottom: 1px solid #f00;
+}
+aside.note {
+    background: #eee;
+    border: 1px solid #aaa;
+    margin-top: 1em;
+    padding: 1em;
+    line-height: 1.5;
+    color: #333;
+}
+aside:not([class]),
+.inline-top {
+    margin-top: -1.5em;
+}
+article aside p,
+article aside li {
+    font-size: inherit;
+}
 .entry-content h2,
 .entry-content h3 {
-    margin-top: 1em;
+    margin-top: 2em;
 }
 .entry-content h2 {
     border-bottom: 1px solid #ccc;
 }
 .entry-content h3 {
     font-size: .9em;
-}
-.entry-content h2 + p {
-    margin-top: 1em;
-}
-.entry-content h3 + p {
-    margin-top: .5em;
 }
 
 /* http://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/ */
@@ -642,11 +634,9 @@ article dd,
 article dt,
 article th,
 article td {
-    margin-bottom: 1em;
     line-height: 1.4;
 }
 article li {
-    margin-bottom: .5em;
 }
 article dd {
     padding-left: 1em;
@@ -682,7 +672,6 @@ article img.avatar {
     width: auto;
 }
 article table {
-    margin: 1em 0;
     width: 100%;
 }
 article caption {
@@ -731,7 +720,6 @@ article figure.aligncenter {
     text-align: center;
 }
 article figure {
-    margin: .5em 0 1em;
     border: 1px solid #ccc;
     background: #ddd;
 }
@@ -1172,7 +1160,7 @@ body.archive h1 {
     article dd,
     article th,
     article td {
-        margin-bottom: 1.5em;
+        /*margin-bottom: 1.5em;*/
     }
     article dd {
         margin-bottom: 0;
@@ -1183,7 +1171,7 @@ body.archive h1 {
     }
     article ol,
     article ul {
-        margin-bottom: .5em;
+        /*margin-bottom: .5em;*/
     }
     article footer {
         font-size: .65em;
