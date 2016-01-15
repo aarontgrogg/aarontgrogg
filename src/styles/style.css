@@ -1,16 +1,16 @@
 /*
-	Theme Name: Atg
-	Theme URI: http://aarontgrogg.com/
-	Description: A slightly-modified version of the 2010 theme for WordPress.
-	Author: Aaron T. Grogg (after the WordPress team)
-	Version: 1.1
-	Template: boilerplate
-	Tags: black, blue, white, two-columns, fixed-width, custom-header, custom-background, threaded-comments, sticky-post, translation-ready, microformats, rtl-language-support, editor-style
+    Theme Name: Atg
+    Theme URI: http://aarontgrogg.com/
+    Description: A slightly-modified version of the 2010 theme for WordPress.
+    Author: Aaron T. Grogg (after the WordPress team)
+    Version: 1.1
+    Template: boilerplate
+    Tags: black, blue, white, two-columns, fixed-width, custom-header, custom-background, threaded-comments, sticky-post, translation-ready, microformats, rtl-language-support, editor-style
 */
 
 /**
-	Save, minify and paste minified into style-min.css:
-	http://cssminifier.com/
+    Save, minify and paste minified into style-min.css:
+    http://cssminifier.com/
 **/
 
 /* http://www.paulirish.com/2012/box-sizing-border-box-ftw/ */
@@ -150,13 +150,6 @@ body {
     -moz-hyphens: auto;
     -ms-hyphens: auto;
     hyphens: auto;
-}
-.entry-content {
-    padding-top: 2em;
-    padding-bottom: 2em;
-}
-.entry-content > * {
-    margin-bottom: 1.5em;
 }
 h1,
 h2,
@@ -322,6 +315,37 @@ blockquote p {
 em {
     font-style: italic;
 }
+aside {
+    padding: .5em 1em;
+    font-style: italic;
+    font-size: .8em;
+    line-height: 1.4;
+    color: #888;
+    border-left: 1px solid #c3c3c3;
+    border-bottom: 1px solid #c3c3c3;
+}
+aside.danger {
+    font-style: normal;
+    color: #f00;
+    border-left: 1px solid #f00;
+    border-bottom: 1px solid #f00;
+}
+aside.note {
+    background: #eee;
+    border: 1px solid #aaa;
+    margin-top: 1em;
+    padding: 1em;
+    line-height: 1.5;
+    color: #333;
+}
+article aside p,
+article aside li {
+    font-size: inherit;
+}
+article aside p:first-child,
+article aside ul:first-child {
+    margin-top: 0;
+}
 nav {
     margin: 1em 0;
     background: #000;
@@ -457,47 +481,21 @@ article header h2 a:hover {
     border-color: #fff;
     outline: 5px solid #ff4b33;
 }
-aside {
-    padding: .5em 1em;
-    font-style: italic;
-    font-size: .8em;
-    line-height: 1.4;
-    color: #888;
-    border-left: 1px solid #c3c3c3;
-    border-bottom: 1px solid #c3c3c3;
-}
-aside.danger {
-    margin-top: 1em;
-    font-style: normal;
-    color: #f00;
-    border-left: 1px solid #f00;
-    border-bottom: 1px solid #f00;
-}
-aside.note {
-    background: #eee;
-    border: 1px solid #aaa;
-    margin-top: 1em;
-    padding: 1em;
-    line-height: 1.5;
-    color: #333;
-}
-aside:not([class]),
-.inline-top {
-    margin-top: -1.5em;
-}
-article aside p,
-article aside li {
-    font-size: inherit;
-}
 .entry-content h2,
 .entry-content h3 {
-    margin-top: 2em;
+    margin-top: 1em;
 }
 .entry-content h2 {
     border-bottom: 1px solid #ccc;
 }
 .entry-content h3 {
     font-size: .9em;
+}
+.entry-content h2 + p {
+    margin-top: 1em;
+}
+.entry-content h3 + p {
+    margin-top: .5em;
 }
 
 /* http://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/ */
@@ -634,9 +632,14 @@ article dd,
 article dt,
 article th,
 article td {
+    margin-top: 1em;
     line-height: 1.4;
 }
+article p:first-child {
+    margin-top: 2em;
+}
 article li {
+    margin-top: .5em;
 }
 article dd {
     padding-left: 1em;
@@ -672,6 +675,7 @@ article img.avatar {
     width: auto;
 }
 article table {
+    margin: 1em 0;
     width: 100%;
 }
 article caption {
@@ -720,6 +724,7 @@ article figure.aligncenter {
     text-align: center;
 }
 article figure {
+    margin: .5em 0 1em;
     border: 1px solid #ccc;
     background: #ddd;
 }
@@ -1160,10 +1165,10 @@ body.archive h1 {
     article dd,
     article th,
     article td {
-        /*margin-bottom: 1.5em;*/
+        margin-top: 1.5em;
     }
     article dd {
-        margin-bottom: 0;
+        margin-top: 0;
     }
     article th,
     article td {
@@ -1171,7 +1176,7 @@ body.archive h1 {
     }
     article ol,
     article ul {
-        /*margin-bottom: .5em;*/
+        margin-top: .5em;
     }
     article footer {
         font-size: .65em;
@@ -1194,6 +1199,10 @@ body.archive h1 {
         display: block;
         padding: 0;
     }
+    /*ul.social-links.social-connect a {
+        font-size: .9em;
+        padding: .5em .75em .2em;
+    }*/
 }
 @media only screen and (min-width: 1300px) {
     body {
@@ -1307,17 +1316,20 @@ body.archive h1 {
     div.widget-area {
         width: 25%;
     }
-    body.home #content article {
+    .home #content article {
         display: inline-block;
         vertical-align: top;
         padding: 0 1em;
         width: 19.5%;
     }
-    body.single #content main,
-    body.page #content main {
+    .page .entry-content,
+    .single .entry-content {
         -webkit-columns: 2;
-        -moz-columns: 2;
-        columns: 2;
+        padding-top: 2em;
+    }
+    .page .entry-content > :first-child,
+    .single .entry-content > :first-child {
+        margin-top: 0;
     }
 }
 
