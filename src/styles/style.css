@@ -455,6 +455,11 @@ nav #searchsubmit {
 article {
     margin-bottom: 2.5em;
 }
+.home .entry-content,
+main {
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
 article header h1,
 article header h2 {
     font-size: 1.5em;
@@ -632,14 +637,11 @@ article dd,
 article dt,
 article th,
 article td {
-    margin-top: 1em;
+    margin-bottom: 1em;
     line-height: 1.4;
 }
-article p:first-child {
-    margin-top: 2em;
-}
 article li {
-    margin-top: .5em;
+    margin-bottom: .5em;
 }
 article dd {
     padding-left: 1em;
@@ -1165,10 +1167,10 @@ body.archive h1 {
     article dd,
     article th,
     article td {
-        margin-top: 1.5em;
+        margin-bottom: 1.5em;
     }
     article dd {
-        margin-top: 0;
+        margin-bottom: 0;
     }
     article th,
     article td {
@@ -1176,7 +1178,7 @@ body.archive h1 {
     }
     article ol,
     article ul {
-        margin-top: .5em;
+        margin-bottom: .5em;
     }
     article footer {
         font-size: .65em;
@@ -1199,10 +1201,6 @@ body.archive h1 {
         display: block;
         padding: 0;
     }
-    /*ul.social-links.social-connect a {
-        font-size: .9em;
-        padding: .5em .75em .2em;
-    }*/
 }
 @media only screen and (min-width: 1300px) {
     body {
@@ -1316,11 +1314,16 @@ body.archive h1 {
     div.widget-area {
         width: 25%;
     }
-    #content article {
+    body.home #content article {
         display: inline-block;
         vertical-align: top;
         padding: 0 1em;
         width: 19.5%;
+    }
+    body.single #content main {
+        -webkit-columns: 2;
+        -moz-columns: 2;
+        columns: 2;
     }
 }
 
