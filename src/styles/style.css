@@ -316,6 +316,7 @@ em {
     font-style: italic;
 }
 aside {
+    margin-bottom: 1em;
     padding: .5em 1em;
     font-style: italic;
     font-size: .8em;
@@ -325,6 +326,7 @@ aside {
     border-bottom: 1px solid #c3c3c3;
 }
 aside.danger {
+    margin-top: 1em;
     font-style: normal;
     color: #f00;
     border-left: 1px solid #f00;
@@ -337,6 +339,9 @@ aside.note {
     padding: 1em;
     line-height: 1.5;
     color: #333;
+}
+aside:not([class]) {
+    margin-top: -1.5em;
 }
 article aside p,
 article aside li {
