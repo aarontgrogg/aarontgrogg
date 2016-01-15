@@ -21,7 +21,7 @@ get_header(); ?>
 					<div class="entry-meta">
 						<?php boilerplate_posted_on(); ?>
 					</div><!-- .entry-meta -->
-					<main class="entry-content" itemprop="articleBody" role="main">
+					<main class="entry-content" itemprop="articleBody">
 						<?php the_content(); ?>
 						<?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'boilerplate' ), 'after' => '</div>' ) ); ?>
 					</main><!-- .entry-content -->

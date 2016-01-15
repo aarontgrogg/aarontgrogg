@@ -1320,7 +1320,8 @@ body.archive h1 {
         padding: 0 1em;
         width: 19.5%;
     }
-    body.single #content main {
+    body.single #content main,
+    body.page #content main {
         -webkit-columns: 2;
         -moz-columns: 2;
         columns: 2;

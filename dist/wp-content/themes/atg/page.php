@@ -25,7 +25,7 @@ get_header(); ?>
 					</header>
 				<?php } ?>
 					<?php atg_social_share_links(); ?>
-					<main itemprop="articleBody" role="main" class="entry-content">
+					<main itemprop="articleBody" class="entry-content">
 						<?php the_content(); ?>
 						<?php wp_link_pages( array( 'before' => '' . __( 'Pages:', 'boilerplate' ), 'after' => '' ) ); ?>
 						<?php edit_post_link( __( 'Edit', 'boilerplate' ), '', '' ); ?>
