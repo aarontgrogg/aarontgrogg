@@ -528,6 +528,9 @@ article header h2 a:hover {
 .entry-content a code {
     text-shadow: none;
 }
+.entry-content figure a {
+    background: 0;
+}
 #comments a {
     -ms-word-break: break-all;
     word-break: break-all;
