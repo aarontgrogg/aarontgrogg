@@ -2,6 +2,8 @@
 <IfModule mod_rewrite.c>
 	# enable Rewrite
 	RewriteEngine On
+	# make sure not lab section
+	RewriteRule ^(lab)($|/) - [L]
 	# make sure not already HTTPS
 	RewriteCond %{HTTPS} !=on
 	# redirect from original location to same location using HTTPS
