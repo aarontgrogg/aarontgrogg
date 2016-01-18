@@ -19,6 +19,16 @@
 	RewriteRule ^(.+)\.(.+)\.(js|css)$ $1.$3 [L]
 </IfModule>
 
+<IfModule mod_headers.c>
+	# https://danielnixon.org/http-security-headers/
+	Header set Strict-Transport-Security "max-age=10886400; includeSubDomains; preload"
+	Header set Content-Security-Policy: "default-src https: 'unsafe-inline' 'unsafe-eval'"
+	Header set X-XSS-Protection "1; mode=block"
+	Header set X-Frame-Options SAMEORIGIN
+	Header set X-Content-Type-Options nosniff
+	Header set X-Permitted-Cross-Domain-Policies "master-only"
+</IfModule>
+
 # BEGIN iThemes Security
 # BEGIN Ban Users
 Order allow,deny
