@@ -485,9 +485,9 @@ article header h2 a:hover {
 .entry-content h3 {
     margin-top: 1em;
 }
-.entry-content aside > h1:first:child,
-.entry-content aside > h2:first:child,
-.entry-content aside > h3:first:child {
+.entry-content aside > h1:first-child,
+.entry-content aside > h2:first-child,
+.entry-content aside > h3:first-child {
     margin-top: 0;
 }
 .entry-content h2 {
