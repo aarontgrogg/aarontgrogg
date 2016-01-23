@@ -2,7 +2,7 @@
 Contributors: Bueltge, inpsyde
 Tags: multisite, administration, admin bar, network,
 Requires at least: 3.0.0
-Tested up to: 4.4
+Tested up to: 4.5-alpha
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -93,6 +93,10 @@ I'm German and my English might be gruesome here and there.
 So please be patient with me and let me know of typos or grammatical parts. Thanks
 
 == Changelog ==
+= 1.3.3 (2016-01-15) =
+* Fix Blog Id enhancement, change filter type.
+* Change different code topics for better performance and stability.
+
 = 1.3.2 (2015-12-17) =
 * Prevent PHP Warning. Props noelboss
 

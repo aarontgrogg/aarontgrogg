@@ -691,7 +691,7 @@ if ( ! class_exists( 'WpSmush' ) ) {
 		 */
 		function _get_api_key() {
 
-			if ( defined( 'WPMUDEV_APIKEY' ) ) {
+			if ( defined( 'WPMUDEV_APIKEY' ) && WPMUDEV_APIKEY ) {
 				$api_key = WPMUDEV_APIKEY;
 			} else {
 				$api_key = get_site_option( 'wpmudev_apikey' );

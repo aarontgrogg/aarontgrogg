@@ -4,7 +4,7 @@
  *
  * @see     http://wpengineer.com/2188/view-blog-id-in-wordpress-multisite/
  * @since   2013-07-19
- * @version 2015-08-20
+ * @version 2016-01-15
  * @package WordPress
  */
 
@@ -36,7 +36,7 @@ class Multisite_Add_Blog_Id {
 	public function __construct() {
 
 		if ( ! is_network_admin() ) {
-			return NULL;
+			return;
 		}
 
 		// Add blog id.
@@ -45,7 +45,7 @@ class Multisite_Add_Blog_Id {
 
 		// Add user id.
 		add_filter( 'manage_users-network_columns', array( $this, 'get_id' ) );
-		add_action( 'manage_users_custom_column', array( $this, 'get_user_id' ), 10, 3 );
+		add_filter( 'manage_users_custom_column', array( $this, 'get_user_id' ), 10, 3 );
 
 		add_action( 'admin_print_styles-sites.php', array( $this, 'add_style' ) );
 		add_action( 'admin_print_styles-users.php', array( $this, 'add_style' ) );
@@ -74,12 +74,16 @@ class Multisite_Add_Blog_Id {
 	 * @param string $value       Custom column output.
 	 * @param string $column_name The current column name.
 	 * @param int    $user_id     ID of the currently-listed user.
+	 *
+	 * @return int|string
 	 */
 	public function get_user_id( $value, $column_name, $user_id ) {
 
 		if ( 'object_id' === $column_name ) {
-			echo (int) $user_id;
+			return (int) $user_id;
 		}
+		
+		return $value;
 	}
 
 	/**
