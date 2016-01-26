@@ -26,7 +26,7 @@ self.addEventListener('fetch', function(event) {
 */
 /* Check if Service Worker works */
 if ('serviceWorker' in navigator) {
-	navigator.serviceWorker.register('/wp-content/themes/atg/serviceworker.js')
+	navigator.serviceWorker.register('/serviceworker-min.js')
 		.then(function(registration) {
 			// Registration was successful
 			console.log('ServiceWorker registration successful with scope: ', registration.scope);

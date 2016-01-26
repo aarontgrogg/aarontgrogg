@@ -38,11 +38,20 @@ gulp.task( 'styles-theme', function() {
 
 // run theme JS-related tasks
 gulp.task( 'scripts-theme', function() {
-    return gulp.src( 'src/scripts/*.js' )                   // grab all src js files
+    return gulp.src( 'src/scripts/scripts.js' )             // grab theme's js file
         .pipe( plugins.changed( THEME_DIST_DIR ) )          // check if source has changed since last build
         .pipe( plugins.concat( 'scripts-min.js' ) )         // concatenate all js files into a single files
         .pipe( plugins.uglify() )                           // minify concatenated js files
         .pipe( gulp.dest( THEME_DIST_DIR ) );               // save files into dist directory
+});
+
+// run serviceworker JS-related tasks
+gulp.task( 'scripts-serviceworker', function() {
+    return gulp.src( 'src/scripts/serviceworker*.js' )      // grab all serviceworker js files
+        .pipe( plugins.changed( THEME_DIST_DIR ) )          // check if source has changed since last build
+        .pipe( plugins.concat( 'serviceworker-min.js' ) )   // concatenate all js files into a single files
+        .pipe( plugins.uglify() )                           // minify concatenated js files
+        .pipe( gulp.dest( 'dist/' ) );                      // save files into root /dist directory
 });
 
 // run plugins CSS-related tasks
@@ -99,4 +108,4 @@ gulp.task( 'styles-critical', function() {
 });
 
 // let's get this party started!
-gulp.task('default', [ 'icons', 'styles-theme', 'scripts-theme', 'styles-plugins', 'scripts-plugins', 'styles-critical' ]);
+gulp.task('default', [ 'icons', 'styles-theme', 'scripts-theme', 'scripts-serviceworker', 'styles-plugins', 'scripts-plugins', 'styles-critical' ]);

@@ -137,6 +137,29 @@
 	endif; // function_exists
 
 
+//	add the site JS at the </body>
+	if ( ! function_exists( 'atg_add_js' ) ) :
+		function atg_add_js() {
+
+			// name of css file
+			$jsfile = '/scripts-min.js';
+
+			// file path for the css file
+			$jspath = get_stylesheet_directory() . $jsfile;
+
+			// get cache-buster
+			$cachebuster = (string) atg_create_cache_buster( $jspath );
+
+			// url for the css file
+			$jsurl = atg_add_cache_buster( get_stylesheet_directory_uri() . $jsfile, $cachebuster );
+
+			// enqueue the js file
+			wp_enqueue_script( 'atg-scripts', $jsurl, array(), $cachebuster, true );
+
+		} // atg_add_js
+	endif; // function_exists
+
+
 //	utility function to get page title
 	if (!function_exists( 'atg_page_title' )) {
 		function atg_page_title() {

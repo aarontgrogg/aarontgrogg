@@ -13,6 +13,11 @@
 		<footer id="footer" role="contentinfo">
 			<div id="colophon">
 <?php
+
+	/* Add site scripts file to end of page
+	 */
+	atg_add_js();
+
 	/* A sidebar in the footer? Yep. You can can customize
 	 * your footer with four columns of widgets.
 	 */
