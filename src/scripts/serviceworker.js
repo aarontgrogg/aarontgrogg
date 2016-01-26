@@ -1,8 +1,8 @@
 var CACHE_NAME = 'atg.com-v1';
 var urlsToCache = [
   '/',
-  '/wp-content/themes/atg/style-min.css',
-  '/wp-content/themes/atg/script-min.js'
+  '/wp-content/themes/atg/styles-min.css',
+  '/wp-content/themes/atg/scripts-min.js'
 ];
 
 self.addEventListener('install', function(event) {

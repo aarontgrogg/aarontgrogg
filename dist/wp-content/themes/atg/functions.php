@@ -107,7 +107,7 @@
 		function atg_add_css() {
 
 			// name of css file
-			$cssfile = '/style-min.css';
+			$cssfile = '/styles-min.css';
 
 			// file path for the css file
 			$csspath = get_stylesheet_directory() . $cssfile;
@@ -121,7 +121,7 @@
 			// check if they need the critical CSS
 			if ( $_COOKIE['atg-csscached'] == $cachebuster ) {
 				// if they have the cookie, then they have the CSS file cached, so simply enqueue it
-				wp_enqueue_style( 'atg-style', $cssurl );
+				wp_enqueue_style( 'atg-styles', $cssurl );
 			} else {
 				// write the critical CSS into the page
 				echo '<style>';

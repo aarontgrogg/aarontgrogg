@@ -56,7 +56,7 @@ rte/
 stats/
 dist/wp-config.php
 dist/wp-content/themes/atg/critical-min.css
-dist/wp-content/themes/atg/style-min.css
+dist/wp-content/themes/atg/styles-min.css
 dist/wp-content/themes/atg/icons/icons.svg
 dist/wp-content/themes/atg/*.js
 dist/serviceworker*.js

@@ -31,7 +31,7 @@ gulp.task( 'styles-theme', function() {
     return gulp.src( 'src/styles/*.css' )                   // grab all src css files
         .pipe( plugins.changed( THEME_DIST_DIR ) )          // check if source has changed since last build
         .pipe( plugins.autoprefixer( AUTOPREFIXER_MATRIX ) ) // remove unneeded and add needed prefixes
-        .pipe( plugins.concat( 'style-min.css' ) )          // concatenate all css files into a single files
+        .pipe( plugins.concat( 'styles-min.css' ) )          // concatenate all css files into a single files
         .pipe( plugins.minifyCss() )                        // minify concatenated css files
         .pipe( gulp.dest( THEME_DIST_DIR ) );               // save files into dist directory
 });
@@ -78,7 +78,7 @@ gulp.task( 'styles-critical', function() {
     critical.generate({
         /* note: cannot use 'base:' or will break remote 'src:' */
         inline: false,                                      // we want css, not html
-        css: 'src/styles/style.css',                        // css source file
+        css: 'src/styles/styles.css',                        // css source file
         dest: THEME_DIST_DIR + '/critical-min.css',         // css destination file
         src: 'https://aarontgrogg.dreamhosters.com/',       // page to use for picking critical
         minify: true,                                       // make sure the output is minified
