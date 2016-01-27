@@ -51,7 +51,7 @@ gulp.task( 'scripts-serviceworker', function() {
         .pipe( plugins.changed( THEME_DIST_DIR ) )          // check if source has changed since last build
         .pipe( plugins.concat( 'serviceworker-min.js' ) )   // concatenate all js files into a single files
         .pipe( plugins.uglify() )                           // minify concatenated js files
-        .pipe( gulp.dest( 'dist/' ) );                      // save files into root /dist directory
+        .pipe( gulp.dest( THEME_DIST_DIR ) );               // save files into root /dist directory
 });
 
 // run plugins CSS-related tasks
