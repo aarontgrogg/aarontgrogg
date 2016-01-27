@@ -26,12 +26,15 @@ self.addEventListener('fetch', function(event) {
 */
 /* Check if Service Worker works */
 if ('serviceWorker' in navigator) {
-	navigator.serviceWorker.register('/serviceworker-min.js')
-		.then(function(registration) {
-			// Registration was successful
-			console.log('ServiceWorker registration successful with scope: ', registration.scope);
-		}).catch(function(err) {
-			// registration failed :(
-			console.log('ServiceWorker registration failed: ', err);
-		});
+	// make sure it isn't already registered (don't need to dupe it)
+	if (!navigator.serviceWorker.controller) {
+		navigator.serviceWorker.register('/wp-content/themes/atg/serviceworker-min.js', { scope: './' })
+			.then(function(registration) {
+				// Registration was successful
+				console.log('ServiceWorker registration successful with scope: ', registration.scope);
+			}).catch(function(err) {
+				// registration failed :(
+				console.log('ServiceWorker registration failed: ', err);
+			});
+	}
 }

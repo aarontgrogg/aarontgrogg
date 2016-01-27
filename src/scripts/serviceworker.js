@@ -8,7 +8,7 @@
 (function () {
 
     // TODO: Ideally Gulp replaces this version with the current cache-buster
-    var version = 'atg.com.v1',
+    var version = 'atg.com.v1.',
         staticCacheName = version + 'static',
         pagesCacheName = version + 'pages',
         imagesCacheName = version + 'images';
