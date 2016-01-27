@@ -1,77 +1,168 @@
-var cachename = 'atg.com-v1';
-var cachefiles = [
-  '/',
-  '/wp-content/themes/atg/styles-min.css',
-  '/wp-content/themes/atg/scripts-min.js'
-];
+/**
+ * Blatantly stolen from Jeremy Keith:
+ * https://adactio.com/serviceworker.js
+ */
 
-// on install...
-self.addEventListener('install', function(event) {
-  // cache above assets
-  event.waitUntil(
-    caches.open( cachename )
-      .then(function( cache ) {
-        console.log( 'Opened cache' );
-        return cache.addAll( cachefiles );
-      })
-  );
-});
+'use strict';
 
-// on fetch...
-self.addEventListener('fetch', function(event) {
-  event.respondWith(
-    // check if requested asset is in cache
-    caches.match(event.request)
-      .then(function(response) {
-        // if so, respond with it
-        if (response) {
-          return response;
+(function () {
+
+    // TODO: Ideally Gulp replaces this version with the current cache-buster
+    var version = 'atg.com.v1',
+        staticCacheName = version + 'static',
+        pagesCacheName = version + 'pages',
+        imagesCacheName = version + 'images';
+
+    var updateStaticCache = function () {
+        return caches.open(staticCacheName)
+            .then(function (cache) {
+                // These items won't block the installation of the Service Worker
+                cache.addAll([
+                    '/projects/',
+                    '/about/',
+                    '/contact/'
+                ]);
+                // These items must be cached for the Service Worker to complete installation
+                return cache.addAll([
+                    '/wp-content/plugins/ricg-responsive-images/js/picturefill.min.js',
+                    '/wp-content/themes/atg/scripts-min.js',
+                    '/wp-content/themes/atg/styles-min.css',
+                    '/',
+                    '/offline'
+                ]);
+            });
+    };
+
+    var stashInCache = function (cacheName, request, response) {
+        caches.open(cacheName)
+            .then(function (cache) {
+                cache.put(request, response);
+            });
+    };
+
+    // Limit the number of items in a specified cache.
+    var trimCache = function (cacheName, maxItems) {
+        caches.open(cacheName)
+            .then(function (cache) {
+                cache.keys()
+                    .then(function (keys) {
+                        if (keys.length > maxItems) {
+                            cache.delete(keys[0])
+                                .then(trimCache(cacheName, maxItems));
+                        }
+                    });
+            });
+    };
+
+    // Remove caches whose name is no longer valid
+    var clearOldCaches = function () {
+        return caches.keys()
+            .then(function (keys) {
+                return Promise.all(keys
+                    .filter(function (key) {
+                        return key.indexOf(version) !== 0;
+                    })
+                    .map(function (key) {
+                        return caches.delete(key);
+                    })
+                );
+            });
+    };
+
+    self.addEventListener('install', function (event) {
+        event.waitUntil(updateStaticCache()
+            .then(function () {
+                return self.skipWaiting();
+            })
+        );
+    });
+
+    self.addEventListener('activate', function (event) {
+        event.waitUntil(clearOldCaches()
+            .then(function () {
+                return self.clients.claim();
+            })
+        );
+    });
+
+    self.addEventListener('message', function(event) {
+      if (event.data.command == 'trimCaches') {
+        trimCache(pagesCacheName, 35);
+        trimCache(imagesCacheName, 20);
+      }
+    });
+
+    self.addEventListener('fetch', function (event) {
+        var request = event.request;
+        var url = new URL(request.url);
+
+        // Only deal with requests to my own server
+        if (url.origin !== location.origin) {
+            return;
         }
 
-        // IMPORTANT: Clone the request. A request is a stream and
-        // can only be consumed once. Since we are consuming this
-        // once by cache and once by the browser for fetch, we need
-        // to clone the response
-        var fetchRequest = event.request.clone();
+        // Ignore requests to some directories
+        /*if (request.url.indexOf('/mint') !== -1 || request.url.indexOf('/cms') !== -1) {
+            return;
+        }*/
 
-        return fetch(fetchRequest).then(
-          function(response) {
-            // Check if we received a valid response
-            if(!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
+        // For non-GET requests, try the network first, fall back to the offline page
+        if (request.method !== 'GET') {
+            event.respondWith(
+                fetch(request)
+                    .catch(function () {
+                        return caches.match('/offline');
+                    })
+            );
+            return;
+        }
 
-            // IMPORTANT: Clone the response. A response is a stream
-            // and because we want the browser to consume the response
-            // as well as the cache consuming the response, we need
-            // to clone it so we have 2 stream.
-            var responseToCache = response.clone();
+        // For HTML requests, try the network first, fall back to the cache, finally the offline page
+        if (request.headers.get('Accept').indexOf('text/html') !== -1) {
+            event.respondWith(
+                fetch(request)
+                    .then(function (response) {
+                        // NETWORK
+                        // Stash a copy of this page in the pages cache
+                        var copy = response.clone();
+                        stashInCache(pagesCacheName, request, copy);
+                        return response;
+                    })
+                    .catch(function () {
+                        // CACHE or FALLBACK
+                        return caches.match(request)
+                            .then(function (response) {
+                                return response || caches.match('/offline');
+                            });
+                    })
+            );
+            return;
+        }
 
-            caches.open(cachename)
-              .then(function(cache) {
-                cache.put(event.request, responseToCache);
-              });
-
-            return response;
-          }
+        // For non-HTML requests, look in the cache first, fall back to the network
+        event.respondWith(
+            caches.match(request)
+                .then(function (response) {
+                    // CACHE
+                    return response || fetch(request)
+                        .then(function (response) {
+                            // NETWORK
+                            // If the request is for an image, stash a copy of this image in the images cache
+                            if (request.headers.get('Accept').indexOf('image') !== -1) {
+                                var copy = response.clone();
+                                stashInCache(imagesCacheName, request, copy);
+                            }
+                            return response;
+                        })
+                        .catch(function () {
+                            // OFFLINE
+                            // If the request is for an image, show an offline placeholder
+                            if (request.headers.get('Accept').indexOf('image') !== -1) {
+                                return new Response('<svg role="img" aria-labelledby="offline-title" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg"><title id="offline-title">Offline</title><g fill="none" fill-rule="evenodd"><path fill="#D8D8D8" d="M0 0h400v300H0z"/><text fill="#9B9B9B" font-family="Helvetica Neue,Arial,Helvetica,sans-serif" font-size="72" font-weight="bold"><tspan x="93" y="172">offline</tspan></text></g></svg>', {headers: {'Content-Type': 'image/svg+xml'}});
+                            }
+                        });
+                })
         );
-      })
-    );
-});
+    });
 
-/*self.addEventListener('activate', function(event) {
-
-  var cacheWhitelist = ['pages-cache-v1', 'blog-posts-cache-v1'];
-
-  event.waitUntil(
-    caches.keys().then(function(cacheNames) {
-      return Promise.all(
-        cacheNames.map(function(cacheName) {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
-  );
-});*/
+}());
