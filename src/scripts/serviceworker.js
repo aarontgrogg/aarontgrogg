@@ -102,9 +102,9 @@
         }
 
         // Ignore requests to some directories
-        /*if (request.url.indexOf('/mint') !== -1 || request.url.indexOf('/cms') !== -1) {
+        if (request.url.indexOf('/wp-admin') !== -1 || request.url.indexOf('/wp-includes') !== -1) {
             return;
-        }*/
+        }
 
         // For non-GET requests, try the network first, fall back to the offline page
         if (request.method !== 'GET') {
