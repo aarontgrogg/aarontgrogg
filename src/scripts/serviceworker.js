@@ -101,8 +101,8 @@
             return;
         }
 
-        // Ignore requests to some directories
-        if (request.url.indexOf('/wp-admin') !== -1 || request.url.indexOf('/wp-includes') !== -1) {
+        // Ignore requests to some directories (admin pages, includes files, and post previews)
+        if (request.url.indexOf('/wp-admin') !== -1 || request.url.indexOf('/wp-includes') !== -1 || request.url.indexOf('preview=true') !== -1) {
             return;
         }
 
