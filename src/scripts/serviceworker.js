@@ -87,7 +87,7 @@
 
     self.addEventListener('message', function(event) {
       if (event.data.command == 'trimCaches') {
-        trimCache(pagesCacheName, 35);
+        trimCache(pagesCacheName, 20);
         trimCache(imagesCacheName, 20);
       }
     });
