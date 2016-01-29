@@ -13,7 +13,8 @@
 //	adapted from: http://www.particletree.com/notebook/automatically-version-your-css-and-javascript-files/
 	if (!function_exists( 'atg_create_cache_buster' )) {
 		function atg_create_cache_buster( $url ){
-		    return filemtime( $url );
+		    //return filemtime( $url );
+		    return 'CACHE_BUSTER';
 		}
 	}
 	if (!function_exists( 'atg_add_cache_buster' )) {
