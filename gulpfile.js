@@ -51,7 +51,7 @@ gulp.task( 'scripts-serviceworker', function() {
         .pipe( plugins.changed( THEME_DIST_DIR ) )          // check if source has changed since last build
         .pipe( plugins.concat( 'serviceworker-min.js' ) )   // concatenate files into a single files
         .pipe( plugins.uglify() )                           // minify concatenated file
-        .pipe( gulp.dest( THEME_DIST_DIR ) );               // save files into root /dist directory
+        .pipe( gulp.dest( '/dist' ) );                      // save files into root /dist directory for proper scope
 });
 
 // run plugins CSS-related tasks
@@ -78,7 +78,7 @@ gulp.task( 'styles-critical', function() {
     critical.generate({
         /* note: cannot use 'base:' or will break remote 'src:' */
         inline: false,                                      // we want css, not html
-        css: 'src/styles/styles.css',                        // css source file
+        css: 'src/styles/styles.css',                       // css source file
         dest: THEME_DIST_DIR + '/critical-min.css',         // css destination file
         src: 'https://aarontgrogg.dreamhosters.com/',       // page to use for picking critical
         minify: true,                                       // make sure the output is minified

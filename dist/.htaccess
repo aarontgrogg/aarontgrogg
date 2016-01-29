@@ -22,7 +22,7 @@
 <IfModule mod_headers.c>
 	# https://danielnixon.org/http-security-headers/
 	Header set Strict-Transport-Security "max-age=10886400; includeSubDomains; preload"
-	Header set Content-Security-Policy: "default-src https: 'unsafe-inline' 'unsafe-eval'"
+	Header set Content-Security-Policy: "img-src 'self' data: https:; script-src 'self' 'unsafe-inline' http://html5shiv.googlecode.com https://dcs.netbiscuits.net https://stats.wp.com; style-src 'self' 'unsafe-inline';"
 	Header set X-XSS-Protection "1; mode=block"
 	Header set X-Frame-Options SAMEORIGIN
 	Header set X-Content-Type-Options nosniff
