@@ -9,7 +9,7 @@
 
     // TODO: Ideally Gulp replaces this version with the current cache-buster
     var cacheStorage = 'atg.com',
-        cacheBuster = '1',
+        cacheBuster = 'CACHE_BUSTER',
         version = cacheStorage + '.' + cacheBuster,
         staticCacheName = version + '.static',
         pagesCacheName = version + '.pages',

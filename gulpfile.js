@@ -28,6 +28,7 @@ gulp.task( 'icons', function() {
 
 // run theme CSS-related tasks
 gulp.task( 'styles-theme', function() {
+
     return gulp.src( 'src/styles/*.css' )                   // grab all src css files
         .pipe( plugins.changed( THEME_DIST_DIR ) )          // check if source has changed since last build
         .pipe( plugins.autoprefixer( AUTOPREFIXER_MATRIX ) ) // remove unneeded and add needed prefixes
@@ -47,11 +48,11 @@ gulp.task( 'scripts-theme', function() {
 
 // run serviceworker JS-related tasks
 gulp.task( 'scripts-serviceworker', function() {
-    return gulp.src( 'src/scripts/serviceworker*.js' )      // grab all serviceworker js files
+    return gulp.src( 'src/scripts/serviceworker.js' )      // grab all serviceworker js files
         .pipe( plugins.changed( THEME_DIST_DIR ) )          // check if source has changed since last build
         .pipe( plugins.concat( 'serviceworker-min.js' ) )   // concatenate files into a single files
         .pipe( plugins.uglify() )                           // minify concatenated file
-        .pipe( gulp.dest( '/dist' ) );                      // save files into root /dist directory for proper scope
+        .pipe( gulp.dest( 'dist/' ) );                      // save files into root /dist directory for proper scope
 });
 
 // run plugins CSS-related tasks
