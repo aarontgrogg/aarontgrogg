@@ -8,27 +8,30 @@
 (function () {
 
     // TODO: Ideally Gulp replaces this version with the current cache-buster
-    var version = 'atg.com.v1.',
-        staticCacheName = version + 'static',
-        pagesCacheName = version + 'pages',
-        imagesCacheName = version + 'images';
+    var cacheStorage = 'atg.com',
+        cacheBuster = '1454015328',
+        version = cacheStorage + '.' + cacheBuster,
+        staticCacheName = version + '.static',
+        pagesCacheName = version + '.pages',
+        imagesCacheName = version + '.images';
 
     var updateStaticCache = function () {
         return caches.open(staticCacheName)
             .then(function (cache) {
                 // These items won't block the installation of the Service Worker
                 cache.addAll([
-                    '/projects/',
                     '/about/',
-                    '/contact/'
+                    '/contact/',
+                    '/resume/',
+                    '/projects/'
                 ]);
                 // These items must be cached for the Service Worker to complete installation
                 return cache.addAll([
                     '/wp-content/plugins/ricg-responsive-images/js/picturefill.min.js',
-                    '/wp-content/themes/atg/scripts-min.js',
-                    '/wp-content/themes/atg/styles-min.css',
+                    '/wp-content/themes/atg/scripts-min.'+cacheBuster+'.js',
+                    '/wp-content/themes/atg/styles-min.'+cacheBuster+'.css',
                     '/',
-                    '/offline'
+                    '/offline/'
                 ]);
             });
     };
@@ -111,7 +114,7 @@
             event.respondWith(
                 fetch(request)
                     .catch(function () {
-                        return caches.match('/offline');
+                        return caches.match('/offline/');
                     })
             );
             return;
@@ -132,7 +135,7 @@
                         // CACHE or FALLBACK
                         return caches.match(request)
                             .then(function (response) {
-                                return response || caches.match('/offline');
+                                return response || caches.match('/offline/');
                             });
                     })
             );

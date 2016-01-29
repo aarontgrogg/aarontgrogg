@@ -6,11 +6,11 @@
 if ('serviceWorker' in navigator) {
 	// make sure one isn't already registered (don't need to dupe it)
 	if (!navigator.serviceWorker.controller) {
-		// register the Service Worker, which lives in my theme directory, but scope it to the site's root directory
-		navigator.serviceWorker.register('/wp-content/themes/atg/serviceworker-min.js', { scope: './' })
+		// register the Service Worker, must be in the site's root directory to have full scope
+		navigator.serviceWorker.register('/serviceworker-min.js')
 			.then(function(registration) {
 				// registration succeeded :-)
-				console.log('ServiceWorker registration succeeded, with this scope: ', registration.scope);
+				console.log('ServiceWorker registration succeeded, scope: ', registration.scope);
 			}).catch(function(err) {
 				// registration failed :-(
 				console.log('ServiceWorker registration failed: ', err);
