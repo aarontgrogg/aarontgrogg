@@ -20,6 +20,9 @@
 </IfModule>
 
 <IfModule mod_headers.c>
+	# do NOT do any of this for wp-admin, creates a nightmare to maintain...
+	RewriteEngine On
+	RewriteCond %{REQUEST_URI} !^/wp-admin
 	# https://danielnixon.org/http-security-headers/
 	Header set Strict-Transport-Security "max-age=10886400; includeSubDomains; preload"
 	Header set Content-Security-Policy: "img-src 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https: http://html5shiv.googlecode.com https://dcs.netbiscuits.net https://stats.wp.com; style-src 'self' https: 'unsafe-inline';"
