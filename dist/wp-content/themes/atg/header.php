@@ -27,6 +27,7 @@
 <?php atg_add_css(); ?>
 		<link rel="profile" href="http://gmpg.org/xfn/11">
 		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
+		<link rel="icon" sizes="192x192" href="favicon-192.png">
 		<link rel="manifest" href="manifest.json">
 		<meta name="mobile-web-app-capable" content="yes">
 		<meta name="description" content="<?php atg_page_description(); ?>">
