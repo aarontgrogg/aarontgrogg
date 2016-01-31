@@ -25,6 +25,8 @@
 			}
 		?></title>
 <?php atg_add_css(); ?>
+		<meta name="mobile-web-app-capable" content="yes">
+		<link rel="manifest" href="manifest.json">
 		<link rel="profile" href="http://gmpg.org/xfn/11">
 		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
 		<meta name="description" content="<?php atg_page_description(); ?>">
