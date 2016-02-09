@@ -925,6 +925,12 @@ div.widget-area ul {
 div.widget-area ul ul {
     padding: 0 0 1em 0;
 }
+code.hljs {
+    display: inline;
+}
+.hljs {
+    padding: .15em .25em;
+}
 @supports (overflow-y: auto) and (max-height: 21em) {
     div.widget-area ul ul {
         overflow-y: auto;

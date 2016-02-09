@@ -39,7 +39,7 @@ gulp.task( 'styles-theme', function() {
 
 // run theme JS-related tasks
 gulp.task( 'scripts-theme', function() {
-    return gulp.src( 'src/scripts/scripts.js' )             // grab theme's js file
+    return gulp.src( [ 'src/scripts/highlight.pack.js', 'src/scripts/scripts.js' ] ) // grab theme's js file
         .pipe( plugins.changed( THEME_DIST_DIR ) )          // check if source has changed since last build
         .pipe( plugins.concat( 'scripts-min.js' ) )         // concatenate all js files into a single files
         .pipe( plugins.uglify() )                           // minify concatenated js files
