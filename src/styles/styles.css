@@ -73,7 +73,7 @@ input, select { vertical-align: middle; }
 body { font:13px/1.231 sans-serif; *font-size:small; } /* Hack retained to preserve specificity */
 select, input, textarea, button { font:99% sans-serif; }
 /* Normalize monospace sizing:  en.wikipedia.org/wiki/MediaWiki_talk:Common.css/Archive_11#Teletype_style_fix_for_Chrome */
-pre, code, kbd, samp { color: green; font-family: consolas,monospace,sans-serif; font-size: 0.8em; }
+pre, code, kbd, samp { color: #f8f8f2; font-family: consolas,monospace,sans-serif; font-size: 0.8em; background: #000; }
 /** Minimal base styles. */
 /* Always force a scrollbar in non-IE */
 html { overflow-y: scroll;-webkit-overflow-scrolling:touch; }
@@ -192,8 +192,6 @@ a * {
 }
 pre,
 code {
-    color: lime;
-    background: #000;
     padding: .15em .25em;
     font-style: normal;
     max-width: 100%;
@@ -925,11 +923,14 @@ div.widget-area ul {
 div.widget-area ul ul {
     padding: 0 0 1em 0;
 }
-code.hljs {
-    display: inline;
+.hljs, .hljs-subst, .hljs-tag {
+    color: #e6db74;
 }
 .hljs {
     padding: .15em .25em;
+}
+code.hljs {
+    display: inline;
 }
 @supports (overflow-y: auto) and (max-height: 21em) {
     div.widget-area ul ul {
