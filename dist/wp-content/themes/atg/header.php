@@ -33,6 +33,7 @@
 		<meta name="description" content="<?php atg_page_description(); ?>">
 		<meta http-equiv="imagetoolbar" content="false">
 		<meta name="bitly-verification" content="624ac79f6370">
+		<meta name="msvalidate.01" content="3583C3B4E1932435C9AC18EE175673F1">
 		<meta name="google-site-verification" content="lbVeIvYlafhq4llvj199Sh3gUfq55tMu065LnAgjliw">
 <?php
 	/* We add some JavaScript to pages with the comment form
