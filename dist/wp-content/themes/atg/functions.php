@@ -9,21 +9,14 @@
 	Tags: black, blue, white, two-columns, fixed-width, custom-header, custom-background, threaded-comments, sticky-post, translation-ready, microformats, rtl-language-support, editor-style
 */
 
-//	utility functions to create and add cache-buster, based on file's last modified date
-//	adapted from: http://www.particletree.com/notebook/automatically-version-your-css-and-javascript-files/
-	if (!function_exists( 'atg_create_cache_buster' )) {
-		function atg_create_cache_buster( $url ){
-		    //return filemtime( $url );
-		    return 'CACHE_BUSTER';
-		}
-	}
-	if (!function_exists( 'atg_add_cache_buster' )) {
-		function atg_add_cache_buster( $url, $buster ){
-			$path = pathinfo( $url );
-			$ver = '.' . $buster . '.';
-			return $path['dirname'] . '/' . str_replace( '.', $ver, $path['basename'] );
-		}
-	}
+
+	// global values, cache-buster string is updated by DeployBot, changed to commit string
+	$_ATG_CACHEBUSTER = 'CACHE_BUSTER';
+	$_ATG_CACHE_ASSETS = (object) [
+		'css' => get_stylesheet_directory_uri() . '/styles-min.CACHE_BUSTER.css',
+		'js' => get_stylesheet_directory_uri() . '/scripts-min.CACHE_BUSTER.js'
+	];
+
 
 //	remove 'http://s0.wp.com/wp-content/js/devicepx-jetpack.js' script
 	add_action('wp_enqueue_scripts', create_function(null, "wp_dequeue_script('devicepx');"), 20);
@@ -103,35 +96,52 @@
 	}
 
 
+//	add pre-* links in the <head>
+	if ( ! function_exists( 'atg_add_pre_party' ) ) :
+		function atg_add_pre_party() {
+
+			// get global objects
+			global $_ATG_CACHE_ASSETS;
+
+			$html = ''
+				.'<link rel="subresource" href="'.$_ATG_CACHE_ASSETS->css.'">'.PHP_EOL
+				.'<link rel="subresource" href="'.$_ATG_CACHE_ASSETS->js.'">'.PHP_EOL
+				.'<link rel="dns-prefetch" href="netbiscuits.net">'.PHP_EOL
+				.'<link rel="dns-prefetch" href="wp.com">'.PHP_EOL;
+
+			echo $html;
+
+		} // atg_add_pre_party
+	endif; // function_exists
+
+
 //	add the critical CSS in the <head>
 	if ( ! function_exists( 'atg_add_css' ) ) :
 		function atg_add_css() {
 
-			// name of css file
-			$cssfile = '/styles-min.css';
-
-			// file path for the css file
-			$csspath = get_stylesheet_directory() . $cssfile;
+			// get global objects
+			global $_ATG_CACHEBUSTER;
+			global $_ATG_CACHE_ASSETS;
 
 			// get cache-buster
-			$cachebuster = (string) atg_create_cache_buster( $csspath );
+			$cachebuster = $_ATG_CACHEBUSTER;
 
-			// url for the css file
-			$cssurl = atg_add_cache_buster( get_stylesheet_directory_uri() . $cssfile, $cachebuster );
+			// url for the css file (site uri)
+			$url = $_ATG_CACHE_ASSETS->css;
 
 			// check if they need the critical CSS
 			if ( $_COOKIE['atg-csscached'] == $cachebuster ) {
 				// if they have the cookie, then they have the CSS file cached, so simply enqueue it
-				wp_enqueue_style( 'atg-styles', $cssurl );
+				wp_enqueue_style( 'atg-styles', $url );
 			} else {
 				// write the critical CSS into the page
 				echo '<style>';
 					include( get_stylesheet_directory() . '/critical-min.css' );
 				echo '</style>'.PHP_EOL;
 				// add loadCSS to the page; note the PHP variables mixed in for the cookie setting
-				echo "<script>!function(e,t){'use strict';function s(s){function n(){var t,s;for(s=0;s<a.length;s+=1)a[s].href&&a[s].href.indexOf(r.href)>-1&&(t=!0);t?r.media='all':e.setTimeout(n)}var r=t.createElement('link'),i=t.getElementsByTagName('script')[0],a=t.styleSheets;return r.rel='stylesheet',r.href=s,r.media='only x',i.parentNode.insertBefore(r,i),n(),r}s('".$cssurl."'),t.cookie='atg-csscached=".$cachebuster.";expires=\"".date("D, j M Y h:i:s e", strtotime("+1 week"))."\";path=/'}(this,this.document);</script>".PHP_EOL;
+				echo "<script>!function(e,t){'use strict';function s(s){function n(){var t,s;for(s=0;s<a.length;s+=1)a[s].href&&a[s].href.indexOf(r.href)>-1&&(t=!0);t?r.media='all':e.setTimeout(n)}var r=t.createElement('link'),i=t.getElementsByTagName('script')[0],a=t.styleSheets;return r.rel='stylesheet',r.href=s,r.media='only x',i.parentNode.insertBefore(r,i),n(),r}s('".$url."'),t.cookie='atg-csscached=".$cachebuster.";expires=\"".date("D, j M Y h:i:s e", strtotime("+1 week"))."\";path=/'}(this,this.document);</script>".PHP_EOL;
 				// add the full CSS file inside of a noscript, just in case
-				echo '<noscript><link rel="stylesheet" href="'.$cssurl.'"></noscript>'.PHP_EOL;
+				echo '<noscript><link rel="stylesheet" href="'.$url.'"></noscript>'.PHP_EOL;
 			}
 
 		} // atg_add_css
@@ -142,20 +152,18 @@
 	if ( ! function_exists( 'atg_add_js' ) ) :
 		function atg_add_js() {
 
-			// name of css file
-			$jsfile = '/scripts-min.js';
-
-			// file path for the css file
-			$jspath = get_stylesheet_directory() . $jsfile;
+			// get global objects
+			global $_ATG_CACHEBUSTER;
+			global $_ATG_CACHE_ASSETS;
 
 			// get cache-buster
-			$cachebuster = (string) atg_create_cache_buster( $jspath );
+			$cachebuster = $_ATG_CACHEBUSTER;
 
-			// url for the css file
-			$jsurl = atg_add_cache_buster( get_stylesheet_directory_uri() . $jsfile, $cachebuster );
+			// url for the css file (site uri)
+			$url = $_ATG_CACHE_ASSETS->js;
 
 			// enqueue the js file
-			wp_enqueue_script( 'atg-scripts', $jsurl, array(), $cachebuster, true );
+			wp_enqueue_script( 'atg-scripts', $url, array(), $cachebuster, true );
 
 		} // atg_add_js
 	endif; // function_exists

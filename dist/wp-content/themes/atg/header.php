@@ -24,6 +24,7 @@
 				echo ' | ' . sprintf(__('Page %s', 'twentyten'), max($paged, $page));
 			}
 		?></title>
+<?php atg_add_pre_party(); ?>
 <?php atg_add_css(); ?>
 		<link rel="profile" href="http://gmpg.org/xfn/11">
 		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
