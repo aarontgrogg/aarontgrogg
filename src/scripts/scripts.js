@@ -8,13 +8,13 @@ if ('serviceWorker' in navigator) {
 	navigator.serviceWorker.register('/serviceworker-min.js')
 		.then(function(registration) {
 			// registration succeeded :-)
-			console.log('ServiceWorker registration succeeded, with this scope: ', registration.scope);
+			//console.log('ServiceWorker registration succeeded, with this scope: ', registration.scope);
 			// you may occasionally need to clear a service worker; this is the only way i've found to do that...
 			// comment this out while not using it
-			registration.unregister().then(function(boolean) {
+			/*registration.unregister().then(function(boolean) {
 				// if boolean = true, unregister is successful
 				console.log('ServiceWorker unregistered');
-			});
+			});*/
 		}).catch(function(err) {
 			// registration failed :-(
 			console.log('ServiceWorker registration failed: ', err);
@@ -31,7 +31,7 @@ if (document.querySelectorAll('pre, code').length && typeof(hljs) !== 'undefined
 		hljs.highlightBlock(elem);
 	});
 	//hljs.initHighlighting();
-	console.log('hljs');
+	//console.log('hljs');
 } else {
-	console.log('no hljs');
+	//console.log('no hljs');
 }
