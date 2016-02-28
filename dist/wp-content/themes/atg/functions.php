@@ -103,11 +103,10 @@
 			// get global objects
 			global $_ATG_CACHE_ASSETS;
 
-			$html = ''
-				.'<link rel="subresource" href="'.$_ATG_CACHE_ASSETS->css.'">'.PHP_EOL
-				.'<link rel="subresource" href="'.$_ATG_CACHE_ASSETS->js.'">'.PHP_EOL
-				.'<link rel="dns-prefetch" href="netbiscuits.net">'.PHP_EOL
-				.'<link rel="dns-prefetch" href="wp.com">'.PHP_EOL;
+			$html =  '<link rel="subresource" href="'.$_ATG_CACHE_ASSETS->css.'">'.PHP_EOL
+					.'<link rel="subresource" href="'.$_ATG_CACHE_ASSETS->js.'">'.PHP_EOL
+					.'<link rel="dns-prefetch" href="//dcs.netbiscuits.net/">'.PHP_EOL
+					.'<link rel="dns-prefetch" href="//stats.wp.com/">'.PHP_EOL;
 
 			echo $html;
 
