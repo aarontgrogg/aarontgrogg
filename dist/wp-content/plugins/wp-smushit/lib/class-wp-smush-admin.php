@@ -50,7 +50,7 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 		/**
 		 * @var int Limit for allowed number of images per bulk request
 		 */
-		public $max_free_bulk = 50; //this is enforced at api level too
+		private $max_free_bulk = 50; //this is enforced at api level too
 
 		public $upgrade_url = 'https://premium.wpmudev.org/project/wp-smush-pro/?utm_source=wordpress.org&utm_medium=plugin&utm_campaign=WP%20Smush%20Upgrade';
 
@@ -76,7 +76,7 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 		public function __construct() {
 
 			// Save Settings, Process Option, Need to process it early, so the pages are loaded accordingly, nextgen gallery integration is loaded at same action
-			add_action( 'plugins_loaded', array( $this, 'process_options' ), 20 );
+			add_action( 'plugins_loaded', array( $this, 'process_options' ), 16 );
 
 			// hook scripts and styles
 			add_action( 'admin_init', array( $this, 'register' ) );
@@ -731,9 +731,9 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 				$error = $smush->get_error_message();
 				//Check for timeout error and suggest to filter timeout
 				if ( strpos( $error, 'timed out' ) ) {
-					$msg = esc_html__( "Smush request timed out, You can try setting a higher value for `WP_SMUSH_API_TIMEOUT`.", "wp-smushit" );
+					$error = esc_html__( "Smush request timed out, You can try setting a higher value for `WP_SMUSH_API_TIMEOUT`.", "wp-smushit" );
 				}
-				wp_send_json_error( array( 'stats' => $stats, 'error_msg' => $msg ) );
+				wp_send_json_error( array( 'stats' => $stats, 'error_msg' => $error ) );
 			} else {
 				wp_send_json_success( array( 'stats' => $stats ) );
 			}
@@ -1113,7 +1113,8 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 			$settings_page = admin_url( 'upload.php?page=wp-smush-bulk' );
 			$settings      = '<a href="' . $settings_page . '">' . __( 'Settings', 'wp-smushit' ) . '</a>';
 
-			array_unshift( $links, $settings );
+			//Added a fix for weird warning in multisite, "array_unshift() expects parameter 1 to be array, null given"
++			!empty( $links ) ? array_unshift( $links, $settings ) : array_push( $settings );
 
 			return $links;
 		}

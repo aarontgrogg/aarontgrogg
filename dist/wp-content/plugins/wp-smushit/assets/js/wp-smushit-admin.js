@@ -7,17 +7,24 @@
  */
 var WP_Smush = WP_Smush || {};
 jQuery(function ($) {
-	// url for smushing
-	WP_Smush.errors = [];
-	WP_Smush.timeout = wp_smushit_data.timeout;
-	/**
-	 * Checks for the specified param in URL
-	 * @param sParam
-	 * @returns {*}
-	 */
-	WP_Smush.geturlparam = function (arg) {
-		var $sPageURL = window.location.search.substring(1);
-		var $sURLVariables = $sPageURL.split('&');
+	var smushAddParams = function (url, data) {
+		if (!$.isEmptyObject(data)) {
+			url += ( url.indexOf('?') >= 0 ? '&' : '?' ) + $.param(data);
+		}
+
+		return url;
+	}
+    // url for smushing
+    WP_Smush.errors = [];
+    WP_Smush.timeout = wp_smushit_data.timeout;
+    /**
+     * Checks for the specified param in URL
+     * @param sParam
+     * @returns {*}
+     */
+    WP_Smush.geturlparam = function(arg) {
+        var $sPageURL = window.location.search.substring(1);
+        var $sURLVariables = $sPageURL.split('&');
 
 		for (var i = 0; i < $sURLVariables.length; i++) {
 			var $sParameterName = $sURLVariables[i].split('=');
@@ -59,7 +66,7 @@ jQuery(function ($) {
 			this.smush_type = typeof smush_type ? smush_type : false;
 			this.single_ajax_suffix = this.smush_type ? 'smush_manual_nextgen' : 'wp_smushit_manual';
 			this.bulk_ajax_suffix = this.smush_type ? 'wp_smushit_nextgen_bulk' : 'wp_smushit_bulk';
-			this.url += this.is_bulk ? '?action=' + this.bulk_ajax_suffix : '?action=' + this.single_ajax_suffix;
+            this.url = this.is_bulk ? smushAddParams(this.url, {action: this.bulk_ajax_suffix}) : smushAddParams(this.url, {action: this.single_ajax_suffix});
 		};
 
 		//Show loader in button for single and bulk smush
@@ -436,3 +443,4 @@ jQuery(function ($) {
 	};
 
 })(jQuery);
+

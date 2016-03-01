@@ -1,36 +1,30 @@
 === WP Smush ===
 Plugin Name: WP Smush
-Version: 2.1.3
+Version: 2.1.4
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org/
 Contributors: WPMUDEV, alexdunae
 Tags: Attachment,Attachments,Compress,Compress Image File,Compress Image Size,Compress JPG,Compressed JPG, Compression Image,Image,Images,JPG,Optimise,Optimize,Photo,Photos,Pictures,PNG,Reduce Image Size,Smush,Smush.it,Upload,WordPress Compression,WordPress Image Tool,Yahoo, Yahoo Smush.it
 Requires at least: 3.5
-Tested up to: 4.4.1
-Stable tag: 2.1.3
+Tested up to: 4.4.2
+Stable tag: 2.1.4
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
 Reduce image file sizes, improve performance and boost your SEO using the free <a href="https://premium.wpmudev.org/">WPMU DEV</a> WordPress Smush API.
 
 == Description ==
 
-<blockquote>
-<h4>All new massively improved smushing!</h4>
-<br>
-Try our completely new, incredibly powerful, and 100% free image Smusher, brought to you by the superheroes at WPMU DEV!
- <br>
+<strong>Optimize unlimited images</strong> with our <strong>incredibly powerful</strong> and <strong>100% free image Smusher</strong>, brought to you by the superheroes at WPMU DEV!
+
 We'll do all the heavy lifting with our superhero servers, your site will be loading quicker in no time at all, leaving you to concentrate on making your content great!
- <br>
-Cheers<br>
-WPMU DEVMan
- <br>
-</blockquote>
 
 WP Smush strips hidden, bulky information from your images, reducing the file size without losing quality. The faster your site loads, the more Google, Bing, Yahoo and other search engines will like it.
 
 [youtube https://www.youtube.com/watch?v=GCzH7z05s5U]
 
 Heavy image files may be slowing down your site without you even knowing it. WP Smush meticulously scans every image you upload – or have already added to your site – and cuts all the unnecessary data for you.
+
+<a href="https://garage.godaddy.com/wordpress-plugin-partner-program/directory/?cvosrc=advocacy.evangelism.WP3" rel="nofollow"><img src="https://garage.godaddy.com/wp-content/uploads/badges/godaddy-plugin-partner-program-badge.svg" title="GoDaddy Plugin Program Partner" alt="GoDaddy Plugin Program Partner"/></a>
 
 ★★★★★ <br>
 “I had no idea that my page load time was being dragged down by the images. The plugin nearly halved the time it took.” - <a href="http://profiles.wordpress.org/karlcw">karlcw</a>
@@ -48,7 +42,7 @@ Install WP Smush and find out why it's the most popular image optimization plugi
   <li>Bulk smush ALL your images with one click! No more rate limiting.</li>
   <li>Keep a backup of your original un-smushed images in case you want to restore later.</li>
 	<li>24/7/365 support from <a href="https://premium.wpmudev.org/support/?utm_source=wordpress.org&utm_medium=readme">the best WordPress support team on the planet</a>.</li>
-	<li><a href="https://premium.wpmudev.org/?utm_source=wordpress.org&utm_medium=readme">350+ other premium plugins and themes</a> included in your membership.</li>
+	<li><a href="https://premium.wpmudev.org/?utm_source=wordpress.org&utm_medium=readme">100+ other premium plugins and themes</a> included in your membership.</li>
 </ul>
 
 Upgrade to <a href="https://premium.wpmudev.org/project/wp-smush-pro/?utm_source=wordpress.org&utm_medium=readme">WP Smush Pro</a> and optimize more and larger image files faster to increase your site’s performance.
@@ -86,11 +80,19 @@ Yahoo's Smush.it API is gone forever. So WPMU DEV built our own free API that is
 
 == Changelog ==
 
+= 2.1.4 =
+* Fixed: Preserve file permission after smushing ( Fix for Images disappearing in Media library on some hosts )
+* Fixed: Styles plugin compatibility
+* Fixed: Append URL params considering the existing arguments ( WPML Compatibility )
+* Fixed: Warning: For settings link in Network admin, Warning: https://goo.gl/HAfhaF ( Thank you @Maks3w for suggestions )
+* Fixed: Fatal error if both pro version and free version are activated
+* Fixed: NextGen-Smush conflict on plugin activation on a fresh install
+
 = 2.1.3 =
 * Fixed: Compatibility with WPMU DEV Dashboard plugin v4.0, was not detecting pro status
 
 = 2.1.2 =
-* Fixed: Important fix for transient issue leading to mutliple api requests
+* Fixed: Important fix for transient issue leading to multiple api requests
 
 = 2.1.1 =
 * Fixed: Workaround for terrible bug in W3TC file based object caching

@@ -1,14 +1,14 @@
-# Copyright (C) 2015 WP Smush
+# Copyright (C) 2016 WP Smush
 # This file is distributed under the same license as the WP Smush package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Smush 2.1.3\n"
+"Project-Id-Version: WP Smush 2.1.4\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/wp-smushit\n"
-"POT-Creation-Date: 2015-11-10 17:31:38+00:00\n"
+"POT-Creation-Date: 2016-02-25 07:02:08+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
@@ -75,7 +75,7 @@ msgstr ""
 msgid "Ops!... something went wrong"
 msgstr ""
 
-#: lib/class-wp-smush-admin.php:266 lib/class-wp-smush.php:804
+#: lib/class-wp-smush-admin.php:266 lib/class-wp-smush.php:808
 #: lib/nextgen-integration/class-wp-smush-nextgen-admin.php:147
 #: lib/nextgen-integration/class-wp-smush-nextgen-stats.php:230
 msgid "Super-Smush"
@@ -110,7 +110,7 @@ msgstr ""
 msgid "Smush all images, including originals."
 msgstr ""
 
-#: lib/class-wp-smush-admin.php:313 lib/class-wp-smush.php:1116
+#: lib/class-wp-smush-admin.php:313 lib/class-wp-smush.php:1120
 msgid "When you upload an image to WordPress it automatically creates %s thumbnail sizes that are commonly used in your pages. WordPress also stores the original full-size image, but because these are not usually embedded on your site we don’t Smush them. Pro users can override this."
 msgstr ""
 
@@ -249,93 +249,93 @@ msgstr ""
 msgid "<strong>%d of %d images</strong> were sent for smushing:"
 msgstr ""
 
-#: lib/class-wp-smush-admin.php:1245
+#: lib/class-wp-smush-admin.php:1246
 msgid "Super-Smush Images"
 msgstr ""
 
-#: lib/class-wp-smush-admin.php:1246
+#: lib/class-wp-smush-admin.php:1247
 msgid "We found attachments that were previously smushed losslessly. If desired you can Super-Smush them now for more savings with almost no noticeable quality loss."
 msgstr ""
 
-#: lib/class-wp-smush-admin.php:1254
+#: lib/class-wp-smush-admin.php:1255
 msgid "<span class=\"remaining-count\">%d</span> attachment left to Super-Smush"
 msgid_plural "<span class=\"remaining-count\">%d</span> attachments left to Super-Smush"
 msgstr[0] ""
 msgstr[1] ""
 
-#: lib/class-wp-smush-admin.php:1279
+#: lib/class-wp-smush-admin.php:1280
 msgid "Thanks for using WP Smush Pro! You now can:"
 msgstr ""
 
-#: lib/class-wp-smush-admin.php:1281 lib/class-wp-smush-admin.php:1299
+#: lib/class-wp-smush-admin.php:1282 lib/class-wp-smush-admin.php:1300
 msgid "Smush the original Full image sizes that are normally skipped by default."
 msgstr ""
 
-#: lib/class-wp-smush-admin.php:1282 lib/class-wp-smush-admin.php:1300
+#: lib/class-wp-smush-admin.php:1283 lib/class-wp-smush-admin.php:1301
 msgid "NextGen Gallery integration"
 msgstr ""
 
-#: lib/class-wp-smush-admin.php:1283 lib/class-wp-smush-admin.php:1301
+#: lib/class-wp-smush-admin.php:1284 lib/class-wp-smush-admin.php:1302
 msgid "\"Super-Smush\" your images with our intelligent multi-pass lossy compression. Get 2&times; more compression than lossless with almost no noticeable quality loss!"
 msgstr ""
 
-#: lib/class-wp-smush-admin.php:1284 lib/class-wp-smush-admin.php:1302
+#: lib/class-wp-smush-admin.php:1285 lib/class-wp-smush-admin.php:1303
 msgid "Get the best lossless compression. We try multiple methods to squeeze every last byte out of your images."
 msgstr ""
 
-#: lib/class-wp-smush-admin.php:1285
+#: lib/class-wp-smush-admin.php:1286
 msgid "Smush images up to 32MB."
 msgstr ""
 
-#: lib/class-wp-smush-admin.php:1286
+#: lib/class-wp-smush-admin.php:1287
 msgid "Bulk smush ALL your images with one click!"
 msgstr ""
 
-#: lib/class-wp-smush-admin.php:1287 lib/class-wp-smush-admin.php:1305
+#: lib/class-wp-smush-admin.php:1288 lib/class-wp-smush-admin.php:1306
 msgid "Keep a backup of your original un-smushed images in case you want to restore later."
 msgstr ""
 
-#: lib/class-wp-smush-admin.php:1297
+#: lib/class-wp-smush-admin.php:1298
 msgid "Upgrade to WP Smush Pro to:"
 msgstr ""
 
-#: lib/class-wp-smush-admin.php:1303
+#: lib/class-wp-smush-admin.php:1304
 msgid "Smush images greater than 1MB."
 msgstr ""
 
-#: lib/class-wp-smush-admin.php:1304
+#: lib/class-wp-smush-admin.php:1305
 msgid "Bulk smush ALL your images with one click! No more rate limiting."
 msgstr ""
 
-#: lib/class-wp-smush-admin.php:1306
+#: lib/class-wp-smush-admin.php:1307
 msgid "Access 24/7/365 support from <a href=\"https://premium.wpmudev.org/support/?utm_source=wordpress.org&utm_medium=plugin&utm_campaign=WP%20Smush%20Upgrade\">the best WordPress support team on the planet</a>."
 msgstr ""
 
-#: lib/class-wp-smush-admin.php:1307
+#: lib/class-wp-smush-admin.php:1308
 msgid "Download <a href=\"https://premium.wpmudev.org/?utm_source=wordpress.org&utm_medium=plugin&utm_campaign=WP%20Smush%20Upgrade\">350+ other premium plugins and themes</a> included in your membership."
 msgstr ""
 
-#: lib/class-wp-smush-admin.php:1310
+#: lib/class-wp-smush-admin.php:1311
 msgid "Upgrade Now &raquo;"
 msgstr ""
 
-#: lib/class-wp-smush-admin.php:1313
+#: lib/class-wp-smush-admin.php:1314
 msgid "Already upgraded to a WPMU DEV membership? Install and Login to our Dashboard plugin to enable Smush Pro features."
 msgstr ""
 
-#: lib/class-wp-smush-admin.php:1315
+#: lib/class-wp-smush-admin.php:1316
 msgid "Unable to access Pro Features? <a href=\"%s\">Refresh Status</a>"
 msgstr ""
 
-#: lib/class-wp-smush-admin.php:1325
+#: lib/class-wp-smush-admin.php:1326
 msgid "Activate WPMU DEV Dashboard"
 msgstr ""
 
-#: lib/class-wp-smush-admin.php:1328
+#: lib/class-wp-smush-admin.php:1329
 msgid "Install WPMU DEV Dashboard"
 msgstr ""
 
-#: lib/class-wp-smush-nextgen.php:193 lib/class-wp-smush.php:330
+#: lib/class-wp-smush-nextgen.php:193 lib/class-wp-smush.php:334
 msgid "Size '%s' not processed correctly"
 msgstr ""
 
@@ -363,77 +363,77 @@ msgstr ""
 msgid "Unknown API error"
 msgstr ""
 
-#: lib/class-wp-smush.php:362 lib/class-wp-smush.php:370
+#: lib/class-wp-smush.php:366 lib/class-wp-smush.php:374
 msgid "Size 'full' not processed correctly"
 msgstr ""
 
-#: lib/class-wp-smush.php:505
+#: lib/class-wp-smush.php:509
 msgid "Error posting to API: %s"
 msgstr ""
 
-#: lib/class-wp-smush.php:511
+#: lib/class-wp-smush.php:515
 msgid "Error posting to API: %s %s"
 msgstr ""
 
-#: lib/class-wp-smush.php:528
+#: lib/class-wp-smush.php:532
 msgid "Smush data corrupted, try again."
 msgstr ""
 
-#: lib/class-wp-smush.php:544
+#: lib/class-wp-smush.php:548
 msgid "Image couldn't be smushed"
 msgstr ""
 
-#: lib/class-wp-smush.php:768
+#: lib/class-wp-smush.php:772
 #: lib/nextgen-integration/class-wp-smush-nextgen-stats.php:185
 msgid "Error processing request"
 msgstr ""
 
-#: lib/class-wp-smush.php:772
+#: lib/class-wp-smush.php:776
 #: lib/nextgen-integration/class-wp-smush-nextgen-stats.php:189
 msgid "Already Optimized"
 msgstr ""
 
-#: lib/class-wp-smush.php:774
+#: lib/class-wp-smush.php:778
 msgid "%d images reduced "
 msgstr ""
 
-#: lib/class-wp-smush.php:774
+#: lib/class-wp-smush.php:778
 msgid "Reduced "
 msgstr ""
 
-#: lib/class-wp-smush.php:775
+#: lib/class-wp-smush.php:779
 msgid "by %s (  %01.1f%% )"
 msgstr ""
 
-#: lib/class-wp-smush.php:780
+#: lib/class-wp-smush.php:784
 #: lib/nextgen-integration/class-wp-smush-nextgen-stats.php:195
 msgid "Smush stats"
 msgstr ""
 
-#: lib/class-wp-smush.php:810
+#: lib/class-wp-smush.php:814
 #: lib/nextgen-integration/class-wp-smush-nextgen-admin.php:246
 msgid "Not processed"
 msgstr ""
 
-#: lib/class-wp-smush.php:816
+#: lib/class-wp-smush.php:820
 #: lib/nextgen-integration/class-wp-smush-nextgen-admin.php:252
 msgid "Smush Now!"
 msgstr ""
 
-#: lib/class-wp-smush.php:1119
+#: lib/class-wp-smush.php:1123
 msgid "Image couldn't be smushed as it exceeded the 1Mb size limit, Pro users can smush images with size upto 32Mb."
 msgstr ""
 
-#: lib/class-wp-smush.php:1121
+#: lib/class-wp-smush.php:1125
 msgid " Skipped"
 msgstr ""
 
-#: lib/class-wp-smush.php:1139
+#: lib/class-wp-smush.php:1143
 #: lib/nextgen-integration/class-wp-smush-nextgen-stats.php:329
 msgid "Image size"
 msgstr ""
 
-#: lib/class-wp-smush.php:1140
+#: lib/class-wp-smush.php:1144
 #: lib/nextgen-integration/class-wp-smush-nextgen-stats.php:330
 msgid "Savings"
 msgstr ""
@@ -460,8 +460,12 @@ msgstr ""
 msgid "Reduced by %s (  %01.1f%% )"
 msgstr ""
 
-#: wp-smush.php:124
+#: wp-smush.php:130
 msgid "Get Fast"
+msgstr ""
+
+#: wp-smush.php:184
+msgid "WP Smush Free was deactivated. You have WP Smush Pro active!"
 msgstr ""
 #. Plugin Name of the plugin/theme
 msgid "WP Smush"

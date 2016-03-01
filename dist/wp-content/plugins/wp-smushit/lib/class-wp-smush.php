@@ -174,12 +174,16 @@ if ( ! class_exists( 'WpSmush' ) ) {
 
 			//If file renaming failed
 			if ( ! $success ) {
-				copy( $tempfile, $file_path );
+				@copy( $tempfile, $file_path );
 				unlink( $tempfile );
 			}
 
 			//Some servers are having issue with file permission, this should fix it
-			chmod($file_path, 0644);
+			//Source: WordPress Core
+			$stat  = stat( dirname( $file_path ) );
+			$perms = $stat['mode'] & 0000666; //same permissions as parent folder, strip off the executable bits
+			@ chmod( $file_path, $perms );
+
 
 			return $response;
 		}
