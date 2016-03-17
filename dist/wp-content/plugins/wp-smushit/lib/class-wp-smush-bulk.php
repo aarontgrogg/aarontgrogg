@@ -22,6 +22,7 @@ if ( ! class_exists( 'WpSmushitBulk' ) ) {
 		 * @return array $attachments
 		 */
 		function get_attachments() {
+			global $wpsmushit_admin;
 			if ( ! isset( $_REQUEST['ids'] ) ) {
 				$args            = array(
 					'fields'         => 'ids',
@@ -40,6 +41,10 @@ if ( ! class_exists( 'WpSmushitBulk' ) ) {
 					'update_post_term_cache' => false,
 					'no_found_rows'  => true
 				);
+
+				//Remove the Filters added by WP Media Folder
+				$wpsmushit_admin->remove_wmf_filters();
+
 				$query           = new WP_Query( $args );
 				$unsmushed_posts = $query->posts;
 			} else {
@@ -54,6 +59,7 @@ if ( ! class_exists( 'WpSmushitBulk' ) ) {
 		 * @return array
 		 */
 		function get_nextgen_attachments() {
+			global $wpsmushit_admin;
 			if ( ! isset( $_REQUEST['ids'] ) ) {
 				$args            = array(
 					'fields'         => 'ids',
@@ -71,6 +77,10 @@ if ( ! class_exists( 'WpSmushitBulk' ) ) {
 					),
 					'no_found_rows'  => true
 				);
+
+				//Remove the Filters added by WP Media Folder
+				$wpsmushit_admin->remove_wmf_filters();
+
 				$query           = new WP_Query( $args );
 				$unsmushed_posts = $query->posts;
 			} else {

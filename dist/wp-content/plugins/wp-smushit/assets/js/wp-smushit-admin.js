@@ -410,8 +410,28 @@ jQuery(function ($) {
 		new WP_Smush.Smush($(this), true, 'nextgen');
 		return;
 	});
+
 	/** Show help text on help image hover **/
 	$( document ).tooltip();
+
+	/** Dismiss the notice and store it in options table **/
+	$('.wp-smush-pro-feature-dismiss').on('click', function(e){
+        e.preventDefault();
+        var $el = $(this).parents().eq(1);
+
+        $el.fadeTo( 100, 0, function() {
+            $el.slideUp( 100, function() {
+                $el.remove();
+            });
+        });
+
+        //Send a ajax request to save the dismissed notice option
+        var param = {
+            action: 'dismiss_smush_notice'
+        };
+        $.post(ajaxurl, param );
+
+    });
 
 });
 (function ($) {

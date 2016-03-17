@@ -5,9 +5,9 @@ Plugin URI: https://github.com/matzko/wp-db-backup
 Description: On-demand backup of your WordPress database. Navigate to <a href="edit.php?page=wp-db-backup">Tools &rarr; Backup</a> to get started.
 Author: Austin Matzko 
 Author URI: http://austinmatzko.com/
-Version: 2.3.0
+Version: 2.3.1
 
-Copyright 2015  Austin Matzko  (email : austin at pressedcode.com)
+Copyright 2016  Austin Matzko  (email : austin at pressedcode.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -298,13 +298,14 @@ class wpdbBackup {
 			';
 			break;
 		case 'smtp':
-			if ( get_option('wpdb_backup_recip') != $_POST['backup_recipient'] ) {
-				update_option('wpdb_backup_recip', $_POST['backup_recipient'] );
+			$email = sanitize_text_field(wp_unslash($_POST['backup_recipient']));
+			if ( get_option('wpdb_backup_recip') != $email) {
+				update_option('wpdb_backup_recip', $email);
 			}
 			echo '
-				setProgress("' . sprintf(__('Your backup has been emailed to %s','wp-db-backup'), $_POST['backup_recipient']) . '");
+				setProgress("' . sprintf(__('Your backup has been emailed to %s','wp-db-backup'), $email) . '");
 				window.onbeforeunload = null; 
-				fram.src = "' . $download_uri . '&via=email&recipient=' . $_POST['backup_recipient'] . '";
+				fram.src = "' . $download_uri . '&via=email&recipient=' . $email . '";
 			';
 			break;
 		default:
@@ -431,9 +432,10 @@ class wpdbBackup {
 		$this->backup_file = $this->db_backup($core_tables, $also_backup);
 		if (false !== $this->backup_file) {
 			if ('smtp' == $_POST['deliver']) {
-				$this->deliver_backup($this->backup_file, $_POST['deliver'], $_POST['backup_recipient'], 'main');
-				if ( get_option('wpdb_backup_recip') != $_POST['backup_recipient'] ) {
-					update_option('wpdb_backup_recip', $_POST['backup_recipient'] );
+				$email = sanitize_text_field(wp_unslash($_POST['backup_recipient']));
+				$this->deliver_backup($this->backup_file, $_POST['deliver'], $email, 'main');
+				if ( get_option('wpdb_backup_recip') != $email ) {
+					update_option('wpdb_backup_recip', $email );
 				}
 				wp_redirect($this->page_url);
 			} elseif ('http' == $_POST['deliver']) {
@@ -864,7 +866,7 @@ class wpdbBackup {
 					foreach ($table_data as $row) {
 						$values = array();
 						foreach ($row as $key => $value) {
-							if ($ints[strtolower($key)]) {
+							if ( !empty($ints[strtolower($key)]) ) {
 								// make sure there are no blank spots in the insert syntax,
 								// yet try to avoid quotation marks around integers
 								$value = ( null === $value || '' === $value) ? $defs[strtolower($key)] : $value;
@@ -1147,10 +1149,11 @@ class wpdbBackup {
 				$feedback .= '<br />' . sprintf(__('Your backup file: %2s should begin downloading shortly.','wp-db-backup'), "{$this->backup_file}", $this->backup_file);
 				break;
 			case 'smtp':
-				if (! is_email($_POST['backup_recipient'])) {
+				$email = sanitize_text_field(wp_unslash($_POST['backup_recipient']));
+				if (! is_email($email)) {
 					$feedback .= get_option('admin_email');
 				} else {
-					$feedback .= $_POST['backup_recipient'];
+					$feedback .= $email;
 				}
 				$feedback = '<br />' . sprintf(__('Your backup has been emailed to %s','wp-db-backup'), $feedback);
 				break;
