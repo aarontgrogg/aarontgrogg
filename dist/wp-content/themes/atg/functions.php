@@ -129,7 +129,7 @@
 			$url = $_ATG_CACHE_ASSETS->css;
 
 			// check if they need the critical CSS
-			if ( $_COOKIE['atg-csscached'] == $cachebuster ) {
+			if ( $_COOKIE['atg-csscached'] && $_COOKIE['atg-csscached'] == $cachebuster ) {
 				// if they have the cookie, then they have the CSS file cached, so simply enqueue it
 				wp_enqueue_style( 'atg-styles', $url );
 			} else {
