@@ -62,7 +62,7 @@
 	if (bloginfo('url') === 'https://aarontgrogg.dreamhosters.com'):
 		$googlebot = "noindex,noarchive,nofollow,nosnippet,noodp";
 		$robots = "noindex,nofollow";
-	else if (is_single() || is_page() || is_home()) :
+	elseif (is_single() || is_page() || is_home()) :
 		$googlebot = "index,archive,follow,noodp";
 		$robots = "all,index,follow";
 	else:
