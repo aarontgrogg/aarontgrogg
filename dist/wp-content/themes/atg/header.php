@@ -65,11 +65,11 @@
 <meta name="googlebot" content="index,noarchive,follow,noodp">
 <meta name="robots" content="all,index,follow">
 <meta name="msnbot" content="all,index,follow">
-	<?php else: ?>
+<?php else: ?>
 <meta name="googlebot" content="noindex,noarchive,follow,noodp">
 <meta name="robots" content="noindex,follow">
 <meta name="msnbot" content="noindex,follow">
-	<?php endif; ?>
+<?php endif; ?>
 <meta name="referrer" content="always">
 <meta property="twitter:card" content="summary">
 <meta property="twitter:site" content="@aarontgrogg">
