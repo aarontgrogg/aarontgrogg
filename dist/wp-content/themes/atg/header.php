@@ -59,7 +59,7 @@
 <meta name="google-site-verification" content="lbVeIvYlafhq4llvj199Sh3gUfq55tMu065LnAgjliw">
 <?php
 	// Block all robots for Dev, pick and choose for live
-	if (bloginfo('url') === 'https://aarontgrogg.dreamhosters.com'):
+	if (get_site_url() === 'https://aarontgrogg.dreamhosters.com'):
 		$googlebot = "noindex,noarchive,nofollow,nosnippet,noodp";
 		$robots = "noindex,nofollow";
 	elseif (is_single() || is_page() || is_home()) :
