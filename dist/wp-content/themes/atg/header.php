@@ -58,18 +58,20 @@
 <meta name="msvalidate.01" content="3583C3B4E1932435C9AC18EE175673F1">
 <meta name="google-site-verification" content="lbVeIvYlafhq4llvj199Sh3gUfq55tMu065LnAgjliw">
 <?php
-	/* We add some JavaScript to pages with the comment form
-	 * to support sites with threaded comments (when in use).
-	 */
-	if (is_single() || is_page() || is_home()) : ?>
-<meta name="googlebot" content="index,noarchive,follow,noodp">
-<meta name="robots" content="all,index,follow">
-<meta name="msnbot" content="all,index,follow">
-<?php else: ?>
-<meta name="googlebot" content="noindex,noarchive,follow,noodp">
-<meta name="robots" content="noindex,follow">
-<meta name="msnbot" content="noindex,follow">
-<?php endif; ?>
+	// Block all robots for Dev, pick and choose for live
+	if (bloginfo('url') === 'https://aarontgrogg.dreamhosters.com'):
+		$googlebot = "noindex,noarchive,nofollow,nosnippet,noodp";
+		$robots = "noindex,nofollow";
+	else if (is_single() || is_page() || is_home()) :
+		$googlebot = "index,archive,follow,noodp";
+		$robots = "all,index,follow";
+	else:
+		$googlebot = "noindex,noarchive,follow,noodp";
+		$robots = "noindex,follow";
+	endif;
+?><meta name="googlebot" content="<?php echo $googlebot; ?>">
+<meta name="robots" content="<?php echo $robots; ?>">
+<meta name="msnbot" content="<?php echo $robots; ?>">
 <meta name="referrer" content="always">
 <meta property="twitter:card" content="summary">
 <meta property="twitter:site" content="@aarontgrogg">
