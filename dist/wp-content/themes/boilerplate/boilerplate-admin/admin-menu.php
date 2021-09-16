@@ -493,7 +493,7 @@
 				$cache = H5BP_cache_buster();
 				$options = get_option('plugin_options');
 				$version = ($options['H5BP_jquery_version']) ? $options['H5BP_jquery_version'] : '1.10.2';
-				wp_deregister_script( 'jquery' ); // get rid of WP's jQuery
+				//wp_deregister_script( 'jquery' ); // get rid of WP's jQuery
 				echo '<script src="//ajax.googleapis.com/ajax/libs/jquery/'.$version.'/jquery.min.js"></script>'.PHP_EOL; // try getting from CDN
 				echo '<script>window.jQuery || document.write(unescape(\'%3Cscript src="' .H5BP_URL. '/js/jquery.js'.$cache.'"%3E%3C/script%3E\'))</script>'.PHP_EOL; // fallback to local if CDN fails
 			}

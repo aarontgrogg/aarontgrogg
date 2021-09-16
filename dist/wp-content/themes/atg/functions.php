@@ -10,7 +10,7 @@
 */
 
 
-	// global values, cache-buster string is updated by DeployBot, changed to commit string
+// global values, cache-buster string is updated by DeployBot, changed to commit string
 	$_ATG_CACHEBUSTER = 'CACHE_BUSTER';
 	$_ATG_CACHE_ASSETS = (object) [
 		'css' => get_stylesheet_directory_uri() . '/styles-min.CACHE_BUSTER.css',
@@ -70,7 +70,6 @@
 		    $content = preg_replace("/„/", "\"", $content);
 		    $content = preg_replace("/“/", "\"", $content);
 		    $content = preg_replace("/«/", "\"", $content);
-		    $content = preg_replace("/÷/", "\/", $content);
 		    $content = preg_replace("/÷/", "\/", $content);
 		    $content = preg_replace("/►/", "\)", $content);
 		    $content = preg_replace("/◄/", "\(", $content);
