@@ -1,4 +1,14 @@
-## Hi there 👋
+## Aaron T. Grogg 👋
+
+Web developer with 25+ years experience building performant, user-focused web experiences. \
+Skilled in modern front-end development, performance optimization, and remote, collaborative team environments.
+
+Tools:
+- **Languages**: HTML, CSS, JavaScript, PHP, MySQL
+- **Frameworks**: SCSS, Bootstrap, Tailwind, jQuery, WordPress, Drupal, Mustache
+- **Concepts**: Responsive Web Design, Web Performance Optimization, Core Web Vitals, Synthetic Monitoring, Real-User Monitoring, Observability, Search Engine Optimization, Agile, Remote Work
+- **Tools**: VS Code, AI/Claude, Git/GitHub, Jira, Jenkins, CI/CD, Splunk, mPulse, WebPageTest, Lighthouse, DevTools, Google Analytics, DataDog, Sentry, Fullstory, FreshDesk, FreshSales, Zapier, Slack, Zoom
+
 
 <!--
 **aarontgrogg/aarontgrogg** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
