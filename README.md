@@ -1,6 +1,6 @@
 ## Aaron T. Grogg 👋
 
-Web developer with 25+ years experience building performant, user-focused web experiences. \
+Senior web developer, committed to improving the user experience by improving web performance. \
 Skilled in modern front-end development, performance optimization, and remote, collaborative team environments.
 
 Tools:
