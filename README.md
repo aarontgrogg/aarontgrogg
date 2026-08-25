@@ -1,7 +1,10 @@
 ## Aaron T. Grogg 👋
 
-Senior web developer, committed to improving the user experience by improving web performance. \
-Skilled in modern front-end development, performance optimization, and remote, collaborative team environments.
+Web Performance Architect specializing in Core Web Vitals, enterprise-scale performance architecture, monitoring, and front-end engineering.
+
+I help organizations move beyond reactive performance optimization by making performance a deliberate part of how digital experiences are architected, developed, tested, monitored, and maintained.
+
+Rather than treating performance as something to diagnose and fix after launch, I focus on establishing measurable performance targets, identifying architectural and engineering risks early, and giving teams the tools and guidance needed to prevent regressions before they reach users. This means integrating performance into architecture, development practices, testing, CI/CD, monitoring, and ongoing governance.
 
 Tools:
 - **Languages**: HTML, CSS, JavaScript, PHP, MySQL
